@@ -1,6 +1,10 @@
+@import "blueprint";
 @import "base";
 
 body {
+  @include blueprint(true);
+  @include forgecraft;
+  
   background: $background-color;
   text-align: left;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
