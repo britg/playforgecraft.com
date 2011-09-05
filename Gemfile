@@ -18,6 +18,7 @@ gem 'jquery-rails'
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
+  gem 'fabrication'
 end
 
 group :development do
@@ -33,3 +34,5 @@ end
 group :production do
   gem 'pg'
 end
+
+gem 'devise'
