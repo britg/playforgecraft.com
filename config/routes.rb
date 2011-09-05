@@ -1,7 +1,5 @@
 ForgeCraft::Application.routes.draw do
 
-  root :to => "users#index"
-
   devise_for :users
 
   devise_scope :user do
@@ -11,5 +9,11 @@ ForgeCraft::Application.routes.draw do
   end
 
   resources :users, :only => [:index]
+
+  namespace :admin do
+    resources :users, :only => [:index]
+  end
+
+  root :to => "admin/users#index"
 
 end

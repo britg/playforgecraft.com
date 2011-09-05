@@ -3,8 +3,8 @@
 
 body {
   @include blueprint(true);
-  @include forgecraft;
   
+
   background: $background-color;
   text-align: left;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
@@ -13,4 +13,6 @@ body {
   color: $text-color;
   margin: 0;
   text-shadow: #000 1px 1px 1px;
+
+  @include forgecraft;
 }
