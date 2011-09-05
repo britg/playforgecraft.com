@@ -1,0 +1,15 @@
+
+@mixin awesome {
+  background: blue;
+}
+
+body {
+  background: #272727;
+}
+
+#users_index {
+  .red {
+    background: red;
+    @include awesome;
+  }
+}

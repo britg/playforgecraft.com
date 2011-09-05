@@ -1,5 +1,6 @@
 ForgeCraft::Application.routes.draw do
 
-  root :to => "users#home"
+  root :to => "users#index"
   resources :users
+
 end
