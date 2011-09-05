@@ -1,0 +1,8 @@
+@import "base";
+
+#login_form {
+  @include inset;
+  display: block;
+  width: 300px;
+  margin: 100px auto;
+}
