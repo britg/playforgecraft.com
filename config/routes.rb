@@ -1,5 +1,7 @@
 ForgeCraft::Application.routes.draw do
 
+  root :to => "users#index"
+
   devise_for :users
 
   devise_scope :user do
@@ -8,7 +10,6 @@ ForgeCraft::Application.routes.draw do
     get "logout", :to => "devise/sessions#destroy"
   end
 
-  root :to => "users#index"
-  resources :users
+  resources :users, :only => [:index]
 
 end
