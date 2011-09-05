@@ -1,15 +1,12 @@
-
-@mixin awesome {
-  background: blue;
-}
+@import "base";
 
 body {
-  background: #272727;
-}
-
-#users_index {
-  .red {
-    background: red;
-    @include awesome;
-  }
+  background: $background-color;
+  text-align: left;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1em;
+  color: #AAA;
+  margin: 0;
+  text-shadow: #000 1px 1px 1px;
 }
