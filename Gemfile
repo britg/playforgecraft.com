@@ -19,6 +19,8 @@ group :test do
   # Pretty printed test output
   gem 'turn', :require => false
   gem 'fabrication'
+  gem 'shoulda'
+  gem 'mocha'
 end
 
 group :development do
