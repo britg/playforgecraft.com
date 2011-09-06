@@ -5,7 +5,7 @@ body {
   @include blueprint(true);
   
 
-  background: $background-color;
+  background: $background-color asset_url("background.png", image);
   text-align: left;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-size: 16px;
