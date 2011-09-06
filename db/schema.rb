@@ -11,7 +11,65 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110905234258) do
+ActiveRecord::Schema.define(:version => 20110906175843) do
+
+  create_table "classifications", :force => true do |t|
+    t.integer  "genre_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "genres", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "item_sets", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "items", :force => true do |t|
+    t.integer  "genre_id"
+    t.integer  "classification_id"
+    t.integer  "rarity_id"
+    t.integer  "ore_id"
+    t.integer  "item_set_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "attack_min"
+    t.integer  "attack_max"
+    t.integer  "defense_min"
+    t.integer  "defense_max"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "items", ["active"], :name => "index_items_on_active"
+  add_index "items", ["classification_id"], :name => "index_items_on_classification_id"
+  add_index "items", ["genre_id"], :name => "index_items_on_genre_id"
+  add_index "items", ["item_set_id"], :name => "index_items_on_item_set_id"
+  add_index "items", ["ore_id"], :name => "index_items_on_ore_id"
+  add_index "items", ["rarity_id"], :name => "index_items_on_rarity_id"
+
+  create_table "ores", :force => true do |t|
+    t.string   "name"
+    t.integer  "rank"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rarities", :force => true do |t|
+    t.string   "name"
+    t.integer  "rank"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
