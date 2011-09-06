@@ -46,6 +46,8 @@ module ForgeCraft
     config.assets.version = '1.0'
 
     config.generators do |g|
+      g.template_engine :haml
+      g.test_framework :test_unit, :fixture_replacement => :fabrication
       g.fixture_replacement :fabrication, :dir => "test/fabricators"
     end
   end
