@@ -9,5 +9,8 @@
     = csrf_meta_tags
 
   %body
-
+    - if flash.any?
+      - for key, msg in flash
+        %p{ :class => key }= msg
+    
     = yield

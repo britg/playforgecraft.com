@@ -1,7 +1,11 @@
+@import "blueprint";
 @import "base";
 
 body {
-  background: $background-color;
+  @include blueprint(true);
+  
+
+  background: $background-color asset_url("background.png", image);
   text-align: left;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -9,4 +13,6 @@ body {
   color: $text-color;
   margin: 0;
   text-shadow: #000 1px 1px 1px;
+
+  @include forgecraft;
 }
