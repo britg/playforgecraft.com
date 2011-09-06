@@ -14,7 +14,7 @@ class CreateItems < ActiveRecord::Migration
       t.integer :attack_max
       t.integer :defense_min
       t.integer :defense_max
-      t.boolean :active
+      t.boolean :active, :default => true
 
       t.timestamps
 
