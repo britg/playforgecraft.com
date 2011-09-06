@@ -1,10 +1,18 @@
 @import "base";
 
+#login_page {
+  .logo {
+    display: block;
+    margin: 0 auto;
+    margin-top: 50px;
+
+  }
+}
 #login_form {
   @include inset;
   display: block;
-  width: 300px;
-  margin: 100px auto;
+  width: 320px;
+  margin: 50px auto;
 
   div {
     margin-bottom: 10px;
