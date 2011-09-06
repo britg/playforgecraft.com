@@ -1,7 +1,7 @@
 require 'test_helper'
 
-class OreTest < ActiveSupport::TestCase
+class RarityTest < ActiveSupport::TestCase
   
   should have_many :items
-
+  
 end
