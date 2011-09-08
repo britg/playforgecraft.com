@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110908012223) do
+ActiveRecord::Schema.define(:version => 20110908012926) do
 
   create_table "classifications", :force => true do |t|
     t.integer  "genre_id"
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(:version => 20110908012223) do
   add_index "items", ["item_set_id"], :name => "index_items_on_item_set_id"
   add_index "items", ["ore_id"], :name => "index_items_on_ore_id"
   add_index "items", ["rarity_id"], :name => "index_items_on_rarity_id"
+
+  create_table "levels", :force => true do |t|
+    t.integer  "level"
+    t.integer  "experience_required"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "levels", ["level"], :name => "index_levels_on_level", :unique => true
 
   create_table "ores", :force => true do |t|
     t.string   "name"
