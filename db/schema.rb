@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110906175843) do
+ActiveRecord::Schema.define(:version => 20110908010630) do
 
   create_table "classifications", :force => true do |t|
     t.integer  "genre_id"
@@ -63,6 +63,18 @@ ActiveRecord::Schema.define(:version => 20110906175843) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "players", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "level"
+    t.integer  "experience"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "players", ["name"], :name => "index_players_on_name", :unique => true
+  add_index "players", ["user_id"], :name => "index_players_on_user_id", :unique => true
 
   create_table "rarities", :force => true do |t|
     t.string   "name"
