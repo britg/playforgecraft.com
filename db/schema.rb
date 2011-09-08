@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110908010630) do
+ActiveRecord::Schema.define(:version => 20110908012223) do
 
   create_table "classifications", :force => true do |t|
     t.integer  "genre_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20110908010630) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "level",             :default => 0
   end
 
   add_index "items", ["active"], :name => "index_items_on_active"
