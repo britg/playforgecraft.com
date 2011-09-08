@@ -5,10 +5,17 @@ module ForgeCraft
     class << self
 
       def create
+
+        if Item.any?
+          puts "Cannot run initialize as items already exist!"
+          return
+        end
+
         create_ores
         create_rarities
         create_genres
         create_classifications
+        create_levels
       end
 
       def create_ores
@@ -42,6 +49,14 @@ module ForgeCraft
           d.each_with_index do |c, i|
             Classification.create :name => c, :genre => Genre.find_by_name(k.to_s.capitalize)
           end 
+        end
+      end
+
+      def create_levels
+        Level.delete_all
+
+        100.times do |i|
+          Level.create(:level => i, :experience_required => 100*i*i)
         end
       end
 
