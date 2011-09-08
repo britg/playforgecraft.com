@@ -1,6 +1,4 @@
-class Player < ActiveRecord::Base
-
-  belongs_to :user
+class Enemy < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name

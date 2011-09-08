@@ -39,3 +39,5 @@ group :production do
 end
 
 gem 'devise'
+gem 'paperclip'
+gem 'aws-s3'

@@ -1,0 +1,13 @@
+development:
+  access_key_id: "0PTHQ2Z1P3PPDV5P4EG2"
+  secret_access_key: "FOxnraeAndwwM3yAy8dsRc7UjfnaJgHCss1oTnlS"
+  bucket: forgecraft
+test:
+  access_key_id: "0PTHQ2Z1P3PPDV5P4EG2"
+  secret_access_key: "FOxnraeAndwwM3yAy8dsRc7UjfnaJgHCss1oTnlS"
+  bucket: forgecraft_test
+production:
+  access_key_id: "0PTHQ2Z1P3PPDV5P4EG2"
+  secret_access_key: "FOxnraeAndwwM3yAy8dsRc7UjfnaJgHCss1oTnlS"
+  bucket: forgecraft
+
