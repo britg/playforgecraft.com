@@ -11,13 +11,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110906175843) do
+ActiveRecord::Schema.define(:version => 20110908180950) do
 
   create_table "classifications", :force => true do |t|
     t.integer  "genre_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "default_icon_file_name"
+    t.string   "default_icon_content_type"
+    t.integer  "default_icon_file_size"
+    t.datetime "default_icon_updated_at"
+    t.string   "default_art_file_name"
+    t.string   "default_art_content_type"
+    t.integer  "default_art_file_size"
+    t.datetime "default_art_updated_at"
+  end
+
+  create_table "enemies", :force => true do |t|
+    t.string   "name"
+    t.integer  "level_min"
+    t.integer  "level_max"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "genres", :force => true do |t|
@@ -31,6 +51,14 @@ ActiveRecord::Schema.define(:version => 20110906175843) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "art_file_name"
+    t.string   "art_content_type"
+    t.integer  "art_file_size"
+    t.datetime "art_updated_at"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
   end
 
   create_table "items", :force => true do |t|
@@ -48,6 +76,15 @@ ActiveRecord::Schema.define(:version => 20110906175843) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "level",             :default => 0
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
+    t.string   "art_file_name"
+    t.string   "art_content_type"
+    t.integer  "art_file_size"
+    t.datetime "art_updated_at"
   end
 
   add_index "items", ["active"], :name => "index_items_on_active"
@@ -57,12 +94,41 @@ ActiveRecord::Schema.define(:version => 20110906175843) do
   add_index "items", ["ore_id"], :name => "index_items_on_ore_id"
   add_index "items", ["rarity_id"], :name => "index_items_on_rarity_id"
 
+  create_table "levels", :force => true do |t|
+    t.integer  "level"
+    t.integer  "experience_required"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "levels", ["level"], :name => "index_levels_on_level", :unique => true
+
   create_table "ores", :force => true do |t|
     t.string   "name"
     t.integer  "rank"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tile_file_name"
+    t.string   "tile_content_type"
+    t.integer  "tile_file_size"
+    t.datetime "tile_updated_at"
   end
+
+  create_table "players", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "level"
+    t.integer  "experience"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+  end
+
+  add_index "players", ["name"], :name => "index_players_on_name", :unique => true
+  add_index "players", ["user_id"], :name => "index_players_on_user_id", :unique => true
 
   create_table "rarities", :force => true do |t|
     t.string   "name"
