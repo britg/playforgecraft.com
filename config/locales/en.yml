@@ -2,4 +2,5 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  email_thanks: "Thanks! We'll notify you as soon as ForgeCraft is ready."
+  notices:
+    email_thanks: "Thanks! We'll notify you as soon as ForgeCraft is ready."

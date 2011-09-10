@@ -6,6 +6,13 @@ $text-color: #aaa;
 $highlight-color: #fff;
 $hover-color: #AA4444;
 
+$common-color: #fff;
+$advanced-color: #1EFF00;
+$rare-color: #00B6FF;
+$epic-color: #C600FF;
+$set-color: #FF8000;
+
+
 @mixin highlighted-text {
   color: $highlight-color;
 }

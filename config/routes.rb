@@ -11,6 +11,8 @@ ForgeCraft::Application.routes.draw do
   resources :users, :only => [:index]
   resources :emails, :only => [:create]
 
+  resources :items
+
   namespace :admin do
     resources :users, :only => [:index]
   end
