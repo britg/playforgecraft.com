@@ -6,14 +6,6 @@ body {
   @include blueprint(true);
   @include forgecraft;
 
-  background: $background-color asset_url("background.png", image);
-  text-align: left;
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 12px/18px;
-  color: $text-color;
-  margin: 0;
-  text-shadow: #000 1px 1px 1px;
-
 }
 
 #head {

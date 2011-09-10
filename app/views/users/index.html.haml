@@ -8,14 +8,14 @@
 
       %h2 Coming Soon
 
-      %p Get a single email as soon as you can play it:
+      %p Get an email notification when ForgeCraft is released:
 
       = form_for @new_email do |f|
         
-        = f.text_field :address, :class => "text"
+        = f.text_field :address, :class => ["text", "required", "email"], :title => "Enter your email address"
         = f.submit "Notify Me"
 
-      %p Your address will be removed as soon as you're notified.
+      %p Your address will be permanently deleted as soon as you're notified.
 
   #teaser
 
