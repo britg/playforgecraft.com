@@ -2,17 +2,32 @@
 @import "base";
 
 body {
-  @include blueprint(true);
   
+  @include blueprint(true);
+  @include forgecraft;
 
   background: $background-color asset_url("background.png", image);
   text-align: left;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 1em;
+  font-size: 12px/18px;
   color: $text-color;
   margin: 0;
   text-shadow: #000 1px 1px 1px;
 
-  @include forgecraft;
+}
+
+#head {
+  @include container;
+
+  #logo {
+    margin: 30px 0;
+  }
+}
+
+#content {
+  @include container;
+}
+
+#footer {
+  @include container; 
 }

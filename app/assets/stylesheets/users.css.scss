@@ -1,6 +1,32 @@
+@import "blueprint";
 @import "base";
 
-#login_page {
+#splash-page {
+
+  @include clearfix;
+
+  #join-mailing-list {
+    @include column(12);
+    text-align: center;
+  }
+
+  #tagline {
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+
+  #teaser {
+    @include column(12, true);
+    text-align: right;
+  }
+
+  #tease-image {
+    margin-top: 20px;
+  }
+
+}
+
+#login-page {
   .logo {
     display: block;
     margin: 0 auto;
@@ -8,7 +34,7 @@
 
   }
 }
-#login_form {
+#login-form {
   @include inset;
   display: block;
   width: 320px;

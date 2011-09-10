@@ -14,6 +14,6 @@ ForgeCraft::Application.routes.draw do
     resources :users, :only => [:index]
   end
 
-  root :to => "admin/users#index"
+  root :to => "users#index"
 
 end

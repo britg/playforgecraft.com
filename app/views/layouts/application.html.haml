@@ -8,9 +8,18 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
 
-  %body
-    - if flash.any?
-      - for key, msg in flash
-        %p{ :class => key }= msg
+  %body{ :class => params[:controller] }
+
+    #head
+      = link_to image_tag("logox300.png", :id => "logo"), root_url
+
+    #content
+      - if flash.any?
+        - for key, msg in flash
+          %p{ :class => key }= msg
     
-    = yield
+      = yield
+
+    #footer
+      
+    

@@ -10,10 +10,13 @@ $hover-color: #AA4444;
 }
 
 @mixin inset {
-  padding: 20px;
   background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
   @include border-radius(5px);
+}
+
+@mixin default_padding {
+  padding: 20px;
 }
 
 @mixin forgecraft {
@@ -34,7 +37,11 @@ $hover-color: #AA4444;
 
   .inset {
     @include inset;
-  } 
+  }
+
+  .col-content {
+    @include default_padding;
+  }
 
   label {
     font-weight: normal;
