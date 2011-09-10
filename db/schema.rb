@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110908180950) do
+ActiveRecord::Schema.define(:version => 20110910193812) do
 
   create_table "classifications", :force => true do |t|
     t.integer  "genre_id"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(:version => 20110908180950) do
     t.integer  "default_art_file_size"
     t.datetime "default_art_updated_at"
   end
+
+  create_table "emails", :force => true do |t|
+    t.string   "address"
+    t.boolean  "delivered",  :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "emails", ["address"], :name => "index_emails_on_address", :unique => true
 
   create_table "enemies", :force => true do |t|
     t.string   "name"

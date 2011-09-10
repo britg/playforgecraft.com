@@ -10,6 +10,12 @@
 
       %p Get a single email as soon as you can play it:
 
+      = form_for @new_email do |f|
+        
+        = f.text_field :address, :class => "text"
+        = f.submit "Notify Me"
+
+      %p Your address will be removed as soon as you're notified.
 
   #teaser
 

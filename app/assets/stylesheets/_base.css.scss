@@ -1,6 +1,7 @@
 @import "compass/css3/border-radius";
 
 $background-color: #1b1c1e;
+$input-background-color: #777;
 $text-color: #aaa;
 $highlight-color: #fff;
 $hover-color: #AA4444;
@@ -49,12 +50,20 @@ $hover-color: #AA4444;
   }
 
   input.text, input[type="text"] {
-    width: 95%;
+    background: $input-background-color;
+    border: solid 1px $input-background-color;
+    color: $highlight-color;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
+    @include border-radius(5px);
   }
 
   .notice, .alert {
     text-align: center;
     text-shadow: none;
+
+    font-size: 125%;
+    font-weight: bold;
+    @include border-radius(5px);
   }
 
 }

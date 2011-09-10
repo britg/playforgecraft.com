@@ -11,7 +11,7 @@
   }
 
   #tagline {
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 30px;
   }
 
@@ -22,6 +22,18 @@
 
   #tease-image {
     margin-top: 20px;
+  }
+
+  #new_email {
+    margin-bottom: 20px;
+
+    input {
+      display: inline;
+    }
+
+    #email_address {
+      width: 200px;
+    }
   }
 
 }

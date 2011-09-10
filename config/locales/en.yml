@@ -2,4 +2,4 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  email_thanks: "Thanks! We'll notify you as soon as ForgeCraft is ready."
