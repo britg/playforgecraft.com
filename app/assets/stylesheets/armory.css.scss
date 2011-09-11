@@ -1,0 +1,9 @@
+@import "base";
+
+#class-nav {
+  @include column(4);
+}
+
+#items {
+  @include column(20, true);
+}

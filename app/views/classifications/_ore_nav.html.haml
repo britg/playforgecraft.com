@@ -1,0 +1,7 @@
+
+%ul
+  
+  - for ore in Ore.all
+
+    %li
+      = link_to ore, armory_items_path(classification, :ore => ore.to_param), :title => ore

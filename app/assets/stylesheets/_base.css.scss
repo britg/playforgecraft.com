@@ -122,5 +122,9 @@ $set-color: #FF8000;
     @include inset;
   }
 
+  .ui-tabs-hide {
+    display: none;
+  }
+
 }
 

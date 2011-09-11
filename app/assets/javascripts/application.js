@@ -15,4 +15,13 @@ $(function () {
 
   $('a[rel=modal]').facebox();
 
+  $('.tab-control').tabs()
+    .bind("tabsselect", function(event, ui) { 
+      window.location.hash = ui.tab.hash;
+    });
+
+  $.address.change(function (event) {
+    $('.tab-control').tabs( "select" , window.location.hash )
+  })
+
 });
