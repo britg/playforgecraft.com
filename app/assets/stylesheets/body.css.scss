@@ -11,13 +11,20 @@ body {
 #head {
   @include container;
 
+  #branding {
+    @include column(8);
+  }
+
+  #actions {
+    @include column(16, true);
+  }
+
   #logo {
     margin: 30px 0;
   }
 
   #navigation {
     float: right;
-    margin-top: 45px;
 
     li {
       display: inline;
@@ -27,8 +34,22 @@ body {
       a {
         display: block;
         padding: 10px 0 10px 20px;
-        font-size: 150%;
+        font-size: 175%;
       }
+    }
+  }
+
+  #profile {
+    float: right;
+    position: relative;
+    @include inset;
+    margin-bottom: 4px;
+
+    height: 30px;
+    padding: 10px 20px 0 20px;
+
+    .log-out {
+      margin-left: 20px;
     }
   }
 }

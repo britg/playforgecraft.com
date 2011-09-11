@@ -8,5 +8,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :admin
 
   has_one :player
+
+  def to_s
+    player.try(:name) || email
+  end
   
 end

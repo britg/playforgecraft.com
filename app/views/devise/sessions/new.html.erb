@@ -1,9 +1,8 @@
 
-<div id="login_page">
-  <img class="logo" src="<%= asset_path('logox300.png') %>" />
+<div id="login-page">
 
-  <div id="login_form">
-    <h3>Admin Log In</h3>
+  <div id="login-form" class="col-content">
+    <h3>Log In</h3>
 
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       <%= f.hidden_field :remember_me, :value => "on" %>

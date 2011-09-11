@@ -39,13 +39,11 @@
 }
 
 #login-page {
-  .logo {
-    display: block;
-    margin: 0 auto;
-    margin-top: 50px;
-
-  }
+  display: block;
+  width: 400px;
+  margin: 0 auto;
 }
+
 #login-form {
   @include inset;
   display: block;
@@ -55,4 +53,14 @@
   div {
     margin-bottom: 10px;
   }
+}
+
+#register-content {
+  display: block;
+  width: 400px;
+  margin: 0 auto;
+}
+
+#register-form {
+  
 }

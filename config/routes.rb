@@ -9,9 +9,12 @@ ForgeCraft::Application.routes.draw do
   end
 
   resources :users, :only => [:index]
+  
   resources :emails, :only => [:create]
 
   resources :items
+
+  resources :topics
 
   namespace :admin do
     resources :users, :only => [:index]

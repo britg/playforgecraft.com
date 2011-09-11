@@ -11,14 +11,34 @@
   %body{ :class => params[:controller] }
 
     #head
+      
+      #branding
+        = link_to image_tag("logox300.png", :id => "logo"), root_path
 
-      %ul#navigation
-        %li
-          = link_to "Armory", items_path
-        %li
-          = link_to "Forums", "#"
 
-      = link_to image_tag("logox300.png", :id => "logo"), root_path
+      #actions
+
+        #profile
+
+          - if current_user.present?
+            
+            .welcome
+              Welcome, #{current_user}
+              = link_to "Log out", logout_path, :class => "log-out"
+
+          - else
+
+            = link_to "Log in", login_path
+            or
+            = link_to "Create an Account", register_path
+
+        .clear
+
+        %ul#navigation
+          %li
+            = link_to "Armory", items_path
+          %li
+            = link_to "Forums", topics_path
 
     #content
       - if flash.any?

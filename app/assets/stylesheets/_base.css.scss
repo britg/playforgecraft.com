@@ -49,6 +49,10 @@ $set-color: #FF8000;
     &:hover {
       color: $hover-color;
     }
+
+    &:visited {
+      @include highlighted-text;
+    }
   }
 
   .inset {
@@ -62,13 +66,18 @@ $set-color: #FF8000;
   label {
     font-weight: normal;
     color: #379;
+
+    &.error {
+      display: block;
+    }
   }
 
-  input.text, input[type="text"] {
+  input.text, input[type="text"], input.email, input[type="email"], input.pasword, input[type="password"] {
     background: $input-background-color;
     border: solid 1px $input-background-color;
     color: $highlight-color;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
+    margin-bottom: 10px;
     @include border-radius(5px);
 
     &.error {
@@ -85,14 +94,6 @@ $set-color: #FF8000;
     font-size: 125%;
     font-weight: bold;
     @include border-radius(5px);
-  }
-
-  .error {
-    text-shadow: none;
-  }
-
-  label.error {
-    display: block;
   }
 
 }
