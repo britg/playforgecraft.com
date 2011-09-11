@@ -30,6 +30,10 @@ class ItemsController < ApplicationController
     @item = Item.find_by_id(params[:id])
     @item.update_attributes(params[:item])
 
+    if single = params[:single]
+      render :text => params[:item][single] and return
+    end
+
     respond_with @item
   end
 
@@ -43,7 +47,7 @@ class ItemsController < ApplicationController
   protected
 
   def find_class
-    @class = Classification.find_by_name(params[:armory_id].singularize)
+    @class = Classification.find_by_name(params[:armory_id].try(:singularize))
   end
 
 end

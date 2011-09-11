@@ -5,6 +5,8 @@
     %tr
       %th Name
 
+      %th Lvl Req
+
       %th
         - if @class.weapon?
           Attack Min
@@ -29,16 +31,19 @@
           = link_to item, armory_item_path(@class, item), :class => item.rarity
 
         %td
-          - if item.weapon?
-            = item.attack_min
-          - else
-            = item.defense_min
+          = admin_field item, :level
 
         %td
           - if item.weapon?
-            = item.attack_max
+            = admin_field item, :attack_min
           - else
-            = item.defense_max
+            = admin_field item, :attack_max
+
+        %td
+          - if item.weapon?
+            = admin_field item, :attack_max
+          - else
+            = admin_field item, :defense_max
 
         - if admin?
           %td
