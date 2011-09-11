@@ -1,6 +1,6 @@
 class Classification < ActiveRecord::Base
 
-  DEFAULTS = { :weapon => ["Sword", "Axe", "Long Sword"],
+  DEFAULTS = { :weapon => ["Sword", "Axe", "Crossbow"],
                :armor => ["Shield", "Leggings", "Tunic"] }
 
   belongs_to :genre
@@ -21,5 +21,9 @@ class Classification < ActiveRecord::Base
     :s3_headers => {'Expires' => 1.year.from_now.httpdate},
     :path => "/:class/:id/:attachment/:style.:extension",
     :styles => { :full => ["640x960#", :jpg], :normal => ["320x480#", :jpg], :small => ["160x240#", :jpg] }
+
+  def to_s
+    name
+  end
 
 end

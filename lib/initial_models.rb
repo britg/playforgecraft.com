@@ -18,6 +18,13 @@ module ForgeCraft
         create_levels
       end
 
+      def reset
+        ["ores", "rarities", "genres", "classifications", "levels"].each do |t|
+          ActiveRecord::Base.connection.execute("DELETE FROM `#{t}`")
+          ActiveRecord::Base.connection.execute("TRUNCATE `#{t}`") rescue nil;
+        end
+      end
+
       def create_ores
         Ore.delete_all
 

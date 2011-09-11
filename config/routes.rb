@@ -12,7 +12,9 @@ ForgeCraft::Application.routes.draw do
   
   resources :emails, :only => [:create]
 
-  resources :items
+  resources :armory, :controller => "classifications" do
+    resources :items
+  end
 
   resources :topics
 

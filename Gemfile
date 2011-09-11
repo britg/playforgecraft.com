@@ -42,3 +42,4 @@ end
 gem 'devise'
 gem 'paperclip'
 gem 'aws-s3'
+gem 'will_paginate'

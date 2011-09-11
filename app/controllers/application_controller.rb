@@ -11,5 +11,9 @@ class ApplicationController < ActionController::Base
     "application"
   end
 
+  def admin?
+    current_user.try(:admin)
+  end
+
 
 end
