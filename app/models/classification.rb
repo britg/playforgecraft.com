@@ -1,7 +1,7 @@
 class Classification < ActiveRecord::Base
 
   DEFAULTS = { :weapon => ["Sword", "Axe", "Crossbow"],
-               :armor => ["Shield", "Leggings", "Tunic"] }
+               :armor => ["Shield", "Legging", "Tunic"] }
 
   belongs_to :genre
   has_many :items
@@ -23,7 +23,11 @@ class Classification < ActiveRecord::Base
     :styles => { :full => ["640x960#", :jpg], :normal => ["320x480#", :jpg], :small => ["160x240#", :jpg] }
 
   def to_s
-    name
+    name.pluralize
+  end
+
+  def to_param
+    name.pluralize
   end
 
 end
