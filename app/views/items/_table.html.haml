@@ -1,0 +1,47 @@
+
+%table.item-table
+  
+  %thead
+    %tr
+      %th Name
+
+      %th
+        - if @class.weapon?
+          Attack Min
+        - else
+          Defense Min
+      
+      %th
+        - if @class.weapon?
+          Attack Max
+        - else
+          Defense Max
+
+      - if admin?
+        %th
+
+  %tbody
+
+    - for item in items
+
+      %tr
+        %td{ :class => item.rarity }
+          = link_to item, armory_item_path(@class, item), :class => item.rarity
+
+        %td
+          - if item.weapon?
+            = item.attack_min
+          - else
+            = item.defense_min
+
+        %td
+          - if item.weapon?
+            = item.attack_max
+          - else
+            = item.defense_max
+
+        - if admin?
+          %td
+            = link_to "Edit", edit_armory_item_path(@class, item), :rel => "modal"
+            |
+            = link_to "Delete", armory_item_path(@class, item), :confirm => "Really delete?", :method => :delete, :remote => true

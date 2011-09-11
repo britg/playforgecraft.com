@@ -1,0 +1,7 @@
+
+- if @item.errors.any?
+  :javascript
+    #{@item.errors.to_json}
+- else
+  :javascript
+    #{@item.to_json}

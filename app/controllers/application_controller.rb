@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
   layout :detect_layout
 
+  helper_method :admin?
+
   protected
 
   def detect_layout

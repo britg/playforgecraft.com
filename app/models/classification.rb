@@ -22,6 +22,15 @@ class Classification < ActiveRecord::Base
     :path => "/:class/:id/:attachment/:style.:extension",
     :styles => { :full => ["640x960#", :jpg], :normal => ["320x480#", :jpg], :small => ["160x240#", :jpg] }
 
+  # Class Methods
+  class << self
+    
+    def to_select_options
+      all.map{ |c| [c.name, c.id] }
+    end
+
+  end
+
   def to_s
     name.pluralize
   end
@@ -29,5 +38,14 @@ class Classification < ActiveRecord::Base
   def to_param
     name.pluralize
   end
+
+  def weapon?
+    genre.name == 'Weapon'
+  end
+
+  def armor?
+    genre.name == 'Armor'
+  end
+  
 
 end

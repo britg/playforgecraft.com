@@ -58,7 +58,7 @@
             if ($.trim(val) === '' || val === title) ele.val(title).addClass(css); 
         });
         
-        $(selector).trigger('focusout');
+        //$(selector).trigger('focusout');
         
         $.each(clear_events, function(i, event){
             
@@ -71,15 +71,20 @@
 
                 if (ev_queue) {
                     for (var x=0; x < len; x++) {
-                        $.data( ele.get(x), "events" )[type].unshift({
-                            type : type,
-                            guid : null,
-                            namespace : "",
-                            data : undefined,
-                            handler: function() {
-                                blink();
-                            }
-                        });
+                        var events = $.data( ele.get(x), "events" );
+
+                        if(typeof events != 'undefined') {
+                            events[type].unshift({
+                                type : type,
+                                guid : null,
+                                namespace : "",
+                                data : undefined,
+                                handler: function() {
+                                    blink();
+                                }
+                            });    
+                        }
+                        
                     }
                 } else {
                     ele.bind(type, function(){

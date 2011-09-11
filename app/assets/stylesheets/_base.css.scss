@@ -42,6 +42,26 @@ $set-color: #FF8000;
   @include font;
 }
 
+@mixin common {
+  color: $common-color;
+}
+
+@mixin advanced {
+  color: $advanced-color;
+}
+
+@mixin rare {
+  color: $rare-color;
+}
+
+@mixin epic {
+  color: $epic-color;
+}
+
+@mixin itemset {
+  color: $set-color;
+}
+
 @mixin forgecraft {
 
   @include font;
@@ -68,6 +88,23 @@ $set-color: #FF8000;
     &:visited {
       @include highlighted-text;
     }
+
+    &.common {
+      @include common;
+    }
+
+    &.advanced {
+      @include advanced;
+    }
+
+    &.rare {
+      @include rare;
+    }
+
+    &.epic {
+      @include epic;
+    }
+
   }
 
   .inset {
@@ -88,7 +125,9 @@ $set-color: #FF8000;
     }
   }
 
-  input.text, input[type="text"], input.email, input[type="email"], input.pasword, input[type="password"] {
+  input.text, input[type="text"], input.email, 
+  input[type="email"], input.pasword, input[type="password"],
+  select {
     background: $input-background-color;
     border: solid 1px $input-background-color;
     color: $highlight-color;

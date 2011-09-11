@@ -1,4 +1,11 @@
 
 #items-content
 
-  %h3= @ore
+  %h3 #{@ore} #{@class}
+
+  - if admin?
+    = link_to "Add Item", new_armory_item_path(@class, :ore => @ore.to_param), :rel => "modal"
+
+  .items
+
+    = render "table", :items => @items

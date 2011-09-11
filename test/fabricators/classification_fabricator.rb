@@ -1,4 +1,4 @@
 Fabricator(:classification) do
-  name "MyString"
-  genre { Fabricate(:genre) }
+  name "Axe"
+  genre!
 end

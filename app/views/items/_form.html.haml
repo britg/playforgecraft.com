@@ -1,0 +1,38 @@
+
+= form_for [:armory, item], :remote => true do |f|
+  
+  .form-section
+    = f.label :name
+    %br
+    = f.text_field :name, :class => "required"
+
+  .form-section
+    = f.label :classification_id, "Class"
+    %br
+    = f.select :classification_id, Classification.to_select_options, :class => "required"
+
+  .form-section
+    = f.label :ore_id, "Ore"
+    %br
+    = f.select :ore_id, Ore.to_select_options, :class => "required"
+
+  .form-section
+    = f.label :rarity_id, "Rarity"
+    %br
+    = f.select :rarity_id, Rarity.to_select_options, :class => "required"
+
+  .form-section
+    = f.submit "Create Item"
+
+:javascript
+
+  $('#new_item, .edit_item')
+    
+    .bind('ajax:complete', function () {
+      ForgeCraft.reloadSelectedTab();
+      $(document).trigger('close.facebox');
+    })
+
+    .bind('ajax:error', function () {
+      
+    });

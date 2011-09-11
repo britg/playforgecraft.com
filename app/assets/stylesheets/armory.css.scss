@@ -7,3 +7,7 @@
 #items {
   @include column(20, true);
 }
+
+#new-item {
+  padding: 20px;
+}

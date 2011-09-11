@@ -13,6 +13,15 @@ class Ore < ActiveRecord::Base
     :path => "/:class/:id/:attachment/:style.:extension",
     :styles => { :large => ["128x128#", :png], :normal => ["64x64#", :png], :small => ["32x32#", :png] }
 
+  # Class Methods
+  class << self
+    
+    def to_select_options
+      all.map{ |o| [o.name, o.id] }
+    end
+
+  end
+
   def to_s
     name
   end

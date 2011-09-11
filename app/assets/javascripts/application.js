@@ -11,17 +11,40 @@
 $(function () {
   
   $.defaultText();
-  $('form').validate();
+  ForgeCraft.bindDefaultHandlers('body');
 
-  $('a[rel=modal]').facebox();
-
-  $('.tab-control').tabs()
-    .bind("tabsselect", function(event, ui) { 
+  $('.tab-control').tabs({
+    
+    select: function (event, ui) { 
       window.location.hash = ui.tab.hash;
-    });
+    },
+
+    load: function (event, ui) {
+      ForgeCraft.bindDefaultHandlers(ui.panel);
+    }
+
+  });
 
   $.address.change(function (event) {
     $('.tab-control').tabs( "select" , window.location.hash )
   })
 
+  $(document).bind('reveal.facebox', function () {
+    ForgeCraft.bindDefaultHandlers('#facebox');
+  });
+
 });
+
+var ForgeCraft = {
+
+  bindDefaultHandlers: function (context) {
+    $(context).find('form').validate();
+    $(context).find('a[rel=modal]').facebox();
+  },
+  
+  reloadSelectedTab: function () {
+    $tabs = $('#items').tabs();
+    $tabs.tabs('load', $tabs.tabs('option', 'selected'));
+  }
+
+}
