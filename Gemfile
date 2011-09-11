@@ -8,6 +8,7 @@ gem 'thin'
 # in production environments by default.
 group :assets do
   gem 'compass', :git => 'https://github.com/chriseppstein/compass.git', :branch => 'rails31'
+  gem 'fancy-buttons'
   gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
