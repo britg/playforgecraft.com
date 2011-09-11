@@ -20,4 +20,8 @@ class Item < ActiveRecord::Base
     :path => "/:class/:id/:attachment/:style.:extension",
     :styles => { :full => ["640x960#", :jpg], :normal => ["320x480#", :jpg], :small => ["160x240#", :jpg] }
 
+  def to_s
+    name
+  end
+
 end

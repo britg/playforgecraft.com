@@ -12,5 +12,9 @@ class Ore < ActiveRecord::Base
     :s3_headers => {'Expires' => 1.year.from_now.httpdate},
     :path => "/:class/:id/:attachment/:style.:extension",
     :styles => { :large => ["128x128#", :png], :normal => ["64x64#", :png], :small => ["32x32#", :png] }
+
+  def to_s
+    name
+  end
   
 end

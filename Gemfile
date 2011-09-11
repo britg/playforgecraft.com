@@ -23,6 +23,7 @@ group :test do
   gem 'fabrication'
   gem 'shoulda'
   gem 'mocha'
+  gem 'watchr'
 end
 
 group :development do
