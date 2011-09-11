@@ -35,6 +35,8 @@ $set-color: #FF8000;
 
 @mixin button {
   @include fancy-button($rare-color, 100%, 5px, 0px);
+  margin-top: 1px;
+  padding: 0.45em 1em;
   font-weight: normal;
   @include font;
 }
@@ -77,6 +79,7 @@ $set-color: #FF8000;
 
   label {
     font-weight: normal;
+    font-size: 125%;
     color: $rare-color;
 
     &.error {
@@ -89,7 +92,8 @@ $set-color: #FF8000;
     border: solid 1px $input-background-color;
     color: $highlight-color;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 125%;
     @include border-radius(5px);
 
     &.error {
@@ -101,6 +105,7 @@ $set-color: #FF8000;
 
   input.button, input[type="button"], input.submit, input[type="submit"] {
     @include button;
+    margin-bottom: 20px;
   }
 
   .notice, .alert, .error {
@@ -110,6 +115,10 @@ $set-color: #FF8000;
     font-size: 125%;
     font-weight: bold;
     @include border-radius(5px);
+  }
+
+  #facebox {
+    @include inset;
   }
 
 }

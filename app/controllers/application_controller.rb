@@ -1,7 +1,15 @@
 class ApplicationController < ActionController::Base
+  
   protect_from_forgery
 
-  def awesome
-    "awesome"
+  layout :detect_layout
+
+  protected
+
+  def detect_layout
+    return nil if request.xhr?
+    "application"
   end
+
+
 end

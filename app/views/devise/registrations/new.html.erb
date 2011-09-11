@@ -10,16 +10,6 @@
         <div><%= f.label :email %><br />
         <%= f.email_field :email, :class => "required email" %></div>
 
-        <div>
-          <%= fields_for :player do |p| %>
-
-            <%= p.label :name, "Player Name" %>
-            <br />
-            <%= p.text_field :name, :class => "required" %>
-          
-          <% end %>
-        </div>
-
         <div><%= f.label :password %><br />
         <%= f.password_field :password, :class => "required" %></div>
 

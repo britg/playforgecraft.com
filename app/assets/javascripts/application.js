@@ -9,6 +9,10 @@
 //= require_tree .
 
 $(function () {
+  
   $.defaultText();
   $('form').validate();
+
+  $('a[rel=modal]').facebox();
+
 });
