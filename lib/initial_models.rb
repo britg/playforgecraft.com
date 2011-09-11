@@ -20,7 +20,8 @@ module ForgeCraft
 
       def reset
         ["ores", "rarities", "genres", "classifications", "levels"].each do |t|
-          ActiveRecord::Base.connection.execute("DELETE FROM `#{t}`")
+          ActiveRecord::Base.connection.execute("DELETE FROM `#{t}`") rescue nil;
+          ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='#{t}'") rescue nil;
           ActiveRecord::Base.connection.execute("TRUNCATE `#{t}`") rescue nil;
         end
       end

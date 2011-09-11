@@ -12,4 +12,10 @@ namespace :forgecraft do
     ForgeCraft::InitialModels.create
   end
 
+  task :reinit => :environment do
+    require 'initial_models'
+    ForgeCraft::InitialModels.reset
+    ForgeCraft::InitialModels.create
+  end
+
 end
