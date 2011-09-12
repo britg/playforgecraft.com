@@ -1,6 +1,10 @@
 @import "blueprint";
 @import "base";
 
+html {
+  height: 100%;
+}
+
 body {
   
   @include blueprint(true);
