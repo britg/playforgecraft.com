@@ -25,7 +25,8 @@
           - if current_user.present?
             
             .welcome
-              Welcome, #{current_user}
+              Welcome, 
+              %span.epic= current_user
               = link_to "Log out", logout_path, :class => "log-out"
 
           - else
