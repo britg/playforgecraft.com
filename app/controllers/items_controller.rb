@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 
   def index
     @ore = Ore.find(params[:ore])
-    @items = @class.items.where(:ore_id => @ore.to_param)
+    @items = @class.items.order("level").where(:ore_id => @ore.to_param)
   end
 
   def new
@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
     @item.update_attributes(params[:item])
 
     if single = params[:single]
-      render :text => params[:item][single] and return
+      render :text => @item[single] and return
     end
 
     respond_with @item

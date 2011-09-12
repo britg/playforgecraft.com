@@ -1,10 +1,10 @@
 
 #items-content
 
-  %h3 #{@ore} #{@class}
-
   - if admin?
-    = link_to "Add Item", new_armory_item_path(@class, :ore => @ore.to_param), :rel => "modal"
+    = link_to "Add Item", new_armory_item_path(@class, :ore => @ore.to_param), :rel => "modal", :class => "button", :id => "add-item-button"
+
+  %h2 #{@ore} #{@class}
 
   .items
 

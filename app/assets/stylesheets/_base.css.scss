@@ -105,6 +105,10 @@ $set-color: #FF8000;
       @include epic;
     }
 
+    &.button {
+      @include button;
+    }
+
   }
 
   .inset {
@@ -163,6 +167,13 @@ $set-color: #FF8000;
 
   .ui-tabs-hide {
     display: none;
+  }
+
+  table {
+    
+    th {
+      background: none;
+    }
   }
 
 }

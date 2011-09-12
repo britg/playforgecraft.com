@@ -2,5 +2,6 @@
   
   - for type in Classification.all
 
-    %li
-      = link_to type, armory_path(type)
+    %li{ :class => ("selected" if params[:id] == type.to_s) }
+      = link_to image_tag("classes/#{type.to_s.singularize.downcase}.png"), armory_path(type), :class => "class-icon"
+      = link_to type, armory_path(type), :class => "class-name"

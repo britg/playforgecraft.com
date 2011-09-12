@@ -1,13 +1,86 @@
 @import "base";
 
 #class-nav {
-  @include column(4);
+  @include column(4, true);
 }
 
-#items {
-  @include column(20, true);
+.class-nav {
+  padding: 20px 0;
+  margin: 0;
+  margin-top: 45px;
+
+  li {
+    display: block;
+    padding: 10px 0 10px 20px;
+    font-size: 125%;
+
+    &.selected {
+      background: #272727;
+    }
+    
+    .class-icon {
+      img {
+        width: 25px;
+        margin-right: 5px;
+        vertical-align: -7px;
+      }
+    }
+
+  }
 }
+
+#add-item-button {
+  float: right;
+} 
 
 #new-item {
   padding: 20px;
+}
+
+#armory {
+  @include inset;
+  @include clearfix;
+  margin-bottom: 20px;
+}
+
+#armory-content {
+  @include column(20, true);
+  padding-right: 10px;
+  background: #272727;
+  min-height: 400px;
+}
+
+#items-content {
+  padding: 20px;
+}
+
+.ore-nav {
+
+  @include clearfix;
+  @include inset;
+  box-shadow: 0 0px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
+  @include border-radius(0px);
+  margin: 0;
+  padding: 0;
+  padding-right: 10px;
+  width: 100%;
+
+  li {
+    list-style-type: none;
+    display: inline;
+    float: left;
+    padding: 20px;
+
+    &.ui-tabs-selected {
+      background: #272727;
+    }
+
+    .ore-icon {
+      img {
+        width: 25px;
+        margin-right: 5px;
+        vertical-align: -7px;
+      }
+    }
+  }
 }

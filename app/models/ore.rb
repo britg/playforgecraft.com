@@ -25,5 +25,9 @@ class Ore < ActiveRecord::Base
   def to_s
     name
   end
+
+  def to_asset
+    name.downcase.gsub(/\s/, '')
+  end
   
 end
