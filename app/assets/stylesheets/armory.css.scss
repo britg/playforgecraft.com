@@ -7,7 +7,7 @@
 .class-nav {
   padding: 20px 0;
   margin: 0;
-  margin-top: 45px;
+  margin-top: 63px;
 
   li {
     display: block;
@@ -26,6 +26,36 @@
       }
     }
 
+  }
+}
+
+.ore-nav {
+
+  @include gutter;
+
+  li {
+    list-style-type: none;
+    display: inline;
+    float: left;
+    padding: 20px;
+
+    a {
+      &:hover {
+        border: 0;
+      }
+    }
+
+    &.ui-tabs-selected {
+      background: #272727;
+    }
+
+    .ore-icon {
+      img {
+        width: 25px;
+        margin-right: 5px;
+        vertical-align: -7px;
+      }
+    }
   }
 }
 
@@ -54,33 +84,33 @@
   padding: 20px;
 }
 
-.ore-nav {
+#item-content {
+  padding: 20px;
+}
 
-  @include clearfix;
-  @include inset;
-  box-shadow: 0 0px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
-  @include border-radius(0px);
-  margin: 0;
-  padding: 0;
-  padding-right: 10px;
-  width: 100%;
+.item-table {
+  .item-name {
+    font-size: 125%;
+  }
+}
+
+#breadcrumbs {
+  @include gutter;
 
   li {
     list-style-type: none;
     display: inline;
     float: left;
-    padding: 20px;
-
-    &.ui-tabs-selected {
-      background: #272727;
-    }
-
-    .ore-icon {
-      img {
-        width: 25px;
-        margin-right: 5px;
-        vertical-align: -7px;
-      }
-    }
+    padding: 5px 5px 5px 10px;
   }
+}
+
+.item-description {
+  font-size: 125%;
+  font-style: oblique;
+  margin-bottom: 20px;
+}
+
+.item-story {
+  white-space: pre-line;
 }

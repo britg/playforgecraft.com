@@ -13,6 +13,12 @@ body {
 
   #branding {
     @include column(8);
+
+    a {
+      &:hover {
+        border: 0;
+      }
+    }
   }
 
   #actions {
@@ -35,6 +41,10 @@ body {
         display: block;
         padding: 10px 0 10px 20px;
         font-size: 175%;
+
+        &:hover {
+          border: 0;
+        }
       }
     }
   }

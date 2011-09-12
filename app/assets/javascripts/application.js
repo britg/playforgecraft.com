@@ -43,7 +43,7 @@ var ForgeCraft = {
   },
   
   reloadSelectedTab: function () {
-    $tabs = $('#armory-content').tabs();
+    $tabs = $('#armory-content.tab-control').tabs();
     $tabs.tabs('load', $tabs.tabs('option', 'selected'));
   }
 

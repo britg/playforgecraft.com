@@ -1,0 +1,32 @@
+
+#armory
+
+  #class-nav
+
+    = render "shared/class_nav"
+  
+  #armory-content
+
+    %ul#breadcrumbs
+      
+      %li
+        = link_to "#{@item.classification}".html_safe, armory_path(@item.classification)
+
+      %li.spacer &rarr;
+
+      %li
+        = link_to "#{@item.ore}".html_safe, armory_path(@item.classification, :anchor => @item.ore.to_s)
+
+      %li.spacer &rarr;
+
+      %li
+        %span{ :class => @item.rarity }= @item
+
+    #item-content
+      
+      %h1{ :class => @item.rarity }= @item
+
+      .item-description
+        = admin_field @item, :description, :type => "textarea", :submit => "Save", :cancel => "Cancel"
+
+      .item-story= admin_field @item, :story, :type => "textarea", :submit => "Save", :cancel => "Cencel"

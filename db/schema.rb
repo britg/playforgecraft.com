@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110910193812) do
+ActiveRecord::Schema.define(:version => 20110912011348) do
 
   create_table "classifications", :force => true do |t|
     t.integer  "genre_id"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20110910193812) do
     t.string   "art_content_type"
     t.integer  "art_file_size"
     t.datetime "art_updated_at"
+    t.text     "story"
   end
 
   add_index "items", ["active"], :name => "index_items_on_active"

@@ -9,6 +9,10 @@ class ItemsController < ApplicationController
     @items = @class.items.order("level").where(:ore_id => @ore.to_param)
   end
 
+  def show
+    @item = Item.find(params[:id])
+  end
+
   def new
     @ore = Ore.find(params[:ore])
     @item = @class.items.build( :name => "#{@ore} #{@class.to_s.singularize}", 

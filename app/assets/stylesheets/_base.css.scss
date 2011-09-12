@@ -62,6 +62,17 @@ $set-color: #FF8000;
   color: $set-color;
 }
 
+@mixin gutter {
+  @include clearfix;
+  @include inset;
+  box-shadow: 0 0px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
+  @include border-radius(0px);
+  margin: 0;
+  padding: 0;
+  padding-right: 10px;
+  width: 100%;
+}
+
 @mixin forgecraft {
 
   @include font;
@@ -70,6 +81,26 @@ $set-color: #FF8000;
   color: $text-color;
   text-shadow: #000 1px 1px 1px;
   margin: 0;
+
+  .common {
+    @include common;
+  }
+
+  .advanced {
+    @include advanced;
+  }
+
+  .rare {
+    @include rare;
+  }
+
+  .epic {
+    @include epic;
+  }
+
+  .button {
+    @include button;
+  }
   
 
   #{headings()} {
@@ -82,7 +113,8 @@ $set-color: #FF8000;
     text-decoration: none;
 
     &:hover {
-      color: $hover-color;
+      @include highlighted-text;
+      border-bottom: 1px dotted;
     }
 
     &:visited {
@@ -173,6 +205,14 @@ $set-color: #FF8000;
     
     th {
       background: none;
+    }
+  }
+
+  form.editable {
+    
+    textarea {
+      width: 95%;
+      display: block;
     }
   }
 

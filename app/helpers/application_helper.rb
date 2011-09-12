@@ -1,9 +1,19 @@
 module ApplicationHelper
 
-  def admin_field(obj, field)
-    editable_field_if admin?, obj, field, 
+  def admin_field(obj, field, opts = {})
+    
+    opts = {
       :submitdata => { :single => field }, 
-      :style => "inherit"
+      :style => "inherit",
+      :onblur => "ignore",
+      :cssclass => "editable",
+      :height => "none",
+      :width => "none",
+      :placeholder => "Click to edit #{field}"
+    }.merge(opts)
+    
+    editable_field_if admin?, obj, field, opts
+      
   end
 
 end
