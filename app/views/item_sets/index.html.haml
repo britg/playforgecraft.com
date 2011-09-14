@@ -1,0 +1,14 @@
+#armory
+
+  #class-nav
+
+    = render "shared/class_nav"
+  
+  #armory-content
+
+    #item-content
+    
+      - if admin?
+        = link_to "Add Item Set", new_item_set_path, :rel => "modal", :class => "button", :id => "add-item-button"
+
+      %h1.itemset Item Sets
