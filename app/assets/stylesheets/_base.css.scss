@@ -98,6 +98,10 @@ $set-color: #FF8000;
     @include epic;
   }
 
+  .itemset {
+    @include itemset;
+  }
+
   .button {
     @include button;
   }
@@ -135,6 +139,10 @@ $set-color: #FF8000;
 
     &.epic {
       @include epic;
+    }
+
+    &.itemset {
+      @include itemset;
     }
 
     &.button {
