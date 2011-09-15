@@ -14,7 +14,13 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
-    current_user.try(:admin)
+    current_user and current_user.admin?
+  end
+
+  def require_admin!
+    unless current_user and current_user.admin?
+      redirect_to logout_path and return false
+    end
   end
 
 

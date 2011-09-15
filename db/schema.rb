@@ -11,17 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110915023706) do
+ActiveRecord::Schema.define(:version => 20110915184842) do
 
   create_table "active_admin_comments", :force => true do |t|
-    t.integer  "resource_id",   :null => false
-    t.string   "resource_type", :null => false
-    t.integer  "author_id"
-    t.string   "author_type"
-    t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "namespace"
+    t.integer   "resource_id",   :null => false
+    t.string    "resource_type", :null => false
+    t.integer   "author_id"
+    t.string    "author_type"
+    t.text      "body"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "namespace"
   end
 
   add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
@@ -81,6 +81,31 @@ ActiveRecord::Schema.define(:version => 20110915023706) do
     t.integer   "avatar_file_size"
     t.timestamp "avatar_updated_at"
   end
+
+  create_table "games", :force => true do |t|
+    t.string   "type"
+    t.integer  "challenger_id"
+    t.integer  "challengee_id"
+    t.integer  "winner_id"
+    t.integer  "loser_id"
+    t.integer  "challenger_attack_score",    :default => 0
+    t.integer  "challenger_defense_score",   :default => 0
+    t.integer  "challengee_attack_score",    :default => 0
+    t.integer  "challengee_defense_score",   :default => 0
+    t.integer  "start_turns",                :default => 0
+    t.integer  "challenger_turns_remaining", :default => 0
+    t.integer  "challengee_turns_remaining", :default => 0
+    t.datetime "challenger_last_action"
+    t.datetime "challengee_last_action"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "games", ["challengee_id"], :name => "index_games_on_challengee_id"
+  add_index "games", ["challenger_id"], :name => "index_games_on_challenger_id"
+  add_index "games", ["loser_id"], :name => "index_games_on_loser_id"
+  add_index "games", ["type"], :name => "index_games_on_type"
+  add_index "games", ["winner_id"], :name => "index_games_on_winner_id"
 
   create_table "genres", :force => true do |t|
     t.string    "name"
