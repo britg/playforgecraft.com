@@ -62,25 +62,7 @@ $set-color: #FF8000;
   color: $set-color;
 }
 
-@mixin gutter {
-  @include clearfix;
-  @include inset;
-  box-shadow: 0 0px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
-  @include border-radius(0px);
-  margin: 0;
-  padding: 0;
-  padding-right: 10px;
-  width: 100%;
-}
-
-@mixin forgecraft {
-
-  @include font;
-  background: $background-color asset_url("background.png", image);
-  text-align: left;
-  color: $text-color;
-  text-shadow: #000 1px 1px 1px;
-  margin: 0;
+@mixin rarity {
 
   .common {
     @include common;
@@ -102,28 +84,7 @@ $set-color: #FF8000;
     @include itemset;
   }
 
-  .button {
-    @include button;
-  }
-  
-
-  #{headings()} {
-    font-weight: normal;
-    @include highlighted-text;
-  }
-
   a {
-    @include highlighted-text;
-    text-decoration: none;
-
-    &:hover {
-      @include highlighted-text;
-      border-bottom: 1px dotted;
-    }
-
-    &:visited {
-      @include highlighted-text;
-    }
 
     &.common {
       @include common;
@@ -145,10 +106,57 @@ $set-color: #FF8000;
       @include itemset;
     }
 
+  }
+}
+
+@mixin gutter {
+  @include clearfix;
+  @include inset;
+  box-shadow: 0 0px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
+  @include border-radius(0px);
+  margin: 0;
+  padding: 0;
+  padding-right: 10px;
+  width: 100%;
+}
+
+@mixin forgecraft {
+
+  @include font;
+  background: $background-color asset_url("background.png", image);
+  text-align: left;
+  color: $text-color;
+  text-shadow: #000 1px 1px 1px;
+  margin: 0;
+
+  @include rarity;
+
+  #{headings()} {
+    font-weight: normal;
+    @include highlighted-text;
+  }
+
+  .button {
+    @include button;
+  }
+
+  a {
+
+    @include highlighted-text;
+    text-decoration: none;
+
+    &:hover {
+      @include highlighted-text;
+      border-bottom: 1px dotted;
+    }
+
+    &:visited {
+      @include highlighted-text;
+    }
+
     &.button {
       @include button;
     }
-
   }
 
   .inset {
