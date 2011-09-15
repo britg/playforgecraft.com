@@ -1,0 +1,37 @@
+// Active Admin CSS Styles
+@import "active_admin/mixins";
+@import "active_admin/base";
+
+// To customize the Active Admin interfaces, add your
+// styles here:
+
+@import "base";
+
+body {
+  @include rarity;
+}
+
+table td {
+  vertical-align: top;
+}
+
+ul.item-list {
+  padding-top: 20px;
+  li {
+    list-style-type: none;
+    margin-bottom: 5px;
+  }
+}
+
+a.item {
+  text-decoration: none;
+  text-shadow: #000 0px 1px 0px;
+  font-size: 110%;
+  font-weight: bold;
+  display: inline-block;
+  background: #7B8389;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  padding: 2px 10px;
+  padding-top: 4px;
+  @include border-radius(10px);
+}

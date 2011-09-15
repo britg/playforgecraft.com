@@ -41,7 +41,9 @@ group :production do
 end
 
 gem 'devise'
-gem 'paperclip'
+gem 'paperclip', '2.4'
 gem 'aws-s3'
 gem 'will_paginate'
 gem 'jeditable-rails'
+gem 'activeadmin'
+gem 'meta_search', '>= 1.1.0.pre'
