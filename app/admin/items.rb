@@ -1,5 +1,11 @@
 ActiveAdmin.register Item do
-  
+
+  scope :all
+
+  Rarity::DEFAULTS.each do |r|
+    scope r.downcase.to_sym
+  end
+
   index do
     column :id
     column :name do |item|

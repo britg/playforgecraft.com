@@ -1,5 +1,7 @@
 ActiveAdmin.register Classification do
 
+  menu :label => "Classes"
+
   index do
     column :id
     column :name

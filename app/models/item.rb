@@ -28,6 +28,10 @@ class Item < ActiveRecord::Base
     :path => "/:class/:id/:attachment/:style.:extension",
     :styles => { :full => ["640x960#", :jpg], :normal => ["320x480#", :jpg], :small => ["160x240#", :jpg] }
 
+  Rarity::DEFAULTS.each do |r|
+    scope r.downcase.to_sym, joins(:rarity).where("rarities.name = ?", r)
+  end
+
   def to_s
     name
   end

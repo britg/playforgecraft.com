@@ -1,6 +1,6 @@
 class Rarity < ActiveRecord::Base
 
-  DEFAULTS = ["Common", "Advanced", "Rare", "Epic"]
+  DEFAULTS = ["Common", "Advanced", "Rare", "Set", "Epic"]
 
   has_many :items
 
