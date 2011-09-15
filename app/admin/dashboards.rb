@@ -60,3 +60,17 @@ ActiveAdmin::Dashboards.build do
   end
 
 end
+
+module ActiveAdmin
+  module Views
+    class HeaderRenderer
+      def to_html
+        title + global_navigation + application_link + utility_navigation
+      end
+
+      def application_link
+        link_to('Public Armory', armory_index_path)
+      end
+    end
+  end
+end
