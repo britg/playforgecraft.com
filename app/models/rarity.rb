@@ -6,6 +6,8 @@ class Rarity < ActiveRecord::Base
 
   validates_presence_of :name, :rank
 
+  default_scope order("rank asc")
+
   def to_s
     name.downcase
   end

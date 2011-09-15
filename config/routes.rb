@@ -1,11 +1,14 @@
 ForgeCraft::Application.routes.draw do
 
+  ActiveAdmin.routes(self)
+
   devise_for :users
 
   devise_scope :user do
     get "login", :to => "devise/sessions#new"
     get "register", :to => "devise/registrations#new"
     get "logout", :to => "devise/sessions#destroy"
+    get "admin_logout", :to => "devise/sessions#destroy"
   end
 
   resources :users, :only => [:index]
@@ -20,10 +23,6 @@ ForgeCraft::Application.routes.draw do
   resources :item_sets
 
   resources :topics
-
-  namespace :admin do
-    resources :users, :only => [:index]
-  end
 
   root :to => "users#index"
 

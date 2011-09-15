@@ -1,6 +1,6 @@
 class Ore < ActiveRecord::Base
 
-  default_scope :order => "rank asc"
+  default_scope order("rank asc")
 
   DEFAULTS = ["Stone", "Bronze", "Iron", "Dark Iron", "Gold", "Mithril"]
 
