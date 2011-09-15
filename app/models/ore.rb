@@ -2,7 +2,9 @@ class Ore < ActiveRecord::Base
 
   default_scope order("rank asc")
 
-  DEFAULTS = ["Stone", "Bronze", "Iron", "Dark Iron", "Gold", "Mithril"]
+  DEFAULTS = ["Stone", "Bronze", "Iron", "Gold", "Mithril", "Dragonsteel"]
+  UNIT = 100.0/21.0
+  CHANCES = [6.0*UNIT, 5.0*UNIT, 4.0*UNIT, 3.0*UNIT, 2.0*UNIT, 1.0*UNIT]
 
   has_many :items
 
@@ -20,6 +22,20 @@ class Ore < ActiveRecord::Base
     
     def to_select_options
       all.map{ |o| [o.name, o.id] }
+    end
+
+    def random
+      roll = Random.new.rand(100)
+      sum = 0.0
+      i = 0
+
+      CHANCES.each do |ch|
+        sum += ch
+        break if (roll <= sum)
+        i += 1
+      end
+
+      where(:rank => i).first
     end
 
   end
