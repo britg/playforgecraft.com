@@ -37,23 +37,23 @@ ActiveAdmin::Dashboards.build do
 
   section "Recently Edited Items" do
     ul :class => "item-list" do
-      Item.order("updated_at desc").limit(10).each do |item|
-        li link_to(item.name, item_path(item), :class => ["item", item.rarity])
+      Item.unscoped.order("updated_at desc").limit(10).each do |item|
+        li link_to(item.name, admin_item_path(item), :class => ["item", item.rarity])
       end
     end
   end
 
-  section "#{Email.count} Emails" do
+  section "Recent Mailing List Additions (#{Email.count} total)" do
     ul do
-      Email.order("created_at desc").limit(20).each do |email|
+      Email.order("created_at desc").limit(10).each do |email|
         li email
       end
     end
   end
 
-  section "#{User.count} Players" do
+  section "Recent Player Sign Ups (#{User.count} total)" do
     ul do
-      User.order("created_at desc").limit(20).each do |user|
+      User.order("created_at desc").limit(10).each do |user|
         li user
       end
     end

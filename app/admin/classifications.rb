@@ -14,4 +14,19 @@ ActiveAdmin.register Classification do
     default_actions
   end
   
+  form :html => { :enctype => "multipart/form-data" } do |f|
+    
+    f.inputs "Details" do
+      f.input :name
+      f.input :genre
+    end
+
+    f.inputs "Art", :multipart => true do
+      f.input :default_icon
+      f.input :default_art
+    end
+
+    f.buttons
+  end
+
 end

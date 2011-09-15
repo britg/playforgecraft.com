@@ -9,7 +9,7 @@ class ClassificationsControllerTest < ActionController::TestCase
   should "GET index" do
     get :index
     assert_response :success
-    assert_select '#classifications'
+    assert_select '#class-nav'
   end
 
   should "GET show" do

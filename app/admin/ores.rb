@@ -1,5 +1,7 @@
 ActiveAdmin.register Ore do
 
+  menu :priority => 2
+
   index do
     column :id
     

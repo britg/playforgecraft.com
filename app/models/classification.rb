@@ -24,6 +24,10 @@ class Classification < ActiveRecord::Base
 
   # Class Methods
   class << self
+
+    def find ident
+      find_by_id(ident) || find_by_name(ident.singularize)
+    end
     
     def to_select_options
       all.map{ |c| [c.name, c.id] }

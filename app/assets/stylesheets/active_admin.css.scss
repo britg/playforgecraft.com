@@ -37,6 +37,10 @@ body {
     padding-top: 4px;
     @include border-radius(10px);
   }
+
+  textarea#item_description {
+    height: 40px;
+  }
   
 }
 

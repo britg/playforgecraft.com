@@ -5,7 +5,3 @@
     %li{ :class => ("selected" if params[:id] == type.to_s) }
       = link_to image_tag("classes/#{type.to_s.singularize.downcase}.png"), armory_path(type), :class => "class-icon"
       = link_to type, armory_path(type), :class => "class-name"
-
-  %li{ :class => ("selected" if params[:id] == "Sets") }
-    = link_to image_tag("classes/sets.png"), armory_path(type), :class => "class-icon"
-    = link_to "Item Sets", armory_Sets_path
