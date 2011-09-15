@@ -1,0 +1,3 @@
+
+Fabricator(:game) do
+end

@@ -46,6 +46,11 @@
           %li
             = link_to "Armory", armory_index_path
           
+          - if admin?
+          
+            %li
+              = link_to "Play", play_path
+          
           
 
     #content

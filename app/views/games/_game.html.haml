@@ -1,0 +1,8 @@
+#game
+  
+  #tiles
+
+    - for t in @game.tiles
+      
+      .tile{ :class => t.ore.to_s.parameterize }
+        = image_tag(t.ore.tile, :class => t.ore.to_s.parameterize)

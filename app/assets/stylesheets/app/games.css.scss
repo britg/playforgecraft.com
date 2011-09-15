@@ -1,0 +1,27 @@
+
+$tile-dim: 48px;
+
+#game {
+
+  #tiles {
+    display: block;
+    width: 12*$tile-dim;
+    height: 12*$tile-dim;
+    overflow: hidden;
+  }
+  
+  .tile {
+
+    float: left;
+    display: block;
+    width: $tile-dim;
+    height: $tile-dim;
+    
+    img {
+      width: $tile-dim;
+      height: $tile-dim;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
