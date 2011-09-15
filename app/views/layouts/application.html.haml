@@ -27,7 +27,11 @@
             .welcome
               Welcome, 
               %span.epic= current_user
-              = link_to "Log out", logout_path, :class => "log-out"
+
+              - if admin?
+                = link_to "Admin Dashboard", admin_dashboard_path, :class => "action"
+
+              = link_to "Log out", logout_path, :class => "action"
 
           - else
 
