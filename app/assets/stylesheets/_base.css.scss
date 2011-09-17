@@ -136,6 +136,10 @@ $set-color: #FF8000;
     @include highlighted-text;
   }
 
+  .hidden {
+    display: none;
+  }
+
   .button {
     @include button;
   }
