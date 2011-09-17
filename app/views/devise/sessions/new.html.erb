@@ -5,13 +5,16 @@
     <h3>Log In</h3>
 
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-      <%= f.check_box :remember_me, :checked => true, :class => "hidden" %>
       
       <div><%= f.label :email %><br />
       <%= f.email_field :email, :class => "required email" %></div>
 
       <div><%= f.label :password %><br />
       <%= f.password_field :password, :class => "required" %></div>
+
+      <% if devise_mapping.rememberable? -%>
+        <div><%= f.check_box :remember_me, :checked => true %> <%= f.label :remember_me %></div>
+      <% end -%>
 
       <div><%= f.submit "Sign in" %></div>
     <% end %>
