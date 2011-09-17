@@ -43,23 +43,23 @@ $set-color: #FF8000;
 }
 
 @mixin common {
-  color: $common-color;
+  color: $common-color !important;
 }
 
 @mixin advanced {
-  color: $advanced-color;
+  color: $advanced-color !important;
 }
 
 @mixin rare {
-  color: $rare-color;
+  color: $rare-color !important;
 }
 
 @mixin epic {
-  color: $epic-color;
+  color: $epic-color !important;
 }
 
 @mixin itemset {
-  color: $set-color;
+  color: $set-color !important;
 }
 
 @mixin rarity {
