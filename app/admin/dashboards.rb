@@ -69,7 +69,9 @@ module ActiveAdmin
       end
 
       def application_link
-        link_to('Public Armory', armory_index_path)
+        content_tag(:span, "|", :class => "sep") + \
+        link_to('Public Armory', armory_index_path, :class => "custom-action") + \
+          link_to('Game Board', play_path, :class => "custom-action")
       end
     end
   end

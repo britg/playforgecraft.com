@@ -11,6 +11,20 @@ body {
   @include rarity;
 }
 
+#header {
+
+  .sep {
+    color: #CDCDCD;
+    text-shadow: none;
+    font-weight: normal;
+  }
+
+  .custom-action {
+    margin-left: 20px;
+    text-decoration: none;
+  }
+}
+
 #active_admin_content {
 
   table td {
