@@ -19,6 +19,30 @@ class Rarity < ActiveRecord::Base
       order("rank").map{ |o| [o.name, o.id] }
     end
 
+    def of sym
+      Rarity.find_by_name(sym.to_s.capitalize)
+    end
+
+  end
+
+  def common?
+    name == "Common"
+  end
+
+  def advanced?
+    name == "Advanced"
+  end
+
+  def rare?
+    name == "Rare"
+  end
+
+  def set?
+    name == "Set"
+  end
+
+  def epic?
+    name == "Epic"
   end
 
 end

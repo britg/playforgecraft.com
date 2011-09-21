@@ -39,6 +39,14 @@ class ItemTest < ActiveSupport::TestCase
       assert_equal true, @item.armor?
       assert_equal false, @item.weapon?
     end
+
+    should "set its rarity to 'set' if part of a set" do
+      @item_set = Fabricate(:item_set)
+      @set_rarity = Fabricate(:set_rarity)
+      assert_not_equal @item.rarity, @set_rarity
+      @item.update_attributes(:item_set => @item_set)
+      assert_equal @item.rarity, @set_rarity
+    end
     
   end
   

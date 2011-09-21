@@ -13,6 +13,7 @@ class Item < ActiveRecord::Base
   validates_presence_of :rarity
 
   before_validation :default_genre
+  before_save :ensure_item_set_rarity
 
   has_attached_file :icon,
     :storage => :s3,
@@ -42,16 +43,26 @@ class Item < ActiveRecord::Base
     "#{id}-#{name.gsub(/[^a-zA-Z0-9\-]+/, '-')}"
   end
 
-  def default_genre
-    self.genre = self.classification.try(:genre)
-  end
-
   def weapon?
     genre.name == 'Weapon'
   end
 
   def armor?
     genre.name == 'Armor'
+  end
+
+  protected
+
+  def default_genre
+    self.genre = self.classification.try(:genre)
+  end
+
+  def ensure_item_set_rarity
+    if self.item_set_id.present?
+      self.rarity = Rarity.of(:set)
+    elsif self.rarity.set?
+      self.rarity = Rarity.of(:advanced)
+    end
   end
 
 end
