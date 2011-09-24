@@ -6,10 +6,10 @@ ActiveAdmin.register Classification do
     column :id
     column :name
     column :default_icon do |cl|
-      image_tag cl.default_icon
+      image_tag cl.default_icon, :class => "icon"
     end
     column :default_art do |cl|
-      image_tag cl.default_art
+      image_tag cl.default_art, :class => "art"
     end
     default_actions
   end

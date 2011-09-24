@@ -17,13 +17,14 @@ ActiveAdmin.register Item do
     column :name do |item|
       link_to item, item_path(item), :class => ["item", item.rarity]
     end
-    column :classification
-    column :ore
+    column :type do |item|
+      item.type
+    end
     column :icon do |item|
-      image_tag item.icon
+      image_tag item.icon, :class => "icon"
     end
     column :art do |item|
-      image_tag item.art
+      image_tag item.art, :class => "art"
     end
     default_actions
   end

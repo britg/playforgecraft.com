@@ -7,10 +7,10 @@ ActiveAdmin.register ItemSet do
       set.items.count
     end
     column :icon do |set|
-      image_tag set.icon
+      image_tag set.icon, :class => "icon"
     end
     column :art do |set|
-      image_tag set.art
+      image_tag set.art, :class => "art"
     end
     default_actions
   end
