@@ -26,6 +26,10 @@
 
       .art
         = link_to image_tag(@item.art.url(:small)), @item.art.url(:full), :rel => "modal"
+
+        - if admin?
+          %br
+          = link_to "Edit/Upload Art", edit_admin_item_path(@item)
       
       
       %h1.heading{ :class => @item.rarity }
@@ -39,4 +43,8 @@
         
         %h3 Origin Story
 
-        = admin_field @item, :story, :type => "textarea", :submit => "Save", :cancel => "Cencel"
+        - unless @item.story
+
+          %p The forging of #{loot(@item)} is lost to time. Perhaps one day a scholar will unveil its origin story, no doubt wrought with blood and battle...
+
+        = admin_field @item, :story, :type => "textarea", :submit => "Save", :cancel => "Cancel"

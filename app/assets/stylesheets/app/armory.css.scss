@@ -91,6 +91,7 @@
     float: right;
     padding: 10px;
     @include inset;
+    text-align: center;
 
     img {
       max-width: 160px;
