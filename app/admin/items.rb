@@ -6,6 +6,12 @@ ActiveAdmin.register Item do
     scope r.downcase.to_sym
   end
 
+  Classification::DEFAULTS.each do |type, classes|
+    classes.each do |c|
+      scope c.downcase.to_sym
+    end
+  end
+
   index do
     column :id
     column :name do |item|

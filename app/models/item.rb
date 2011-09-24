@@ -35,6 +35,12 @@ class Item < ActiveRecord::Base
     scope r.downcase.to_sym, joins(:rarity).where("rarities.name = ?", r)
   end
 
+  Classification::DEFAULTS.each do |type, classes|
+    classes.each do |c|
+      scope c.downcase.to_sym, joins(:classification).where("classifications.name = ?", c)  
+    end
+  end
+
   def to_s
     name
   end

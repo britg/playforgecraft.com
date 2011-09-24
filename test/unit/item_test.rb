@@ -14,6 +14,24 @@ class ItemTest < ActiveSupport::TestCase
   should validate_presence_of :ore
   should validate_presence_of :rarity
 
+  context "The Item class" do
+    
+    should "Have scopes for each rarity" do
+      Rarity::DEFAULTS.each do |r|
+        assert_not_nil Item.send(r.downcase.to_sym)
+      end
+    end
+
+    should "Have scopes for each classification" do
+      Classification::DEFAULTS.each do |type, classes|
+        classes.each do |c|
+          assert_not_nil Item.send(c.downcase.to_sym)
+        end
+      end
+    end
+
+  end
+
   context "An item" do
     
     setup do
