@@ -23,10 +23,20 @@
         %span{ :class => @item.rarity }= @item
 
     #item-content
-      
-      %h1{ :class => @item.rarity }= @item
 
-      .item-description
+      .art
+        = link_to image_tag(@item.art.url(:small)), @item.art.url(:full), :rel => "modal"
+      
+      
+      %h1.heading{ :class => @item.rarity }
+        = image_tag(@item.icon.url(:tiny), :class => "icon")
+        = admin_field @item, :name
+
+      .description
         = admin_field @item, :description, :type => "textarea", :submit => "Save", :cancel => "Cancel"
 
-      .item-story= admin_field @item, :story, :type => "textarea", :submit => "Save", :cancel => "Cencel"
+      .story
+        
+        %h3 Origin Story
+
+        = admin_field @item, :story, :type => "textarea", :submit => "Save", :cancel => "Cencel"

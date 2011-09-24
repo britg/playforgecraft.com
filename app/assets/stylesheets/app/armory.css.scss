@@ -86,11 +86,44 @@
 
 #item-content {
   padding: 20px;
+
+  .art {
+    float: right;
+    padding: 10px;
+    @include inset;
+
+    img {
+      max-width: 160px;
+    }
+  }
+
+  .heading {
+    .icon {
+      vertical-align: -12px;
+    }
+  }
+ 
+  .description {
+    font-size: 125%;
+    font-style: oblique;
+    margin-bottom: 20px;
+  }
+
+  .story {
+    .editable {
+      white-space: pre-line;  
+    }
+  }
 }
 
 .item-table {
-  .item-name {
+  .name {
     font-size: 125%;
+
+    .icon {
+      width: 20px;
+      vertical-align: -5px;
+    }
   }
 }
 
@@ -105,15 +138,6 @@
   }
 }
 
-.item-description {
-  font-size: 125%;
-  font-style: oblique;
-  margin-bottom: 20px;
-}
-
-.item-story {
-  white-space: pre-line;
-}
 
 #loot-spotlight {
   padding: 20px;
