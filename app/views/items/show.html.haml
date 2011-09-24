@@ -43,8 +43,8 @@
         
         %h3 Origin Story
 
-        - unless @item.story
+        - if !@item.story or @item.story.empty?
 
-          %p The forging of #{loot(@item)} is lost to time. Perhaps one day a scholar will unveil its origin story, no doubt wrought with blood and battle...
+          %p= t('stories.default', :item => loot(@item)).html_safe
 
         = admin_field @item, :story, :type => "textarea", :submit => "Save", :cancel => "Cancel"

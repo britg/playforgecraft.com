@@ -4,3 +4,6 @@
 en:
   notices:
     email_thanks: "Thanks! We'll notify you as soon as ForgeCraft is ready."
+
+  stories:
+    default: "%{item}'s forging and history has been lost to time. Perhaps one day an adventurous scholar will unveil its origin story; no doubt wrought with blood and battle..."

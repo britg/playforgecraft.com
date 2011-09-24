@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def loot(item)
-    link_to item, item_path(item), :class => item.rarity
+    link_to(item, item_path(item), :class => item.rarity)
   end
 
 end
