@@ -3,6 +3,8 @@ class Classification < ActiveRecord::Base
   DEFAULTS = { :weapon => ["Sword", "Axe", "Crossbow"],
                :armor => ["Shield", "Legging", "Tunic"] }
 
+  default_scope order("id asc")
+
   belongs_to :genre
   has_many :items
 
