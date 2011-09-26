@@ -44,6 +44,14 @@ class Ore < ActiveRecord::Base
     name
   end
 
+  def tile_url
+    tile.url(:large)
+  end
+
+  def serializable_hash(opts)
+    super((opts||{}).merge(:methods => [:tile_url]))
+  end
+
   def to_asset
     name.downcase.gsub(/\s/, '')
   end

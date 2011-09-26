@@ -52,6 +52,18 @@ class Classification < ActiveRecord::Base
     name.pluralize
   end
 
+  def default_icon_url
+    default_icon.url(:thumb)
+  end
+
+  def default_art_url
+    default_art.url(:full)
+  end
+
+  def serializable_hash(opts)
+    super((opts||{}).merge(:methods => [:default_icon_url, :default_art_url]))
+  end
+
   def weapon?
     genre.name == 'Weapon'
   end

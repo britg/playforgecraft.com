@@ -18,4 +18,16 @@ class ItemSet < ActiveRecord::Base
     :default_url => "http://forgecraft.s3.amazonaws.com/default.jpg",
     :styles => { :full => ["640x960#", :jpg], :normal => ["320x480#", :jpg], :small => ["160x240#", :jpg] }
 
+  def icon_url
+    icon.url(:thumb)
+  end
+
+  def art_url
+    art.url(:full)
+  end
+
+  def serializable_hash(opts)
+    super((opts||{}).merge(:methods => [:icon_url, :art_url]))
+  end
+
 end

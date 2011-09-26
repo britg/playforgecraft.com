@@ -49,10 +49,32 @@ class Item < ActiveRecord::Base
       Item.where(:classification_id => type.id, :ore_id => ore.id).count
     end
 
+    def armory_dump
+      {
+        :ores => Ore.all,
+        :rarities => Rarity.all,
+        :classifications => Classification.all,
+        :items => Item.all,
+        :item_sets => ItemSet.all
+      }
+    end
+
   end
 
   def to_s
     name
+  end
+
+  def icon_url
+    icon.url(:thumb)
+  end
+
+  def art_url
+    art.url(:full)
+  end
+
+  def serializable_hash(opts)
+    super((opts||{}).merge(:methods => [:icon_url, :art_url]))
   end
 
   def to_param

@@ -17,6 +17,15 @@ class OreTest < ActiveSupport::TestCase
       assert_equal @ore.name, @ore.to_s
     end
 
+    should "have an accessor method for its tile url" do
+      assert_equal @ore.tile.url(:large), @ore.tile_url
+    end
+
+    should "include its tile url in serialization" do
+      assert_match "tile_url", @ore.to_json
+      assert_match @ore.tile.url(:large), @ore.to_json
+    end
+
   end
 
 end

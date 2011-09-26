@@ -37,6 +37,10 @@ class ItemTest < ActiveSupport::TestCase
       assert_equal 1, Item.item_count(@class, @ore)
     end
 
+    should "respond to armory_dump" do
+      assert_not_nil Item.armory_dump
+    end
+
   end
 
   context "An item" do
@@ -71,6 +75,24 @@ class ItemTest < ActiveSupport::TestCase
       assert_not_equal @item.rarity, @set_rarity
       @item.update_attributes(:item_set => @item_set)
       assert_equal @item.rarity, @set_rarity
+    end
+
+    should "have an accessor method for its icon url" do
+      assert_equal @item.icon.url(:thumb), @item.icon_url
+    end
+
+    should "include its icon url in serialization" do
+      assert_match "icon_url", @item.to_json
+      assert_match @item.icon.url(:thumb), @item.to_json
+    end
+
+    should "have an accessor method for its art url" do
+      assert_equal @item.art.url(:full), @item.art_url
+    end
+
+    should "include its art url in serialization" do
+      assert_match "art_url", @item.to_json
+      assert_match @item.art.url(:full), @item.to_json
     end
     
   end
