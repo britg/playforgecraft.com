@@ -4,4 +4,4 @@
   - for ore in Ore.all
 
     %li
-      = link_to image_tag(ore.tile) + ore, armory_items_path(classification, :ore => ore.to_param), :title => ore, :class => "ore-icon"
+      = link_to image_tag(ore.tile) + "#{ore} (#{ore.items.count})", armory_items_path(classification, :ore => ore.to_param), :title => ore, :class => "ore-icon"

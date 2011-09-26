@@ -37,6 +37,11 @@ class Classification < ActiveRecord::Base
       all.map{ |c| [c.name, c.id] }
     end
 
+    def item_count(sym)
+      c = sym.to_s.downcase.capitalize.singularize
+      Classification.find_by_name(c).items.count rescue 0;
+    end
+
   end
 
   def to_s
