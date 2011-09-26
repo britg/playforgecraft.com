@@ -30,6 +30,13 @@ class ItemTest < ActiveSupport::TestCase
       end
     end
 
+    should "have a helper method for item counts under a class and ore" do
+      @class = Fabricate(:classification)
+      @ore = Fabricate(:ore)
+      @item = Fabricate(:item, :ore => @ore, :classification => @class)
+      assert_equal 1, Item.item_count(@class, @ore)
+    end
+
   end
 
   context "An item" do
