@@ -43,6 +43,14 @@ class Item < ActiveRecord::Base
     end
   end
 
+  class << self
+
+    def item_count(type, ore)
+      Item.where(:classification_id => type.id, :ore_id => ore.id).count
+    end
+
+  end
+
   def to_s
     name
   end
