@@ -2,6 +2,8 @@ class ItemSet < ActiveRecord::Base
 
   has_many :items
 
+  has_paper_trail
+
   has_attached_file :icon,
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",

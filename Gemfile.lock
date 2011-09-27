@@ -122,6 +122,8 @@ GEM
       rake
     multi_json (1.0.3)
     orm_adapter (0.0.5)
+    paper_trail (2.3.3)
+      rails (~> 3)
     paperclip (2.4.0)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
@@ -214,6 +216,7 @@ DEPENDENCIES
   jquery-rails
   meta_search (>= 1.1.0.pre)
   mocha
+  paper_trail
   paperclip (= 2.4)
   pg
   rails (= 3.1.0)

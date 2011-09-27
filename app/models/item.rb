@@ -15,6 +15,8 @@ class Item < ActiveRecord::Base
   before_validation :default_genre
   before_save :ensure_item_set_rarity
 
+  has_paper_trail
+
   has_attached_file :icon,
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
