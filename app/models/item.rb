@@ -53,6 +53,7 @@ class Item < ActiveRecord::Base
 
     def armory_dump
       {
+        :version => Version.last.try(:id)||0,
         :ores => Ore.all,
         :rarities => Rarity.all,
         :classifications => Classification.all,

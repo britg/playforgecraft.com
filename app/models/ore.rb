@@ -38,6 +38,10 @@ class Ore < ActiveRecord::Base
       where(:rank => i).first
     end
 
+    def browsable
+      Ore.where(:name => DEFAULTS)
+    end
+
   end
 
   def to_s

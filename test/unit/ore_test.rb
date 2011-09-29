@@ -6,12 +6,24 @@ class OreTest < ActiveSupport::TestCase
 
   should validate_presence_of :name
   should validate_presence_of :rank
+  
+  setup do
+    @ore = Fabricate(:ore)
+  end
+
+  context "The Ore class" do
+    
+    should "output for select options" do
+      assert_not_nil Ore.to_select_options
+    end
+
+    should "list browsable ores" do
+      assert_not_nil Ore.browsable
+    end
+
+  end
 
   context "An ore" do
-    
-    setup do
-      @ore = Fabricate(:ore)
-    end
 
     should "respond with its name to to_s" do
       assert_equal @ore.name, @ore.to_s
