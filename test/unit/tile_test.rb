@@ -11,5 +11,13 @@ class TileTest < ActiveSupport::TestCase
   setup do
     @tile = Fabricate(:tile)
   end
+
+  context "A tile" do
+
+    should "start unconsumed" do
+      assert_equal false, @tile.consumed?  
+    end
+    
+  end
   
 end
