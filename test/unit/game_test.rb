@@ -8,5 +8,6 @@ class GameTest < ActiveSupport::TestCase
   should belong_to :loser
 
   should have_many :tiles
+  should have_many :turns
 
 end

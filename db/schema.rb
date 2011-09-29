@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110929155130) do
+ActiveRecord::Schema.define(:version => 20110929161857) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer   "resource_id",   :null => false
@@ -216,6 +216,29 @@ ActiveRecord::Schema.define(:version => 20110929155130) do
   end
 
   add_index "tiles", ["game_id"], :name => "index_tiles_on_game_id"
+
+  create_table "tiles_turns", :id => false, :force => true do |t|
+    t.integer "tile_id"
+    t.integer "turn_id"
+  end
+
+  add_index "tiles_turns", ["tile_id", "turn_id"], :name => "index_tiles_turns_on_tile_id_and_turn_id", :unique => true
+  add_index "tiles_turns", ["tile_id"], :name => "index_tiles_turns_on_tile_id"
+  add_index "tiles_turns", ["turn_id"], :name => "index_tiles_turns_on_turn_id"
+
+  create_table "turns", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "player_id"
+    t.integer  "loot_id"
+    t.integer  "number"
+    t.string   "action"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "turns", ["game_id", "number"], :name => "index_turns_on_game_id_and_number", :unique => true
+  add_index "turns", ["game_id"], :name => "index_turns_on_game_id"
+  add_index "turns", ["player_id"], :name => "index_turns_on_player_id"
 
   create_table "users", :force => true do |t|
     t.string    "email",                                 :default => "", :null => false

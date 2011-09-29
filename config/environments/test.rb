@@ -41,4 +41,6 @@ ForgeCraft::Application.configure do
   config.assets.allow_debugging = true
 
   config.active_support.deprecation = :log
+
+  Paperclip.options[:log] = false
 end
