@@ -11,7 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110929161857) do
+ActiveRecord::Schema.define(:version => 20111005183910) do
+
+  create_table "actions", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "player_id"
+    t.integer  "loot_id"
+    t.integer  "turn"
+    t.string   "action"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "actions", ["game_id", "turn"], :name => "index_actions_on_game_id_and_turn", :unique => true
+  add_index "actions", ["game_id"], :name => "index_actions_on_game_id"
+  add_index "actions", ["player_id"], :name => "index_actions_on_player_id"
+
+  create_table "actions_tiles", :id => false, :force => true do |t|
+    t.integer "action_id"
+    t.integer "tile_id"
+  end
+
+  add_index "actions_tiles", ["action_id"], :name => "index_actions_tiles_on_action_id"
+  add_index "actions_tiles", ["tile_id", "action_id"], :name => "index_actions_tiles_on_tile_id_and_action_id", :unique => true
+  add_index "actions_tiles", ["tile_id"], :name => "index_actions_tiles_on_tile_id"
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer   "resource_id",   :null => false

@@ -11,7 +11,7 @@ class Game < ActiveRecord::Base
   belongs_to :loser, :class_name => "Player"
 
   has_many :tiles
-  has_many :turns
+  has_many :actions
 
   def init_tiles
     DEFAULT_ROWS.times do |r|
