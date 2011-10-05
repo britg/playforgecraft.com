@@ -28,7 +28,7 @@ $(function () {
 
   $.address.change(function (event) {
     $('.tab-control').tabs( "select" , window.location.hash )
-  })
+  });
 
   $(document).bind('reveal.facebox', function () {
     ForgeCraft.bindDefaultHandlers('#facebox');
