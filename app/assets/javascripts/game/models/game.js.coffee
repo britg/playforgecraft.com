@@ -7,7 +7,7 @@
     $('.tile').each ->
       
       tile = new Tile 
-        id: $(@).attr("id") 
+        id: $(@).attr("data-remote-id")
         x: parseInt($(@).attr("data-x"))
         y: parseInt($(@).attr("data-y"))
         ore: $(@).attr("data-ore")

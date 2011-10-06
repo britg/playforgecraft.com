@@ -4,45 +4,47 @@
 
   className: "tile"
 
-  events:
-
-    mousedown: "beginWatchingMovement"
-    mousemove: "watchMovement"
-    mouseup: "stopWatchingMovement"
-    mouseout: "stopWatchingMovement"
-
   initialize: () ->
     @model.bind "change:forgeable", @updateHighlight, @
+    @model.bind "change:x", @updateCoordinates, @
+    @model.bind "change:y", @updateCoordinates, @
+    $(@el).css left: @leftPos()
+    @animateToPosition(yes)
 
   render: () ->
     # console.log("Model changed!", @model)
+
+  leftPos: () ->
+    boardLeft = $('#tiles').position().left
+    boardLeft + config.tileWidth * @model.get("x")
+
+  topPos: () ->
+    boardTop = $('#tiles').position().top
+    topPos = boardTop + config.tileWidth * @model.get("y")
+
+  updateCoordinates: () ->
+    $(@el).attr("data-x", @model.get('x')).attr("data-y", @model.get('y'))
+    $(@el).find('img').attr("data-x", @model.get('x')).attr("data-y", @model.get('y'))
+
+    @animateToPosition(no)
+
+  animateToPosition: (dropDelay = no) ->
+    self = @
+    timeout = parseInt(Math.random() * config.dropInTimeout)
+
+    $(@el).animate left: @leftPos()
+
+    dropDown = ->
+      $(self.el).animate top: self.topPos()
+    
+    if dropDelay
+      console.log("timeout on move")
+      setTimeout dropDown, timeout
+    else
+      dropDown()
 
   updateHighlight: () ->
     if forgeable = @model.get("forgeable")?
       $(@el).addClass "forgeable"
     else
       $(@el).removeClass "forgeable"
-
-  beginWatchingMovement: (e)->
-    console.log "Watching", @.id
-    @watching = true
-    @ref = x: e.pageX, y: e.pageY
-
-    e.preventDefault()
-    false
-
-  watchMovement: (e) ->
-    return unless @watching
-    
-    @delta = x: e.pageX - @ref.x, y: e.pageY - @ref.y
-
-    console.log "Moving", @id, @delta.x, @delta.y
-
-    e.preventDefault()
-    false
-
-  stopWatchingMovement: ->
-    return unless @watching
-
-    console.log "Stopping watcher", @id, @model.get("x"), @model.get("y")
-    @watching = false

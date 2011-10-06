@@ -97,3 +97,21 @@
       $.each forgeable.get("tiles"), (i, tile) ->
         tile.set
           forgeable: forgeable
+  
+  ###
+    Tile Swapping
+  ###
+
+  swapTiles: (tileOne, tileTwo) ->
+    console.log("Swapping tile models", tileOne, tileTwo);
+    
+    tileOneX = tileOne.get('x')
+    tileOneY = tileOne.get('y')
+    tileTwoX = tileTwo.get('x')
+    tileTwoY = tileTwo.get('y')
+
+    tileOne.set x: tileTwoX, y: tileTwoY
+    tileTwo.set x: tileOneX, y: tileOneY
+
+    @cacheTile(tileOne)
+    @cacheTile(tileTwo)
