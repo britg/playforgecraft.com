@@ -1,9 +1,10 @@
 
 class GamesController < ApplicationController
 
+  layout "game"
+
   def new
-    @game = Game.new
-    @game.init_tiles
+    @game = Game.first || Game.create
   end
 
 end

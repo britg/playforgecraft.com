@@ -17,6 +17,10 @@ class TileTest < ActiveSupport::TestCase
     should "start unconsumed" do
       assert_equal false, @tile.consumed?  
     end
+
+    should "return its ore name from to_ore" do
+      assert_equal @tile.ore.to_s.parameterize, @tile.to_ore
+    end
     
   end
   

@@ -13,11 +13,15 @@ class Game < ActiveRecord::Base
   has_many :tiles
   has_many :actions
 
+  after_create :init_tiles
+
+  protected
+
   def init_tiles
     DEFAULT_ROWS.times do |r|
       DEFAULT_COLS.times do |c|
         ore = Ore.random
-        self.tiles.build(:x => c, :y => r, :ore => ore)
+        self.tiles.create(:x => c, :y => r, :ore => ore)
       end
     end
   end

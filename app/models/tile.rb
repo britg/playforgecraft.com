@@ -5,5 +5,9 @@ class Tile < ActiveRecord::Base
 
   validates_presence_of :game
   validates_presence_of :ore
+
+  def to_ore
+    ore.to_s.parameterize
+  end
   
 end

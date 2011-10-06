@@ -3,6 +3,11 @@ $tile-dim: 48px;
 
 #game {
 
+  display: block;
+  width: 1024px;
+  height: 768px;
+  margin: 0 auto;
+
   #tiles {
     display: block;
     width: 12*$tile-dim;
@@ -22,6 +27,10 @@ $tile-dim: 48px;
       height: $tile-dim;
       margin: 0;
       padding: 0;
+    }
+
+    &.forgeable {
+      background-color: #ccc;
     }
   }
 }
