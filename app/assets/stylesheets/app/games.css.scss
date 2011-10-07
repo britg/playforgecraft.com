@@ -32,7 +32,21 @@ $tile-dim: 48px;
     }
 
     &.forgeable {
-      background-color: rgba(100,100,100,0.2);;
+      background-color: rgba(100,100,100,0.2);
+      /* border: solid 1px #fff; */
+
+      &.top {
+        border-top: none;  
+      }
+      &.right {
+        border-right: none;  
+      }
+      &.bottom {
+        border-bottom: none;  
+      }
+      &.left {
+        border-left: none;  
+      }
     }
   }
 }

@@ -4,15 +4,26 @@
 
   className: "tile"
 
+  events:
+    click: "click"
+
   initialize: () ->
     @model.bind "change:forgeable", @updateHighlight, @
     @model.bind "change:x", @updateCoordinates, @
     @model.bind "change:y", @updateCoordinates, @
+    @model.bind "change:neighbors", @updateNeighbors, @
+    @model.bind "change:consumed", @consume, @
     $(@el).css left: @leftPos()
     @animateToPosition(yes)
 
   render: () ->
     # console.log("Model changed!", @model)
+
+  click: () ->
+    # console.log("Neighbors", @model.get("neighbors"))
+    forgeable = @model.get("forgeable")
+    console.log("forgeable is ", forgeable)
+    game.forge(forgeable) if forgeable?
 
   leftPos: () ->
     boardLeft = $('#tiles').position().left
@@ -48,3 +59,13 @@
       $(@el).addClass "forgeable"
     else
       $(@el).removeClass "forgeable"
+
+  updateNeighbors: () ->
+    n = @model.get("neighbors")
+    d = ["top", "right", "bottom", "left"]
+
+    $(@el).removeClass(d.join(" "))
+    $(@el).addClass(n.join(" "))
+
+  consume: () ->
+    $(@el).fadeOut "slow", -> $(@).remove()

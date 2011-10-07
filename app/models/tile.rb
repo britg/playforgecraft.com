@@ -1,10 +1,16 @@
 class Tile < ActiveRecord::Base
 
+  default_scope where(:consumed => false)
+
   belongs_to :game
   belongs_to :ore
 
   validates_presence_of :game
   validates_presence_of :ore
+
+  def <=> other
+    y > other.y
+  end
 
   def to_ore
     Ore.name_cache(ore_id)

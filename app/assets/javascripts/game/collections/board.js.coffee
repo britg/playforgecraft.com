@@ -27,7 +27,6 @@
     console.log("Refreshing board")
     @clearForgeables()
     @detectForgeables()
-    # @highlightForgeables()
 
   clearForgeables: ->
     @tilesInForgeables = []
@@ -96,15 +95,11 @@
     return no unless tileToTest.get("ore") == @workingTile.get("ore")
 
     @workingForgeable.push(tileToTest)
+    # @workingTile.hasNeighbor point
+    # tileToTest.isNeighbor point
     # console.log("Tile is a match! Adding to working forgeable", @workingForgeable)
 
     yes
-
-  highlightForgeables: ->
-
-    forgeables.each (forgeable) ->
-      $.each forgeable.get("tiles"), (i, tile) ->
-        tile.set forgeable: forgeable
   
   ###
     Tile Swapping
@@ -126,4 +121,3 @@
 
     game.trigger "ForgeCraft:actionTilesSwapped", tileOne, tileTwo
     @refresh()
-    

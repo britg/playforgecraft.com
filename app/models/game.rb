@@ -22,6 +22,49 @@ class Game < ActiveRecord::Base
     decrement! :challenger_turns_remaining
   end
 
+  def consume forged_tiles
+    forged_tiles.update_all :consumed => true
+    gravitize
+  end
+
+  def gravitize
+    @tile_cache = tiles.dup
+
+    DEFAULT_COLS.times do |x|
+      @col_tiles = @tile_cache.select{ |t| t.x == x }
+      fill_col(x) if @col_tiles.count < DEFAULT_ROWS
+    end
+
+    tiles
+  end
+
+  def fill_col(x)
+    puts "filling col #{x}"
+    missing_rows = []
+    puts "col tiles is #{@col_tiles.map(&:y)}"
+    DEFAULT_ROWS.times do |y|
+      exists = @col_tiles.select{ |t| t.y == y }
+      missing_rows << y unless exists.any?
+    end
+
+    puts "missing rows #{missing_rows.inspect}"
+
+    first_missing_row = missing_rows.first
+    move_down = @col_tiles.select{ |t| t.y < first_missing_row }
+    move_down.each do |t|
+      t.increment!(:y, missing_rows.count)
+    end
+
+    missing_rows.count.times do |i|
+      generate_tile(x, i)
+    end
+  end
+
+  def generate_tile(x, y)
+    ore = Ore.random
+    self.tiles.create(:x => x, :y => y, :ore => ore)
+  end
+
   def reset!
     update_attributes :start_turns => Game::DEFAULT_TURNS,
                       :challenger_turns_remaining => Game::DEFAULT_TURNS,
@@ -38,10 +81,9 @@ class Game < ActiveRecord::Base
   protected
 
   def init_tiles
-    DEFAULT_ROWS.times do |r|
-      DEFAULT_COLS.times do |c|
-        ore = Ore.random
-        self.tiles.create(:x => c, :y => r, :ore => ore)
+    DEFAULT_ROWS.times do |y|
+      DEFAULT_COLS.times do |x|
+        generate_tile(x, y)
       end
     end
   end

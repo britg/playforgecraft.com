@@ -11,10 +11,11 @@
 
   updateTileForgeables: (model, tiles) ->
     # console.log("Updating tile forgeables", model, tiles)
+    self = @
 
     prevTiles = @previous("tiles")
     $.each prevTiles, (i, tile) ->
       tile.set forgeable: undefined unless _.include tiles, tile
 
     $.each tiles, (i, tile) ->
-      tile.set forgeable: @
+      tile.set forgeable: self

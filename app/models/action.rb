@@ -3,6 +3,8 @@ class Action < ActiveRecord::Base
   SWAP_TILES_ACTION = :swap_tiles
   FORGE_ACTION = :forge
 
+  attr_accessor :payload
+
   belongs_to :game
   belongs_to :player
   belongs_to :loot
@@ -25,7 +27,7 @@ class Action < ActiveRecord::Base
   end
 
   def perform_forge
-    
+    @payload = game.consume tiles
   end
 
   def spend_action

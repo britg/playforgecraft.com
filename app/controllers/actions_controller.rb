@@ -8,7 +8,7 @@ class ActionsController < ApplicationController
     @action = @game.actions.build(params[:game_action])
 
     if @action.save
-      render :json => { :status => "success" }
+      render :json => { :status => "success", :payload => @action.payload }
     else
       render :json => { :status => "errors", :errors => @action.errors }
     end

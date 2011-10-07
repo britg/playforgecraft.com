@@ -22,12 +22,29 @@
         id: $(@).attr("id")
         el: @
 
-  actionTilesSwapped: (tileOne, tileTwo) ->
+  remoteSwap: (tileOne, tileTwo) ->
     console.log "Generating action to swap tiles"
 
     action = new Action 
       gameId: @get("id")
       action: "swap_tiles"
       tiles: [tileOne, tileTwo]
+
+    action.save()
+
+  forge: (forgeable) ->
+
+    tiles = forgeable.get("tiles")
+
+    @remoteForge(tiles)
+    
+    $.each tiles, (i, tile) ->
+      tile.consume()
+
+  remoteForge: (tiles) ->
+    action = new Action
+      gameId: @get("id")
+      action: "forge"
+      tiles: tiles
 
     action.save()
