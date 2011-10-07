@@ -13,15 +13,18 @@ class Game < ActiveRecord::Base
   has_many :tiles
   has_many :actions
 
-  before_create :defaults
-
   def has_player? player
     player.present? and \
       (challenger_id == player.id or challengee_id == player.id)
   end
 
+  def spend_action
+    decrement! :challenger_turns_remaining
+  end
+
   def reset!
     update_attributes :start_turns => Game::DEFAULT_TURNS,
+                      :challenger_turns_remaining => Game::DEFAULT_TURNS,
                       :challenger_attack_score => 0,
                       :challenger_defense_score => 0,
                       :challengee_attack_score => 0,
@@ -33,10 +36,6 @@ class Game < ActiveRecord::Base
   end
 
   protected
-
-  def defaults
-    self.start_turns = Game::DEFAULT_TURNS
-  end
 
   def init_tiles
     DEFAULT_ROWS.times do |r|

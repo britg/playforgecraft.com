@@ -16,6 +16,7 @@ class Action < ActiveRecord::Base
   def action_callbacks
     perform_swap_tiles if self.action.to_sym == Action::SWAP_TILES_ACTION
     perform_forge if self.action.to_sym == Action::FORGE_ACTION
+    spend_action
   end
 
   def perform_swap_tiles
@@ -25,6 +26,10 @@ class Action < ActiveRecord::Base
 
   def perform_forge
     
+  end
+
+  def spend_action
+    game.spend_action
   end
 
 end
