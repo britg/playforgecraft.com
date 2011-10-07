@@ -8,6 +8,14 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def current_player
+    current_user.try(:player)
+  end
+
+  def not_authorized_response
+    render :json => { :status => "error", :error => "not authorized" }
+  end
+
   def detect_layout
     return nil if request.xhr?
     "application"

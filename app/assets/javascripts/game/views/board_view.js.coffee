@@ -27,7 +27,7 @@
     
     @delta = x: e.pageX - @ref.x, y: e.pageY - @ref.y
 
-    console.log('delta is', @delta.x, @delta.y)
+    # console.log('delta is', @delta.x, @delta.y)
 
     # right
     if @delta.x >= config.moveThreshold and @refTile.get("x") < config.numCols - 1

@@ -24,8 +24,10 @@ ForgeCraft::Application.routes.draw do
 
   resources :topics
 
-  resources :games
   match 'play' => "games#new"
+  resources :games do
+    resources :actions, :only => :create
+  end
 
   root :to => "users#index"
 

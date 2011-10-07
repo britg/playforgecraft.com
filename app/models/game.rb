@@ -15,6 +15,11 @@ class Game < ActiveRecord::Base
 
   after_create :init_tiles
 
+  def has_player? player
+    player.present? and \
+      (challenger_id == player.id or challengee_id == player.id)
+  end
+
   protected
 
   def init_tiles

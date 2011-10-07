@@ -22,9 +22,18 @@
 
   tileInForgeable: (tile) ->
     _.include(@tilesInForgeables, tile)
+
+  refresh: ->
+    console.log("Refreshing board")
+    @clearForgeables()
+    @detectForgeables()
+    # @highlightForgeables()
+
+  clearForgeables: ->
+    @tilesInForgeables = []
+    tile.clearForgeable() for tile in @.models
     
   detectForgeables: ->
-    @tilesInForgeables = []
     @detectForgeable tile for tile in @.models
     @
 
@@ -95,8 +104,7 @@
 
     forgeables.each (forgeable) ->
       $.each forgeable.get("tiles"), (i, tile) ->
-        tile.set
-          forgeable: forgeable
+        tile.set forgeable: forgeable
   
   ###
     Tile Swapping
@@ -115,3 +123,7 @@
 
     @cacheTile(tileOne)
     @cacheTile(tileTwo)
+
+    game.trigger "ForgeCraft:actionTilesSwapped", tileOne, tileTwo
+    @refresh()
+    

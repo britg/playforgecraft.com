@@ -32,10 +32,10 @@
     self = @
     timeout = parseInt(Math.random() * config.dropInTimeout)
 
-    $(@el).animate left: @leftPos()
+    $(@el).animate left: @leftPos(), "fast"
 
     dropDown = ->
-      $(self.el).animate top: self.topPos()
+      $(self.el).animate top: self.topPos(), "fast"
     
     if dropDelay
       console.log("timeout on move")

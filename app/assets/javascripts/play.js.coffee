@@ -1,10 +1,11 @@
 #= require jquery
-#= require lib/underscore
-#= require lib/json2
-#= require lib/backbone
+#= require jquery_ujs
+#= require_tree ./game/lib
 #= require_tree ./game/models
 #= require_tree ./game/collections
 #= require_tree ./game/views
+
+overrideTouchEvents()
 
 @config =
   numRows: 12
@@ -31,6 +32,6 @@ $ ->
   game.initTiles()
 
   highlight = ->
-    game.board.detectForgeables().highlightForgeables()
+    game.board.refresh()
   
-  setTimeout highlight, config.forgeableTimeout
+  setTimeout highlight, config.highlightTimeout
