@@ -7,6 +7,6 @@
     "/games/" + @get("gameId") + "/actions"
 
   toJSON: ->
-    action:
+    game_action:
       action: @get("action")
-      tiles: @get("tiles")
+      tile_ids: _.map(@get("tiles"), (tile) -> tile.get("id"))

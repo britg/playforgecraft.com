@@ -38,7 +38,7 @@
       $(self.el).animate top: self.topPos(), "fast"
     
     if dropDelay
-      console.log("timeout on move")
+      # console.log("timeout on move")
       setTimeout dropDown, timeout
     else
       dropDown()

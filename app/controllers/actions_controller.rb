@@ -5,12 +5,14 @@ class ActionsController < ApplicationController
   respond_to :json
 
   def create
-    @action = Action.new(params[:action])
+    @action = @game.actions.build(params[:game_action])
+
     if @action.save
-      respond_with @action
+      render :json => { :status => "success" }
     else
-      respond_with @action.errors
+      render :json => { :status => "errors", :errors => @action.errors }
     end
+
   end
 
   protected
@@ -22,7 +24,7 @@ class ActionsController < ApplicationController
 
   def validate_player
     not_authorized_response \
-      and return false unless @game.has_player? current_player
+      and return false unless @game and @game.has_player? current_player
   end
 
 end

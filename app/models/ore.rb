@@ -42,6 +42,16 @@ class Ore < ActiveRecord::Base
       Ore.where(:name => DEFAULTS)
     end
 
+    def tile_cache(id)
+      @tile_cache ||= {}
+      @tile_cache[id] ||= Ore.find(id).tile rescue Ore.new.tile
+    end
+
+    def name_cache(id)
+      @name_cache ||= {}
+      @name_cache[id] ||= Ore.find(id).to_s.parameterize rescue ""
+    end
+
   end
 
   def to_s

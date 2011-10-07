@@ -5,4 +5,4 @@
     - for t in @game.tiles
       
       .tile{ :id => dom_id(t), :class => t.to_ore, "data-x" => t.x, "data-y" => t.y, "data-ore" => t.to_ore, "data-remote-id" => t.id }
-        = image_tag(t.ore.tile, :class => t.to_ore, "data-x" => t.x, "data-y" => t.y, "data-ore" => t.to_ore)
+        = tile_image(t)

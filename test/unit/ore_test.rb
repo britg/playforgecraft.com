@@ -21,6 +21,26 @@ class OreTest < ActiveSupport::TestCase
       assert_not_nil Ore.browsable
     end
 
+    should "cache tile requests" do
+      2.times do
+        assert_equal @ore.tile.url, Ore.tile_cache(@ore.id).url
+      end
+    end
+
+    should "cache name requests" do
+      2.times do
+        assert_equal @ore.to_s.parameterize, Ore.name_cache(@ore.id)  
+      end
+    end
+
+    should "gracefully handle bad tile requests" do
+      assert_equal Ore.new.tile.url, Ore.tile_cache(nil).url
+    end
+
+    should "gracefully handle bad name requests" do
+      assert_equal "", Ore.name_cache(nil)
+    end
+
   end
 
   context "An ore" do

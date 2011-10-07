@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   has_one :player
 
+  validates_presence_of :player
+
   accepts_nested_attributes_for :player
 
   def to_s

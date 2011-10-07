@@ -31,5 +31,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_player!
+    unless current_player
+      redirect_to root_path, :notice => t("notices.player_required") \
+        and return false
+    end
+  end
 
 end

@@ -13,14 +13,30 @@ class Game < ActiveRecord::Base
   has_many :tiles
   has_many :actions
 
-  after_create :init_tiles
+  before_create :defaults
 
   def has_player? player
     player.present? and \
       (challenger_id == player.id or challengee_id == player.id)
   end
 
+  def reset!
+    update_attributes :start_turns => Game::DEFAULT_TURNS,
+                      :challenger_attack_score => 0,
+                      :challenger_defense_score => 0,
+                      :challengee_attack_score => 0,
+                      :challengee_defense_score => 0
+    tiles.destroy_all
+    actions.destroy_all
+
+    init_tiles
+  end
+
   protected
+
+  def defaults
+    self.start_turns = Game::DEFAULT_TURNS
+  end
 
   def init_tiles
     DEFAULT_ROWS.times do |r|

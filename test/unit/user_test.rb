@@ -4,6 +4,6 @@ class UserTest < ActiveSupport::TestCase
   
   should have_one :player
 
-  should accept_nested_attributes_for :player
+  should validate_presence_of :player
   
 end

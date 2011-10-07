@@ -20,4 +20,12 @@ module ApplicationHelper
     link_to(item, item_path(item), :class => item.rarity)
   end
 
+  def tile_image(t)
+    image_tag Ore.tile_cache(t.ore_id), 
+              :class => t.to_ore, 
+              "data-x" => t.x, 
+              "data-y" => t.y, 
+              "data-ore" => t.to_ore
+  end
+
 end

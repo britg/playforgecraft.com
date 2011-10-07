@@ -3,7 +3,9 @@ class Player < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :name
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :case_sensitive => false
+
+  has_many :games, :foreign_key => :challenger_id
 
   has_attached_file :avatar,
     :storage => :s3,
@@ -11,5 +13,19 @@ class Player < ActiveRecord::Base
     :s3_headers => {'Expires' => 1.year.from_now.httpdate},
     :path => "/:class/:id/:attachment/:style.:extension",
     :styles => { :full => ["200x200#", :jpg], :thumb => ["100x100#", :jpg], :tiny => ["50x50#", :jpg] }
+
+  def to_s
+    name
+  end
+
+  def active_game
+    games.last
+  end
+
+  def start_game
+    new_game = games.create
+    new_game.reset!
+    new_game
+  end
 
 end
