@@ -17,6 +17,27 @@
     @tileCache[x] ?= []
     @tileCache[x][y] = tile
 
+  removeTile: (tile) ->
+    console.log("removing tile", tile)
+    @remove(tile)
+    @tileCache[tile.get('x')][tile.get('y')] = undefined
+
+  syncTiles: (remoteTiles) ->
+    self = @
+    $.each remoteTiles, (i, remote) ->
+      localTile = self.get(remote.id)
+      
+      if localTile?
+        self.removeTile(localTile)
+        localTile.set(remote)
+        self.addAndCache(localTile)
+      else
+        tile = new Tile remote
+        self.addAndCache(tile)
+        boardView.addTile(tile)
+
+    @refresh()
+
   tileAt: (x, y) ->
     @tileCache[x]?[y]
 
@@ -33,7 +54,8 @@
     tile.clearForgeable() for tile in @.models
     
   detectForgeables: ->
-    @detectForgeable tile for tile in @.models
+    for tile in @.models
+      @detectForgeable tile unless @tileInForgeable tile
     @
 
   detectForgeable: (tile) ->
@@ -55,6 +77,7 @@
       classification: classification.name
 
     forgeables.add forgeable
+    @tilesInForgeables = _.union @tilesInForgeables, tiles
 
   testTemplate: (template) ->
     self = @

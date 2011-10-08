@@ -35,7 +35,7 @@ class Game < ActiveRecord::Base
       fill_col(x) if @col_tiles.count < DEFAULT_ROWS
     end
 
-    tiles
+    tiles.map(&:to_sync)
   end
 
   def fill_col(x)

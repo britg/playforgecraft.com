@@ -11,6 +11,15 @@
     mouseup: "stopWatchingMovement"
     mouseout: "stopWatchingMovement"
 
+  addTile: (tile) ->
+    console.log "Creating a new tile view from tile", tile
+    tileView = new TileView 
+      model: tile
+      id: tile.get("id")
+    tileView.render()
+    $(@el).append(tileView.el)
+    tileView.updateCoordinates()
+
   beginWatchingMovement: (e)->
     console.log "Watching", e
     @watching = true

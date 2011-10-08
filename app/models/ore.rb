@@ -49,13 +49,17 @@ class Ore < ActiveRecord::Base
 
     def name_cache(id)
       @name_cache ||= {}
-      @name_cache[id] ||= Ore.find(id).to_s.parameterize rescue ""
+      @name_cache[id] ||= Ore.find(id).to_class rescue ""
     end
 
   end
 
   def to_s
     name
+  end
+
+  def to_class
+    to_s.parameterize
   end
 
   def tile_url

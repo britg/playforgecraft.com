@@ -17,7 +17,30 @@
     @animateToPosition(yes)
 
   render: () ->
-    # console.log("Model changed!", @model)
+    newTile = $('.tile').first().clone()
+    newImg = $('.tile').first().find('img').clone()
+    clonedOre = newTile.attr("data-ore")
+    ore = @model.get("ore")
+
+    newImg.attr("src", config[ore + "_tile"])
+          .removeClass(clonedOre).addClass(ore)
+          .attr("data-x", @model.get("x"))
+          .attr("data-y", @model.get("y"))
+          .attr("data-ore", @model.get("ore"))
+
+    newTile.attr("id", "tile_" + @id)
+           .removeClass(clonedOre).addClass(ore)
+           .attr("data-x", @model.get("x"))
+           .attr("data-y", @model.get("y"))
+           .attr("data-ore", @model.get("ore"))
+           .html(newImg)
+
+    newTile.css top: -100, left: 0
+
+    @el = newTile.get(0)
+
+    console.log "rendering", @
+    @
 
   click: () ->
     # console.log("Neighbors", @model.get("neighbors"))

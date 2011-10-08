@@ -16,6 +16,10 @@ class Tile < ActiveRecord::Base
     Ore.name_cache(ore_id)
   end
 
+  def to_sync
+    { :x => x, :y => y, :id => id, :ore => to_ore }
+  end
+
   def swap_with other_tile
     myX = self.x
     myY = self.y

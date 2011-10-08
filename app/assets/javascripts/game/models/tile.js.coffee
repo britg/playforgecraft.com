@@ -15,6 +15,7 @@
     x = @get("x")
     y = @get("y")
     @set consumed: true
+    game.board.removeTile @
 
   isNeighbor: (dir) ->
     # console.log "is neighbor", dir

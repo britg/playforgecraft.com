@@ -2,7 +2,7 @@
 @Game = Backbone.Model.extend
 
   initialize: ->
-    @bind "ForgeCraft:actionTilesSwapped", @actionTilesSwapped
+    @bind "ForgeCraft:actionTilesSwapped", @remoteSwap
 
   initTiles: ->
     game = @
@@ -47,4 +47,8 @@
       action: "forge"
       tiles: tiles
 
-    action.save()
+    action.save action.toJSON, success: @syncBoard
+
+  syncBoard: (model, response) ->
+    console.log("Sync board", response)
+    game.board.syncTiles(response.payload)

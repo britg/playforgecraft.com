@@ -13,7 +13,7 @@ overrideTouchEvents()
 @config =
   numRows: 12
   numCols: 12
-  tileWidth: 48
+  tileWidth: 64
   moveThreshold: 12
   dropInTimeout: 500
   highlightTimeout: 1000
