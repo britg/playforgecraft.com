@@ -1,5 +1,24 @@
+@import "base";
 
 $tile-dim: 60px;
+
+/*
+ * Active Forge
+ */
+$bar-empty-color: $background-color;
+$bar-border-color: #979797;
+$bar-color: #2f2f2f;
+$bar-top: 200px;
+$bar-width: 600px;
+$bar-height: 30px;
+$checkpoint-width: 45px;
+
+@mixin board {
+  display: block;
+  width: 12*$tile-dim;
+  height: 12*$tile-dim;
+  overflow: hidden;
+}
 
 #game {
 
@@ -9,10 +28,7 @@ $tile-dim: 60px;
   margin: 0 auto;
 
   #tiles {
-    display: block;
-    width: 12*$tile-dim;
-    height: 12*$tile-dim;
-    overflow: hidden;
+    @include board;
   }
   
   .tile {
@@ -45,8 +61,72 @@ $tile-dim: 60px;
         border-bottom: none;  
       }
       &.left {
-        border-left: none;  
+        border-left: none;
       }
     }
   }
+
+  #active-forge {
+    @include board;
+    background: rgba(0, 0, 0, 0.3);
+    position: relative;
+    top: -12*$tile-dim;
+    z-index: 1;
+    display: none;
+    
+    #bar-container {
+      /*position: absolute;
+      top: $bar-top;
+      left: 156px;*/
+      display: block;
+      margin: $bar-top auto;
+      margin-bottom: 10px;
+      width: $bar-width;
+      height: $bar-height;
+      background: $bar-empty-color;
+      border: solid 5px $bar-border-color;
+      overflow: hidden;
+      @include inset;
+    }
+
+    #bar {
+      position: relative;
+      left: -$bar-width;
+      background: $bar-color;
+      width: $bar-width;
+      height: $bar-height;
+    }
+
+    .checkpoint {
+      display: block;
+      float: left;
+      height: $checkpoint-width;
+      width: $checkpoint-width;
+      margin-right: -$checkpoint-width;
+      position: relative;
+      left: 25%;
+
+      .marker {
+        position: relative;
+        width: 5px;
+        height: $bar-height + 20;
+        top: - ($bar-height + 25);
+        left: $checkpoint-width/2;
+        margin-right: -5px;
+        margin-bottom: - ($bar-height + 20);
+        background: #fff;
+
+        &.activated {
+          background: $advanced-color;
+        }
+      }
+
+      img {
+        height: $checkpoint-width;
+        width: $checkpoint-width;
+      }
+
+    }
+  }
+
 }

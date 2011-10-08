@@ -6,3 +6,5 @@
       
       .tile{ :id => dom_id(t), :class => t.to_ore, "data-x" => t.x, "data-y" => t.y, "data-ore" => t.to_ore, "data-remote-id" => t.id }
         = tile_image(t)
+
+  = render "active_forge"

@@ -3,6 +3,7 @@
 
   initialize: ->
     @bind "ForgeCraft:actionTilesSwapped", @remoteSwap
+    @bind "ForgeCraft:activeForgeComplete", @forgeWithAccuracy
 
   initTiles: ->
     game = @
@@ -33,21 +34,37 @@
     action.save()
 
   forge: (forgeable) ->
-    tiles = forgeable.get("tiles")
+    @forgeable = forgeable
+    @activeForge()
 
-    @remoteForge(tiles)
-    
-    $.each tiles, (i, tile) ->
+  forgeWithAccuracy: (accuracy) ->
+    @remoteForge(@forgeable, accuracy)
+    @consumeForgeable()
+
+  consumeForgeable: ->
+    $.each @forgeable.get("tiles"), (i, tile) ->
       tile.consume()
 
-  remoteForge: (tiles) ->
+    @forgeable = undefined
+
+  remoteForge: (forgeable, accuracy) ->
     action = new Action
       gameId: @get("id")
       action: "forge"
-      tiles: tiles
+      tiles: forgeable.get("tiles")
+      accuracy: accuracy
+      forgeable: forgeable
 
     action.save action.toJSON, success: @syncBoard
 
   syncBoard: (model, response) ->
     console.log("Sync board", response)
     game.board.syncTiles(response.payload)
+
+  ###
+    Active Forge
+  ###
+  
+  activeForge: ->
+    activeForgeView = new ActiveForgeView el: $('#active-forge').get(0)
+    activeForgeView.start()

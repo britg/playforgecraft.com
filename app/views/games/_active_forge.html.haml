@@ -1,0 +1,10 @@
+#active-forge.active-forge
+  
+  #bar-container
+    
+    #bar
+
+  - 3.times do |i|
+    .checkpoint{ :id => "checkpoint-#{i}" }
+      .marker
+      = link_to image_tag("forge_checkpoint.png"), "#"
