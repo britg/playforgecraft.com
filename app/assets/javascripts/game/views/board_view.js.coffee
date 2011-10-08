@@ -8,7 +8,7 @@
 
     mousedown: "beginWatchingMovement"
     mousemove: "watchMovement"
-    mouseup: "stopWatchingMovement"
+    mouseup: "attemptForge"
     mouseout: "stopWatchingMovement"
 
   addTile: (tile) ->
@@ -60,6 +60,13 @@
 
     e.preventDefault()
     false
+
+  attemptForge: ->
+    if @refTile and not @swapTile
+      if forgeable = @refTile.get("forgeable")
+        game.forge(forgeable)
+
+    @stopWatchingMovement()
 
   stopWatchingMovement: ->
     return unless @watching

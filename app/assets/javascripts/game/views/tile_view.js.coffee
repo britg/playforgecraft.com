@@ -4,8 +4,8 @@
 
   className: "tile"
 
-  events:
-    click: "click"
+  # events:
+  #   click: "click"
 
   initialize: () ->
     @model.bind "change:forgeable", @updateHighlight, @
