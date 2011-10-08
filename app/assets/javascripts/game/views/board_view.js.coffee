@@ -6,10 +6,13 @@
 
   events:
 
-    mousedown: "beginWatchingMovement"
-    mousemove: "watchMovement"
-    mouseup: "attemptForge"
-    mouseout: "stopWatchingMovement"
+    mousedown:  "beginWatchingMovement"
+    mousemove:  "watchMovement"
+    mouseup:    "attemptForge"
+    mouseout:   "stopWatchingMovement"
+
+  initialize: ->
+    @tileLock = off
 
   addTile: (tile) ->
     console.log "Creating a new tile view from tile", tile
@@ -21,6 +24,7 @@
     tileView.updateCoordinates()
 
   beginWatchingMovement: (e)->
+    return if @tileLock
     console.log "Watching", e
     @watching = true
     @ref = x: e.pageX, y: e.pageY
@@ -32,6 +36,7 @@
     false
 
   watchMovement: (e) ->
+    return if @tileLock
     return unless @watching
     
     @delta = x: e.pageX - @ref.x, y: e.pageY - @ref.y
@@ -62,6 +67,7 @@
     false
 
   attemptForge: ->
+    return if @tileLock
     if @refTile and not @swapTile
       if forgeable = @refTile.get("forgeable")
         game.forge(forgeable)

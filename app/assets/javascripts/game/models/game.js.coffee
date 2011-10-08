@@ -33,7 +33,6 @@
     action.save()
 
   forge: (forgeable) ->
-
     tiles = forgeable.get("tiles")
 
     @remoteForge(tiles)
