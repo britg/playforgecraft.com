@@ -4,7 +4,7 @@
   className: 'checkpoint'
 
   events:
-    "click a": "activateCheckpoint"
+    "mousedown a": "activateCheckpoint"
 
   setPosition: (pos) ->
     $(@el).css left: pos + "%"
