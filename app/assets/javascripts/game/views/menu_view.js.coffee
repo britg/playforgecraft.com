@@ -6,6 +6,6 @@
   events:
     mouseup: "activate"
 
-  activate: ->
+  activate: (e) ->
     console.log "Activating menu"
-    return false
+    $.facebox div: '#menu'
