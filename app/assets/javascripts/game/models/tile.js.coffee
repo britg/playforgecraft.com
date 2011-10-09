@@ -7,6 +7,18 @@
     consumed: false
     neighbors: []
 
+  initialize: ->
+    @bind "change:x", @triggerPositionChange, @
+    @bind "change:y", @triggerPositionChange, @
+
+  triggerPositionChange: ->
+    # console.log "Trigger change", @changedAttributes()
+    @recache()
+
+  recache: ->
+    # console.log "Updating board due to position change"
+    game.board.recacheTile(@)
+
   clearForgeable: ->
     @set forgeable: undefined
     @set neighbors: []
@@ -47,3 +59,6 @@
       newNeighbors.push "top"
 
     @set neighbors: _.union(@get("neighbors"), newNeighbors)
+
+  forLog: ->
+    @get("ore") + " (" + @get("x") + ", " + @get("y") + ")" + " in forgeable " + @get("forgeable")

@@ -18,9 +18,12 @@
     @tileCache[x][y] = tile
 
   removeTile: (tile) ->
-    console.log("removing tile", tile)
     @remove(tile)
     @tileCache[tile.get('x')][tile.get('y')] = undefined
+
+  recacheTile: (tile) ->
+    @removeTile(tile)
+    @addAndCache(tile)
 
   syncTiles: (remoteTiles) ->
     self = @
@@ -28,9 +31,7 @@
       localTile = self.get(remote.id)
       
       if localTile?
-        self.removeTile(localTile)
         localTile.set(remote)
-        self.addAndCache(localTile)
       else
         tile = new Tile remote
         self.addAndCache(tile)
@@ -138,9 +139,6 @@
 
     tileOne.set x: tileTwoX, y: tileTwoY
     tileTwo.set x: tileOneX, y: tileOneY
-
-    @cacheTile(tileOne)
-    @cacheTile(tileTwo)
 
     game.trigger "ForgeCraft:actionTilesSwapped", tileOne, tileTwo
     @refresh()

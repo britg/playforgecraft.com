@@ -29,12 +29,12 @@
 
   beginWatchingMovement: (e)->
     return if @tileLock
-    console.log "Watching", e
+    # console.log "Watching", e
     @watching = true
     @ref = x: e.pageX, y: e.pageY
     @refTile = @model.tileAt $(e.target).attr("data-x"), $(e.target).attr("data-y")
 
-    console.log "reference tile is ", @refTile
+    console.log "Clicked tile is ", @refTile.forLog()
 
     e.preventDefault()
     false
@@ -81,7 +81,7 @@
   stopWatchingMovement: ->
     return unless @watching
 
-    console.log "Stopping watcher"
+    # console.log "Stopping watcher"
     @ref = undefined
     @refTile = undefined
     @swapTile = undefined

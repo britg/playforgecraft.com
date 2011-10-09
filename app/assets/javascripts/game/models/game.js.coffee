@@ -71,5 +71,5 @@
   ###
   
   activeForge: ->
-    activeForgeView = new ActiveForgeView el: $('#active-forge').get(0)
-    activeForgeView.start()
+    @activeForgeView ||= new ActiveForgeView el: $('#active-forge').get(0)
+    @activeForgeView.start()

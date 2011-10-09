@@ -26,10 +26,11 @@
 
   positionCheckpoints: ->
     @calculateCheckpoints()
+    @checkpointViews ||= []
 
     for i in [0..2]
-      checkpointView = new CheckpointView el: $('#checkpoint-' + i).get(0)
-      checkpointView.setPosition(@checkpoints[i])
+      @checkpointViews[i] ||= new CheckpointView el: $('#checkpoint-' + i).get(0)
+      @checkpointViews[i].setPosition(@checkpoints[i])
 
   finish: ->
     $(@el).hide()

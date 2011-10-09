@@ -39,7 +39,7 @@
 
     @el = newTile.get(0)
 
-    console.log "rendering", @
+    # console.log "rendering", @
     @
 
   click: () ->
