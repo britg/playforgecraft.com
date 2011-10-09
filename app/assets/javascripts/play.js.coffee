@@ -10,7 +10,7 @@
 #= require_tree ./game/collections
 #= require_tree ./game/views
 
-overrideTouchEvents()
+#overrideTouchEvents()
 
 @config =
   numRows: 12

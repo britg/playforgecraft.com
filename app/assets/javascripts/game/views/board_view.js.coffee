@@ -7,9 +7,13 @@
   events:
 
     mousedown:  "beginWatchingMovement"
+    touchstart: "beginWatchingMovement"
     mousemove:  "watchMovement"
+    touchmove:  "watchMovement"
     mouseup:    "attemptForge"
+    touchend:   "attemptForge"
     mouseout:   "stopWatchingMovement"
+    touchcancel:"stopWatchingMovement"
 
   initialize: ->
     @tileLock = off

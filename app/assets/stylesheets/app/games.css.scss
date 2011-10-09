@@ -199,5 +199,19 @@ $checkpoint-width: 45px;
 
     }
   }
+}
 
+.settings-menu {
+
+  ul {
+    li {
+      list-style-type: none;
+
+      a {
+        font-size: 200%;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  
 }

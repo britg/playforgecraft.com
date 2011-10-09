@@ -8,4 +8,4 @@
 
   activate: (e) ->
     console.log "Activating menu"
-    $.facebox div: '#menu'
+    $.facebox div: '#settings'
