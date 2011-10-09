@@ -13,6 +13,10 @@ class Game < ActiveRecord::Base
   has_many :tiles
   has_many :actions
 
+  def to_sync
+    self
+  end
+
   def has_player? player
     player.present? and \
       (challenger_id == player.id or challengee_id == player.id)
@@ -20,6 +24,7 @@ class Game < ActiveRecord::Base
 
   def spend_action
     decrement! :challenger_turns_remaining
+    to_sync
   end
 
   def consume forged_tiles

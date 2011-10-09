@@ -7,13 +7,14 @@
 #= require_tree ./game/models
 #= require_tree ./game/collections
 #= require_tree ./game/views
+#= require lib/modernizr-2.0.6
 
 overrideTouchEvents()
 
 @config =
   numRows: 12
   numCols: 12
-  tileWidth: 60
+  tileWidth: 20
   moveThreshold: 12
   dropInTimeout: 500
   highlightTimeout: 1000
@@ -25,8 +26,14 @@ overrideTouchEvents()
 
 $ ->
 
-  game.board = new Board
+  config.tileWidth = $('.tile').first().width()
 
+  # Init game from embedded JSON
+  game.set(config.initialState)
+
+  # Board and Board View
+  game.board = new Board
+  
   window.boardView = new BoardView 
     model: game.board
     id: "#tiles"
@@ -34,6 +41,15 @@ $ ->
 
   game.initTiles()
 
+  # Score View
+  scoreView = new ScoreView 
+    model: game 
+    el: $('.scores').get(0)
+
+  # Menu
+  menuView = new MenuView el: $('.settings').get(0)
+
+  # Start
   highlight = ->
     game.board.refresh()
   

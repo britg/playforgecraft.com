@@ -31,7 +31,7 @@
       action: "swap_tiles"
       tiles: [tileOne, tileTwo]
 
-    action.save()
+    action.save action.toJSON, success: @syncScore
 
   forge: (forgeable) ->
     @forgeable = forgeable
@@ -57,9 +57,14 @@
 
     action.save action.toJSON, success: @syncBoard
 
+  syncScore: (model, response) ->
+    console.log "Syncing score"
+    game.set response.payload.game
+
   syncBoard: (model, response) ->
     console.log("Sync board", response)
-    game.board.syncTiles(response.payload)
+    game.set response.payload.game
+    game.board.syncTiles(response.payload.tiles)
 
   ###
     Active Forge

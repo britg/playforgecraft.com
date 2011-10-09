@@ -151,7 +151,6 @@ $set-color: #FF8000;
 
     &:hover {
       @include highlighted-text;
-      border-bottom: 1px dotted;
     }
 
     &:visited {

@@ -3,7 +3,3 @@
 :javascript
 
   game.set({id: "#{@game.to_param}"});
-
-- for ore in Ore.all
-  :javascript
-    config["#{ore.to_class}_tile"] = "#{Ore.tile_cache(ore.id)}"

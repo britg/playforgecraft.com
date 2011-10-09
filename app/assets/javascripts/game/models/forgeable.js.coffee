@@ -19,3 +19,8 @@
 
     $.each tiles, (i, tile) ->
       tile.set forgeable: self
+
+  toJSON: ->
+    forgeable =
+      classification: @get("classification")
+      ore: @get("ore")

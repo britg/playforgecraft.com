@@ -7,4 +7,39 @@
       .tile{ :id => dom_id(t), :class => t.to_ore, "data-x" => t.x, "data-y" => t.y, "data-ore" => t.to_ore, "data-remote-id" => t.id }
         = tile_image(t)
 
+  #score-box
+    .menu
+      %ul
+        %li
+          = link_to "Settings", "#", :class => "settings"
+
+    .inner
+      
+      %table.scores
+
+        %tr
+          %td.value.turns= @game.challenger_turns_remaining
+          %td.label
+            = image_tag "menu/turn.png"
+
+        %tr
+          %td.value.attack= @game.challenger_attack_score
+          %td.label
+            = image_tag "menu/attack.png"
+
+        %tr
+          %td.value.defense= @game.challenger_defense_score
+          %td.label
+            = image_tag "menu/defense.png"
+
+
+  #loot-list
+
   = render "active_forge"
+
+:javascript
+  config["initialState"] = #{@game.to_sync.to_json}
+
+- for ore in Ore.all
+  :javascript
+    config["#{ore.to_class}_tile"] = "#{Ore.tile_cache(ore.id)}"

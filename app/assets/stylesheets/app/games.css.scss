@@ -1,6 +1,11 @@
 @import "base";
 
-$tile-dim: 60px;
+/*
+ * Board
+ */ 
+$tile-dim: 64px;
+$board-guide-color: #333;
+$menu-dim: $tile-dim/2;
 
 /*
  * Active Forge
@@ -14,6 +19,7 @@ $bar-height: 30px;
 $checkpoint-width: 45px;
 
 @mixin board {
+  float: left;
   display: block;
   width: 12*$tile-dim;
   height: 12*$tile-dim;
@@ -26,6 +32,7 @@ $checkpoint-width: 45px;
   width: 1024px;
   height: 768px;
   margin: 0 auto;
+  @include inset;
 
   #tiles {
     @include board;
@@ -39,6 +46,8 @@ $checkpoint-width: 45px;
     height: $tile-dim;
     position: absolute;
     top: -$tile-dim;
+
+    border: solid 1px $board-guide-color;
     
     img {
       width: $tile-dim;
@@ -66,9 +75,71 @@ $checkpoint-width: 45px;
     }
   }
 
+  #score-box {
+    float: left;
+    display: block;
+    height: 3 * $tile-dim;
+    border-bottom: solid 2px $board-guide-color;
+    width: 4 * $tile-dim;
+
+    .menu {
+      height: $menu-dim;
+      width: 100%;
+
+      ul {
+        float: right;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: inline;
+          float: right;
+
+          a {
+            display: block;
+            float: right;
+            width: $menu-dim;
+            height: $menu-dim;
+            text-indent: -2000em;
+
+            &.settings {
+              background: image_url("menu/settings.png") center no-repeat;
+            }
+          }
+        }
+      }
+    }
+
+    .inner {
+      clear: left;
+      padding: 10px;
+    }
+
+    .scores {
+      .value {
+        font-size: 300%;
+        color: $highlight-color;
+        vertical-align: bottom;
+        text-align: right;
+        line-height: 1em;
+      }
+      .label {
+        width: 50px;
+        vertical-align: bottom;
+      }
+    }
+
+  }
+
+  #loot-list {
+    
+  }
+
   #active-forge {
     @include board;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.7);
     position: relative;
     top: -12*$tile-dim;
     z-index: 1;
@@ -108,10 +179,10 @@ $checkpoint-width: 45px;
 
       .marker {
         position: relative;
-        width: 5px;
+        width: 10px;
         height: $bar-height + 20;
         top: - ($bar-height + 25);
-        left: $checkpoint-width/2;
+        left: $checkpoint-width/2 - 5;
         margin-right: -5px;
         margin-bottom: - ($bar-height + 20);
         background: #fff;
