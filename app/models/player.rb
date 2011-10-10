@@ -14,8 +14,10 @@ class Player < ActiveRecord::Base
     :path => "/:class/:id/:attachment/:style.:extension",
     :styles => { :full => ["200x200#", :jpg], :thumb => ["100x100#", :jpg], :tiny => ["50x50#", :jpg] }
 
+  before_create :starting_level
+
   def to_s
-    name
+    "#{name} (#{level})"
   end
 
   def active_game
@@ -26,6 +28,10 @@ class Player < ActiveRecord::Base
     new_game = games.create
     new_game.reset!
     new_game
+  end
+
+  def starting_level
+    self.level = 1 unless self.level.present?
   end
 
 end

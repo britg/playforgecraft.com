@@ -73,9 +73,11 @@
     @createForgeable matchingTemplate, @workingForgeable if match
 
   createForgeable: (classification, tiles) ->
+    console.log("Creating forgeable with class", classification)
     forgeable = new Forgeable
       tiles: tiles
-      classification: classification.name
+      classification: classification.get("name")
+      ore: tiles[0].get("ore")
 
     forgeables.add forgeable
     @tilesInForgeables = _.union @tilesInForgeables, tiles

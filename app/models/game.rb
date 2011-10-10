@@ -29,7 +29,9 @@ class Game < ActiveRecord::Base
 
   def consume forged_tiles
     forged_tiles.update_all :consumed => true
+    @changed_tiles = []
     gravitize
+    @changed_tiles.map(&:to_sync)
   end
 
   def gravitize
@@ -39,35 +41,40 @@ class Game < ActiveRecord::Base
       @col_tiles = @tile_cache.select{ |t| t.x == x }
       fill_col(x) if @col_tiles.count < DEFAULT_ROWS
     end
-
-    tiles.map(&:to_sync)
+    #tiles.map(&:to_sync)
   end
 
   def fill_col(x)
-    puts "filling col #{x}"
     missing_rows = []
-    puts "col tiles is #{@col_tiles.map(&:y)}"
     DEFAULT_ROWS.times do |y|
       exists = @col_tiles.select{ |t| t.y == y }
       missing_rows << y unless exists.any?
     end
 
-    puts "missing rows #{missing_rows.inspect}"
-
     first_missing_row = missing_rows.first
     move_down = @col_tiles.select{ |t| t.y < first_missing_row }
     move_down.each do |t|
       t.increment!(:y, missing_rows.count)
+      @changed_tiles << t
     end
 
     missing_rows.count.times do |i|
-      generate_tile(x, i)
+      @changed_tiles << generate_tile(x, i)
     end
   end
 
   def generate_tile(x, y)
     ore = Ore.random
     self.tiles.create(:x => x, :y => y, :ore => ore)
+  end
+
+  def forge class_name, ore_name, accuracy, player
+    puts class_name
+    puts ore_name
+    classification = Classification.find_by_name(class_name.capitalize)
+    ore = Ore.find_by_name(ore_name.capitalize)
+
+    loot = Loot.generate(classification, ore, accuracy, player.level)
   end
 
   def reset!

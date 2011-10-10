@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111005183910) do
+ActiveRecord::Schema.define(:version => 20111009205843) do
 
   create_table "actions", :force => true do |t|
     t.integer  "game_id"
@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(:version => 20111005183910) do
     t.string   "action"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "forgeable_accuracy"
+    t.string   "forgeable_class"
+    t.string   "forgeable_ore"
+    t.boolean  "forgeable_mana_crystal", :default => false
   end
 
   add_index "actions", ["game_id", "turn"], :name => "index_actions_on_game_id_and_turn", :unique => true
@@ -193,6 +197,22 @@ ActiveRecord::Schema.define(:version => 20111005183910) do
   end
 
   add_index "levels", ["level"], :name => "index_levels_on_level", :unique => true
+
+  create_table "loots", :force => true do |t|
+    t.integer  "player_id"
+    t.integer  "game_id"
+    t.integer  "action_id"
+    t.integer  "item_id"
+    t.integer  "attack"
+    t.integer  "defense"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "loots", ["action_id"], :name => "index_loots_on_action_id", :unique => true
+  add_index "loots", ["game_id"], :name => "index_loots_on_game_id"
+  add_index "loots", ["item_id"], :name => "index_loots_on_item_id"
+  add_index "loots", ["player_id"], :name => "index_loots_on_player_id"
 
   create_table "ores", :force => true do |t|
     t.string    "name"

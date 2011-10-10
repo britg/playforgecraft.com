@@ -34,6 +34,7 @@
     action.save action.toJSON, success: @syncScore
 
   forge: (forgeable) ->
+    console.log "forging", forgeable
     @forgeable = forgeable
     @activeForge()
 
@@ -52,8 +53,9 @@
       gameId: @get("id")
       action: "forge"
       tiles: forgeable.get("tiles")
-      accuracy: accuracy
-      forgeable: forgeable
+      forgeable_accuracy: accuracy
+      forgeable_class: forgeable.get("classification")
+      forgeable_ore: forgeable.get("ore")
 
     action.save action.toJSON, success: @syncBoard
 

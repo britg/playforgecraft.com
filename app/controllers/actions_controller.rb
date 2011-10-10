@@ -6,6 +6,7 @@ class ActionsController < ApplicationController
 
   def create
     @action = @game.actions.build(params[:game_action])
+    @action.player = current_player
 
     if @action.save
       render :json => { :status => "success", :payload => @action.payload }

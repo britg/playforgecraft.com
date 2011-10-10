@@ -12,8 +12,13 @@ class PlayerTest < ActiveSupport::TestCase
     @player = Fabricate(:player)
   end
 
+  should "set initial level to 1" do
+    player = Player.create(:name => "Cheese")
+    assert_equal 1, player.level
+  end
+
   should "return name for to_s" do
-    assert_equal @player.name, @player.to_s
+    assert_equal "#{@player.name} (#{@player.level})", @player.to_s
   end
 
   context "With a game in progress" do

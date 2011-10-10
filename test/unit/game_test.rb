@@ -17,12 +17,6 @@ class GameTest < ActiveSupport::TestCase
       @game = Fabricate(:game)
     end
 
-    should "init its tiles when reset" do
-      assert_difference("Tile.count", Game::DEFAULT_ROWS*Game::DEFAULT_COLS) do
-        @game.reset!
-      end
-    end
-
     context "without a player" do
       should "return false to has_player?" do
         assert_equal false, @game.has_player?(Fabricate(:player, :name => "joe"))
@@ -47,6 +41,25 @@ class GameTest < ActiveSupport::TestCase
       
     end
 
+    should "generate a tile" do
+      assert_difference("Tile.count", +1) do
+        @game.generate_tile(1, 2)
+      end
+      tile = @game.tiles.last
+      assert_equal [1, 2], [tile.x, tile.y]
+    end
+
+    should "init its tiles when reset" do
+      assert_difference("Tile.count", Game::DEFAULT_ROWS*Game::DEFAULT_COLS) do
+        @game.reset!
+      end
+    end
+
+    should "spend action" do
+      assert_difference("@game.challenger_turns_remaining", -1) do
+        @game.spend_action
+      end
+    end
     
   end
 

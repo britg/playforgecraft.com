@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :player
 
   def to_s
-    player.try(:name) || email
+    player.try(:to_s) || email
   end
   
 end

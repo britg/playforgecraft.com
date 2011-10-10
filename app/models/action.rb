@@ -13,6 +13,13 @@ class Action < ActiveRecord::Base
 
   after_create :action_callbacks
 
+  def assign loot
+    loot.action = self
+    loot.player = player
+    loot.game = game
+    loot.save
+  end
+
   protected
 
   def action_callbacks
@@ -28,6 +35,11 @@ class Action < ActiveRecord::Base
   end
 
   def perform_forge
+    loot = game.forge forgeable_class, forgeable_ore, forgeable_accuracy, player
+
+    assign(loot) if loot.present?
+
+    @payload[:loot] = loot
     @payload[:tiles] = game.consume tiles
   end
 
