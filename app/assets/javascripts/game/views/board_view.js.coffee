@@ -18,6 +18,9 @@
   initialize: ->
     @tileLock = off
 
+  reveal: ->
+    $('.tile').fadeIn();
+
   addTile: (tile) ->
     console.log "Creating a new tile view from tile", tile
     tileView = new TileView 

@@ -46,7 +46,7 @@ $checkpoint-width: 45px;
     height: $tile-dim;
     position: absolute;
     top: -$tile-dim;
-
+    display: none;
     border: solid 1px $board-guide-color;
     
     img {
@@ -142,7 +142,7 @@ $checkpoint-width: 45px;
 
   #loot-list {
     float: left;
-    display: block;
+    display: none;
     height: 9*$tile-dim - 2;
     width: 4 * $tile-dim;
     overflow: hidden;

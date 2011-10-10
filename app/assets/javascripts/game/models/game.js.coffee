@@ -23,6 +23,13 @@
         id: $(@).attr("id")
         el: @
 
+    setTimeout boardView.reveal, 500
+
+    setTimeout game.revealLootList, 1000
+
+  revealLootList: ->
+    $('#loot-list').fadeIn();
+
   remoteSwap: (tileOne, tileTwo) ->
     console.log "Generating action to swap tiles"
 

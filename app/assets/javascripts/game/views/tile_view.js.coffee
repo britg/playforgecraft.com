@@ -13,8 +13,8 @@
     @model.bind "change:y", @updateCoordinates, @
     @model.bind "change:neighbors", @updateNeighbors, @
     @model.bind "change:consumed", @consume, @
-    $(@el).css left: @leftPos()
-    @animateToPosition(yes)
+    $(@el).css left: @leftPos(), top: @topPos()
+    
 
   render: () ->
     newTile = $('.tile').first().clone()
