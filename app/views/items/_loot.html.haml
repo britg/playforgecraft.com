@@ -1,0 +1,20 @@
+.loot{ :class => loot.to_css_classes }
+  
+  = image_tag loot.icon, :class => "icon"
+
+  %h4.name{ :class => loot.rarity }= loot.name
+  %span.stats
+    
+    - if loot.attack and loot.attack > 0
+      %span.attack
+        + 
+        %span.val= loot.attack
+        = image_tag "menu/attack.png", :class => "type-icon"
+    
+    - if loot.defense and loot.defense > 0
+      %span.defense
+        +
+        %span.val= loot.defense
+        = image_tag "menu/defense.png", :class => "type-icon"
+
+  

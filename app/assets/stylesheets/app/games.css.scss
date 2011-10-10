@@ -108,6 +108,13 @@ $checkpoint-width: 45px;
               background: image_url("menu/settings.png") center no-repeat;
             }
           }
+
+          &.player {
+            font-size: 150%;
+            color: $epic-color;
+            margin: 0 10px;
+          }
+
         }
       }
     }
@@ -134,7 +141,11 @@ $checkpoint-width: 45px;
   }
 
   #loot-list {
-    
+    float: left;
+    display: block;
+    height: 9*$tile-dim - 2;
+    width: 4 * $tile-dim;
+    overflow: hidden;
   }
 
   #active-forge {
@@ -214,4 +225,8 @@ $checkpoint-width: 45px;
     }
   }
   
+}
+
+#loot-template {
+  display: none;
 }

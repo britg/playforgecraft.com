@@ -12,6 +12,8 @@
       %ul
         %li
           = link_to "Settings", "#", :class => "settings"
+        %li.player
+          = current_player
 
     .inner
       
@@ -33,7 +35,10 @@
             = image_tag "menu/defense.png"
 
 
-  #loot-list
+  #loot-list.scrollable.vertical
+    
+    - for loot in @game.loot
+      = render "items/loot", :loot => loot
 
   = render "active_forge"
   = render "settings"
@@ -44,3 +49,6 @@
 - for ore in Ore.all
   :javascript
     config["#{ore.to_class}_tile"] = "#{Ore.tile_cache(ore.id)}"
+
+#loot-template
+  = render "items/loot", :loot => Loot.new(:attack => 1, :defense => 1)

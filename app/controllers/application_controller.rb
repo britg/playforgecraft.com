@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   layout :detect_layout
 
-  helper_method :admin?
+  helper_method :admin?, :current_user, :current_player
 
   protected
 

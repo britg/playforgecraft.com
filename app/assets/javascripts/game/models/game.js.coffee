@@ -67,6 +67,14 @@
     console.log("Sync board", response)
     game.set response.payload.game
     game.board.syncTiles(response.payload.tiles)
+    game.createLoot(response.payload.loot)
+
+  createLoot: (att) ->
+    loot = new Loot(att)
+    lootView = new LootView id: loot.id, model: loot, el: $('#loot-template').find('.loot').clone().get(0)
+    lootView.render()
+    lootView.display()
+    
 
   ###
     Active Forge
