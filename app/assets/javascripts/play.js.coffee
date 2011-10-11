@@ -40,8 +40,6 @@ $ ->
     id: "#tiles"
     el: $('#tiles').get(0)
 
-  game.initTiles()
-
   # Score View
   scoreView = new ScoreView 
     model: game 
@@ -50,8 +48,4 @@ $ ->
   # Menu
   menuView = new MenuView el: $('.settings').get(0)
 
-  # Start
-  highlight = ->
-    game.board.refresh()
-  
-  setTimeout highlight, config.highlightTimeout
+  game.start()

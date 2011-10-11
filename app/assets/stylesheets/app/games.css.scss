@@ -47,7 +47,7 @@ $checkpoint-width: 45px;
     position: absolute;
     top: -$tile-dim;
     display: none;
-    border: solid 1px $board-guide-color;
+    /*border: solid 1px $board-guide-color; */
     
     img {
       width: $tile-dim;
@@ -77,9 +77,8 @@ $checkpoint-width: 45px;
 
   #score-box {
     float: left;
-    display: block;
+    display: none;
     height: 3 * $tile-dim;
-    border-bottom: solid 2px $board-guide-color;
     width: 4 * $tile-dim;
 
     .menu {
@@ -143,7 +142,7 @@ $checkpoint-width: 45px;
   #loot-list {
     float: left;
     display: none;
-    height: 9*$tile-dim - 2;
+    height: 9*$tile-dim;
     width: 4 * $tile-dim;
     overflow: hidden;
   }

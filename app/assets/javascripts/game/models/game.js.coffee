@@ -5,7 +5,7 @@
     @bind "ForgeCraft:actionTilesSwapped", @remoteSwap
     @bind "ForgeCraft:activeForgeComplete", @forgeWithAccuracy
 
-  initTiles: ->
+  start: ->
     game = @
 
     $('.tile').each ->
@@ -25,10 +25,20 @@
 
     setTimeout boardView.reveal, 500
 
-    setTimeout game.revealLootList, 1000
+    setTimeout game.revealScoreBox, 1000
+
+    setTimeout game.revealLootList, 1500
+
+    setTimeout game.refreshBoard, 2000
 
   revealLootList: ->
     $('#loot-list').fadeIn();
+
+  revealScoreBox: ->
+    $('#score-box').fadeIn();
+
+  refreshBoard: ->
+    game.board.refresh();
 
   remoteSwap: (tileOne, tileTwo) ->
     console.log "Generating action to swap tiles"
