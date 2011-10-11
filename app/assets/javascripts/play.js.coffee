@@ -22,7 +22,7 @@
 
 
 @game = new Game
-@templates = new ClassTemplates([@sword])
+@templates = new ClassTemplates([@tunic, @leggings, @crossbow, @axe, @shield, @sword])
 @forgeables = new ForgeableCollection
 
 $ ->

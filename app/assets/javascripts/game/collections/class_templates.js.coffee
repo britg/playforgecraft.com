@@ -2,5 +2,5 @@
 
   model: Classification
 
-  comparitor: (classification) ->
-    classification.get("priority")
+  comparator: (classification) ->
+    -classification.get("priority")
