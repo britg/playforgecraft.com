@@ -29,7 +29,7 @@ class Loot < ActiveRecord::Base
   end
 
   def icon
-    item.icon.url(:tiny) rescue ""
+    item.icon.url(:tiny) rescue Classification.new.default_icon.url(:tiny)
   end
 
   def rarity
