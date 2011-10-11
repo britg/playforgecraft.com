@@ -19,6 +19,12 @@ class GamesController < ApplicationController
     validate_player
   end
 
+  def restart
+    @game = Game.find(params[:id])
+    @game.reset!
+    redirect_to game_path(@game)
+  end
+
   protected
 
   def validate_player

@@ -53,7 +53,8 @@ class Loot < ActiveRecord::Base
 
     def roll classification, ore, accuracy, level
       # STUB
-      item = Item.random
+      puts "Rolling loot for #{ore} #{classification}"
+      item = Item.where(:classification_id => classification, :ore_id => ore).random
     end
 
   end

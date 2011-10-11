@@ -87,6 +87,7 @@ class Game < ActiveRecord::Base
                       :challengee_defense_score => 0
     tiles.destroy_all
     actions.destroy_all
+    loot.destroy_all
 
     init_tiles
   end

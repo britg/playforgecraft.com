@@ -4,7 +4,9 @@
 
     %ul
       %li
-        = link_to "Reload Game", "javascript:window.location.reload();"
+        = link_to "Refresh", "javascript:window.location.reload();"
+      %li
+        = link_to "Restart", restart_game_path(@game)
       %li
         = link_to "Home", root_path
       %li
