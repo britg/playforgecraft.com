@@ -26,6 +26,21 @@ $checkpoint-width: 45px;
   overflow: hidden;
 }
 
+html.game.no-touch {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+
+  body#play {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+}
+
+
 #game {
 
   display: block;
@@ -218,6 +233,24 @@ $checkpoint-width: 45px;
         width: $checkpoint-width;
       }
 
+    }
+
+    .instructions {
+      text-align: center;
+      font-weight: bold;
+      color: $highlight-color;
+      margin-top: $checkpoint-width + 20px;
+      display: none;
+    }
+  }
+}
+
+html.no-touch {
+  #game {
+    #active-forge {
+      .instructions {
+        display: block;
+      }
     }
   }
 }
