@@ -2,8 +2,8 @@
 @Game = Backbone.Model.extend
 
   initialize: ->
-    @bind "ForgeCraft:actionTilesSwapped", @remoteSwap
-    @bind "ForgeCraft:activeForgeComplete", @forgeWithAccuracy
+    @bind "ForgeCraft:actionTilesSwapped", @remoteSwap, @
+    @bind "ForgeCraft:activeForgeComplete", @forgeWithAccuracy, @
 
   start: ->
     game = @
@@ -58,6 +58,7 @@
     @activeForge()
 
   forgeWithAccuracy: (accuracy) ->
+    console.log "This is", @
     @remoteForge(@forgeable, accuracy)
     @consumeForgeable()
 
@@ -68,6 +69,8 @@
     @forgeable = undefined
 
   remoteForge: (forgeable, accuracy) ->
+    console.log "Remote forging with", forgeable, "accuracy:", accuracy
+
     action = new Action
       gameId: @get("id")
       action: "forge"

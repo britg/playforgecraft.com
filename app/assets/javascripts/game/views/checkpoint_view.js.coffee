@@ -10,7 +10,7 @@
     $(@el).css left: pos + "%"
 
   activateCheckpoint: ->
-    console.log "Activating checkpoint!"
     $(@el).find('.marker').addClass("activated")
     $(@el).find('img').fadeOut("fast")
+    game.activeForgeView.trigger "ForgeCraft:checkpointActivated"
     return false

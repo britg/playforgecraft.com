@@ -180,6 +180,10 @@ $checkpoint-width: 45px;
       @include transition-property("left");
       @include transition-duration("1.5s");
 
+      &.new {
+        left: -$bar-width;
+      }
+
       &.activated {
         left: 0;
       }

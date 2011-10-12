@@ -26,7 +26,6 @@
     $(window).resize =>
       $('.tile').each (i, tile) ->
         view = $(tile).data("view")
-        console.log(view)
         view.jumpToPosition()
 
   addTile: (tile) ->
