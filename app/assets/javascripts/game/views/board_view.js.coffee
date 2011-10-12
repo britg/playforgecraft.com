@@ -19,7 +19,15 @@
     @tileLock = off
 
   reveal: ->
-    $('.tile').fadeIn();
+    $('.tile').fadeIn()
+    @watchWindowResize()
+
+  watchWindowResize: ->
+    $(window).resize =>
+      $('.tile').each (i, tile) ->
+        view = $(tile).data("view")
+        console.log(view)
+        view.jumpToPosition()
 
   addTile: (tile) ->
     console.log "Creating a new tile view from tile", tile

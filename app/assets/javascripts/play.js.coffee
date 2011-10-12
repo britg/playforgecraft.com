@@ -41,9 +41,9 @@ $ ->
     el: $('#tiles').get(0)
 
   # Score View
-  scoreView = new ScoreView 
+  window.scoreView = new ScoreView 
     model: game 
-    el: $('.scores').get(0)
+    el: $('#score-box').get(0)
 
   # Menu
   menuView = new MenuView el: $('.settings').get(0)

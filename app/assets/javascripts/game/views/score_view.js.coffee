@@ -9,6 +9,9 @@
     @model.bind "change:challenger_attack_score", @updateAttackScore, @
     @model.bind "change:challenger_defense_score", @updateDefenseScore, @
 
+  reveal: ->
+    $(@el).fadeIn();
+
   updateTurnsRemaining: ->
     $(@el).find('.turns.value').html(@model.get("challenger_turns_remaining"))
 

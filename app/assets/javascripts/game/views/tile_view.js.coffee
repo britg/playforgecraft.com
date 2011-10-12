@@ -13,7 +13,7 @@
     @model.bind "change:y", @updateCoordinates, @
     @model.bind "change:neighbors", @updateNeighbors, @
     @model.bind "change:consumed", @consume, @
-    $(@el).css left: @leftPos(), top: @topPos()
+    @jumpToPosition()
     
 
   render: () ->
@@ -38,7 +38,7 @@
     newTile.css top: -100, left: 0
 
     @el = newTile.get(0)
-
+    $(@el).data view: @
     # console.log "rendering", @
     @
 
@@ -61,6 +61,9 @@
     $(@el).find('img').attr("data-x", @model.get('x')).attr("data-y", @model.get('y'))
 
     @animateToPosition(no)
+
+  jumpToPosition: ->
+    $(@el).css left: @leftPos(), top: @topPos()
 
   animateToPosition: (dropDelay = no) ->
     self = @

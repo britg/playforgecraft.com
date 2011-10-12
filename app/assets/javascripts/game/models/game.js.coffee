@@ -23,22 +23,24 @@
         id: $(@).attr("id")
         el: @
 
-    setTimeout boardView.reveal, 500
+      $(@).data view: tileView
 
-    setTimeout game.revealScoreBox, 1000
+    setTimeout =>
+      boardView.reveal()
+    , 500
+
+    setTimeout =>
+      scoreView.reveal()
+    , 1000
 
     setTimeout game.revealLootList, 1500
 
-    setTimeout game.refreshBoard, 2000
+    setTimeout =>
+      game.board.refresh()
+    , 2000
 
   revealLootList: ->
     $('#loot-list').fadeIn();
-
-  revealScoreBox: ->
-    $('#score-box').fadeIn();
-
-  refreshBoard: ->
-    game.board.refresh();
 
   remoteSwap: (tileOne, tileTwo) ->
     console.log "Generating action to swap tiles"
