@@ -5,12 +5,13 @@
 
   events:
     "mousedown a": "activateCheckpoint"
+    "touchstart a": "activateCheckpoint"
 
   setPosition: (pos) ->
     $(@el).css left: pos + "%"
 
-  activateCheckpoint: ->
-    $(@el).find('.marker').addClass("activated")
-    $(@el).find('img').fadeOut("fast")
+  activateCheckpoint: (e) ->
     game.activeForgeView.trigger "ForgeCraft:checkpointActivated"
+    $(@el).find('.marker').addClass("activated")
+    e.preventDefault() if e
     return false
