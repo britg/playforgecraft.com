@@ -5,10 +5,10 @@
   id: '#active-forge'
 
   bar: ->
-    $(@el).find('#bar')
+    $('#bar')
 
   reset: ->
-    @bar().css left: -@bar().width()
+    @bar().removeClass("activated")
     $(@el).find('.checkpoint img').show()
     $(@el).find('.marker').removeClass("activated")
 
@@ -16,13 +16,20 @@
     self = @
     @positionCheckpoints()
     $(@el).show()
-    @bar().animate left: 0, 3000, () -> self.finish()
+    # @bar().animate left: 0, 3000, () -> self.finish()
+    setTimeout =>
+      @activateBar()
+    , 500
+
+  activateBar: ->
+    $('#bar').addClass "activated"
+    setTimeout => 
+      @finish()
+    , 1500
 
   calculateCheckpoints: ->
     @checkpoints = []
-    @checkpoints.push(25)
-    @checkpoints.push(50)
-    @checkpoints.push(75)
+    @checkpoints.push (25 + Math.random()*50)
 
   positionCheckpoints: ->
     @calculateCheckpoints()

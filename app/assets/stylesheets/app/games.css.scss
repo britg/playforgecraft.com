@@ -12,10 +12,10 @@ $menu-dim: $tile-dim/2;
  */
 $bar-empty-color: $background-color;
 $bar-border-color: #979797;
-$bar-color: #2f2f2f;
+$bar-color: #999;
 $bar-top: 200px;
 $bar-width: 600px;
-$bar-height: 30px;
+$bar-height: 60px;
 $checkpoint-width: 45px;
 
 @mixin board {
@@ -173,9 +173,16 @@ $checkpoint-width: 45px;
     #bar {
       position: relative;
       left: -$bar-width;
-      background: $bar-color;
+      background-color: rgba($bar-color, 0.3);
       width: $bar-width;
       height: $bar-height;
+      border-right: solid 5px $highlight-color;
+      @include transition-property("left");
+      @include transition-duration("1.5s");
+
+      &.activated {
+        left: 0;
+      }
     }
 
     .checkpoint {
