@@ -49,6 +49,22 @@ html.game.no-touch {
   margin: 0 auto;
   @include inset;
 
+  #gameover {
+    @include board;
+
+    .center {
+      margin: 50px;
+    }
+
+    .final-scores {
+      .score {
+        font-size: 550%;
+        color: $highlight-color;
+        font-weight: bold;
+      }
+    }
+  }
+
   #tiles {
     @include board;
   }

@@ -13,6 +13,7 @@ class Game < ActiveRecord::Base
   has_many :tiles
   has_many :actions
   has_many :loot, :class_name => "Loot"
+  has_many :items, :through => :loot
 
   def to_sync
     self

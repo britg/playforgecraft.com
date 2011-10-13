@@ -1,11 +1,10 @@
 #game
   
-  #tiles.board
-
-    - for t in @game.tiles
-      
-      .tile{ :id => dom_id(t), :class => t.to_ore, "data-x" => t.x, "data-y" => t.y, "data-ore" => t.to_ore, "data-remote-id" => t.id }
-        = tile_image(t)
+  - if false
+    = render "gameover", :game => @game
+  
+  - else
+    = render "board", :game => @game
 
   #score-box
     .menu

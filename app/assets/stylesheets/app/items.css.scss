@@ -6,27 +6,27 @@
   @include border-radius(5px);
 
   &.common {
-    border-color: rgba($common-color, 0.2);
+    border-color: rgba($common-color, 0.1);
     background-color: rgba($common-color, 0.1);
   }
 
   &.advanced {
-    border-color: rgba($advanced-color, 0.2);
+    border-color: rgba($advanced-color, 0.1);
     background-color: rgba($advanced-color, 0.1);
   }
 
   &.rare {
-    border-color: rgba($rare-color, 0.2);
+    border-color: rgba($rare-color, 0.1);
     background-color: rgba($rare-color, 0.1);
   }
 
   &.epic {
-    border-color: rgba($epic-color, 0.2);
+    border-color: rgba($epic-color, 0.1);
     background-color: rgba($epic-color, 0.1);
   }
 
   &.itemset {
-    border-color: rgba($set-color, 0.2);
+    border-color: rgba($set-color, 0.1);
     background-color: rgba($set-color, 0.1);
   }
 
@@ -55,4 +55,22 @@
     width: 12px;
   }
 
+}
+
+.loot-with-icon {
+  .item-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+    vertical-align: -3px;
+  }
+}
+
+.loot-list {
+  margin: 0;
+  padding: 0;
+  li {
+    display: block;
+    float: left;
+  }
 }

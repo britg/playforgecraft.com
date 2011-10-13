@@ -1,0 +1,27 @@
+#gameover
+  
+  .center
+
+    %h1 Forging Complete
+
+    %table.final-scores
+      
+      %tr
+        
+        %td
+          %span.score= game.challenger_attack_score
+          = image_tag "menu/attack.png"
+        
+        %td
+          %span.score= game.challenger_defense_score
+          = image_tag "menu/defense.png"
+
+        %td
+          %span.score= game.loot.count
+          %span items forged
+
+    - if game.items.rare.any?
+      = render "forgings", :items => game.items, :rarity => "rare"
+
+    - if game.items.epic.any?
+      = render "forgings", :items => game.items, :rarity => "epic"
