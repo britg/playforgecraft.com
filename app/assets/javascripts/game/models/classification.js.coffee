@@ -5,13 +5,15 @@
     priority: 0
     patterns: []
 
+priority = 100
+
 ###
   Tunic
 ###
 
 @tunic = new Classification
   name: "Tunic"
-  priority: 5
+  priority: priority--
   patterns:
     [
       [ [1, 0], [2, 0], [0, 1], [1, 1], [2, 1] ],
@@ -24,7 +26,7 @@
 
 @leggings = new Classification
   name: "Legging"
-  priority: 4
+  priority: priority--
   patterns:
     [
       # [ [1, 0], [0, 1], [0, 2], [1, 2] ],  # Currently disabled due to "gravity" problem
@@ -39,10 +41,23 @@
 
 @crossbow = new Classification
   name: "Crossbow"
-  priority: 3
+  priority: priority--
   patterns:
     [
       [ [-1, 1], [0, 1], [1, 1], [0, 2] ],
+    ]
+
+###
+  Sword
+###
+
+@longsword = new Classification
+  name: "Sword"
+  priority: priority--
+  patterns:
+    [
+      [ [1, 0], [2, 0], [3, 0] ],
+      [ [0, 1], [0, 2], [0, 3] ]
     ]
 
 
@@ -52,7 +67,7 @@
 
 @axe = new Classification
   name: "Axe"
-  priority: 2
+  priority: priority--
   patterns:
     [
       [ [1, 0], [1, 1], [1, 2] ],
@@ -71,7 +86,7 @@
 
 @shield = new Classification
   name: "Shield"
-  priority: 1
+  priority: priority--
   patterns:
     [
       [ [1, 0], [0, 1], [1, 1] ]
@@ -84,7 +99,7 @@
 
 @sword = new Classification
   name: "Sword"
-  priority: 0
+  priority: priority--
   patterns:
     [
       [ [1, 0], [2, 0] ],
