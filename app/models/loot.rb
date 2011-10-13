@@ -9,23 +9,43 @@ class Loot < ActiveRecord::Base
 
   after_create :update_score
 
+  validates_presence_of :item
+
+  class << self
+
+    def generate classification, ore, accuracy, level
+      item = roll classification, ore, accuracy, level
+      return nil unless item
+
+      loot = Loot.new( :item => item )
+      loot.set_stats accuracy
+      loot
+    end
+
+    def roll classification, ore, accuracy, level
+      item = Item.where(:classification_id => classification, :ore_id => ore).random
+    end
+
+  end
+
   def serializable_hash(opts = {})
     super((opts||{}).merge( :only => [:id, :attack, :defense],
                             :methods => [:item_attributes]))
   end
 
   def item_attributes
+    return {} unless item
     {
       :name => item.name,
       :description => item.description,
       :icon_url => item.icon_url,
-      :type => item.type.downcase,
+      :type => to_css_classes,
       :param => item.to_param
     }
   end
 
   def to_css_classes
-    item.type.downcase rescue ""
+    item.try(:to_css_classes)
   end
 
   def icon
@@ -40,25 +60,6 @@ class Loot < ActiveRecord::Base
     item.name rescue ""
   end
 
-  class << self
-
-    def generate classification, ore, accuracy, level
-      item = roll classification, ore, accuracy, level
-      return nil unless item
-
-      loot = Loot.new( :item => item )
-      loot.set_stats accuracy
-      loot
-    end
-
-    def roll classification, ore, accuracy, level
-      # STUB
-      puts "Rolling loot for #{ore} #{classification}"
-      item = Item.where(:classification_id => classification, :ore_id => ore).random
-    end
-
-  end
-
   def set_stats accuracy
     # STUB
     self.attack = self.item.attack_max
@@ -66,6 +67,7 @@ class Loot < ActiveRecord::Base
   end
 
   def update_score
+    return unless game
     game.increment(:challenger_attack_score, attack) if attack
     game.increment(:challenger_defense_score, defense) if defense
   end

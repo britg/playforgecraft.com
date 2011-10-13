@@ -93,6 +93,10 @@ class Game < ActiveRecord::Base
     init_tiles
   end
 
+  def finished?
+    challenger_turns_remaining <= 0
+  end
+
   protected
 
   def init_tiles

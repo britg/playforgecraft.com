@@ -17,6 +17,30 @@ class GameTest < ActiveSupport::TestCase
       @game = Fabricate(:game)
     end
 
+    context "With challenger turns remaining" do
+      
+      setup do
+        @game.stubs(:challenger_turns_remaining).returns(1)  
+      end
+      
+      should "not be finished?" do
+        assert_equal false, @game.finished?
+      end
+
+    end
+
+    context "With no challenger turns remaining" do
+      
+      setup do
+        @game.stubs(:challenger_turns_remaining).returns(0)
+      end
+
+      should "be finished?" do
+        assert_equal true, @game.finished?
+      end
+
+    end
+
     context "without a player" do
       should "return false to has_player?" do
         assert_equal false, @game.has_player?(Fabricate(:player, :name => "joe"))

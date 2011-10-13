@@ -54,6 +54,10 @@ class ItemTest < ActiveSupport::TestCase
       assert_equal @item.name, @item.to_s
     end
 
+    should "respond to to_css_classes with its type downcased" do
+      assert_equal @item.type.downcase, @item.to_css_classes
+    end
+
     should "set its genre before saving" do
       assert_not_nil @class.genre
       assert_equal @item.genre, @class.genre

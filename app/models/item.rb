@@ -84,6 +84,10 @@ class Item < ActiveRecord::Base
     "#{id}-#{name.gsub(/[^a-zA-Z0-9\-]+/, '-')}"
   end
 
+  def to_css_classes
+    type.downcase
+  end
+
   def type
     "#{rarity.name} #{ore} #{classification.name}"
   end
