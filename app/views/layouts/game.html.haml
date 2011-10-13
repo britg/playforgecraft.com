@@ -4,10 +4,7 @@
     %meta{'http-equiv' => "content-type", :content => "text/html;charset=UTF-8"}
     %title= @browser_title || 'ForgeCraft'
 
-    %meta{ :name => "apple-mobile-web-app-capable", :content => "yes" }
-    %meta{ :name => "apple-mobile-web-app-status-bar-style", :content => "black" }
-    %meta{ :name => "viewport", :content => "width = device-width, user-scalable=no" }
-
+    = render "shared/mobile_meta"
 
     = stylesheet_link_tag "application"
     = csrf_meta_tags
