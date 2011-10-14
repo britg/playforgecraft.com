@@ -1,7 +1,7 @@
 class Game < ActiveRecord::Base
 
   TYPES = [:singleplayer, :multiplayer, :freeplay]
-  DEFAULT_TURNS = 100
+  DEFAULT_TURNS = 50
   DEFAULT_ROWS = 12
   DEFAULT_COLS = 12
 
@@ -15,8 +15,8 @@ class Game < ActiveRecord::Base
   has_many :loot, :class_name => "Loot"
   has_many :items, :through => :loot
 
-  def to_sync
-    self
+  def serializeable_hash opts = {}
+    super((opts||{}).merge(:methods => [:finished?]))
   end
 
   def has_player? player
@@ -26,7 +26,7 @@ class Game < ActiveRecord::Base
 
   def spend_action
     decrement! :challenger_turns_remaining
-    to_sync
+    self
   end
 
   def consume forged_tiles
@@ -95,6 +95,11 @@ class Game < ActiveRecord::Base
 
   def finished?
     challenger_turns_remaining <= 0
+  end
+
+  def loot_list rarity = nil
+    return items unless rarity.present?
+    items.send(rarity)
   end
 
   protected

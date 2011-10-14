@@ -19,6 +19,11 @@ class GamesController < ApplicationController
     validate_player
   end
 
+  def finished
+    @game = Game.find(params[:id])
+    render :partial => "gameover", :locals => {:game => @game}
+  end
+
   def restart
     @game = Game.find(params[:id])
     @game.reset!

@@ -1,9 +1,9 @@
 .forgings
 
-  %h3 #{items.send(rarity.to_sym).count} #{rarity.titleize} Items Forged
+  %h3 #{items.count} #{rarity.titleize} Item
   
   %ul.loot-list
 
-    - for item in items.send(rarity.to_sym)
+    - for item in items
       
       %li= loot_with_icon(item)

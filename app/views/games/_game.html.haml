@@ -43,7 +43,7 @@
   = render "settings"
 
 :javascript
-  config["initialState"] = #{@game.to_sync.to_json}
+  config["initialState"] = #{@game.to_json}
 
 - for ore in Ore.all
   :javascript

@@ -4,6 +4,7 @@
   initialize: ->
     @bind "ForgeCraft:actionTilesSwapped", @remoteSwap, @
     @bind "ForgeCraft:activeForgeComplete", @forgeWithAccuracy, @
+    @bind "change:challenger_turns_remaining", @turnsRemaining, @
 
   start: ->
     game = @
@@ -105,3 +106,14 @@
   activeForge: ->
     @activeForgeView ||= new ActiveForgeView el: $('#active-forge').get(0)
     @activeForgeView.start()
+
+  turnsRemaining: ->
+    if @get("challenger_turns_remaining") <= 0
+      @finish()
+
+  finish: ->
+    $.get "/games/" + @get("id") + "/finished", (resp) ->
+      $('.board').fadeOut ->
+        $('.board').html(resp).fadeIn()
+
+        

@@ -221,6 +221,11 @@ $set-color: #FF8000;
   }
 
   table {
+
+    td {
+      vertical-align: top;
+    }
+    
     
     th {
       background: none;

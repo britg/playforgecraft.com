@@ -20,8 +20,16 @@
           %span.score= game.loot.count
           %span items forged
 
-    - if game.items.rare.any?
-      = render "forgings", :items => game.items, :rarity => "rare"
+    %table
 
-    - if game.items.epic.any?
-      = render "forgings", :items => game.items, :rarity => "epic"
+      %tr
+
+        - if game.items.rare.any?
+          %td
+            = render "forgings", :items => game.loot_list(:rare), :rarity => "rare"
+        
+        - if game.items.epic.any?    
+          %td
+            = render "forgings", :items => game.loot_list(:epic), :rarity => "epic"
+
+    = link_to "Start a New Game", restart_game_path(game), :class => "button newgame"

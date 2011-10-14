@@ -27,7 +27,8 @@ ForgeCraft::Application.routes.draw do
   match 'play' => "games#new"
   resources :games do
     member do
-      get :restart  
+      get :restart
+      get :finished
     end
     
     resources :actions, :only => :create
