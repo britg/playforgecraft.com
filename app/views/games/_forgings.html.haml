@@ -1,6 +1,6 @@
 .forgings
 
-  %h3 #{items.count} #{rarity.titleize} Item
+  %h3=pluralize items.count, "#{rarity.titleize} Item"
   
   %ul.loot-list
 
