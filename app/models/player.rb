@@ -6,6 +6,8 @@ class Player < ActiveRecord::Base
   validates_uniqueness_of :name, :case_sensitive => false
 
   has_many :games, :foreign_key => :challenger_id
+  has_many :loot, :class_name => "Loot"
+  has_many :items, :through => :loot
 
   has_attached_file :avatar,
     :storage => :s3,
@@ -16,8 +18,18 @@ class Player < ActiveRecord::Base
 
   before_create :starting_level
 
+  class << self
+    def ladder
+      order("level desc")
+    end
+  end
+
   def to_s
     "#{name} (#{level})"
+  end
+
+  def to_param
+    name
   end
 
   def active_game
@@ -32,6 +44,58 @@ class Player < ActiveRecord::Base
 
   def starting_level
     self.level = 1 unless self.level.present?
+  end
+
+  def to_css_class
+    'advanced'
+  end
+
+  def title
+    "Novice Crafstman"
+  end
+
+  def rare_count
+    @rare_count ||= items.rare.uniq.count
+  end
+
+  def rare_percent
+    (rare_count.to_f / items.rare.count.to_f * 100).round rescue 0
+  end
+
+  def epic_count
+    @epic_count ||= items.epic.uniq.count
+  end
+
+  def epic_percent
+    @epic_percent ||= (epic_count.to_f / items.epic.count.to_f * 100).round rescue 0
+  end
+
+  def set_count
+    0
+  end
+
+  def set_percent
+    0
+  end
+
+  def item_count
+    @item_count ||= items.uniq.count
+  end
+
+  def item_percent
+    @item_percent ||= (item_count.to_f / Item.all.count.to_f * 100).round rescue 0
+  end
+
+  def work_order_count
+    0
+  end
+
+  def work_order_percent
+    0
+  end
+
+  def score
+    0
   end
 
 end

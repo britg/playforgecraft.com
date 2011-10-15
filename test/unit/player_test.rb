@@ -21,6 +21,10 @@ class PlayerTest < ActiveSupport::TestCase
     assert_equal "#{@player.name} (#{@player.level})", @player.to_s
   end
 
+  should "return name for to_param" do
+    assert_equal "#{@player.name}", @player.to_param
+  end
+
   context "With a game in progress" do
     
     setup do

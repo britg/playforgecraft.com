@@ -12,6 +12,8 @@ ForgeCraft::Application.routes.draw do
   end
 
   resources :users, :only => [:index]
+  resources :players, :only => [:index, :show]
+  get "ladder", :to => "players#index"
   
   resources :emails, :only => [:create]
 
@@ -35,5 +37,7 @@ ForgeCraft::Application.routes.draw do
   end
 
   root :to => "users#index"
+
+  get ':playername', :to => "players#show", :as => :player
 
 end

@@ -166,6 +166,10 @@ $set-color: #FF8000;
     @include inset;
   }
 
+  .padded {
+    @include default_padding;
+  }
+
   .col-content {
     @include default_padding;
   }

@@ -36,4 +36,22 @@ module ApplicationHelper
               "data-ore" => t.to_ore
   end
 
+  def player_name player
+    content_tag(:span, player.name, :class => player.to_css_class)
+  end
+
+  def player_level player
+    content_tag(:span, "LVL #{player.level}", :class => "level")
+  end
+
+  def player_title player
+    content_tag(:span, player.title, :class => "title")
+  end
+
+  def player_slug player
+    content_tag :span, :class => "player-slug" do
+      [player_name(player), player_level(player), player_title(player)].join(" ").html_safe
+    end
+  end
+
 end

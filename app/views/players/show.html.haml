@@ -1,0 +1,47 @@
+#player-page
+
+  .heading.padded
+
+    - if @player == current_player
+      = link_to "Quick Play &rarr;".html_safe, play_path, :class => "button"
+
+    %h1.player= player_slug(@player)
+
+  .completion
+
+    .total
+      %span.count= @player.item_count
+      total items
+      (#{@player.item_percent}%)
+    
+    .rare
+      %span.count= @player.rare_count
+      rares
+      (#{@player.rare_percent}%)
+
+    .epic
+      %span.count= @player.epic_count
+      epics
+      (#{@player.epic_percent}%)
+
+    .itemset
+      %span.count= @player.set_count
+      sets
+      (#{@player.set_percent}%)
+
+    
+
+
+  .games
+
+    #singleplayer
+      .col-content
+        
+        %h2 Work Orders
+
+    #multiplayer
+      .col-content
+        
+        %h2 Multiplayer
+
+  .clear
