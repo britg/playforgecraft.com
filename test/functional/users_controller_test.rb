@@ -23,10 +23,9 @@ class UsersControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    should "GET index" do
+    should "redirect to player page" do
       get :index
-      assert_response :success
-      assert_select 'a', 'Log out'
+      assert_redirected_to player_path(@user.player.name)
     end
 
   end
