@@ -59,7 +59,7 @@ class Player < ActiveRecord::Base
   end
 
   def rare_percent
-    (rare_count.to_f / items.rare.count.to_f * 100).round rescue 0
+    (rare_count.to_f / Item.rare.count.to_f * 100).round rescue 0
   end
 
   def epic_count
@@ -67,7 +67,7 @@ class Player < ActiveRecord::Base
   end
 
   def epic_percent
-    @epic_percent ||= (epic_count.to_f / items.epic.count.to_f * 100).round rescue 0
+    @epic_percent ||= (epic_count.to_f / Item.epic.count.to_f * 100).round rescue 0
   end
 
   def set_count
