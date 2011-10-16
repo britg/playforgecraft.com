@@ -33,11 +33,11 @@ class Player < ActiveRecord::Base
   end
 
   def active_game
-    games.last
+    continue = games.in_progress.last
   end
 
   def start_game
-    new_game = games.create
+    new_game = games.create( :game_type => :singleplayer )
     new_game.reset!
     new_game
   end

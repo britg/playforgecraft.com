@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
 
-  TYPES = [:singleplayer, :multiplayer, :freeplay]
+  TYPES = [:singleplayer, :multiplayer, :workorder]
   DEFAULT_TURNS = 50
   DEFAULT_ROWS = 12
   DEFAULT_COLS = 12
@@ -14,6 +14,41 @@ class Game < ActiveRecord::Base
   has_many :actions
   has_many :loot, :class_name => "Loot"
   has_many :items, :through => :loot
+
+  validates_inclusion_of :game_type, :in => TYPES
+
+  class << self
+
+    # Scopes
+    def in_progress
+      where(["challenger_turns_remaining > 0"])
+    end
+
+    def singleplayer
+      where(:game_type => :singleplayer)
+    end
+
+    def multiplayer
+      where(:game_type => :multiplayer)
+    end
+
+    def workorder
+      where(:game_type => :workorder)
+    end
+
+  end
+
+  def is_singleplayer?
+    :singleplayer == game_type.to_sym
+  end
+
+  def is_multiplayer?
+    :multiplayer == game_type.to_sym
+  end
+
+  def is_workorder?
+    :workorder == game_type.to_sym
+  end
 
   def serializeable_hash opts = {}
     super((opts||{}).merge(:methods => [:finished?]))

@@ -44,7 +44,7 @@
     @ref = x: e.pageX, y: e.pageY
     @refTile = @model.tileAt $(e.target).attr("data-x"), $(e.target).attr("data-y")
 
-    console.log "Clicked tile is ", @refTile.forLog()
+    # console.log "Clicked tile is ", @refTile.forLog()
 
     e.preventDefault()
     false

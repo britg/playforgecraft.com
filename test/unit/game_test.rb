@@ -10,11 +10,29 @@ class GameTest < ActiveSupport::TestCase
   should have_many :tiles
   should have_many :actions
 
+  should_allow_values_for :game_type, :singleplayer, :multiplayer, :workorder
+
   context "A game" do
     
     setup do
       bootstrap_ores
       @game = Fabricate(:game)
+    end
+
+    should "scope to in_progress" do
+      assert_not_nil Game.in_progress
+    end
+
+    should "scope to singleplayer" do
+      assert_not_nil Game.singleplayer
+    end
+
+    should "scope to multiplayer" do
+      assert_not_nil Game.multiplayer
+    end
+
+    should "scope to workorder" do
+      assert_not_nil Game.workorder
     end
 
     context "With challenger turns remaining" do
@@ -85,6 +103,66 @@ class GameTest < ActiveSupport::TestCase
       end
     end
     
+  end
+
+  context "A singleplayer game" do
+    
+    setup do
+      @singleplayer = Fabricate(:game, :game_type => :singleplayer)
+    end
+
+    should "respond true to is_singleplayer?" do
+      assert_equal true, @singleplayer.is_singleplayer?
+    end
+
+    should "respond false to is_multiplayer?" do
+      assert_equal false, @singleplayer.is_multiplayer?
+    end
+
+    should "respond false to is_workorder?" do
+      assert_equal false, @singleplayer.is_workorder?
+    end
+
+  end
+
+  context "A multiplayer game" do
+    
+    setup do
+      @multiplayer = Fabricate(:game, :game_type => :multiplayer)
+    end
+
+    should "respond false to is_singleplayer?" do
+      assert_equal false, @multiplayer.is_singleplayer?
+    end
+
+    should "respond true to is_multiplayer?" do
+      assert_equal true, @multiplayer.is_multiplayer?
+    end
+
+    should "respond false to is_workorder?" do
+      assert_equal false, @multiplayer.is_workorder?
+    end
+
+  end
+
+  context "A workorder game" do
+    
+    setup do
+      @workorder = Fabricate(:game, :game_type => :workorder)
+    end
+
+    should "respond false to is_singleplayer?" do
+      assert_equal false, @workorder.is_singleplayer?
+    end
+
+    should "respond fasle to is_multiplayer?" do
+      assert_equal false, @workorder.is_multiplayer?
+    end
+
+    should "respond true to is_workorder?" do
+      assert_equal true, @workorder.is_workorder?
+    end
+
   end
 
 end

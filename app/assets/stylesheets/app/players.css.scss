@@ -58,13 +58,17 @@
   }
 
   .games {
+
+    #workorders {
+      @include column(8);
+    }
     
     #singleplayer {
-      @include column(12);
+      @include column(8);
     }
 
     #multiplayer {
-      @include column(12, true);
+      @include column(8, true);
     }
 
   }

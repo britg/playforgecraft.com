@@ -20,6 +20,13 @@ class ActiveSupport::TestCase
       Fabricate(:ore, :name => t, :rank => i)
     end
   end
+
+  def bootstrap_rarities
+    Rarity::DEFAULTS.each_with_index do |r, i|
+      Fabricate :rarity, :name => r, :rank => i
+    end
+  end
+  
 end
 
 class ActionController::TestCase

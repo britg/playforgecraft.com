@@ -32,4 +32,5 @@
           %td
             = render "forgings", :items => game.loot_list(:epic), :rarity => "epic"
 
-    = link_to "Start a New Game", restart_game_path(game), :class => "button newgame"
+    = link_to "Start a New Game", play_path, :class => "button newgame"
+    = link_to "Quit", player_path(current_player), :class => "button newgame"
