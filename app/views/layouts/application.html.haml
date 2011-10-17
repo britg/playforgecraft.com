@@ -54,6 +54,10 @@
           %li
             = link_to "Armory", armory_index_path
 
+          - if current_player.present?
+            %li
+              = link_to "My Profile", player_path(current_player), :class => 'my-profile'
+
     #content
       - if flash.any?
         - for key, msg in flash

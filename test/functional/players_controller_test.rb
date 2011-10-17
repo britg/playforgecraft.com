@@ -22,7 +22,7 @@ class PlayersControllerTest < ActionController::TestCase
     end
 
     should "not show a quick play button" do
-      #TODO
+      assert_select '.quick-play', 0
     end
 
     context "current player is the player viewed" do
@@ -37,9 +37,7 @@ class PlayersControllerTest < ActionController::TestCase
       end
 
       should "show a quick play button" do
-        assert_select ".heading" do
-          assert_select ".button"
-        end
+        assert_select '.quick-play'
       end
 
     end

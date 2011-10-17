@@ -21,4 +21,5 @@ class HomepageFlowsTest < ActionDispatch::IntegrationTest
     end
 
   end
+
 end
