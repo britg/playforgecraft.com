@@ -5,6 +5,7 @@
     %title= @browser_title || 'ForgeCraft'
 
     = render "shared/mobile_meta"
+    = render "shared/favicon"
 
     = stylesheet_link_tag "application"
     = csrf_meta_tags
@@ -16,3 +17,5 @@
   %body#play
 
     = yield
+
+    = render "shared/web_app_link_capture"
