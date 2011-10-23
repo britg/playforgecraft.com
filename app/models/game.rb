@@ -102,7 +102,7 @@ class Game < ActiveRecord::Base
 
   def generate_tile(x, y)
     ore = Ore.random
-    self.tiles.create(:x => x, :y => y, :ore => ore)
+    self.tiles.build(:x => x, :y => y, :ore => ore)
   end
 
   def forge class_name, ore_name, accuracy, player

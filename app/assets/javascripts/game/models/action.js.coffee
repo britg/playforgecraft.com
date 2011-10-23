@@ -4,7 +4,7 @@
     action: "swap_tiles"
 
   url: ->
-    "/games/" + @get("gameId") + "/actions"
+    "/players/" + @get("gameId") + "/actions"
 
   toJSON: ->
     game_action:

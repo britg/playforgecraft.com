@@ -10,24 +10,13 @@ class GamesController < ApplicationController
   end
 
   def new
-    @game = current_player.active_game || current_player.start_game
-    redirect_to game_path(@game)
+    @game = Game.new
+    @game.init_tiles
   end
 
   def show
     @game = Game.find(params[:id])
     validate_player
-  end
-
-  def finished
-    @game = Game.find(params[:id])
-    render :partial => "gameover", :locals => {:game => @game}
-  end
-
-  def restart
-    @game = Game.find(params[:id])
-    @game.reset!
-    redirect_to game_path(@game)
   end
 
   protected

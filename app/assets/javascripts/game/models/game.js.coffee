@@ -83,7 +83,8 @@
     action.save action.toJSON, success: @syncBoard
 
   syncScore: (model, response) ->
-    console.log "Syncing score"
+    console.log "Disabled"
+    return
     game.set response.payload.game
 
   syncBoard: (model, response) ->

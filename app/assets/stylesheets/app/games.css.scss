@@ -6,6 +6,8 @@
 $tile-dim: 64px;
 $board-guide-color: #333;
 $menu-dim: $tile-dim/2;
+$board-height: 12*$tile-dim;
+$board-width: 12*$tile-dim;
 
 /*
  * Active Forge
@@ -21,8 +23,8 @@ $checkpoint-width: 45px;
 @mixin board {
   float: left;
   display: block;
-  width: 12*$tile-dim;
-  height: 12*$tile-dim;
+  width: $board-width;
+  height: $board-height;
   overflow: hidden;
 }
 
@@ -117,7 +119,7 @@ html.game.no-touch {
   #score-box {
     float: left;
     display: none;
-    height: 3 * $tile-dim;
+    height: $menu-dim;
     width: 4 * $tile-dim;
 
     .menu {
@@ -181,7 +183,7 @@ html.game.no-touch {
   #loot-list {
     float: left;
     display: none;
-    height: 9*$tile-dim;
+    height: $board-height - $menu-dim;
     width: 4 * $tile-dim;
     overflow: hidden;
   }

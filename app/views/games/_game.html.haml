@@ -1,10 +1,6 @@
 #game
   
-  - if @game.finished?
-    = render "gameover", :game => @game
-  
-  - else
-    = render "board", :game => @game
+  = render "board", :game => @game
 
   #score-box
     .menu
@@ -13,26 +9,6 @@
           = link_to "Settings", "#", :class => "settings"
         %li.player
           = current_player
-
-    .inner
-      
-      %table.scores
-
-        %tr
-          %td.value.turns= @game.challenger_turns_remaining
-          %td.label
-            = image_tag "menu/turn.png"
-
-        %tr
-          %td.value.attack= @game.challenger_attack_score
-          %td.label
-            = image_tag "menu/attack.png"
-
-        %tr
-          %td.value.defense= @game.challenger_defense_score
-          %td.label
-            = image_tag "menu/defense.png"
-
 
   #loot-list.scrollable.vertical
     
