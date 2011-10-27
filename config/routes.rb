@@ -12,10 +12,14 @@ ForgeCraft::Application.routes.draw do
   end
 
   resources :users, :only => [:index]
+
   resources :players, :only => [:index, :show] do
     resources :actions, :only => :create
   end
+
   get "ladder", :to => "players#index"
+
+  resource :forge, :only => [:show]
   
   resources :emails, :only => [:create]
 
@@ -28,8 +32,6 @@ ForgeCraft::Application.routes.draw do
 
   resources :topics
 
-  match 'play' => "games#new"
-  match 'forge' => "games#new"
   resources :games, :only => [:new]
 
   root :to => "users#index"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111016183204) do
+ActiveRecord::Schema.define(:version => 20111027190113) do
 
   create_table "actions", :force => true do |t|
     t.integer  "game_id"
@@ -236,6 +236,7 @@ ActiveRecord::Schema.define(:version => 20111016183204) do
     t.string    "avatar_content_type"
     t.integer   "avatar_file_size"
     t.timestamp "avatar_updated_at"
+    t.integer   "coins",               :default => 1000
   end
 
   add_index "players", ["name"], :name => "index_players_on_name", :unique => true
