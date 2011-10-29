@@ -20,6 +20,7 @@ ForgeCraft::Application.routes.draw do
   get "ladder", :to => "players#index"
 
   resource :forge, :only => [:show]
+  resources :ores, :only => [:index]
   
   resources :emails, :only => [:create]
 

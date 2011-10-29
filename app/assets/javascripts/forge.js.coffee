@@ -10,4 +10,3 @@
 #= require_tree ./game/views
 
 $ ->
-  
