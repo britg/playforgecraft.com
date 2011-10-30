@@ -15,6 +15,7 @@
 
 #player-page {
 
+  margin: $content-top 10px;
   @include inset;
 
   .heading {

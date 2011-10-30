@@ -17,56 +17,33 @@
     
   %body{ :class => params[:controller] }
 
-    #head
-      
-      #branding
-        = link_to image_tag("logox300.png", :id => "logo"), root_path
-        
-      #actions
-
-        #profile
-
-          - if current_user.present?
-            
-            .welcome
-              Welcome, 
-              = link_to current_player, player_path(current_player), :class => current_player.to_css_class
-
-              - if admin?
-                = link_to "Admin Dashboard", admin_dashboard_path, :class => "action"
-
-              = link_to "Log out", logout_path, :class => "action"
-
-          - else
-
-            = link_to "Log in", login_path, :rel => "modal"
-            or
-            = link_to "Create an Account", register_path, :rel => "modal"
-
-        .clear
-
-        %ul#navigation
-          
-          %li
-            = link_to "Ladder", ladder_path
-
-          %li
-            = link_to "Armory", armory_index_path
-
-          - if current_player.present?
-            %li
-              = link_to "My Profile", player_path(current_player), :class => 'my-profile'
-
-    #content
+    #flash-wrap
       - if flash.any?
         - for key, msg in flash
-          %p{ :class => key }= msg
+          .flash{ :class => key }
+            %p= msg
+
+    #loading
+      = image_tag "loading.gif"
+
+    #profile
+
+      - if current_user.present?
+        
+        .welcome
+          = link_to current_player, player_path(current_player), :class => current_player.to_css_class
+
+          - if admin?
+            = link_to "Admin Dashboard", admin_dashboard_path, :class => "action", "data-external" => true
+
+          = link_to "Log out", logout_path, :class => "action", "data-external" => true
+
+      - else
+
+        = link_to "Log in", login_path, :rel => "modal"
+        or
+        = link_to "Create an Account", register_path, :rel => "modal"
+
+    #content
     
       = yield
-
-    #footer
-
-      %p.copyright &copy; #{Time.now.year} Foolish Aggro
-
-    = render "shared/web_app_link_capture"
-

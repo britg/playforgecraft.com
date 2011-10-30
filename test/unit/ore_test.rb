@@ -21,6 +21,17 @@ class OreTest < ActiveSupport::TestCase
       assert_not_nil Ore.browsable
     end
 
+    should "return a random ore" do
+      bootstrap_ores
+      assert Ore.all.include? Ore.random
+    end
+
+    should "cache rank requests" do
+      2.times do
+        assert_equal Ore.where(:rank => @ore.rank).first, Ore.rank_cache(@ore.rank)
+      end
+    end
+
     should "cache tile requests" do
       2.times do
         assert_equal @ore.tile.url, Ore.tile_cache(@ore.id).url

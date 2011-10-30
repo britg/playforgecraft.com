@@ -1,7 +1,13 @@
-#sidebar
+#forge
 
-  #player-bar
-  
-  #loot-list
+  #sidebar
 
-#ores
+    #player-bar
+    
+    #loot-list
+
+  #ores
+
+:javascript
+  ForgeCraft.Config.ores = #{Ore.tile_urls.to_json}
+  ForgeCraft.Config.player = #{current_player.to_json}

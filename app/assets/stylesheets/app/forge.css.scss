@@ -53,23 +53,19 @@ html.game.no-touch {
   padding: 0;
 
   #ores {
-    height: 100%;
+    padding-top: $content-top + 10px;
     margin-right: $sidebar-width;
   }
-
-  #tiles {
-    @include board;
-  }
   
-  .tile {
+  .ore {
 
     float: left;
     display: block;
     width: $tile-dim;
     height: $tile-dim;
     position: absolute;
-    top: -$tile-dim;
-    display: none;
+    background-position: center center;
+    background-repeat: no-repeat;
     /*border: solid 1px $board-guide-color; */
     
     img {

@@ -14,6 +14,8 @@ $rare-color: #00B6FF;
 $epic-color: #C600FF;
 $set-color: #FF8000;
 
+$profile-height: 30px;
+$content-top: $profile-height + 10px;
 
 @mixin highlighted-text {
   color: $highlight-color;

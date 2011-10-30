@@ -32,6 +32,10 @@ class Player < ActiveRecord::Base
     name
   end
 
+  def serializable_hash(opts)
+    super((opts||{}).merge(:only => [:name, :level, :coins]))
+  end
+
   def active_game
     continue = games.in_progress.last
   end

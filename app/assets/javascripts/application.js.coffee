@@ -8,6 +8,20 @@
 #= require backbone/forge_craft
 
 $ ->
+  window.router = new ForgeCraft.Routers.Router
+
+  window.flashView = new ForgeCraft.Views.FlashView el: $('#flash-wrap').get(0)
+  window.loadingView = new ForgeCraft.Views.LoadingView el: $('#loading').get(0)
+
+  forging = (window.location.pathname == "/forge")
+  Backbone.history.start(pushState: true, silent: !forging)
+
+  $('a').live 'click', ->
+    unless $(@).attr('data-external')
+      r = $(@).attr('href').slice(1)
+      console.log "Hijacked link:", r
+      Backbone.history.navigate(r, true)
+      return false
 
 
 

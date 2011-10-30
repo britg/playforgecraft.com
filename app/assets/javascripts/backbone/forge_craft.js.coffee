@@ -9,3 +9,8 @@ window.ForgeCraft =
   Collections: {}
   Routers: {}
   Views: {}
+  Config: 
+    oreDim: 64
+    moveThreshold: 12
+    dropInTimeout: 500
+    highlightTimeout: 1000
