@@ -65,7 +65,7 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
     ore.clearForgeable() for ore in @models
     
   detectForgeables: ->
-    window.forgeables = new ForgeCraft.Collections.Forgeables
+    window.Forgings = new ForgeCraft.Collections.Forgings
     for y in [0..(@numRows-1)]
       for x in [0..(@numCols-1)]
         # console.log("detecting forgeable for at", x, ",", y)
@@ -144,7 +144,7 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
     forgeable = new ForgeCraft.Models.Forgeable
       ores: ores
       classification: classification.get("name")
-      ore: ores[0].get("ore")
+      ore: ores[0].get("name")
 
-    forgeables.add forgeable
+    Forgings.add forgeable
     @oresInForgeables = _.union @oresInForgeables, ores

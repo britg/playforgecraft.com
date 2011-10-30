@@ -13,11 +13,11 @@ class Loot < ActiveRecord::Base
 
   class << self
 
-    def generate classification, ore, accuracy, level
-      item = roll classification, ore, accuracy, level
+    def generate classification, ore, accuracy, player
+      item = roll classification, ore, accuracy, player.level
       return nil unless item
 
-      loot = Loot.new( :item => item )
+      loot = Loot.new( :item => item, :player => player )
       loot.set_stats accuracy
       loot
     end

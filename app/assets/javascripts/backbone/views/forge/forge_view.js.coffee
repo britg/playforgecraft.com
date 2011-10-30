@@ -40,6 +40,9 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     Ores.numRows = @rows
     @numOres = @cols * @rows
 
+    @lootListHeight = $('#sidebar').height() - $('#loot-list').position().top - 10
+    $('#loot-list').css('height', @lootListHeight);
+
     console.log "Ores width:", @oresWidth, "height:", @oresHeight, "cols:", @cols, "rows:", @rows
 
   fetchInitialOres: ->
@@ -125,7 +128,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     return if @oreLock
     if @refOre and not @swapOre
       if forgeable = @refOre.get("forgeable")
-        game.forge(forgeable)
+        forgeable.forge()
 
     @stopWatchingMovement()
 

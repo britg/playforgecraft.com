@@ -1,6 +1,6 @@
 @import "base";
 
-$sidebar-width: 200px;
+$sidebar-width: 250px;
 
 /*
  * Board
@@ -164,12 +164,14 @@ html.game.no-touch {
 
   }
 
+  #player-bar {
+    padding-top: $content-top;
+    height: $tile-dim;
+  }
+
   #loot-list {
-    float: left;
-    display: none;
-    height: $board-height - $menu-dim;
-    width: 4 * $tile-dim;
     overflow: hidden;
+    padding-right: 10px;
   }
 
   #active-forge {

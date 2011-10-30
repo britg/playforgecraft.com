@@ -3,11 +3,19 @@
   #sidebar
 
     #player-bar
+      = number_with_delimiter current_player.coins
     
     #loot-list
+      - for loot in @loot
+        = render "items/loot", :loot => loot
 
   #ores
+
+  = render "active_forge"
 
 :javascript
   ForgeCraft.Config.ores = #{Ore.tile_urls.to_json}
   ForgeCraft.Config.player = #{current_player.to_json}
+
+#loot-template
+  = render "items/loot", :loot => Loot.new(:attack => 1, :defense => 1)
