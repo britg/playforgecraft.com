@@ -24,22 +24,34 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
     forging:
       classification: @get("classification")
       ore: @get("ore")
+      ore_count: @get("ores").length
       accuracy: 100
 
   forge: ->
+    return if @forging
+    @forging = true
+    @save @toJSON, success: @convertToLoot
+  
+  convertToLoot: (forgeable, params) ->
+    console.log "Response from server is:", params
+    
+    loot = new ForgeCraft.Models.Loot(params.loot)
+    lootView = new ForgeCraft.Views.LootView id: loot.id, model: loot, el: $('#loot-template').find('.loot').clone().get(0)
+    lootView.render()
+    lootView.display()
+
+    Ores.addReplacements(params.replacements)
+    forgeable.consumeOres()
+    Forgings.remove(forgeable)
+
+  consumeOres: ->
     $.each @get("ores"), (i, ore) ->
       ore.clearForgeable()
       ore.destroy()
 
-    @save @toJSON, success: @convertToLoot
-  
-  convertToLoot: (forgeable, params) ->
-    console.log "Loot from server is:", params
-    loot = new ForgeCraft.Models.Loot(params)
-    lootView = new ForgeCraft.Views.LootView id: loot.id, model: loot, el: $('#loot-template').find('.loot').clone().get(0)
-    lootView.render()
-    lootView.display()
-    Forgings.remove(forgeable)
+    setTimeout =>
+      Ores.refresh()
+    , 200
 
 class ForgeCraft.Collections.Forgings extends Backbone.Collection
   

@@ -16,9 +16,10 @@ class ForgesController < ApplicationController
     accuracy = params[:forging][:accuracy]
 
     loot = Loot.generate(classification, ore, accuracy, current_player)
+    replacements = Ore.random_set(params[:forging][:ore_count])
 
     if loot.save
-      render :json => loot
+      render :json => { :loot => loot, :replacements => replacements }
     else
       render :json => loot.errors
     end

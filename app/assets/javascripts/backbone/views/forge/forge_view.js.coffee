@@ -16,6 +16,8 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
 
   initialize: ->
     window.Ores = new ForgeCraft.Collections.OresCollection
+    Ores.bind "add", @displayOre, @
+    Ores.bind "reveal", @displayAllOres, @
     @renderForge()
 
     $(window).resize ->
@@ -25,56 +27,47 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     $('#ores').html('')
     clearTimeout @redrawTimeout
     @redrawTimeout = setTimeout =>
-      forgeView.calculateDimensions()
-      forgeView.fetchInitialOres()
-    , 500
+      @calculateDimensions()
+      @initializeOres()
+    , 300
 
   calculateDimensions: ->
-    @topOffset = parseInt($('#ores').css('paddingTop'))
-    @oresHeight = $('#forge').height() - @topOffset + 10
-    @oresWidth = $('#ores').width()
-    @cols = Math.floor(@oresWidth/ForgeCraft.Config.oreDim)
-    Ores.numCols = @cols
-    @hMargin = (@oresWidth % ForgeCraft.Config.oreDim)/2
-    @rows = Math.floor(@oresHeight/ForgeCraft.Config.oreDim)
-    Ores.numRows = @rows
-    @numOres = @cols * @rows
+    
+    @topOffset      = parseInt($('#ores').css('paddingTop'))
+
+    @oresHeight     = $('#forge').height() - @topOffset + 10
+    @oresWidth      = $('#ores').width()
+
+    @hMargin        = (@oresWidth % ForgeCraft.Config.oreDim)/2
+
+    @cols           = Math.floor(@oresWidth/ForgeCraft.Config.oreDim)
+    @rows           = Math.floor(@oresHeight/ForgeCraft.Config.oreDim)
+    @numOres        = @cols * @rows
+
+    Ores.numCols    = @cols
+    Ores.numRows    = @rows
 
     @lootListHeight = $('#sidebar').height() - $('#loot-list').position().top - 10
+    
     $('#loot-list').css('height', @lootListHeight);
 
     console.log "Ores width:", @oresWidth, "height:", @oresHeight, "cols:", @cols, "rows:", @rows
 
-  fetchInitialOres: ->
+  initializeOres: ->
 
     # Ask the server for ores
-    console.log "Asking for", @numOres, "ores"
-    Ores.fetch data: {count: @numOres}, success: @fillInitialOres
+    console.log "Initializing Ores for", @numOres, "ores"
+    Ores.initialFill(@numOres)
 
-  fillInitialOres: (collection) ->
-    console.log "Filling ores", collection
+  displayOre: (ore) ->
+    console.log "Creating view for ore", ore.forLog()
+    view = new ForgeCraft.Views.OreView model: ore
+    view.renderAndPosition()
 
-    col = 0
-    row = 0
-    Ores.forEach (ore) ->
-      ore.set x: col, y: row
-      Ores.cache(ore)
-
-      view = new ForgeCraft.Views.OreView model: ore
-      view.render()
-      $('#ores').append(view.el)
-
-      $(view.el).css("left", ForgeCraft.Config.oreDim * col + forgeView.hMargin)
-      $(view.el).css("top", ForgeCraft.Config.oreDim * row + forgeView.topOffset)
-      ore_url = ForgeCraft.Config.ores[ore.get("rank")]
-      $(view.el).css("backgroundImage", "url(" + ore_url + ")")
-
-      col++
-      if col >= forgeView.cols
-        col = 0
-        row++
-
-    Ores.refresh()
+  displayAllOres: ->
+    console.log "Creating view for all ores"
+    Ores.forEach (ore) =>
+      @displayOre(ore)
 
   beginWatchingMovement: (e)->
     return if @oreLock

@@ -2,8 +2,9 @@ class ForgeCraft.Models.Ore extends Backbone.Model
   paramRoot: 'ore'
 
   defaults:
-    x: 0
-    y: 0
+    rank: 1
+    x: -1
+    y: -1
 
   initialize: ->
     @bind "change", @cache, @
@@ -17,6 +18,7 @@ class ForgeCraft.Models.Ore extends Backbone.Model
 
   forLog: ->
     @get("name") + " (" + @get("x") + ", " + @get("y") + ")" + " in forgeable " + @get("forgeable")
+    
   
 class ForgeCraft.Collections.OresCollection extends Backbone.Collection
   
@@ -26,14 +28,46 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
   numCols: 0
   numRows: 0
 
+  oreCache: [[]]
+  holes: []
+  replacements: []
+
   initialize: ->
-    @oreCache = [[]]
+    @bind "destroy", @consume, @
+
+  initialFill: (count) ->
+    @fetch data: {count: count}, success: @onInitialFill
+
+  onInitialFill: (collection, response) ->
+    console.log "On initial fill: ", collection
+    col = 0
+    row = 0
+    Ores.forEach (ore) ->
+      ore.set x: col, y: row
+
+      col++
+      if col >= Ores.numCols
+        col = 0
+        row++
+    
+    Ores.trigger("reveal")
+    Ores.refresh()
 
   cache: (ore) ->
     x = ore.get('x')
     y = ore.get('y')
     @oreCache[x] = [] unless @oreCache[x]?
     @oreCache[x][y] = ore
+
+  uncache: (ore) ->
+    x = ore.get('x')
+    y = ore.get('y')
+    @oreCache[x] = [] unless @oreCache[x]?
+    @oreCache[x][y] = undefined
+
+  consume: (ore) ->
+    @uncache(ore)
+    @holes.push(ore.get('x'))
 
   oreAt: (x, y) ->
     return undefined unless @oreCache[x]?
@@ -58,7 +92,25 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
   refresh: ->
     console.log("Refreshing board")
     @clearForgeables()
+    @fillHoles()
     @detectForgeables()
+
+  fillHoles: ->
+    return unless @holes.length > 0
+
+    for x in @holes
+      for y in [@numRows-2 .. 0]
+
+        console.log "Checking ore at", x, ",", y, ",", col
+        continue unless ore = @oreAt(x, y)
+
+        # check ore below this one
+        found = false
+        dy = y
+        found = @oreAt(x, ++dy) while !found and dy <= @numRows-1
+
+        ore.set(y: dy-1) if found
+
 
   clearForgeables: ->
     @oresInForgeables = []
@@ -148,3 +200,7 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
 
     Forgings.add forgeable
     @oresInForgeables = _.union @oresInForgeables, ores
+
+  addReplacements: (ores) ->
+    @replacements ||= []
+    @replacements = _.union @replacements, ores

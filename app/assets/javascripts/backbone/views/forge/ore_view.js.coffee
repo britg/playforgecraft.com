@@ -15,7 +15,16 @@ class ForgeCraft.Views.OreView extends Backbone.View
     @el = $('<div class="ore" />').get(0);
     $(@el).addClass(@model.get('to_class'))
     $(@el).data view: @
+    $(@el).css("backgroundImage", "url(" + @oreUrl() + ")")
     @
+
+  oreUrl: ->
+    ForgeCraft.Config.ores[@model.get("rank")]
+
+  renderAndPosition: ->
+    @render()
+    $('#ores').append(@el)
+    @jumpToPosition()
 
   leftPos: () ->
     boardLeft = $('#ores').position().left + forgeView.hMargin
@@ -64,3 +73,4 @@ class ForgeCraft.Views.OreView extends Backbone.View
 
   consume: () ->
     $(@el).fadeOut "slow", -> $(@).remove()
+    
