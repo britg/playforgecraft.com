@@ -16,6 +16,11 @@ class ForgeCraft.Models.Ore extends Backbone.Model
     @set forgeable: undefined
     @set neighbors: []
 
+  dropTo: (y) ->
+    console.log "Dropping ore to", y
+    Ores.consume(@)
+    @set y: y
+
   forLog: ->
     @get("name") + " (" + @get("x") + ", " + @get("y") + ")" + " in forgeable " + @get("forgeable")
     
@@ -67,7 +72,8 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
 
   consume: (ore) ->
     @uncache(ore)
-    @holes.push(ore.get('x'))
+    col = ore.get('x')
+    @holes.push(col) unless _.include(@holes, col)
 
   oreAt: (x, y) ->
     return undefined unless @oreCache[x]?
@@ -99,18 +105,30 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
     return unless @holes.length > 0
 
     for x in @holes
-      for y in [@numRows-2 .. 0]
+      @applyGravityAt(x, y) for y in [@numRows-2 .. 0]
+      @backFillAt(x, y) for y in [@numRows-2 .. 0]
+      _.reject @holes, (col) -> col == x
 
-        console.log "Checking ore at", x, ",", y, ",", col
-        continue unless ore = @oreAt(x, y)
+  applyGravityAt: (x, y) ->
+    console.log "Checking ore at", x, ",", y
+    return unless ore = @oreAt(x, y)
 
-        # check ore below this one
-        found = false
-        dy = y
-        found = @oreAt(x, ++dy) while !found and dy <= @numRows-1
+    # check ore below this one
+    blocked = false
+    dy = y
+    blocked = @blockage(x, ++dy) while !blocked
 
-        ore.set(y: dy-1) if found
+    ore.dropTo(dy-1) if blocked and (dy-1)!=y
 
+  backFillAt: (x, y) ->
+    return if @oreAt(x, y)
+
+    filler = new ForgeCraft.Models.Ore(@replacements.shift())
+    @add(filler)
+    filler.set x:x, y:y
+
+  blockage: (x, y) ->
+    @oreAt(x, y)? or y == @numRows-1
 
   clearForgeables: ->
     @oresInForgeables = []

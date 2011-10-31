@@ -10,6 +10,7 @@ class ForgeCraft.Views.OreView extends Backbone.View
     @model.bind "change:y", @updateCoordinates, @
     @model.bind "change:neighbors", @updateNeighbors, @
     @model.bind "destroy", @consume, @
+    @model.bind "change:marked", @mark, @
 
   render: ->
     @el = $('<div class="ore" />').get(0);
@@ -31,8 +32,12 @@ class ForgeCraft.Views.OreView extends Backbone.View
     boardLeft + ForgeCraft.Config.oreDim * @model.get("x")
 
   topPos: () ->
-    boardTop = forgeView.topOffset
-    topPos = boardTop + ForgeCraft.Config.oreDim * @model.get("y")
+    y = @model.get("y")
+    if y == -1
+      topPost = -2*ForgeCraft.Config.oreDim
+    else
+      boardTop = forgeView.topOffset
+      topPos = boardTop + ForgeCraft.Config.oreDim * @model.get("y")
 
   updateCoordinates: () ->
     $(@el).attr("data-x", @model.get('x')).attr("data-y", @model.get('y'))
@@ -70,6 +75,9 @@ class ForgeCraft.Views.OreView extends Backbone.View
 
     $(@el).removeClass(d.join(" "))
     $(@el).addClass(n.join(" "))
+
+  mark: ->
+    $(@el).addClass("marked");
 
   consume: () ->
     $(@el).fadeOut "slow", -> $(@).remove()

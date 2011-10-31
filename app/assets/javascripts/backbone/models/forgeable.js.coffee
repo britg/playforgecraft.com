@@ -30,7 +30,12 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
   forge: ->
     return if @forging
     @forging = true
+    @markOres()
     @save @toJSON, success: @convertToLoot
+
+  markOres: ->
+    $.each @get("ores"), (i, ore) ->
+      ore.set marked: true
   
   convertToLoot: (forgeable, params) ->
     console.log "Response from server is:", params

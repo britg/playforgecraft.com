@@ -92,6 +92,10 @@ html.game.no-touch {
         border-left: none;
       }
     }
+
+    &.marked {
+      @include opacity(0.3);
+    }
   }
 
   #sidebar {
