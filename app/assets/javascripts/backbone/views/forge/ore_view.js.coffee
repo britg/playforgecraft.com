@@ -40,9 +40,6 @@ class ForgeCraft.Views.OreView extends Backbone.View
       topPos = boardTop + ForgeCraft.Config.oreDim * @model.get("y")
 
   updateCoordinates: () ->
-    $(@el).attr("data-x", @model.get('x')).attr("data-y", @model.get('y'))
-    $(@el).find('img').attr("data-x", @model.get('x')).attr("data-y", @model.get('y'))
-
     @animateToPosition(no)
 
   jumpToPosition: ->

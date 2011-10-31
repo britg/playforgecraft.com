@@ -128,7 +128,7 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
     filler.set x:x, y:y
 
   blockage: (x, y) ->
-    @oreAt(x, y)? or y == @numRows-1
+    @oreAt(x, y)? or y >= @numRows
 
   clearForgeables: ->
     @oresInForgeables = []

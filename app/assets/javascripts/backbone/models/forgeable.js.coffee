@@ -30,6 +30,7 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
   forge: ->
     return if @forging
     @forging = true
+    Ores.clearForgeables()
     @markOres()
     @save @toJSON, success: @convertToLoot
 

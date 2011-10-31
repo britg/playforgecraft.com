@@ -31,9 +31,9 @@ class ForgeCraft.Collections.ClassTemplates extends Backbone.Collection
   priority: priority--
   patterns:
     [
-      # [ [1, 0], [0, 1], [0, 2], [1, 2] ],  # Currently disabled due to "gravity" problem
+      [ [1, 0], [0, 1], [0, 2], [1, 2] ],  # Currently disabled due to "gravity" problem
       [ [0, 1], [1, 1], [2, 1], [2, 0] ],
-      # [ [1, 0], [1, 1], [1, 2], [0, 2] ],
+      [ [1, 0], [1, 1], [1, 2], [0, 2] ],
       [ [0, 1], [1, 0], [2, 0], [2, 1] ],
     ]
 
