@@ -18,18 +18,28 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     window.Ores = new ForgeCraft.Collections.OresCollection
     Ores.bind "add", @displayOre, @
     Ores.bind "reveal", @displayAllOres, @
+    Ores.bind "reset", @clearOres, @
     @renderForge()
 
-    $(window).resize ->
-      forgeView.renderForge()
+    $(window).unbind('resize').resize =>
+      @renderForge()
 
   renderForge: ->
-    $('#ores').html('')
+    return if @renderHold
+
+    @clearOres()
+    loadingView.show()
+
     clearTimeout @redrawTimeout
+
     @redrawTimeout = setTimeout =>
       @calculateDimensions()
       @initializeOres()
-    , 300
+      loadingView.hide()
+    , 500
+
+  clearOres: ->
+    $('#ores').html('')
 
   calculateDimensions: ->
     
@@ -47,9 +57,8 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     Ores.numCols    = @cols
     Ores.numRows    = @rows
 
-    @lootListHeight = $('#sidebar').height() - $('#loot-list').position().top - 10
-    
-    $('#loot-list').css('height', @lootListHeight);
+    @lootListHeight = $('#sidebar').height() - $('#loot-list').position().top
+    $('#loot-list').css('height', @lootListHeight)
 
     console.log "Ores width:", @oresWidth, "height:", @oresHeight, "cols:", @cols, "rows:", @rows
 
@@ -60,12 +69,13 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     Ores.initialFill(@numOres)
 
   displayOre: (ore) ->
-    console.log "Creating view for ore", ore.forLog()
+    # console.log "Creating view for ore", ore.forLog()
     view = new ForgeCraft.Views.OreView model: ore
     view.renderAndPosition()
 
   displayAllOres: ->
-    console.log "Creating view for all ores"
+    # console.log "Creating view for all ores"
+    @clearOres()
     Ores.forEach (ore) =>
       @displayOre(ore)
 
