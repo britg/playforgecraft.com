@@ -3,6 +3,7 @@
 
 html {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -10,68 +11,60 @@ body {
   @include blueprint(true);
   @include forgecraft;
 
+  padding-top: 1px;
+
+  height: 100%;
+  overflow: hidden;
+
 }
 
-#head {
-  @include container;
+#loading {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 49%;
+}
 
-  #branding {
-    @include column(8);
+#profile {
+  position: fixed;
+  right: -5px;
+  top: -3px;
+  @include inset;
+  width: $sidebar-width + 5px;
+  height: $profile-height;
+  padding: 10px 0 0 0;
 
-    a {
-      &:hover {
-        border: 0;
-      }
-    }
+  .inner {
+    padding: 0 10px;
   }
 
-  #actions {
-    @include column(16, true);
+  .welcome {
+    float: left;
   }
 
-  #logo {
-    margin: 30px 0;
-  }
-
-  #navigation {
+  .actions {
     float: right;
-
-    li {
-      display: inline;
-      float: left;
-      list-style-type: none;
-
-      a {
-        display: block;
-        padding: 10px 0 10px 20px;
-        font-size: 175%;
-
-        &:hover {
-          border: 0;
-        }
-      }
-    }
-  }
-
-  #profile {
-    float: right;
-    position: relative;
-    @include inset;
-    margin-bottom: 4px;
-
-    height: 30px;
-    padding: 10px 20px 0 20px;
-
-    .action {
-      margin-left: 20px;
-    }
   }
 }
+
+#flash-wrap {
+  width: 100%;
+  position: fixed;
+  top: -3px;
+
+  .flash {
+    display: block;
+    width: 75%;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
 
 #content {
-  @include container;
+  height: 100%;
+  padding-top: 1px;
 }
 
 #footer {
-  @include container; 
 }

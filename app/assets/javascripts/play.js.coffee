@@ -1,36 +1,51 @@
 #= require jquery
-#= require lib/underscore
-#= require lib/json2
-#= require lib/backbone
+#= require jquery_ujs
+#= require lib/modernizr-2.0.6
+#= require lib/facebox
+#= require game/lib/underscore
+#= require game/lib/json2
+#= require game/lib/touchhandler
+#= require game/lib/backbone
 #= require_tree ./game/models
 #= require_tree ./game/collections
 #= require_tree ./game/views
 
+#overrideTouchEvents()
+
 @config =
   numRows: 12
   numCols: 12
-  tileWidth: 48
+  tileWidth: 20
   moveThreshold: 12
   dropInTimeout: 500
   highlightTimeout: 1000
 
 
 @game = new Game
-@templates = new ClassTemplates([@sword])
+@templates = new ClassTemplates([@tunic, @leggings, @crossbow, @longsword, @axe, @shield])
 @forgeables = new ForgeableCollection
 
 $ ->
 
-  game.board = new Board
+  config.tileWidth = $('.tile').first().width()
 
+  # Init game from embedded JSON
+  game.set(config.initialState)
+
+  # Board and Board View
+  game.board = new Board
+  
   window.boardView = new BoardView 
     model: game.board
     id: "#tiles"
     el: $('#tiles').get(0)
 
-  game.initTiles()
+  # Score View
+  window.scoreView = new ScoreView 
+    model: game 
+    el: $('#score-box').get(0)
 
-  highlight = ->
-    game.board.detectForgeables().highlightForgeables()
-  
-  setTimeout highlight, config.forgeableTimeout
+  # Menu
+  menuView = new MenuView el: $('.settings').get(0)
+
+  game.start()

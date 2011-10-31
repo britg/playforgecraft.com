@@ -1,0 +1,51 @@
+#player-page
+
+  .heading.padded
+
+    - if @player == current_player
+      = link_to "Forge &rarr;".html_safe, forge_path, :class => "button quick-play"
+
+    %h1.player= player_slug(@player)
+
+  .completion
+
+    .total
+      %span.count= @player.item_count
+      total items
+      (#{@player.item_percent}%)
+    
+    .rare
+      %span.count= @player.rare_count
+      rares
+      (#{@player.rare_percent}%)
+
+    .epic
+      %span.count= @player.epic_count
+      epics
+      (#{@player.epic_percent}%)
+
+    .itemset
+      %span.count= @player.set_count
+      sets
+      (#{@player.set_percent}%)
+
+  .games
+
+    #workorders
+      .col-content
+        
+        %h2 Work Orders
+
+    #singleplayer
+      .col-content
+        
+        %h2 Singleplayer
+
+        %ul.singleplayer-game-list
+
+    #multiplayer
+      .col-content
+        
+        %h2 Multiplayer
+
+  .clear

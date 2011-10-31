@@ -5,12 +5,16 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :admin
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :admin, :player_attributes
 
   has_one :player
 
+  validates_presence_of :player
+
+  accepts_nested_attributes_for :player
+
   def to_s
-    player.try(:name) || email
+    player.try(:to_s) || email
   end
   
 end

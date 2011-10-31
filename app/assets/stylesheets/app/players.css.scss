@@ -1,0 +1,90 @@
+@import "base";
+
+.player-slug {
+  
+  .level {
+    font-size: 40%;
+  }
+
+  .title {
+    font-size: 60%;
+    font-weight: bold;
+  }
+
+}
+
+#player-page {
+
+  margin: $content-top 10px;
+  @include inset;
+
+  .heading {
+    .button {
+      float: right;
+      font-size: 150%;
+      margin-top: 16px;
+    }
+  }
+  
+  .player {
+    font-size: 500%;
+    border-bottom: solid 1px $highlight-color;
+    margin-bottom: 0;
+  }
+
+  .completion {
+
+    text-align: center;
+    
+    .rare {
+      @include column(6);
+    }
+
+    .epic {
+      @include column(6);
+    }
+
+    .itemset {
+      @include column(6);
+    }
+
+    .total {
+      @include column(6, true);
+    }
+
+    .count {
+      font-size: 400%;
+    }
+
+  }
+
+  .games {
+
+    #workorders {
+      @include column(8);
+    }
+    
+    #singleplayer {
+      @include column(8);
+    }
+
+    #multiplayer {
+      @include column(8, true);
+    }
+
+  }
+
+}
+
+#ladder-page {
+
+  @include inset;
+  
+  #ladder {
+    
+    .name {
+      font-weight: bold;
+    }
+    
+  }
+}

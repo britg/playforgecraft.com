@@ -8,10 +8,24 @@ class UsersControllerTest < ActionController::TestCase
       
     end
 
-    should "GET index" do
-      get :index
-      assert_response :success
-      assert_select 'a', 'Log in'
+    context "GET index" do
+      
+      setup do
+        get :index
+      end
+
+      should "respond successfully" do
+        assert_response :success
+      end
+
+      should "have a Log in link" do
+        assert_select 'a', 'Log in'
+      end
+
+      should "not have a My Profile link" do
+        assert_select '.my-profile', 0
+      end
+
     end
 
   end
@@ -23,11 +37,19 @@ class UsersControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    should "GET index" do
-      get :index
-      assert_response :success
-      assert_select 'a', 'Log out'
+    context "GET index" do
+      
+      setup do
+        get :index
+      end
+
+      should "redirect to player page" do
+        assert_redirected_to player_path(@user.player.name)
+      end
+
     end
+
+    
 
   end
 

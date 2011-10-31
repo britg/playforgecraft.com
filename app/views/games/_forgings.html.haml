@@ -1,0 +1,9 @@
+.forgings
+
+  %h3=pluralize items.count, "#{rarity.titleize} Item"
+  
+  %ul.loot-list
+
+    - for item in items
+      
+      %li= loot_with_icon(item)

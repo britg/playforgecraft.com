@@ -1,0 +1,75 @@
+@import "base";
+
+.loot {
+
+  border: solid 1px;
+  @include border-radius(5px);
+
+  &.common {
+    border-color: rgba($common-color, 0.1);
+    background-color: rgba($common-color, 0.1);
+  }
+
+  &.advanced {
+    border-color: rgba($advanced-color, 0.1);
+    background-color: rgba($advanced-color, 0.1);
+  }
+
+  &.rare {
+    border-color: rgba($rare-color, 0.1);
+    background-color: rgba($rare-color, 0.1);
+  }
+
+  &.epic {
+    border-color: rgba($epic-color, 0.1);
+    background-color: rgba($epic-color, 0.1);
+  }
+
+  &.itemset {
+    border-color: rgba($set-color, 0.1);
+    background-color: rgba($set-color, 0.1);
+  }
+
+  height: 50px;
+  padding: 10px;
+  margin-bottom: 2px;
+
+  .icon {
+    float: left;
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .name {
+    margin-bottom: 0;
+  }
+
+  .stats {
+    font-size: 175%;
+    line-height: 1;
+    color: $highlight-color;
+  }
+
+  .type-icon {
+    width: 12px;
+  }
+
+}
+
+.loot-with-icon {
+  .item-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+    vertical-align: -3px;
+  }
+}
+
+.loot-list {
+  margin: 0;
+  padding: 0;
+  li {
+    display: block;
+  }
+}

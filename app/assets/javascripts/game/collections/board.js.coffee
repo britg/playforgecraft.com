@@ -17,36 +17,69 @@
     @tileCache[x] ?= []
     @tileCache[x][y] = tile
 
+  removeTile: (tile) ->
+    @remove(tile)
+    @tileCache[tile.get('x')][tile.get('y')] = undefined
+
+  recacheTile: (tile) ->
+    @removeTile(tile)
+    @addAndCache(tile)
+
+  syncTiles: (remoteTiles) ->
+    self = @
+    $.each remoteTiles, (i, remote) ->
+      localTile = self.get(remote.id)
+      
+      if localTile?
+        localTile.set(remote)
+      else
+        tile = new Tile remote
+        self.addAndCache(tile)
+        boardView.addTile(tile)
+
+    @refresh()
+
   tileAt: (x, y) ->
     @tileCache[x]?[y]
 
   tileInForgeable: (tile) ->
     _.include(@tilesInForgeables, tile)
+
+  refresh: ->
+    console.log("Refreshing board")
+    @clearForgeables()
+    @detectForgeables()
+
+  clearForgeables: ->
+    @tilesInForgeables = []
+    tile.clearForgeable() for tile in @.models
     
   detectForgeables: ->
-    @tilesInForgeables = []
-    @detectForgeable tile for tile in @.models
+    for y in [0..11]
+      for x in [0..11]
+        @detectForgeable @tileAt(x, y)
     @
 
   detectForgeable: (tile) ->
+    return if @tileInForgeable tile
+
     self = @
     @workingTile = tile
 
+    # console.log("detecting forgeable for tile", tile.forLog())
+
     match = no
     matchingTemplate = 0
-    $.each templates.models, (i, template) ->
+
+    for i in [0..templates.length-1]
+      template = templates.at(i)
+      # console.log "attempting to detect", template.get("name")
       match = self.testTemplate template
       matchingTemplate = template if match
+      @createForgeable matchingTemplate, @workingForgeable if match
       !match
 
-    @createForgeable matchingTemplate, @workingForgeable if match
-
-  createForgeable: (classification, tiles) ->
-    forgeable = new Forgeable
-      tiles: tiles
-      classification: classification.name
-
-    forgeables.add forgeable
+    
 
   testTemplate: (template) ->
     self = @
@@ -54,6 +87,7 @@
     templateMatch = no
 
     $.each patterns, (i, pattern) ->
+      # console.log "Testing", template.get("name"), "pattern", i
       templateMatch = self.testPattern pattern
       !templateMatch
 
@@ -71,6 +105,7 @@
       patternMatch
 
     # console.log("Is the overall pattern a match?", patternMatch)
+    
     patternMatch
 
   testTileAt: (point) ->
@@ -87,16 +122,22 @@
     return no unless tileToTest.get("ore") == @workingTile.get("ore")
 
     @workingForgeable.push(tileToTest)
+    # @workingTile.hasNeighbor point
+    # tileToTest.isNeighbor point
     # console.log("Tile is a match! Adding to working forgeable", @workingForgeable)
 
     yes
 
-  highlightForgeables: ->
+  createForgeable: (classification, tiles) ->
+    # console.log("Creating forgeable with class", classification)
+    # debugger;
+    forgeable = new Forgeable
+      tiles: tiles
+      classification: classification.get("name")
+      ore: tiles[0].get("ore")
 
-    forgeables.each (forgeable) ->
-      $.each forgeable.get("tiles"), (i, tile) ->
-        tile.set
-          forgeable: forgeable
+    forgeables.add forgeable
+    @tilesInForgeables = _.union @tilesInForgeables, tiles
   
   ###
     Tile Swapping
@@ -113,5 +154,5 @@
     tileOne.set x: tileTwoX, y: tileTwoY
     tileTwo.set x: tileOneX, y: tileOneY
 
-    @cacheTile(tileOne)
-    @cacheTile(tileTwo)
+    game.trigger "ForgeCraft:actionTilesSwapped", tileOne, tileTwo
+    @refresh()

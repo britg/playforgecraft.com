@@ -35,11 +35,42 @@ class Ore < ActiveRecord::Base
         i += 1
       end
 
-      where(:rank => i).first
+      rank_cache(i)
+    end
+
+    def random_set(count)
+      set = []
+      count.to_i.times do
+        set << random
+      end
+      set
     end
 
     def browsable
       Ore.where(:name => DEFAULTS)
+    end
+
+    def rank_cache(rank)
+      @rank_cache ||= {}
+      @rank_cache[rank] ||= find_by_rank(rank)
+    end
+
+    def tile_cache(id)
+      @tile_cache ||= {}
+      @tile_cache[id] ||= Ore.find(id).tile rescue Ore.new.tile
+    end
+
+    def name_cache(id)
+      @name_cache ||= {}
+      @name_cache[id] ||= Ore.find(id).to_class rescue ""
+    end
+
+    def tile_urls
+      mapping = {}
+      Ore.all.each do |ore|
+        mapping[ore.rank] = ore.tile_url
+      end
+      mapping
     end
 
   end
@@ -48,12 +79,16 @@ class Ore < ActiveRecord::Base
     name
   end
 
+  def to_class
+    to_s.parameterize
+  end
+
   def tile_url
-    tile.url(:large)
+    tile.url(:normal)
   end
 
   def serializable_hash(opts)
-    super((opts||{}).merge(:methods => [:tile_url]))
+    super((opts||{}).merge(:methods => [:to_class], :only => [:name, :rank]))
   end
 
   def to_asset

@@ -4,6 +4,8 @@
 en:
   notices:
     email_thanks: "Thanks! We'll notify you as soon as ForgeCraft is ready."
+    player_required: "Please log in or create an account to proceed."
+    game_player_required: "The game you are attempting to play doesn't belong to you!"
 
   stories:
     default: "%{item}'s forging and history has been lost to time. Perhaps one day an adventurous scholar will unveil its origin story; no doubt wrought with blood and battle..."

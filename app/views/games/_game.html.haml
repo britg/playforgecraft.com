@@ -1,8 +1,29 @@
 #game
   
-  #tiles.board
+  = render "board", :game => @game
 
-    - for t in @game.tiles
-      
-      .tile{ :id => dom_id(t), :class => t.to_ore, "data-x" => t.x, "data-y" => t.y, "data-ore" => t.to_ore, "data-remote-id" => t.id }
-        = image_tag(t.ore.tile, :class => t.to_ore, "data-x" => t.x, "data-y" => t.y, "data-ore" => t.to_ore)
+  #score-box
+    .menu
+      %ul
+        %li
+          = link_to "Settings", "#", :class => "settings"
+        %li.player
+          = current_player
+
+  #loot-list.scrollable.vertical
+    
+    - for loot in @game.loot
+      = render "items/loot", :loot => loot
+
+  = render "active_forge"
+  = render "settings"
+
+:javascript
+  config["initialState"] = #{@game.to_json}
+
+- for ore in Ore.all
+  :javascript
+    config["#{ore.to_class}_tile"] = "#{Ore.tile_cache(ore.id)}"
+
+#loot-template
+  = render "items/loot", :loot => Loot.new(:attack => 1, :defense => 1)

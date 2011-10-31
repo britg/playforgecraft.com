@@ -1,0 +1,47 @@
+#ladder-page
+
+  .heading.padded
+
+    %h1 Singleplayer Ladder
+
+    %table#ladder
+
+      %tr
+
+        %th Rank
+        %th Score
+        %th Player
+        %th Level
+        %th Items
+        %th Rares
+        %th Epics
+        %th Sets
+        %th Work Orders
+      
+      - Player.ladder.each_with_index do |player, i|
+
+        %tr
+          %td.rank= i+1
+          %td.score= player.score
+          %td.name= link_to player.name, player_path(player)
+          %td.level= player.level
+
+          %td.count
+            = player.item_count
+            (#{player.item_percent}%)
+
+          %td.count.rare
+            = player.rare_count
+            (#{player.rare_percent}%)
+
+          %td.count.epic
+            = player.epic_count
+            (#{player.epic_percent}%)
+
+          %td.count.itemset
+            = player.set_count
+            (#{player.set_percent}%)
+
+          %td.count
+            = player.work_order_count
+            (#{player.work_order_percent}%)

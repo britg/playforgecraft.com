@@ -1,0 +1,292 @@
+@import "base";
+
+/*
+ * Board
+ */ 
+$tile-dim: 64px;
+$board-guide-color: #333;
+$menu-dim: $tile-dim/2;
+$board-height: 12*$tile-dim;
+$board-width: 12*$tile-dim;
+
+/*
+ * Active Forge
+ */
+$bar-empty-color: $background-color;
+$bar-border-color: #979797;
+$bar-color: #999;
+$bar-top: 200px;
+$bar-width: 600px;
+$bar-height: 60px;
+$checkpoint-width: 45px;
+
+@mixin board {
+  float: left;
+  display: block;
+  width: $board-width;
+  height: $board-height;
+  overflow: hidden;
+}
+
+html.game.no-touch {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+
+  body#play {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+}
+
+
+#forge {
+
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  #ores {
+    padding-top: $content-top + 10px;
+    margin-right: $sidebar-width;
+  }
+  
+  .ore {
+
+    float: left;
+    display: block;
+    width: $tile-dim;
+    height: $tile-dim;
+    position: absolute;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /*border: solid 1px $board-guide-color; */
+    
+    img {
+      width: $tile-dim;
+      height: $tile-dim;
+      margin: 0;
+      padding: 0;
+    }
+
+    &.forgeable {
+      background-color: rgba(100,100,100,0.2);
+      /* border: solid 1px #fff; */
+
+      &.top {
+        border-top: none;  
+      }
+      &.right {
+        border-right: none;  
+      }
+      &.bottom {
+        border-bottom: none;  
+      }
+      &.left {
+        border-left: none;
+      }
+    }
+
+    &.marked {
+      @include opacity(0.3);
+      background-color: rgba(100,100,100,0.3);
+    }
+  }
+
+  #sidebar {
+    float: right;
+    width: $sidebar-width;
+    height: 100%;
+  }
+
+  #score-box {
+    float: left;
+    display: none;
+    height: $menu-dim;
+    width: 4 * $tile-dim;
+
+    .menu {
+      height: $menu-dim;
+      width: 100%;
+
+      ul {
+        float: right;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: inline;
+          float: right;
+
+          a {
+            display: block;
+            float: right;
+            width: $menu-dim;
+            height: $menu-dim;
+            text-indent: -2000em;
+
+            &.settings {
+              background: image_url("menu/settings.png") center no-repeat;
+            }
+          }
+
+          &.player {
+            font-size: 150%;
+            color: $epic-color;
+            margin: 0 10px;
+          }
+
+        }
+      }
+    }
+
+    .inner {
+      clear: left;
+      padding: 10px;
+    }
+
+    .scores {
+      .value {
+        font-size: 300%;
+        color: $highlight-color;
+        vertical-align: bottom;
+        text-align: right;
+        line-height: 1em;
+      }
+      .label {
+        width: 50px;
+        vertical-align: bottom;
+      }
+    }
+
+  }
+
+  #player-bar {
+    padding-top: $content-top;
+    height: $tile-dim;
+  }
+
+  #loot-list {
+    overflow: hidden;
+    padding-right: 0px;
+    margin-right: -5px;
+  }
+
+  #active-forge {
+    @include board;
+    background: rgba(0, 0, 0, 0.7);
+    position: relative;
+    top: -12*$tile-dim;
+    z-index: 1;
+    display: none;
+    
+    #bar-container {
+      /*position: absolute;
+      top: $bar-top;
+      left: 156px;*/
+      display: block;
+      margin: $bar-top auto;
+      margin-bottom: 10px;
+      width: $bar-width;
+      height: $bar-height;
+      background: $bar-empty-color;
+      border: solid 5px $bar-border-color;
+      overflow: hidden;
+      @include inset;
+    }
+
+    #bar {
+      position: relative;
+      left: -$bar-width;
+      background-color: rgba($bar-color, 0.3);
+      width: $bar-width;
+      height: $bar-height;
+      border-right: solid 5px $highlight-color;
+      @include transition-property("left");
+      @include transition-duration("1.5s");
+
+      &.new {
+        left: -$bar-width;
+      }
+
+      &.activated {
+        left: 0;
+      }
+    }
+
+    .checkpoint {
+      display: block;
+      float: left;
+      height: $checkpoint-width;
+      width: $checkpoint-width;
+      margin-right: -$checkpoint-width;
+      position: relative;
+      left: 25%;
+
+      .marker {
+        position: relative;
+        width: 10px;
+        height: $bar-height + 20;
+        top: - ($bar-height + 25);
+        left: $checkpoint-width/2 - 5;
+        margin-right: -5px;
+        margin-bottom: - ($bar-height + 20);
+        background: #fff;
+
+        &.activated {
+          background: $advanced-color;
+        }
+      }
+
+      img {
+        height: $checkpoint-width;
+        width: $checkpoint-width;
+      }
+
+    }
+
+    .instructions {
+      text-align: center;
+      font-weight: bold;
+      color: $highlight-color;
+      margin-top: $checkpoint-width + 20px;
+      display: none;
+    }
+  }
+}
+
+html.no-touch {
+  #game {
+    margin-top: 20px;
+    #active-forge {
+      .instructions {
+        display: block;
+      }
+    }
+  }
+}
+
+.settings-menu {
+
+  ul {
+    li {
+      list-style-type: none;
+
+      a {
+        font-size: 200%;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  
+}
+
+#loot-template {
+  display: none;
+}

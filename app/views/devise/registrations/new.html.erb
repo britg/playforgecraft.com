@@ -4,8 +4,14 @@
 
   <div id="register-form" class="inset">
     <div class="col-content">
+      <% resource.build_player %>
       <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
+
+        <%= f.fields_for :player do |p| %>
+          <div><%= p.label :name, "Player Name" %><br />
+          <%= p.text_field :name, :class => "required" %></div>
+        <% end %>
 
         <div><%= f.label :email %><br />
         <%= f.email_field :email, :class => "required email" %></div>

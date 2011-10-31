@@ -1,5 +1,5 @@
 Fabricator(:player) do
-  name "MyString"
+  name "Herb"
   level 1
   experience 1
 end

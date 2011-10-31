@@ -72,6 +72,7 @@ GEM
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       warden (~> 1.0.3)
+    ejs (1.0.0)
     erubis (2.7.0)
     eventmachine (0.12.10)
     execjs (1.2.4)
@@ -150,6 +151,10 @@ GEM
       activesupport (= 3.1.0)
       bundler (~> 1.0)
       railties (= 3.1.0)
+    rails-backbone (0.5.4)
+      coffee-script (~> 2.2.0)
+      ejs (~> 1.0.0)
+      rails (~> 3.1.0)
     rails-dev-tweaks (0.4.0)
       rails (~> 3.1.0.rc4)
     railties (3.1.0)
@@ -220,6 +225,7 @@ DEPENDENCIES
   paperclip (= 2.4)
   pg
   rails (= 3.1.0)
+  rails-backbone
   rails-dev-tweaks
   sass-rails (~> 3.1.0)
   shoulda

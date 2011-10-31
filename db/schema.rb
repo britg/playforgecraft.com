@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111005183910) do
+ActiveRecord::Schema.define(:version => 20111027190113) do
 
   create_table "actions", :force => true do |t|
     t.integer  "game_id"
@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(:version => 20111005183910) do
     t.string   "action"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "forgeable_accuracy"
+    t.string   "forgeable_class"
+    t.string   "forgeable_ore"
+    t.boolean  "forgeable_mana_crystal", :default => false
   end
 
   add_index "actions", ["game_id", "turn"], :name => "index_actions_on_game_id_and_turn", :unique => true
@@ -106,28 +110,28 @@ ActiveRecord::Schema.define(:version => 20111005183910) do
   end
 
   create_table "games", :force => true do |t|
-    t.string    "type"
-    t.integer   "challenger_id"
-    t.integer   "challengee_id"
-    t.integer   "winner_id"
-    t.integer   "loser_id"
-    t.integer   "challenger_attack_score",    :default => 0
-    t.integer   "challenger_defense_score",   :default => 0
-    t.integer   "challengee_attack_score",    :default => 0
-    t.integer   "challengee_defense_score",   :default => 0
-    t.integer   "start_turns",                :default => 0
-    t.integer   "challenger_turns_remaining", :default => 0
-    t.integer   "challengee_turns_remaining", :default => 0
-    t.timestamp "challenger_last_action"
-    t.timestamp "challengee_last_action"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "game_type"
+    t.integer  "challenger_id"
+    t.integer  "challengee_id"
+    t.integer  "winner_id"
+    t.integer  "loser_id"
+    t.integer  "challenger_attack_score",    :default => 0
+    t.integer  "challenger_defense_score",   :default => 0
+    t.integer  "challengee_attack_score",    :default => 0
+    t.integer  "challengee_defense_score",   :default => 0
+    t.integer  "start_turns",                :default => 0
+    t.integer  "challenger_turns_remaining", :default => 0
+    t.integer  "challengee_turns_remaining", :default => 0
+    t.datetime "challenger_last_action"
+    t.datetime "challengee_last_action"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "games", ["challengee_id"], :name => "index_games_on_challengee_id"
   add_index "games", ["challenger_id"], :name => "index_games_on_challenger_id"
+  add_index "games", ["game_type"], :name => "index_games_on_type"
   add_index "games", ["loser_id"], :name => "index_games_on_loser_id"
-  add_index "games", ["type"], :name => "index_games_on_type"
   add_index "games", ["winner_id"], :name => "index_games_on_winner_id"
 
   create_table "genres", :force => true do |t|
@@ -194,6 +198,22 @@ ActiveRecord::Schema.define(:version => 20111005183910) do
 
   add_index "levels", ["level"], :name => "index_levels_on_level", :unique => true
 
+  create_table "loots", :force => true do |t|
+    t.integer  "player_id"
+    t.integer  "game_id"
+    t.integer  "action_id"
+    t.integer  "item_id"
+    t.integer  "attack"
+    t.integer  "defense"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "loots", ["action_id"], :name => "index_loots_on_action_id", :unique => true
+  add_index "loots", ["game_id"], :name => "index_loots_on_game_id"
+  add_index "loots", ["item_id"], :name => "index_loots_on_item_id"
+  add_index "loots", ["player_id"], :name => "index_loots_on_player_id"
+
   create_table "ores", :force => true do |t|
     t.string    "name"
     t.integer   "rank"
@@ -216,6 +236,7 @@ ActiveRecord::Schema.define(:version => 20111005183910) do
     t.string    "avatar_content_type"
     t.integer   "avatar_file_size"
     t.timestamp "avatar_updated_at"
+    t.integer   "coins",               :default => 1000
   end
 
   add_index "players", ["name"], :name => "index_players_on_name", :unique => true

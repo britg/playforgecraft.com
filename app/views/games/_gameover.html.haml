@@ -1,0 +1,36 @@
+#gameover
+  
+  .center
+
+    %h1 Forging Complete
+
+    %table.final-scores
+      
+      %tr
+        
+        %td
+          %span.score= game.challenger_attack_score
+          = image_tag "menu/attack.png"
+        
+        %td
+          %span.score= game.challenger_defense_score
+          = image_tag "menu/defense.png"
+
+        %td
+          %span.score= game.loot.count
+          %span items forged
+
+    %table.loot-lists
+
+      %tr
+
+        - if game.items.rare.any?
+          %td
+            = render "forgings", :items => game.loot_list(:rare), :rarity => "rare"
+        
+        - if game.items.epic.any?    
+          %td
+            = render "forgings", :items => game.loot_list(:epic), :rarity => "epic"
+
+    = link_to "Start a New Game", play_path, :class => "button newgame"
+    = link_to "Quit", player_path(current_player), :class => "button newgame"

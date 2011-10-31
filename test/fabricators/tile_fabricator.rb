@@ -1,6 +1,6 @@
 Fabricator(:tile) do
-  game
-  ore
+  game!
+  ore!
   x 1
   y 1
 end

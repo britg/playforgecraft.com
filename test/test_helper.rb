@@ -14,6 +14,19 @@ class ActiveSupport::TestCase
   #fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def bootstrap_ores
+    Ore::DEFAULTS.each_with_index do |t, i|
+      Fabricate(:ore, :name => t, :rank => i)
+    end
+  end
+
+  def bootstrap_rarities
+    Rarity::DEFAULTS.each_with_index do |r, i|
+      Fabricate :rarity, :name => r, :rank => i
+    end
+  end
+  
 end
 
 class ActionController::TestCase
