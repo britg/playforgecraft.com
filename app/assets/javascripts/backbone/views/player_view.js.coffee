@@ -5,6 +5,7 @@ class ForgeCraft.Views.PlayerView extends Backbone.View
   initialize: ->
 
     @model.bind "change:coins", @onCoinChange, @
+    @model.bind "ForgeCraft:NeedMoreCoins", @shakeMoney, @
 
   onCoinChange: ->
     coins = @model.get("coins")
@@ -13,3 +14,6 @@ class ForgeCraft.Views.PlayerView extends Backbone.View
 
   updateCoinage: (coins) ->
     $('#player-bar').find('.coins').html(coins)
+
+  shakeMoney: ->
+    $('#player-bar').find('.coins').effect("shake", { times: 3, distance: 10 }, 50)

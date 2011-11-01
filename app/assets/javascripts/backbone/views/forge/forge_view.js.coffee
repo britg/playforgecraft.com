@@ -121,7 +121,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
       @swapOre = Ores.oreAt @refOre.get('x'), @refOre.get('y') - 1
       
     if @swapOre?
-      Ores.swapOres @refOre, @swapOre
+      Ores.swapOresAndValidate @refOre, @swapOre
       @stopWatchingMovement()
 
     e.preventDefault()

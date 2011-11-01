@@ -8,8 +8,8 @@ class OresController < ApplicationController
   end
 
   def swap
-    current_player.decrement!(:coins, Ore::SWAP_COST)
-    render :json => current_player
+    purchased = current_player.purchase!(Ore::SWAP_COST)
+    render :json => { :purchased => purchased, :player => current_player }
   end
 
 end

@@ -102,4 +102,10 @@ class Player < ActiveRecord::Base
     0
   end
 
+  def purchase!(cost)
+    return false if cost > coins
+    decrement!(:coins, cost)
+    true
+  end
+
 end

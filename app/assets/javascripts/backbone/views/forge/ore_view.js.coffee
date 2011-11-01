@@ -74,7 +74,10 @@ class ForgeCraft.Views.OreView extends Backbone.View
     $(@el).addClass(n.join(" "))
 
   mark: ->
-    $(@el).addClass("marked");
+    if @model.get("marked")
+      $(@el).addClass("marked")
+    else
+      $(@el).removeClass("marked")
 
   consume: () ->
     $(@el).fadeOut "slow", -> $(@).remove()

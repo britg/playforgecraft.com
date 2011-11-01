@@ -105,11 +105,19 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
     oreOne.set x: oreTwoX, y: oreTwoY
     oreTwo.set x: oreOneX, y: oreOneY
 
+    @refresh()
+
+  swapOresAndValidate: (oreOne, oreTwo) ->
+    @swapOres(oreOne, oreTwo)
+
     $.post '/ores/swap.json', {}, (response) ->
       console.log "Swap response", response
-      player.set(response)
+      unless response.purchased
+        Ores.swapOres(oreOne, oreTwo)
+        player.trigger "ForgeCraft:NeedMoreCoins"
 
-    @refresh()
+      player.set(response.player)
+
 
   refresh: ->
     console.log("Refreshing board")

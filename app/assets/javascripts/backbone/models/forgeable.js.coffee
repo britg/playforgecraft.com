@@ -32,15 +32,25 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
     @forging = true
     Ores.clearForgeables()
     @markOres()
-    @save @toJSON, success: @convertToLoot
+    @save @toJSON, success: @convertToLootIfPurchased
 
   markOres: ->
     $.each @get("ores"), (i, ore) ->
       ore.set marked: true
+
+  unmarkOres: ->
+    $.each @get("ores"), (i, ore) ->
+      ore.set marked: false    
   
-  convertToLoot: (forgeable, params) ->
+  convertToLootIfPurchased: (forgeable, params) ->
     console.log "Response from server is:", params
+
+    if params.purchased
+      forgeable.convertToLoot(params)
+    else
+      forgeable.unableToPurchase(params)
     
+  convertToLoot: (forgeable, params) ->
     loot = new ForgeCraft.Models.Loot(params.loot)
     player.set(params.player)
     lootView = new ForgeCraft.Views.LootView id: loot.id, model: loot, el: $('#loot-template').find('.loot').clone().get(0)
@@ -50,6 +60,12 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
     Ores.addReplacements(params.replacements)
     forgeable.consumeOres()
     Forgings.remove(forgeable)
+
+  unableToPurchase: (params) ->
+    @unmarkOres()
+    player.trigger("ForgeCraft:NeedMoreCoins")
+    player.set(params.player)
+    Ores.refresh()
 
   consumeOres: ->
     $.each @get("ores"), (i, ore) ->

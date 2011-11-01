@@ -7,7 +7,7 @@ class Loot < ActiveRecord::Base
   belongs_to :action
   belongs_to :item
 
-  after_create :purchase
+  before_create :purchase
 
   validates_presence_of :item
 
@@ -70,7 +70,7 @@ class Loot < ActiveRecord::Base
   def purchase
     return unless player
     return unless item
-    player.decrement!(:coins, item.cost!)
+    player.purchase!(item.cost!)
   end
 
 end

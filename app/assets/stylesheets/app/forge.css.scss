@@ -113,6 +113,10 @@ html.game.no-touch {
       text-align: right;
       font-size: 300%;
       color: $coin-color;
+      padding-right: 40px;
+      margin-right: 20px;
+      background: image_url("coin.png") right bottom no-repeat;
+      line-height: 1.1em;
     }
   }
 
