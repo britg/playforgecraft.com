@@ -42,6 +42,7 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
     console.log "Response from server is:", params
     
     loot = new ForgeCraft.Models.Loot(params.loot)
+    player.set(params.player)
     lootView = new ForgeCraft.Views.LootView id: loot.id, model: loot, el: $('#loot-template').find('.loot').clone().get(0)
     lootView.render()
     lootView.display()
@@ -63,6 +64,9 @@ class ForgeCraft.Collections.Forgings extends Backbone.Collection
   
   model: ForgeCraft.Models.Forgeable
   url: '/forge.json'
+
+  onRender: ->
+    @reset()
 
   forge: (forgeable) ->
     console.log "Forging", forgeable

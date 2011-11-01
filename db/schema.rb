@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111027190113) do
+ActiveRecord::Schema.define(:version => 20111031233422) do
 
   create_table "actions", :force => true do |t|
     t.integer  "game_id"
@@ -74,18 +74,19 @@ ActiveRecord::Schema.define(:version => 20111027190113) do
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
   create_table "classifications", :force => true do |t|
-    t.integer   "genre_id"
-    t.string    "name"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "default_icon_file_name"
-    t.string    "default_icon_content_type"
-    t.integer   "default_icon_file_size"
-    t.timestamp "default_icon_updated_at"
-    t.string    "default_art_file_name"
-    t.string    "default_art_content_type"
-    t.integer   "default_art_file_size"
-    t.timestamp "default_art_updated_at"
+    t.integer  "genre_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "default_icon_file_name"
+    t.string   "default_icon_content_type"
+    t.integer  "default_icon_file_size"
+    t.datetime "default_icon_updated_at"
+    t.string   "default_art_file_name"
+    t.string   "default_art_content_type"
+    t.integer  "default_art_file_size"
+    t.datetime "default_art_updated_at"
+    t.integer  "cost",                      :default => 1
   end
 
   create_table "emails", :force => true do |t|
@@ -156,30 +157,31 @@ ActiveRecord::Schema.define(:version => 20111027190113) do
   end
 
   create_table "items", :force => true do |t|
-    t.integer   "genre_id"
-    t.integer   "classification_id"
-    t.integer   "rarity_id"
-    t.integer   "ore_id"
-    t.integer   "item_set_id"
-    t.string    "name"
-    t.text      "description"
-    t.integer   "attack_min"
-    t.integer   "attack_max"
-    t.integer   "defense_min"
-    t.integer   "defense_max"
-    t.boolean   "active"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "level",             :default => 0
-    t.string    "icon_file_name"
-    t.string    "icon_content_type"
-    t.integer   "icon_file_size"
-    t.timestamp "icon_updated_at"
-    t.string    "art_file_name"
-    t.string    "art_content_type"
-    t.integer   "art_file_size"
-    t.timestamp "art_updated_at"
-    t.text      "story"
+    t.integer  "genre_id"
+    t.integer  "classification_id"
+    t.integer  "rarity_id"
+    t.integer  "ore_id"
+    t.integer  "item_set_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "attack_min"
+    t.integer  "attack_max"
+    t.integer  "defense_min"
+    t.integer  "defense_max"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "level",             :default => 0
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
+    t.string   "art_file_name"
+    t.string   "art_content_type"
+    t.integer  "art_file_size"
+    t.datetime "art_updated_at"
+    t.text     "story"
+    t.integer  "cost"
   end
 
   add_index "items", ["active"], :name => "index_items_on_active"
@@ -215,14 +217,15 @@ ActiveRecord::Schema.define(:version => 20111027190113) do
   add_index "loots", ["player_id"], :name => "index_loots_on_player_id"
 
   create_table "ores", :force => true do |t|
-    t.string    "name"
-    t.integer   "rank"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "tile_file_name"
-    t.string    "tile_content_type"
-    t.integer   "tile_file_size"
-    t.timestamp "tile_updated_at"
+    t.string   "name"
+    t.integer  "rank"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "tile_file_name"
+    t.string   "tile_content_type"
+    t.integer  "tile_file_size"
+    t.datetime "tile_updated_at"
+    t.integer  "cost",              :default => 1
   end
 
   create_table "players", :force => true do |t|

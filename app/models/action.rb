@@ -23,10 +23,8 @@ class Action < ActiveRecord::Base
   protected
 
   def action_callbacks
-    @payload = {}
     perform_swap_tiles if self.action.to_sym == Action::SWAP_TILES_ACTION
     perform_forge if self.action.to_sym == Action::FORGE_ACTION
-    spend_action
   end
 
   def perform_swap_tiles

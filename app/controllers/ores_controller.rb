@@ -7,4 +7,9 @@ class OresController < ApplicationController
     respond_with @set
   end
 
+  def swap
+    current_player.decrement!(:coins, Ore::SWAP_COST)
+    render :json => current_player
+  end
+
 end

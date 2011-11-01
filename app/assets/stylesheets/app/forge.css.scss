@@ -101,75 +101,19 @@ html.game.no-touch {
     float: right;
     width: $sidebar-width;
     height: 100%;
-  }
-
-  #score-box {
-    float: left;
-    display: none;
-    height: $menu-dim;
-    width: 4 * $tile-dim;
-
-    .menu {
-      height: $menu-dim;
-      width: 100%;
-
-      ul {
-        float: right;
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-
-        li {
-          display: inline;
-          float: right;
-
-          a {
-            display: block;
-            float: right;
-            width: $menu-dim;
-            height: $menu-dim;
-            text-indent: -2000em;
-
-            &.settings {
-              background: image_url("menu/settings.png") center no-repeat;
-            }
-          }
-
-          &.player {
-            font-size: 150%;
-            color: $epic-color;
-            margin: 0 10px;
-          }
-
-        }
-      }
-    }
-
-    .inner {
-      clear: left;
-      padding: 10px;
-    }
-
-    .scores {
-      .value {
-        font-size: 300%;
-        color: $highlight-color;
-        vertical-align: bottom;
-        text-align: right;
-        line-height: 1em;
-      }
-      .label {
-        width: 50px;
-        vertical-align: bottom;
-      }
-    }
-
+    @include inset;
+    padding-left: 10px;
   }
 
   #player-bar {
     padding-top: $content-top;
     height: $tile-dim;
+
+    .coins {
+      text-align: right;
+      font-size: 300%;
+      color: $coin-color;
+    }
   }
 
   #loot-list {

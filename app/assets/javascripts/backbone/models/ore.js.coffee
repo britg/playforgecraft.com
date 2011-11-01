@@ -17,7 +17,7 @@ class ForgeCraft.Models.Ore extends Backbone.Model
     @set neighbors: []
 
   dropTo: (y) ->
-    console.log "Dropping ore to", y
+    # console.log "Dropping ore to", y
     Ores.consume(@)
     @set y: y
 
@@ -36,11 +36,23 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
   oreCache: [[]]
   holes: []
   replacements: []
+  oresInForgeables: []
+  workingForgeables: []
 
   initialize: ->
     @bind "destroy", @consume, @
+    @bind "reset", @flush, @
+
+  flush: ->
+    console.log "Flushing Ores..."
+    @oreCache = [[]]
+    @holes = []
+    @replacements = []
+    @oresInForgeables = []
+    @workingForgeables = []
 
   initialFill: (count) ->
+    @reset()
     @fetch data: {count: count}, success: @onInitialFill
 
   onInitialFill: (collection, response) ->
@@ -93,6 +105,10 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
     oreOne.set x: oreTwoX, y: oreTwoY
     oreTwo.set x: oreOneX, y: oreOneY
 
+    $.post '/ores/swap.json', {}, (response) ->
+      console.log "Swap response", response
+      player.set(response)
+
     @refresh()
 
   refresh: ->
@@ -110,7 +126,7 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
       _.reject @holes, (col) -> col == x
 
   applyGravityAt: (x, y) ->
-    console.log "Checking ore at", x, ",", y
+    # console.log "Checking ore at", x, ",", y
     return unless ore = @oreAt(x, y)
 
     # check ore below this one

@@ -77,7 +77,7 @@ class Item < ActiveRecord::Base
   end
 
   def serializable_hash(opts)
-    super((opts||{}).merge(:methods => [:icon_url, :art_url]))
+    super((opts||{}).merge(:methods => [:icon_url, :art_url, :cost!]))
   end
 
   def to_param
@@ -98,6 +98,14 @@ class Item < ActiveRecord::Base
 
   def armor?
     genre.name == 'Armor'
+  end
+
+  def cost!
+    cost||default_cost
+  end
+
+  def default_cost
+    ore.cost + classification.cost
   end
 
   protected

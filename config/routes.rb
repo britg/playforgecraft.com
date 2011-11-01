@@ -16,11 +16,12 @@ ForgeCraft::Application.routes.draw do
   resources :players, :only => [:index, :show] do
     resources :actions, :only => :create
   end
-
   get "ladder", :to => "players#index"
 
   resource :forge, :only => [:show, :create]
-  resources :ores, :only => [:index]
+  resources :ores, :only => [:index] do
+    post :swap, :on => :collection
+  end
   
   resources :emails, :only => [:create]
 

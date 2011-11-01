@@ -7,7 +7,7 @@ class Loot < ActiveRecord::Base
   belongs_to :action
   belongs_to :item
 
-  after_create :update_score
+  after_create :purchase
 
   validates_presence_of :item
 
@@ -40,7 +40,8 @@ class Loot < ActiveRecord::Base
       :description => item.description,
       :icon_url => item.icon_url,
       :type => to_css_classes,
-      :param => item.to_param
+      :param => item.to_param,
+      :cost => item.cost!
     }
   end
 
@@ -66,10 +67,10 @@ class Loot < ActiveRecord::Base
     self.defense = self.item.defense_max
   end
 
-  def update_score
-    return unless game
-    game.increment(:challenger_attack_score, attack) if attack
-    game.increment(:challenger_defense_score, defense) if defense
+  def purchase
+    return unless player
+    return unless item
+    player.decrement!(:coins, item.cost!)
   end
 
 end

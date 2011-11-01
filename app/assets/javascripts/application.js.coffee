@@ -12,6 +12,8 @@ $ ->
 
   window.flashView = new ForgeCraft.Views.FlashView el: $('#flash-wrap').get(0)
   window.loadingView = new ForgeCraft.Views.LoadingView el: $('#loading').get(0)
+  window.player = new ForgeCraft.Models.Player ForgeCraft.Config.player
+  window.playerView = new ForgeCraft.Views.PlayerView el: $('#profile').get(0), model: player
 
   forging = (window.location.pathname == "/forge")
   Backbone.history.start(pushState: true, silent: !forging)
