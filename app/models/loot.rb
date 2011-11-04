@@ -1,6 +1,6 @@
 class Loot < ActiveRecord::Base
 
-  default_scope order("id desc")
+  default_scope order("id desc").where(:available => true)
 
   belongs_to :player
   belongs_to :game
@@ -70,7 +70,26 @@ class Loot < ActiveRecord::Base
   def purchase
     return unless player
     return unless item
-    player.purchase!(item.cost!)
+    player.purchase!(buy_price)
+  end
+
+  def sell
+    return unless player
+    return unless item
+    player.sell!(sell_price)
+    destroy
+  end
+
+  def buy_price
+    item.cost!
+  end
+
+  def sell_price
+    item.cost!
+  end
+
+  def destroy
+    update_attributes(:available => false)
   end
 
 end

@@ -17,14 +17,6 @@
 
   margin: $content-top 10px;
   @include inset;
-
-  .heading {
-    .button {
-      float: right;
-      font-size: 150%;
-      margin-top: 16px;
-    }
-  }
   
   .player {
     font-size: 500%;

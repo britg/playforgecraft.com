@@ -3,6 +3,9 @@
   tagName: 'div'
   
   className: 'loot'
+
+  initialize: ->
+    @model.bind "destroy", @destroy, @
   
   render: ->
     console.log "Rendering loot with", @model
@@ -22,7 +25,22 @@
     else
       $(@el).find('.defense').remove()
 
+    $(@el).data("view", @)
+
   display: ->
     $(@el).hide()
     $('#loot-list').prepend($(@el))
-    $(@el).fadeIn()
+    $(@el).fadeIn =>
+      $(@el).draggable().touch({
+                                  animate: false,
+                                  sticky: false,
+                                  dragx: true,
+                                  dragy: true,
+                                  rotate: false,
+                                  resort: true,
+                                  scale: false
+                              })
+
+  destroy: ->
+    $(@el).fadeOut =>
+      $(this).remove()

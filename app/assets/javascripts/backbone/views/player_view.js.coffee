@@ -17,3 +17,12 @@ class ForgeCraft.Views.PlayerView extends Backbone.View
 
   shakeMoney: ->
     $('#player-bar').find('.coins').effect("shake", { times: 3, distance: 10 }, 50)
+
+  createLootDropZones: ->
+    $('#player-bar').droppable({ accept: '.loot', drop: playerView.cashInLoot })
+
+  cashInLoot: (event, ui) ->
+    console.log(arguments)
+
+    lootView = $(ui.draggable).data("view")
+    lootView.model.cashIn()

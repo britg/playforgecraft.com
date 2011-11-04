@@ -108,4 +108,9 @@ class Player < ActiveRecord::Base
     true
   end
 
+  def sell!(cost)
+    increment!(:coins, cost)
+    true
+  end
+
 end

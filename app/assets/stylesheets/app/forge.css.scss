@@ -52,7 +52,7 @@ html.game.no-touch {
 
   #ores {
     padding-top: $content-top + 10px;
-    margin-right: $sidebar-width;
+    margin-right: $sidebar-width + 10px;
   }
   
   .ore {
@@ -121,7 +121,6 @@ html.game.no-touch {
   }
 
   #loot-list {
-    overflow: hidden;
     padding-right: 0px;
     margin-right: -5px;
   }

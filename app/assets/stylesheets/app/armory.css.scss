@@ -1,5 +1,9 @@
 @import "base";
 
+#armory-page {
+  margin: $content-top 10px;
+}
+
 #class-nav {
   @include column(4, true);
 }
@@ -13,10 +17,6 @@
     display: block;
     padding: 10px 0 10px 10px;
     font-size: 125%;
-
-    &.selected {
-      background: #272727;
-    }
     
     .class-icon {
       img {
@@ -65,19 +65,6 @@
 
 #new-item {
   padding: 20px;
-}
-
-#armory {
-  @include inset;
-  @include clearfix;
-  margin-bottom: 20px;
-}
-
-#armory-content {
-  @include column(20, true);
-  padding-right: 10px;
-  background: #272727;
-  min-height: 500px;
 }
 
 #items-content {

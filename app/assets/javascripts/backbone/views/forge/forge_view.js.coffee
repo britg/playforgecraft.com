@@ -19,7 +19,11 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     Ores.bind "add", @displayOre, @
     Ores.bind "reveal", @displayAllOres, @
     Ores.bind "reset", @clearOres, @
+
+    playerView.createLootDropZones()
+
     @renderForge()
+    @renderLoot()
 
     $(window).unbind('resize').resize =>
       @renderForge()
@@ -37,6 +41,21 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
       @initializeOres()
       loadingView.hide()
     , 500
+
+  renderLoot: ->
+    window.Loot = new ForgeCraft.Collections.Loot
+    Loot.bind "add", @displayLoot, @
+    Loot.bind "reset", @displayAllLoot, @
+    Loot.reset(ForgeCraft.Config.loot)
+
+  displayAllLoot: ->
+    Loot.forEach (loot) =>
+      @displayLoot(loot)
+
+  displayLoot: (loot) ->
+    lootView = new ForgeCraft.Views.LootView id: loot.id, model: loot, el: $('#loot-template').find('.loot').clone().get(0)
+    lootView.render()
+    lootView.display()
 
   clearOres: ->
     $('#ores').html('')
@@ -85,7 +104,9 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @watching = true
     @ref = x: e.pageX, y: e.pageY
 
-    return unless touchedView = $(e.target).data('view')
+    unless $(e.target).hasClass("ore") and touchedView = $(e.target).data('view')
+      @watching = false
+      return
 
     x = touchedView.model.get('x')
     y = touchedView.model.get('y')

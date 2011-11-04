@@ -1,0 +1,6 @@
+@import "base";
+
+#heroes-page {
+  margin: $content-top 10px;
+  @include inset;  
+}

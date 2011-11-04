@@ -6,7 +6,7 @@ class ForgesController < ApplicationController
   respond_to :json
 
   def show
-    @loot = current_player.loot.limit(10)
+    @loot = current_player.loot.limit(20)
   end
 
   def create

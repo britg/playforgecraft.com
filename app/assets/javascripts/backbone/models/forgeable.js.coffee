@@ -50,16 +50,13 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
     else
       forgeable.unableToPurchase(params)
     
-  convertToLoot: (forgeable, params) ->
+  convertToLoot: (params) ->
     loot = new ForgeCraft.Models.Loot(params.loot)
     player.set(params.player)
-    lootView = new ForgeCraft.Views.LootView id: loot.id, model: loot, el: $('#loot-template').find('.loot').clone().get(0)
-    lootView.render()
-    lootView.display()
-
+    Loot.add(loot)
     Ores.addReplacements(params.replacements)
-    forgeable.consumeOres()
-    Forgings.remove(forgeable)
+    @consumeOres()
+    Forgings.remove(@)
 
   unableToPurchase: (params) ->
     @unmarkOres()

@@ -6,7 +6,7 @@ class Ore < ActiveRecord::Base
   UNIT = 100.0/21.0
   CHANCES = [6.0*UNIT, 5.0*UNIT, 4.0*UNIT, 3.0*UNIT, 2.0*UNIT, 1.0*UNIT]
 
-  SWAP_COST = 20
+  SWAP_COST = 2
 
   has_many :items
 

@@ -4,6 +4,7 @@
 
   border: solid 1px;
   @include border-radius(5px);
+  cursor: pointer;
 
   &.common {
     border-color: rgba($common-color, 0.1);
@@ -53,6 +54,10 @@
 
   .type-icon {
     width: 12px;
+  }
+
+  &.ui-draggable {
+    z-index: 1000
   }
 
 }

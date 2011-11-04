@@ -1,0 +1,17 @@
+#profile
+
+  .inner
+
+    - if current_user.present?
+      
+      .welcome
+        = link_to current_player, player_path(current_player), :class => current_player.to_css_class
+      
+      .actions
+        = link_to "Log out", logout_path, :class => "action", "data-external" => true
+
+    - else
+
+      = link_to "Log in", login_path, :rel => "modal"
+      or
+      = link_to "Create an Account", register_path, :rel => "modal"
