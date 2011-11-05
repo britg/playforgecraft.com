@@ -60,19 +60,3 @@ ActiveAdmin::Dashboards.build do
   end
 
 end
-
-module ActiveAdmin
-  module Views
-    class HeaderRenderer
-      def to_html
-        title + global_navigation + application_link + utility_navigation
-      end
-
-      def application_link
-        content_tag(:span, "|", :class => "sep") + \
-        link_to('Public Armory', armory_index_path, :class => "custom-action") + \
-          link_to('Game Board', play_path, :class => "custom-action")
-      end
-    end
-  end
-end

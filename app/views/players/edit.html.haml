@@ -8,7 +8,7 @@
 
       - if admin?
         %li
-          = link_to "Admin", admin_dashboard_path
+          = link_to "Admin", admin_dashboard_path, "data-external" => true
       
       %li
         = link_to "Logout", logout_path, "data-external" => true
