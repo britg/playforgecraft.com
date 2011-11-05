@@ -14,6 +14,7 @@ $ ->
   window.loadingView = new ForgeCraft.Views.LoadingView el: $('#loading').get(0)
   window.player = new ForgeCraft.Models.Player ForgeCraft.Config.player
   window.playerView = new ForgeCraft.Views.PlayerView el: $('#profile').get(0), model: player
+  window.menuView = new ForgeCraft.Views.MenuView
 
   forging = (window.location.pathname == "/forge")
   Backbone.history.start(pushState: true, silent: !forging)
@@ -21,8 +22,8 @@ $ ->
   $('a').live 'click', ->
     unless $(@).attr('data-external')
       r = $(@).attr('href').slice(1)
-      console.log "Hijacked link:", r
       Backbone.history.navigate(r, true)
+
       return false
 
 

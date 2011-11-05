@@ -67,38 +67,70 @@ body {
   @include inset;
   width: $sidebar-width - 10px;
   height: $profile-height;
+  margin: 0;
   padding: 0;
+
+  ul {
+    margin: 0;
+    margin-left: 6px;
+    padding: 0;
+  }
 
   li {
     display: inline;
     float: left;
 
-    a {
+    a.nav-item {
       display: block;
       float: left;
-      width: $profile-height;
+      width: 46px;
       height: $profile-height;
-      margin-right: 10px;
       text-indent: -2000em;
+      background: image_url('menu/nav.png') center top no-repeat;
 
       &.profile {
-        background: image_url('menu/profile.png') center center no-repeat;
-      }
+        
+        background-position: center -40px;
 
-      &.armory {
-        background: image_url('menu/loot.png') center center no-repeat;
+        &.selected {
+          background-position: center top;          
+        }
       }
 
       &.forge {
-        background: image_url('menu/turn.png') center center no-repeat; 
+        
+        background-position: center -120px;
+
+        &.selected {
+          background-position: center -80px;          
+        }
       }
 
-      &.heroes {
-        background: image_url('menu/attack.png') center center no-repeat;
+      &.armory {
+        
+        background-position: center -200px;
+
+        &.selected {
+          background-position: center -160px;          
+        }
       }
 
-      &.last {
-        margin-right: 0;
+      &.battle {
+        
+        background-position: center -280px;
+
+        &.selected {
+          background-position: center -240px;          
+        }
+      }
+
+      &.menu {
+        
+        background-position: center -360px;
+
+        &.selected {
+          background-position: center -320px;          
+        }
       }
     }
   }

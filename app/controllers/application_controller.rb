@@ -38,4 +38,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def select_nav(item)
+    @nav_item = item
+  end
+
 end

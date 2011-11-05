@@ -6,6 +6,7 @@ class ForgesController < ApplicationController
   respond_to :json
 
   def show
+    select_nav("forge")
     @loot = current_player.loot.limit(20)
   end
 

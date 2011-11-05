@@ -1,0 +1,14 @@
+#menu
+  .settings-menu
+    %h3 Menu
+
+    %ul
+      %li
+        = link_to "Refresh", "javascript:window.location.reload();", "data-external" => true
+
+      - if admin?
+        %li
+          = link_to "Admin", admin_dashboard_path
+      
+      %li
+        = link_to "Logout", logout_path, "data-external" => true

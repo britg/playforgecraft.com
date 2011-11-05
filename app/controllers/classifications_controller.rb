@@ -2,12 +2,7 @@
 class ClassificationsController < ApplicationController
 
   def index
-    
-    respond_to do |format|
-      format.html
-      format.json{ render :json => Item.armory_dump }
-    end
-    
+    select_nav("armory")
   end
 
   def show

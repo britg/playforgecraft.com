@@ -17,6 +17,8 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     "register": "register"
 
     "forge": "forge"
+    "armory": "armory"
+    "battles": "battles"
 
     ":player": "player"
 
@@ -34,11 +36,25 @@ class ForgeCraft.Routers.Router extends Backbone.Router
   # Player
 
   player: (player) ->
+    menuView.selectNav('profile')
     @load("/" + player)
 
   # Forge
         
   forge: ->
     console.log "Triggering"
+    menuView.selectNav('forge')
     @load '/forge', ->
       window.forgeView = new ForgeCraft.Views.ForgeView el: $('#forge').get(0)
+
+  # Armory
+
+  armory: ->
+    menuView.selectNav('armory')
+    @load '/armory'
+
+  # Battle
+
+  battles: ->
+    menuView.selectNav('battle')
+    @load '/battles'

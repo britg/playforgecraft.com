@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def selected(item)
+    "selected" if (@nav_item == item)
+  end
+
   def admin_field(obj, field, opts = {})
     
     opts = {

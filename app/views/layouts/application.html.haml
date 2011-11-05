@@ -26,21 +26,26 @@
     #loading
       = image_tag "loading.gif"
 
-    #navigation
-      
-      %ul.nav
+    - if current_player
 
-        %li
-          = link_to "Profile", player_path(current_player), :class => "profile"
+      #navigation
+        
+        %ul.nav
 
-        %li
-          = link_to "Forge", forge_path, :class => "forge"
+          %li
+            = link_to "Profile", player_path(current_player), :class => "profile nav-item #{selected('profile')}", :rel => "profile"
 
-        %li
-          = link_to "Armory", armory_index_path, :class => "armory"
+          %li
+            = link_to "Forge", forge_path, :class => "forge nav-item #{selected('forge')}", :rel => "forge"
 
-        %li
-          = link_to "Heroes", heroes_path, :class => "heroes last"
+          %li
+            = link_to "Armory", armory_index_path, :class => "armory nav-item #{selected('armory')}", :rel => "armory"
+
+          %li
+            = link_to "Battle", battles_path, :class => "battle nav-item #{selected('battle')}", :rel => "battle"
+
+          %li
+            = link_to "Menu", menu_path, :class => "menu nav-item", :rel => "menu"
 
     #content
     

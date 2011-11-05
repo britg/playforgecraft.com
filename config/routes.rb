@@ -1,6 +1,12 @@
 ForgeCraft::Application.routes.draw do
 
+  resources :emails, :only => [:create]
+
+  # Admin
+
   ActiveAdmin.routes(self)
+
+  # Accounts
 
   devise_for :users
 
@@ -12,11 +18,10 @@ ForgeCraft::Application.routes.draw do
   end
 
   resources :users, :only => [:index]
+  root :to => "users#index"
+  get "about", :to => "users#index", :as => :about
 
-  resources :players, :only => [:index, :show] do
-    resources :actions, :only => :create
-  end
-  get "ladder", :to => "players#index"
+  # Forge
 
   resource :forge, :only => [:show, :create]
   resources :ores, :only => [:index] do
@@ -24,9 +29,12 @@ ForgeCraft::Application.routes.draw do
   end
   resources :loot, :only => [:index, :destroy]
 
+  # Battles
+
   resources :heroes
-  
-  resources :emails, :only => [:create]
+  resources :battles
+
+  # Armory
 
   match 'armory/Sets' => "item_sets#index"
   resources :items, :only => [:show, :update]
@@ -35,12 +43,17 @@ ForgeCraft::Application.routes.draw do
   end
   resources :item_sets
 
+  # Chat
+
   resources :topics
 
-  resources :games, :only => [:new]
+  # Player
 
-  root :to => "users#index"
-
+  resources :players, :only => [:index, :show] do
+    resources :actions, :only => :create
+  end
+  get "ladder", :to => "players#index"
+  get 'menu', :to => "players#edit", :as => :menu
   get ':playername', :to => "players#show", :as => :player
 
 end
