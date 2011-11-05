@@ -27,6 +27,7 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
     $(window).unbind 'keydown', @activateCheckpoint
 
   reset: ->
+    @clearTimeouts()
     @bar().remove()
     $(@el).find('#bar-container').html('<div id="bar" />');
     $(@el).find('.checkpoint img').show()
@@ -37,19 +38,19 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
     @positionCheckpoints()
     $(@el).show()
     @bindKeyDown()
-    setTimeout =>
+    @activateBarTimeout = setTimeout =>
       @activateBar()
-    , 500
+    , 1000
 
   activateBar: ->
     $('#bar').removeClass("new").addClass("activated")
-    setTimeout => 
+    @finishTimeout = setTimeout => 
       @finish() if @active
     , 1500
 
   calculateCheckpoints: ->
     @checkpoints = []
-    @checkpoints.push (25 + Math.random()*50)
+    @checkpoints.push (40 + Math.random()*20)
 
   positionCheckpoints: ->
     @calculateCheckpoints()
@@ -64,10 +65,16 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
     @finish()
 
   stop: ->
+    @clearTimeouts()
     @bar().css left: @bar().css("left")
     @unbindKeyDown()
 
+  clearTimeouts: ->
+    clearTimeout(@activateBarTimeout)
+    clearTimeout(@finishTimeout)
+
   finish: ->
+    @clearTimeouts()
     return unless @active
     @active = no
     @stop()
