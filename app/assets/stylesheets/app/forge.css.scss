@@ -102,6 +102,7 @@ html.game.no-touch {
     width: $sidebar-width;
     height: 100%;
     @include inset;
+    @include border-radius(0);
     padding-left: 10px;
   }
 
@@ -126,19 +127,29 @@ html.game.no-touch {
   }
 
   #active-forge {
-    @include board;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
     background: rgba(0, 0, 0, 0.7);
-    position: relative;
-    top: -12*$tile-dim;
-    z-index: 1;
+    z-index: 1001;
     display: none;
+
+    .title {
+      text-align: center;
+      font-size: 250%;
+      margin-top: 20%;
+      font-weight: bold;
+      color: $coin-color;
+    }
     
     #bar-container {
       /*position: absolute;
       top: $bar-top;
       left: 156px;*/
       display: block;
-      margin: $bar-top auto;
+      margin: 20px auto;
       margin-bottom: 10px;
       width: $bar-width;
       height: $bar-height;
@@ -202,15 +213,14 @@ html.game.no-touch {
       text-align: center;
       font-weight: bold;
       color: $highlight-color;
-      margin-top: $checkpoint-width + 20px;
+      margin-top: 60px;
       display: none;
     }
   }
 }
 
 html.no-touch {
-  #game {
-    margin-top: 20px;
+  #forge {
     #active-forge {
       .instructions {
         display: block;

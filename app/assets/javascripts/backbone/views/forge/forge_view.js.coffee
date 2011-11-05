@@ -22,11 +22,16 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
 
     playerView.createLootDropZones()
 
+    @initializeActiveForge()
     @renderForge()
     @renderLoot()
 
     $(window).unbind('resize').resize =>
       @renderForge()
+
+  initializeActiveForge: ->
+    window.activeForgeView = new ForgeCraft.Views.ActiveForgeView el: $('#active-forge').get(0)
+    activeForgeView.bind "ForgeCraft:activeForgeComplete", @forgeWithAccuracy, @
 
   renderForge: ->
     return if @renderHold
@@ -151,10 +156,18 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
   attemptForge: ->
     return if @oreLock
     if @refOre and not @swapOre
-      if forgeable = @refOre.get("forgeable")
-        forgeable.forge()
+      if @forgeable = @refOre.get("forgeable")
+        rand = Math.floor(Math.random()*4)
+        console.log("Active Forge roll is " + rand)
+        if rand == 2
+          activeForgeView.start()
+        else
+          @forgeable.forge()
 
     @stopWatchingMovement()
+
+  forgeWithAccuracy: (accuracy) ->
+    @forgeable.forge() if @forgeable?
 
   stopWatchingMovement: ->
     return unless @watching
