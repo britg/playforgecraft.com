@@ -25,6 +25,7 @@ class ForgeCraft.Routers.Router extends Backbone.Router
   # User
 
   home: ->
+    menuView.selectNav('profile')
     @load('/')
 
   login: ->

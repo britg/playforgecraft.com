@@ -18,6 +18,14 @@ body {
 
 }
 
+#logo-wrap {
+  float: left;
+  
+  #logo {
+    height: $profile-height;
+  }
+}
+
 #loading {
   display: none;
   position: fixed;

@@ -17,6 +17,11 @@
     
   %body{ :class => params[:controller] }
 
+    - if current_player
+    
+      #logo-wrap
+        = link_to image_tag("logo.png", :id => "logo"), root_path
+
     #flash-wrap
       - if flash.any?
         - for key, msg in flash
