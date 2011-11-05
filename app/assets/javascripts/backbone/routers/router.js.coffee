@@ -20,6 +20,8 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     "armory": "armory"
     "battles": "battles"
 
+    "loot/:id": "loot"
+
     ":player": "player"
 
   # User

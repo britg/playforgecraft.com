@@ -11,6 +11,7 @@ class ForgeCraft.Views.LootView extends Backbone.View
     console.log "Rendering loot with", @model
 
     $(@el).addClass(@model.get("item_attributes").type).attr("id", "loot-" + @model.get("id"))
+    $(@el).attr("data-id", @model.get('id'))
     $(@el).find('.icon').attr('src', @model.get("item_attributes").icon_url)
     $(@el).find('.name').addClass(@model.get("item_attributes").type)
     $(@el).find('.name').html(@model.get("item_attributes").name)

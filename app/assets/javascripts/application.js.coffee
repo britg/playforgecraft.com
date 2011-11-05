@@ -15,6 +15,7 @@ $ ->
   window.player = new ForgeCraft.Models.Player ForgeCraft.Config.player
   window.playerView = new ForgeCraft.Views.PlayerView el: $('#profile').get(0), model: player
   window.menuView = new ForgeCraft.Views.MenuView
+  window.equipperView = new ForgeCraft.Views.EquipperView
 
   forging = (window.location.pathname == "/forge")
   Backbone.history.start(pushState: true, silent: !forging)
