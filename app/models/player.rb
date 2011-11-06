@@ -5,9 +5,10 @@ class Player < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
 
-  has_many :games, :foreign_key => :challenger_id
   has_many :loot, :class_name => "Loot"
   has_many :items, :through => :loot
+  has_many :heroes
+  has_many :slots, :class_name => "HeroSlot"
 
   has_attached_file :avatar,
     :storage => :s3,
@@ -34,16 +35,6 @@ class Player < ActiveRecord::Base
 
   def serializable_hash(opts)
     super((opts||{}).merge(:only => [:name, :level, :coins]))
-  end
-
-  def active_game
-    continue = games.in_progress.last
-  end
-
-  def start_game
-    new_game = games.create( :game_type => :singleplayer )
-    new_game.reset!
-    new_game
   end
 
   def starting_level
@@ -98,10 +89,6 @@ class Player < ActiveRecord::Base
     0
   end
 
-  def score
-    0
-  end
-
   def purchase!(cost)
     return false if cost > coins
     decrement!(:coins, cost)
@@ -112,5 +99,23 @@ class Player < ActiveRecord::Base
     increment!(:coins, cost)
     true
   end
+
+  # Heroes
+
+  def hero_for_class hero_class
+    heroes.where(:hero_class_id => hero_class).first
+  end
+
+  def warrior
+    heroes.where(:hero_class_id => HeroClass.warrior).first
+  end
+
+  def thief
+    heroes.where(:hero_class_id => HeroClass.thief).first
+  end
+
+  def ranger
+    heroes.where(:hero_class_id => HeroClass.ranger).first
+  end  
 
 end

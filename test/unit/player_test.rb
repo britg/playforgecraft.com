@@ -3,13 +3,50 @@ require 'test_helper'
 class PlayerTest < ActiveSupport::TestCase
   
   should belong_to :user
-  should have_many :games
+
+  should have_many :heroes
+  should have_many :slots
 
   should validate_presence_of :name
   should validate_uniqueness_of :name
 
   setup do
     @player = Fabricate(:player)
+  end
+
+  context "With hero classes" do
+
+    setup do
+      bootstrap_hero_classes
+      @player_with_heroes = Fabricate(:player, :name => "jebus")
+    end
+
+    should "have at least one hero" do
+      assert (@player_with_heroes.heroes.count > 0)
+    end
+    
+    should "begin with heroes for all hero_classes" do
+      HeroClass.all.each do |hero_class|
+        assert_not_nil @player_with_heroes.heroes.where(:hero_class => hero_class)
+      end
+    end
+
+    should "return a hero by hero_class" do
+      assert_equal HeroClass.first, @player_with_heroes.hero_for_class(HeroClass.first).job
+    end
+
+    should "have a warrior hero" do
+      assert_not_nil @player_with_heroes.warrior
+    end
+
+    should "have a thief hero" do
+      assert_not_nil @player_with_heroes.thief
+    end
+
+    should "have a ranger hero" do
+      assert_not_nil @player_with_heroes.ranger
+    end
+
   end
 
   should "set initial level to 1" do
@@ -118,44 +155,6 @@ class PlayerTest < ActiveSupport::TestCase
 
     end
 
-  end
-
-  context "With a game in progress" do
-    
-    setup do
-      @game = Fabricate(:game, :challenger_id => @player.id, :challenger_turns_remaining => 1)
-    end
-
-    should "return the last active game" do
-      assert_equal @game, @player.active_game
-    end
-    
-  end
-
-
-  context "With no game in progress" do
-    
-    setup do
-      @game = Fabricate(:game, :challenger_id => @player.id, :challenger_turns_remaining => 0)
-    end
-
-    should "return no game" do
-      assert_no_difference("@player.games.count") do
-        assert_equal nil, @player.active_game
-      end
-    end
-    
-  end
-
-  should "start a game" do
-    assert_difference("@player.games.count", +1) do
-      @player.start_game
-    end
-  end
-
-  should "start a game as a singleplayer game" do
-    new_game = @player.start_game
-    assert_equal true, new_game.is_singleplayer?
   end
 
 end

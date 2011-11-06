@@ -11,4 +11,7 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.singular /^(axe)s/i, '\1'
+  inflect.plural 'hero', 'heroes'
+  inflect.plural 'hero_slot', 'hero_slots'
+  inflect.plural 'hero_class', 'hero_classes'
 end

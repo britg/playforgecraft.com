@@ -26,6 +26,12 @@ class ActiveSupport::TestCase
       Fabricate :rarity, :name => r, :rank => i
     end
   end
+
+  def bootstrap_hero_classes
+    HeroClass::CLASSES.each do |hero_class|
+      Fabricate hero_class
+    end
+  end
   
 end
 

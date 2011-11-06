@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102203307) do
+ActiveRecord::Schema.define(:version => 20111106132316) do
 
   create_table "actions", :force => true do |t|
     t.integer  "game_id"
@@ -140,6 +140,35 @@ ActiveRecord::Schema.define(:version => 20111102203307) do
     t.timestamp "created_at"
     t.timestamp "updated_at"
   end
+
+  create_table "hero_classes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hero_slots", :force => true do |t|
+    t.integer  "hero_id"
+    t.integer  "player_id"
+    t.integer  "loot_id"
+    t.string   "slot"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hero_slots", ["hero_id"], :name => "index_hero_slots_on_hero_id"
+  add_index "hero_slots", ["loot_id"], :name => "index_hero_slots_on_loot_id", :unique => true
+  add_index "hero_slots", ["player_id"], :name => "index_hero_slots_on_player_id"
+
+  create_table "heroes", :force => true do |t|
+    t.integer  "player_id"
+    t.integer  "hero_class_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "heroes", ["player_id"], :name => "index_heroes_on_player_id"
 
   create_table "item_sets", :force => true do |t|
     t.string    "name"
