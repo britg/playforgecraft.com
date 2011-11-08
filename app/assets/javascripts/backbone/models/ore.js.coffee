@@ -112,8 +112,10 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
 
   swapOresAndValidate: (oreOne, oreTwo) ->
 
-    unless oreOne.get("moveable")
-      return oreOne.trigger("ForgeCraft:MoveBlock")
+    unless oreOne.get("moveable") and oreTwo.get("moveable")
+      oreOne.trigger("ForgeCraft:MoveBlock") unless oreOne.get("moveable")
+      oreTwo.trigger("ForgeCraft:MoveBlock") unless oreTwo.get("moveable")
+      return
 
     @swapOres(oreOne, oreTwo)
 
