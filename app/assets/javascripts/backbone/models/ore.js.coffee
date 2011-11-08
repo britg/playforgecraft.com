@@ -5,6 +5,7 @@ class ForgeCraft.Models.Ore extends Backbone.Model
     rank: 1
     x: -1
     y: -1
+    moveable: true
 
   initialize: ->
     @bind "change", @cache, @
@@ -23,6 +24,10 @@ class ForgeCraft.Models.Ore extends Backbone.Model
 
   forLog: ->
     @get("name") + " (" + @get("x") + ", " + @get("y") + ")" + " in forgeable " + @get("forgeable")
+
+  useMovement: ->
+    console.log "Using movement"
+    @set moveable: false
     
   
 class ForgeCraft.Collections.OresCollection extends Backbone.Collection
@@ -106,11 +111,19 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
     oreTwo.set x: oreOneX, y: oreOneY
 
   swapOresAndValidate: (oreOne, oreTwo) ->
+
+    unless oreOne.get("moveable")
+      return oreOne.trigger("ForgeCraft:MoveBlock")
+
     @swapOres(oreOne, oreTwo)
 
     $.post '/ores/swap.json', {}, (response) ->
       console.log "Swap response", response
-      unless response.purchased
+      
+      if response.purchased
+        oreOne.useMovement()
+        oreTwo.useMovement()
+      else
         Ores.swapOres(oreOne, oreTwo)
         player.trigger "ForgeCraft:NeedMoreCoins"
       

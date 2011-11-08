@@ -4,6 +4,8 @@
  * Board
  */ 
 $tile-dim: 64px;
+$status-height: 12px;
+$status-width: 14px;
 $board-guide-color: #333;
 $menu-dim: $tile-dim/2;
 $board-height: 12*$tile-dim;
@@ -94,6 +96,20 @@ html.game.no-touch {
     &.marked {
       @include opacity(0.3);
       background-color: rgba(100,100,100,0.3);
+    }
+
+    .status {
+      display: block;
+      width: $status-height;
+      height: $status-width;
+      background: image_url("moveable.png") center no-repeat;
+
+      margin-top: $tile-dim - $status-height - 5px;
+      margin-left: $tile-dim - $status-width - 5px;
+
+      &.immoveable {
+        background: image_url("immoveable.png") center no-repeat;        
+      }
     }
   }
 

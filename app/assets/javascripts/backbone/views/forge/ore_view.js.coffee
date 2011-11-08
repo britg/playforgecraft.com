@@ -11,12 +11,15 @@ class ForgeCraft.Views.OreView extends Backbone.View
     @model.bind "change:neighbors", @updateNeighbors, @
     @model.bind "destroy", @consume, @
     @model.bind "change:marked", @mark, @
+    @model.bind "change:moveable", @updateMoveability, @
+    @model.bind "ForgeCraft:MoveBlock", @moveBlocked, @
 
   render: ->
     @el = $('<div class="ore" />').get(0);
     $(@el).addClass(@model.get('to_class'))
     $(@el).data view: @
     $(@el).css("backgroundImage", "url(" + @oreUrl() + ")")
+    $(@el).append('<div class="status" />');
     @
 
   oreUrl: ->
@@ -82,3 +85,13 @@ class ForgeCraft.Views.OreView extends Backbone.View
   consume: () ->
     $(@el).fadeOut "slow", -> $(@).remove()
     
+  updateMoveability: () ->
+    console.log "Updating moveability"
+
+    if @model.get("moveable")
+      $(@el).find('.status').removeClass('immoveable');
+    else
+      $(@el).find('.status').addClass('immoveable');
+
+  moveBlocked: () ->
+    $(@el).effect("shake", { times: 3, distance: 10 }, 50)
