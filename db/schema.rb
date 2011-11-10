@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111106132316) do
+ActiveRecord::Schema.define(:version => 20111109175230) do
 
   create_table "actions", :force => true do |t|
     t.integer  "game_id"
@@ -166,6 +166,8 @@ ActiveRecord::Schema.define(:version => 20111106132316) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "attack",        :default => 10
+    t.integer  "defense",       :default => 10
   end
 
   add_index "heroes", ["player_id"], :name => "index_heroes_on_player_id"

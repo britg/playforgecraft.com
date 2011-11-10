@@ -61,6 +61,14 @@ class Loot < ActiveRecord::Base
     item.name rescue ""
   end
 
+  def classification
+    item.classification.to_s rescue ""    
+  end
+
+  def level
+    item.level rescue 0
+  end
+
   def set_stats accuracy
     # STUB
     self.attack = self.item.attack_max
@@ -90,6 +98,21 @@ class Loot < ActiveRecord::Base
 
   def destroy
     update_attributes(:available => false)
+  end
+
+  # Equipping
+
+  def equipped?
+    HeroSlot.where(:loot_id => id).any?
+  end
+
+  def equippable? hero, slot
+    return false if level > player.level
+    return false if hero.player != player
+    return false unless available?
+    return false if equipped?
+    return false unless slot.accepts?(loot)
+    true
   end
 
 end

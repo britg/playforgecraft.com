@@ -7,6 +7,7 @@ Fabricator(:item) do
   ore!
   rarity!
 
+  level 1
   attack_min 1
   attack_max 1
   defense_min 1

@@ -42,6 +42,30 @@ class Classification < ActiveRecord::Base
       Classification.find_by_name(c).items.count rescue 0;
     end
 
+    def sword
+      Classification.find_by_name("Sword")
+    end
+
+    def axe
+      Classification.find_by_name("Axe")
+    end
+
+    def crossbow
+      Classification.find_by_name("Crossbow")
+    end
+
+    def shield
+      Classification.find_by_name("Shield")
+    end
+
+    def leggings
+      Classification.find_by_name("Legging")
+    end
+    
+    def tunic
+      Classification.find_by_name("Tunic")
+    end
+
   end
 
   def to_s

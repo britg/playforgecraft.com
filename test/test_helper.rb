@@ -32,6 +32,24 @@ class ActiveSupport::TestCase
       Fabricate hero_class
     end
   end
+
+  def bootstrap_classifications
+    Classification::DEFAULTS.each do |genre, class_names|
+      class_names.each do |class_name|
+        Fabricate(:classification, :name => class_name)
+      end
+    end
+  end
+
+  def bootstrap_loot
+    bootstrap_classifications
+    loot = {}
+    Classification.all.each do |classification|
+      item = Fabricate :item, :classification => classification
+      loot[classification.name] = Fabricate :loot, :item => item
+    end
+    return loot
+  end
   
 end
 

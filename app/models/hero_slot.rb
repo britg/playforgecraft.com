@@ -26,6 +26,49 @@ class HeroSlot < ActiveRecord::Base
       where(:slot => :leggings)
     end
 
+    def weapon1_classes
+      ["Sword"]
+    end
+
+  end
+
+  def slot
+    attributes["slot"].to_sym
+  end
+
+  def to_s
+    slot.to_s
+  end
+
+  def accepts? loot
+    acceptable_classifications.include? loot.classification
+  end
+
+  def acceptable_classifications
+    case slot
+    when :weapon1
+      case hero.job.name
+      when :warrior
+        ["Swords", "Axes"]
+      when :thief
+        ["Swords", "Axes"]
+      when :ranger
+        ["Crossbows"]
+      end
+    when :weapon2
+      case hero.job.name
+      when :warrior
+        ["Shields"]
+      when :thief
+        ["Swords", "Axes"]
+      when :ranger
+        ["Crossbows"]
+      end
+    when :armor
+      ["Tunics"]
+    when :leggings
+      ["Leggings"]
+    end
   end
 
 end

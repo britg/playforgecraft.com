@@ -27,4 +27,8 @@ class HeroClass < ActiveRecord::Base
 
   end
 
+  def name
+    attributes["name"].to_sym
+  end
+
 end

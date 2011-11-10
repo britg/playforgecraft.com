@@ -22,6 +22,15 @@ class Hero < ActiveRecord::Base
 
   end
 
+  def equip slot_type, loot
+    return false unless slot(slot_type).accepts?(loot)
+    equip! slot_type, loot
+  end
+
+  def equip! slot_type, loot
+    slot(slot_type).update_attributes(:loot => loot)
+  end
+
   def slot type
     send(:"#{type.to_s}_slot")
   end
