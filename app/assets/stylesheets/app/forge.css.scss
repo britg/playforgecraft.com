@@ -53,8 +53,8 @@ html.game.no-touch {
   padding: 0;
 
   #ores {
-    padding-top: $content-top + 10px;
-    margin-right: $sidebar-width + 10px;
+    padding-top: 10px;
+    position: fixed;
   }
   
   .ore {
@@ -116,15 +116,15 @@ html.game.no-touch {
   #sidebar {
     float: right;
     width: $sidebar-width;
-    height: 100%;
     @include inset;
     @include border-radius(0);
     padding-left: 10px;
+    padding-bottom: 20px;
   }
 
   #player-bar {
-    padding-top: $content-top;
     height: $tile-dim;
+    padding-top: 20px;
 
     .coins {
       text-align: right;

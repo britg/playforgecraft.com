@@ -17,40 +17,42 @@
     
   %body{ :class => params[:controller] }
 
-    - if current_player
-    
-      #logo-wrap
-        = link_to image_tag("logo.png", :id => "logo"), root_path
+    .topbar
 
-    #flash-wrap
-      - if flash.any?
-        - for key, msg in flash
-          .flash{ :class => key }
-            %p= msg
+      - if current_player
+      
+        #logo-wrap
+          = link_to image_tag("logo.png", :id => "logo"), root_path
 
-    #loading
-      = image_tag "loading.gif"
+      #flash-wrap
+        - if flash.any?
+          - for key, msg in flash
+            .flash{ :class => key }
+              %p= msg
 
-    - if current_player
+      #loading
+        = image_tag "loading.gif"
 
-      #navigation
-        
-        %ul.nav
+      - if current_player
 
-          %li
-            = link_to "Profile", player_path(current_player), :class => "profile nav-item #{selected('profile')}", :rel => "profile"
+        #navigation
+          
+          %ul.pages
 
-          %li
-            = link_to "Forge", forge_path, :class => "forge nav-item #{selected('forge')}", :rel => "forge"
+            %li
+              = link_to "Profile", player_path(current_player), :class => "profile nav-item #{selected('profile')}", :rel => "profile"
 
-          %li
-            = link_to "Armory", armory_index_path, :class => "armory nav-item #{selected('armory')}", :rel => "armory"
+            %li
+              = link_to "Forge", forge_path, :class => "forge nav-item #{selected('forge')}", :rel => "forge"
 
-          %li
-            = link_to "Battle", battles_path, :class => "battle nav-item #{selected('battle')}", :rel => "battle"
+            %li
+              = link_to "Armory", armory_index_path, :class => "armory nav-item #{selected('armory')}", :rel => "armory"
 
-          %li
-            = link_to "Menu", menu_path, :class => "menu nav-item", :rel => "menu"
+            %li
+              = link_to "Battle", battles_path, :class => "battle nav-item #{selected('battle')}", :rel => "battle"
+
+            %li
+              = link_to "Menu", menu_path, :class => "menu nav-item", :rel => "menu"
 
     #content
     

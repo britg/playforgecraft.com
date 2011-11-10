@@ -26,8 +26,9 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @renderForge()
     @renderLoot()
 
-    $(window).unbind('resize').resize =>
-      @renderForge()
+    if $('body').hasClass('no-touch')
+      $(window).unbind('resize').resize =>
+        @renderForge()
 
   initializeActiveForge: ->
     window.activeForgeView = new ForgeCraft.Views.ActiveForgeView el: $('#active-forge').get(0)
@@ -38,6 +39,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
 
     @clearOres()
     loadingView.show()
+    @calculateDimensions()
 
     clearTimeout @redrawTimeout
 
@@ -66,6 +68,16 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     $('#ores').html('')
 
   calculateDimensions: ->
+
+    @topBarHeight   = $('.topbar').height();
+    @htmlHeight     = $('html').height();
+    @forgeHeight    = (@htmlHeight - @topBarHeight)
+    $('#forge').css height: @forgeHeight
+
+    @forgeWidth     = $('#forge').width()
+    @sidebarWidth   = $('#sidebar').width()
+
+    $('#ores').css width: (@forgeWidth - @sidebarWidth - 20), height: @forgeHeight
     
     @topOffset      = parseInt($('#ores').css('paddingTop'))
 
@@ -81,8 +93,8 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     Ores.numCols    = @cols
     Ores.numRows    = @rows
 
-    @lootListHeight = $('#sidebar').height() - $('#loot-list').position().top
-    $('#loot-list').css('height', @lootListHeight)
+    # @lootListHeight = $('#sidebar').height() - $('#loot-list').position().top
+    # $('#loot-list').css('height', @lootListHeight)
 
     console.log "Ores width:", @oresWidth, "height:", @oresHeight, "cols:", @cols, "rows:", @rows
 

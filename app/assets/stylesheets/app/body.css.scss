@@ -3,7 +3,7 @@
 
 html {
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 body {
@@ -11,11 +11,15 @@ body {
   @include blueprint(true);
   @include forgecraft;
 
-  padding-top: 1px;
+  padding-top: 40px;
 
-  height: 100%;
-  overflow: hidden;
+}
 
+.topbar {
+  background: #222;
+  @include background(linear-gradient(top left, #222, #000),
+                      radial-gradient(#000, #222 100px));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 
 #logo-wrap {
@@ -34,10 +38,6 @@ body {
 }
 
 #profile {
-  position: fixed;
-  right: -5px;
-  top: -3px;
-  @include inset;
   width: $sidebar-width + 5px;
   height: $profile-height;
   padding: 10px 0 0 0;
@@ -70,74 +70,75 @@ body {
 
 #navigation {
   position: fixed;
+  top: 0;
   right: 10px;
-  top: -3px;
-  @include inset;
   width: $sidebar-width - 10px;
   height: $profile-height;
   margin: 0;
   padding: 0;
 
-  ul {
+  ul.pages {
     margin: 0;
     margin-left: 6px;
     padding: 0;
-  }
 
-  li {
-    display: inline;
-    float: left;
-
-    a.nav-item {
-      display: block;
+    li {
+      display: inline;
       float: left;
-      width: 46px;
-      height: $profile-height;
-      text-indent: -2000em;
-      background: image_url('menu/nav.png') center top no-repeat;
 
-      &.profile {
-        
-        background-position: center -40px;
+      a.nav-item {
+        display: block;
+        padding: 0;
+        text-decoration: none;
+        float: left;
+        width: 46px;
+        height: $profile-height;
+        text-indent: -2000em;
+        background: image_url('menu/nav.png') center top no-repeat;
 
-        &.selected {
-          background-position: center top;          
+        &.profile {
+          
+          background-position: center -40px;
+
+          &.selected {
+            background-position: center top;          
+          }
         }
-      }
 
-      &.forge {
-        
-        background-position: center -120px;
+        &.forge {
+          
+          background-position: center -120px;
 
-        &.selected {
-          background-position: center -80px;          
+          &.selected {
+            background-position: center -80px;          
+          }
         }
-      }
 
-      &.armory {
-        
-        background-position: center -200px;
+        &.armory {
+          
+          background-position: center -200px;
 
-        &.selected {
-          background-position: center -160px;          
+          &.selected {
+            background-position: center -160px;          
+          }
         }
-      }
 
-      &.battle {
-        
-        background-position: center -280px;
+        &.battle {
+          
+          background-position: center -280px;
 
-        &.selected {
-          background-position: center -240px;          
+          &.selected {
+            background-position: center -240px;          
+          }
         }
-      }
 
-      &.menu {
-        
-        background-position: center -360px;
+        &.menu {
+          
+          background-position: center -360px;
 
-        &.selected {
-          background-position: center -320px;          
+          &.selected {
+            background-position: center -320px;          
+          }
         }
       }
     }
@@ -145,8 +146,6 @@ body {
 }
 
 #content {
-  height: 100%;
-  padding-top: 1px;
 }
 
 #footer {

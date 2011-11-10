@@ -39,17 +39,19 @@ class ForgeCraft.Views.LootView extends Backbone.View
     else
       $('#loot-list').append($(@el))
 
-    $(@el).fadeIn =>
-      $(@el).draggable({ revert: 'invalid' })
-      $(@el).touch({
-        animate: false,
-        sticky: false,
-        dragx: true,
-        dragy: true,
-        rotate: false,
-        resort: true,
-        scale: false
-      })
+    $(@el).fadeIn()
+      
+  makeDraggable: ->
+    $(@el).draggable({ revert: 'invalid' })
+    $(@el).touch({
+      animate: false,
+      sticky: false,
+      dragx: true,
+      dragy: true,
+      rotate: false,
+      resort: true,
+      scale: false
+    })
 
   destroy: ->
     $(@el).fadeOut =>
