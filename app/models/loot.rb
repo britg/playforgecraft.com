@@ -111,7 +111,7 @@ class Loot < ActiveRecord::Base
     return false if hero.player != player
     return false unless available?
     return false if equipped?
-    return false unless slot.accepts?(loot)
+    return false unless slot.accepts?(self)
     true
   end
 
