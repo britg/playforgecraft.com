@@ -81,8 +81,24 @@ class Hero < ActiveRecord::Base
   end
 
   def update_stats
-    update_attributes :attack => ((weapon1.try(:attack)||0) + (weapon2.try(:attack)||0)),
-                      :defense => ((armor.try(:defense)||0) + (leggings.try(:defense)||0))
+    update_attributes :attack => calculate_attack,
+                      :defense => calculate_defense
+  end
+
+  def calculate_attack
+    if warrior?
+      weapon1.try(:attack)||0
+    else
+      (weapon1.try(:attack)||0) + (weapon2.try(:attack)||0)
+    end
+  end
+
+  def calculate_defense
+    if warrior?
+      (weapon2.try(:defense)||0) + (armor.try(:defense)||0) + (leggings.try(:defense)||0)
+    else
+      (armor.try(:defense)||0) + (leggings.try(:defense)||0)
+    end
   end
 
   def create_slots
