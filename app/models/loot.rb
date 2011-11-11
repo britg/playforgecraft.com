@@ -115,4 +115,12 @@ class Loot < ActiveRecord::Base
     true
   end
 
+  def diff other_loot
+    if item.weapon?
+      (self.attack||0) - (other_loot.attack||0)
+    else
+      (self.defense||0) - (other_loot.defense||0)
+    end
+  end
+
 end

@@ -58,4 +58,10 @@ module ApplicationHelper
     end
   end
 
+  def plus_minus val
+    return content_tag(:span, "+#{val.to_i.abs}", :class => "positive") if val.to_i > 0
+    return content_tag(:span, "-#{val.to_i.abs}", :class => "negative") if val.to_i < 0
+    content_tag(:span, "0", :class => "zero")
+  end
+
 end

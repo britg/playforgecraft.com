@@ -3,6 +3,7 @@ class ForgeCraft.Views.EquipperView extends Backbone.View
   initialize: ->
     @bindLootClicks()
     @bindSellClicks()
+    @bindEquipClicks()
 
   bindLootClicks: ->
     self = @
@@ -19,6 +20,15 @@ class ForgeCraft.Views.EquipperView extends Backbone.View
 
       $(document).trigger("close.facebox")
       e.preventDefault()
+      return false
+
+  bindEquipClicks: ->
+    self = @
+    $('.slot.enabled').live 'click', (e) ->
+      loot_id = $('#equipper').find('.loot').attr("data-id")
+      slot = $(this).attr('rel')
+      hero_id = $(this).attr("data-hero-id")
+      player.equip(hero_id, slot, loot_id)
       return false
 
   activateEquipper: (loot_id) ->

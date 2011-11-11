@@ -29,6 +29,7 @@ class Hero < ActiveRecord::Base
 
   def equip! slot_type, loot
     slot(slot_type).update_attributes(:loot => loot)
+    update_stats
   end
 
   def slot type
@@ -65,6 +66,11 @@ class Hero < ActiveRecord::Base
 
   def leggings
     leggings_slot.try(:loot)
+  end
+
+  def update_stats
+    update_attributes :attack => ((weapon1.try(:attack)||0) + (weapon2.try(:attack)||0)),
+                      :defense => ((armor.try(:defense)||0) + (leggings.try(:defense)||0))
   end
 
   def create_slots

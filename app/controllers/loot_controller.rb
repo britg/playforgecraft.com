@@ -20,6 +20,10 @@ class LootController < ApplicationController
     @loot = Loot.find(params[:id])
   end
 
+  def update
+    
+  end
+
   def destroy
     loot = Loot.find(params[:id])
     loot.sell

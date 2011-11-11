@@ -1,8 +1,53 @@
 
-.slot.weapon1{ :class => ("enabled" if loot.present? and loot.equippable?(hero, hero.weapon1_slot)) }
+- weapon1_equippable = (loot.present? and loot.equippable?(hero, hero.weapon1_slot))
+- weapon2_equippable = (loot.present? and loot.equippable?(hero, hero.weapon2_slot))
+- armor_equippable = (loot.present? and loot.equippable?(hero, hero.armor_slot))
+- leggings_equippable = (loot.present? and loot.equippable?(hero, hero.leggings_slot))
 
-.slot.weapon2{ :class => ("enabled" if loot.present? and loot.equippable?(hero, hero.weapon2_slot)) }
+.slot.weapon1{ :class => ("enabled" if weapon1_equippable), :rel => "weapon1", :"data-hero-id" => hero.id }
 
-.slot.armor{ :class => ("enabled" if loot.present? and loot.equippable?(hero, hero.armor_slot)) }
+  - if weapon1_equippable
+    .diff
+      - if hero.weapon1.present?
+        = plus_minus(loot.diff(hero.weapon1))
+      - else
+        = plus_minus(loot.attack)
 
-.slot.leggings{ :class => ("enabled" if loot.present? and loot.equippable?(hero, hero.leggings_slot)) }
+  .equipped-item
+    = image_tag(hero.weapon1.icon) if hero.weapon1.present?
+
+.slot.weapon2{ :class => ("enabled" if weapon2_equippable), :rel => "weapon2", :"data-hero-id" => hero.id }
+
+  - if weapon2_equippable
+    .diff
+      - if hero.weapon2.present?
+        = plus_minus(loot.diff(hero.weapon2))
+      - else
+        = plus_minus(loot.attack)
+
+  .equipped-item
+    = image_tag(hero.weapon2.icon) if hero.weapon2.present?
+
+.slot.armor{ :class => ("enabled" if armor_equippable), :rel => "armor", :"data-hero-id" => hero.id }
+
+  - if armor_equippable
+    .diff
+      - if hero.armor.present?
+        = plus_minus(loot.diff(hero.armor))
+      - else
+        = plus_minus(loot.defense)
+
+  .equipped-item
+    = image_tag(hero.armor.icon) if hero.armor.present?
+
+.slot.leggings{ :class => ("enabled" if leggings_equippable), :rel => "leggings", :"data-hero-id" => hero.id }
+
+  - if leggings_equippable
+    .diff
+      - if hero.leggings.present?
+        = plus_minus(loot.diff(hero.leggings))
+      - else
+        = plus_minus(loot.defense)
+
+  .equipped-item
+    = image_tag(hero.leggings.icon) if hero.leggings.present?

@@ -116,6 +116,6 @@ class Player < ActiveRecord::Base
 
   def ranger
     heroes.where(:hero_class_id => HeroClass.ranger).first
-  end  
+  end
 
 end

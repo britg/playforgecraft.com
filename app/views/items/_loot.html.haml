@@ -2,7 +2,7 @@
 
   = link_to image_tag("loot/sell.png", :class => "sell-image"), "javascript:void(0)", :class => "sell-action", :"data-external" => true, :title => "Sell"
 
-  .level
+  .level{ :class => ("toohigh" if loot.level > current_player.try(:level))}
     lvl
     %span.val= loot.level
   
@@ -14,12 +14,10 @@
     
     - if loot.attack and loot.attack > 0
       %span.attack
-        +
         %span.val= loot.attack
         = image_tag "loot/attack.png", :class => "type-icon"
     
     - if loot.defense and loot.defense > 0
       %span.defense
-        +
         %span.val= loot.defense
         = image_tag "loot/defense.png", :class => "type-icon"

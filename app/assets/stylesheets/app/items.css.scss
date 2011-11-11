@@ -62,13 +62,16 @@
     margin-bottom: -10px;
     text-align: right;
 
-    color: $text-color;
+    color: $highlight-color;
     font-size: 69%;
     margin-left: 10px;
 
     .val {
       font-size: 175%;
-      color: $highlight-color;
+    }
+
+    &.toohigh {
+      color: $blood-color;
     }
   }
 
