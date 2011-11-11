@@ -41,6 +41,7 @@ class HeroSlot < ActiveRecord::Base
   end
 
   def accepts? loot
+    return false unless loot.present?
     acceptable_classifications.include? loot.classification
   end
 

@@ -3,3 +3,84 @@
 #heroes-page {
   margin: $content-top 10px;
 }
+
+.heroes {
+  
+  .hero {
+
+    .inner {
+      @include inset;
+      padding: 10px;
+    }
+
+    .name {
+      margin-bottom: 0;
+    }
+
+    .stats {
+
+      .stat {
+        text-align: center;
+      }
+
+      .type-icon {
+        height: 20px;
+        width: 20px;
+        margin-left: 5px;
+        margin-right: 10px;
+      }
+      
+      .val {
+        font-size: 250%;
+        line-height: 1;
+        color: $highlight-color;
+      }
+    }
+
+    .equipment {
+      @include clearfix;
+      margin-bottom: 10px;
+    }
+
+    .slot {
+      width: 50px;
+      height: 50px;
+      @include inset;
+      cursor: pointer;
+      display: block;
+      float: left;
+      margin-right: 10px;
+      margin-left: 10px;
+
+      &.enabled {
+        border: solid 1px $advanced-color;
+        margin-right: 9px;
+        margin-left: 9px;
+      }
+    }
+  }
+
+}
+
+.warrior {
+  
+  .name {
+    @include warrior;
+  }
+
+}
+
+.thief {
+  
+  .name {
+    @include thief;
+  }
+
+}
+
+.ranger {
+  
+  .name {
+    @include ranger;
+  }
+}

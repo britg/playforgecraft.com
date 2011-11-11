@@ -1,10 +1,41 @@
-.heroes.row
+.heroes.row{ :class => ("editable" if player == current_player) }
 
   .hero.warrior.span-one-third
-    %h2 Warrior
+    .inner
+      
+      %h2.name Warrior
+
+      .stats
+
+        = render "heroes/stats", :hero => player.warrior
+
+      .equipment
+
+        = render "heroes/equipment", :hero => player.warrior, :loot => loot
+
 
   .hero.thief.span-one-third
-    %h2 Thief
+    .inner
+      
+      %h2.name Thief
+
+      .stats
+
+        = render "heroes/stats", :hero => player.thief
+
+      .equipment
+      
+        = render "heroes/equipment", :hero => player.thief, :loot => loot
 
   .hero.ranger.span-one-third
-    %h2 Ranger
+    .inner
+      
+      %h2.name Ranger
+
+      .stats
+
+        = render "heroes/stats", :hero => player.ranger
+
+      .equipment
+      
+        = render "heroes/equipment", :hero => player.ranger, :loot => loot

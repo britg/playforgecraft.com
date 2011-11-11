@@ -14,6 +14,7 @@ $rare-color: #00B6FF;
 $epic-color: #C600FF;
 $set-color: #FF8000;
 $coin-color: #FEF092;
+$blood-color: #920516;
 
 $profile-height: 40px;
 $content-top: $profile-height + 20px;
@@ -64,6 +65,18 @@ $sidebar-width: 250px;
 
 @mixin itemset {
   color: $set-color !important;
+}
+
+@mixin warrior {
+  color: $blood-color !important;
+}
+
+@mixin thief {
+  color: darken($rare-color, 20%) !important;
+}
+
+@mixin ranger {
+  color: darken($advanced-color, 20%) !important;
 }
 
 @mixin rarity {

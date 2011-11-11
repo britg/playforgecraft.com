@@ -16,6 +16,11 @@
 #player-page {
 
   height: 2000px;
+
+  .heading {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
   
   .player {
     font-size: 500%;
@@ -26,6 +31,8 @@
   .completion {
 
     text-align: center;
+    @include clearfix;
+    margin-bottom: 20px;
     
     .rare {
       @include column(6);

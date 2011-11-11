@@ -1,0 +1,16 @@
+
+%table
+
+  %tbody
+
+    %tr
+      
+      %td.stat.attack
+    
+        %span.val= number_with_delimiter(hero.attack)
+        = image_tag "loot/attack.png", :class => "type-icon"
+
+      %td.stat.defense
+  
+        %span.val= number_with_delimiter(hero.defense)
+        = image_tag "loot/defense.png", :class => "type-icon"

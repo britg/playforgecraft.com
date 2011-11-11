@@ -4,5 +4,9 @@
 
     = render "items/loot", :loot => @loot
 
+  .explain
+
+    %p Select an enabled slot below to equip this item
+
   .heroes-wrap
-    = render "heroes/heroes", :player => current_player
+    = render "heroes/heroes", :player => current_player, :loot => @loot
