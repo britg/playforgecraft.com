@@ -22,6 +22,18 @@ class Hero < ActiveRecord::Base
 
   end
 
+  def warrior?
+    @is_warrior ||= (job == HeroClass.warrior)
+  end
+
+  def thief?
+    @is_thief ||= (job == HeroClass.thief)
+  end
+
+  def ranger?
+    @is_ranger ||= (job == HeroClass.ranger)
+  end
+
   def equip slot_type, loot
     return false unless slot(slot_type).accepts?(loot)
     equip! slot_type, loot

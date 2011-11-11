@@ -42,6 +42,29 @@
       margin-bottom: 10px;
     }
 
+    .slots {
+      @include clearfix;
+    }
+
+    .explain {
+      @include clearfix;
+    }
+
+    .slot-spacer {
+      display: block;
+      float: left;
+      width: 50px;
+      height: 20px;
+      margin-right: 10px;
+      margin-left: 10px;
+      text-align: center;
+
+      &.enabled {
+        font-weight: bold;
+        color: $advanced-color;
+      }
+    }
+
     .slot {
       width: 50px;
       height: 50px;
@@ -53,15 +76,44 @@
       margin-left: 10px;
 
       &.enabled {
-        border: solid 1px $advanced-color;
         margin-right: 9px;
         margin-left: 9px;
+        border: solid 1px $advanced-color;
       }
 
-      &.equipped {
-        border: solid 1px $rare-color;
+      &.common {
         margin-right: 9px;
         margin-left: 9px;
+        border: solid 1px $common-color;
+        background-color: rgba($common-color, 0.5);
+      }
+
+      &.advanced {
+        margin-right: 9px;
+        margin-left: 9px;
+        border: solid 1px $advanced-color;
+        background-color: rgba($advanced-color, 0.5);
+      }
+
+      &.rare {
+        margin-right: 9px;
+        margin-left: 9px;
+        border: solid 1px $rare-color;
+        background-color: rgba($rare-color, 0.5);
+      }
+
+      &.epic {
+        margin-right: 9px;
+        margin-left: 9px;
+        border: solid 1px $epic-color;
+        background-color: rgba($epic-color, 0.5);
+      }
+
+      &.itemset {
+        margin-right: 9px;
+        margin-left: 9px;
+        border: solid 1px $set-color;
+        background-color: rgba($set-color, 0.5);
       }
 
       .equipped-item {

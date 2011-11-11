@@ -4,50 +4,78 @@
 - armor_equippable = (loot.present? and loot.equippable?(hero, hero.armor_slot))
 - leggings_equippable = (loot.present? and loot.equippable?(hero, hero.leggings_slot))
 
-.slot.weapon1{ :class => ("enabled" if weapon1_equippable), :rel => "weapon1", :"data-hero-id" => hero.id }
+.slots 
+  .slot.weapon1{ :class => "#{'enabled' if weapon1_equippable} #{hero.weapon1.to_css_classes if hero.weapon1.present?}", :rel => "weapon1", :"data-hero-id" => hero.id }
 
-  - if weapon1_equippable
-    .diff
-      - if hero.weapon1.present?
-        = plus_minus(loot.diff(hero.weapon1))
-      - else
-        = plus_minus(loot.attack)
+    - if weapon1_equippable
+      .diff
+        - if hero.weapon1.present?
+          = plus_minus(loot.diff(hero.weapon1))
+        - else
+          = plus_minus(loot.attack)
 
-  .equipped-item
-    = image_tag(hero.weapon1.icon) if hero.weapon1.present?
+    .equipped-item
+      = image_tag(hero.weapon1.icon) if hero.weapon1.present?
 
-.slot.weapon2{ :class => ("enabled" if weapon2_equippable), :rel => "weapon2", :"data-hero-id" => hero.id }
+  - if hero.ranger?
+    .slot-spacer
+      &nbsp;
 
-  - if weapon2_equippable
-    .diff
-      - if hero.weapon2.present?
-        = plus_minus(loot.diff(hero.weapon2))
-      - else
-        = plus_minus(loot.attack)
+  - else
+    .slot.weapon2{ :class => "#{'enabled' if weapon2_equippable} #{hero.weapon2.to_css_classes if hero.weapon2.present?}", :rel => "weapon2", :"data-hero-id" => hero.id }
 
-  .equipped-item
-    = image_tag(hero.weapon2.icon) if hero.weapon2.present?
+      - if weapon2_equippable
+        .diff
+          - if hero.weapon2.present?
+            = plus_minus(loot.diff(hero.weapon2))
+          - else
+            = plus_minus(loot.attack)
 
-.slot.armor{ :class => ("enabled" if armor_equippable), :rel => "armor", :"data-hero-id" => hero.id }
+      .equipped-item
+        = image_tag(hero.weapon2.icon) if hero.weapon2.present?
 
-  - if armor_equippable
-    .diff
-      - if hero.armor.present?
-        = plus_minus(loot.diff(hero.armor))
-      - else
-        = plus_minus(loot.defense)
+  .slot.armor{ :class => "#{'enabled' if armor_equippable} #{hero.armor.to_css_classes if hero.armor.present?}", :rel => "armor", :"data-hero-id" => hero.id }
 
-  .equipped-item
-    = image_tag(hero.armor.icon) if hero.armor.present?
+    - if armor_equippable
+      .diff
+        - if hero.armor.present?
+          = plus_minus(loot.diff(hero.armor))
+        - else
+          = plus_minus(loot.defense)
 
-.slot.leggings{ :class => ("enabled" if leggings_equippable), :rel => "leggings", :"data-hero-id" => hero.id }
+    .equipped-item
+      = image_tag(hero.armor.icon) if hero.armor.present?
 
-  - if leggings_equippable
-    .diff
-      - if hero.leggings.present?
-        = plus_minus(loot.diff(hero.leggings))
-      - else
-        = plus_minus(loot.defense)
+  .slot.leggings{ :class => "#{'enabled' if leggings_equippable} #{hero.leggings.to_css_classes if hero.leggings.present?}", :rel => "leggings", :"data-hero-id" => hero.id }
 
-  .equipped-item
-    = image_tag(hero.leggings.icon) if hero.leggings.present?
+    - if leggings_equippable
+      .diff
+        - if hero.leggings.present?
+          = plus_minus(loot.diff(hero.leggings))
+        - else
+          = plus_minus(loot.defense)
+
+    .equipped-item
+      = image_tag(hero.leggings.icon) if hero.leggings.present?
+
+.explain
+
+  .slot-spacer{ :class => "#{'enabled' if weapon1_equippable}" }
+    - if hero.warrior?
+      Weapon
+    - elsif hero.thief?
+      Weapon
+    - elsif hero.ranger?
+      Crossbow
+
+  .slot-spacer{ :class => "#{'enabled' if weapon2_equippable}" }
+    - if hero.warrior?
+      Shield
+    - elsif hero.thief?
+      Weapon
+  
+  .slot-spacer{ :class => "#{'enabled' if armor_equippable}" }
+    Armor
+
+  .slot-spacer{ :class => "#{'enabled' if armor_equippable}" }
+    Leggings
