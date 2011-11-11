@@ -5,23 +5,22 @@ class ForgeCraft.Models.Loot extends Backbone.Model
     rarity: ""
     ore: ""
 
-  cashIn: ->
-    @destroy success: (model, response) =>
+  sell: ->
+    self = @
+    loadingView.show()
+    @destroy success: (model, response) ->
       player.set(response.player)
+      loadingView.hide()
 
 class ForgeCraft.Collections.Loot extends Backbone.Collection
 
   model: ForgeCraft.Models.Loot
   url: '/loot'
 
-  initialize: ->
-
-    @bind "destroy", @backfill, @
-
   comparator: (loot) ->
     -parseInt(loot.get("id"))
 
-  backfill: ->
+  fetchMore: (count = 1)->
     last = @at @length-1
-    @fetch data: {last: last.get("id"), limit: 1}, add: true
+    @fetch data: {last: last.get("id"), limit: count}, add: true
   

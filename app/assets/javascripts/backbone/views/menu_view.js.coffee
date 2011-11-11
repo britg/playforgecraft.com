@@ -4,11 +4,15 @@ class ForgeCraft.Views.MenuView extends Backbone.View
 
   initialize: ->
     @bindMenu()
+    @bindTooltips()
 
   bindMenu: ->
     self = @
     $('.menu').click ->
       self.activateMenu()
+
+  bindTooltips: ->
+    $('.nav-item').twipsy()
 
   selectNav: (item) ->
 

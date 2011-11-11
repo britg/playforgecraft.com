@@ -21,8 +21,5 @@ class ForgeCraft.Views.PlayerView extends Backbone.View
   createLootDropZones: ->
     # $('#player-bar').droppable({ accept: '.loot', drop: playerView.cashInLoot })
 
-  cashInLoot: (event, ui) ->
-    console.log(arguments)
-
-    lootView = $(ui.draggable).data("view")
-    lootView.model.cashIn()
+  cashInLoot: (loot_id) ->
+    

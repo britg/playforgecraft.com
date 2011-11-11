@@ -40,19 +40,19 @@
           %ul.pages
 
             %li
-              = link_to "Profile", player_path(current_player), :class => "profile nav-item #{selected('profile')}", :rel => "profile"
+              = link_to "Profile", player_path(current_player), :class => "profile nav-item #{selected('profile')}", :title => "Profile", :"data-placement" => "below"
 
             %li
-              = link_to "Forge", forge_path, :class => "forge nav-item #{selected('forge')}", :rel => "forge"
+              = link_to "Forge", forge_path, :class => "forge nav-item #{selected('forge')}", :title => "Forge", :"data-placement" => "below"
 
             %li
-              = link_to "Armory", armory_index_path, :class => "armory nav-item #{selected('armory')}", :rel => "armory"
+              = link_to "Armory", armory_index_path, :class => "armory nav-item #{selected('armory')}", :title => "Armory", :"data-placement" => "below"
 
             %li
-              = link_to "Battle", battles_path, :class => "battle nav-item #{selected('battle')}", :rel => "battle"
+              = link_to "Battle", battles_path, :class => "battle nav-item #{selected('battle')}", :title => "Battle", :"data-placement" => "below"
 
             %li
-              = link_to "Menu", menu_path, :class => "menu nav-item", :rel => "menu"
+              = link_to "Menu", menu_path, :class => "menu nav-item", :title => "Menu", :"data-placement" => "below"
 
     #content
     

@@ -10,16 +10,24 @@
 $ ->
   window.router = new ForgeCraft.Routers.Router
 
+  # Collections
+  window.Loot = new ForgeCraft.Collections.Loot
+
+  # Models
+  window.player = new ForgeCraft.Models.Player ForgeCraft.Config.player
+
+  # Views
   window.flashView = new ForgeCraft.Views.FlashView el: $('#flash-wrap').get(0)
   window.loadingView = new ForgeCraft.Views.LoadingView el: $('#loading').get(0)
-  window.player = new ForgeCraft.Models.Player ForgeCraft.Config.player
   window.playerView = new ForgeCraft.Views.PlayerView el: $('#profile').get(0), model: player
   window.menuView = new ForgeCraft.Views.MenuView
   window.equipperView = new ForgeCraft.Views.EquipperView
 
+  # History
   forging = (window.location.pathname == "/forge")
   Backbone.history.start(pushState: true, silent: !forging)
 
+  # Hijack Links
   $('a').live 'click', ->
     unless $(@).attr('data-external')
       r = $(@).attr('href').slice(1)

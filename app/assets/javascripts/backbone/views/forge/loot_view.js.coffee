@@ -27,8 +27,9 @@ class ForgeCraft.Views.LootView extends Backbone.View
       $(@el).find('.defense').remove()
 
     $(@el).data("view", @)
+    $(@el).find('.sell-action').twipsy()
 
-  display: ->
+  addToLootList: ->
     $(@el).hide()
 
     first_loot_id = Loot.at(1).get("id")
@@ -54,5 +55,6 @@ class ForgeCraft.Views.LootView extends Backbone.View
     })
 
   destroy: ->
+    $(@el).find('.sell-action').twipsy('hide')
     $(@el).fadeOut =>
       $(@el).remove()

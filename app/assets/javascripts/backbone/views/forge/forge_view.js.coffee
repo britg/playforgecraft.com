@@ -39,7 +39,6 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
 
     @clearOres()
     loadingView.show()
-    @calculateDimensions()
 
     clearTimeout @redrawTimeout
 
@@ -50,10 +49,26 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     , 500
 
   renderLoot: ->
-    window.Loot = new ForgeCraft.Collections.Loot
+    Loot.unbind "add"
+    Loot.unbind "reset"
+
     Loot.bind "add", @displayLoot, @
     Loot.bind "reset", @displayAllLoot, @
     Loot.reset(ForgeCraft.Config.loot)
+
+    $('.more-loot').click ->
+      Loot.fetchMore(10)
+      return false
+
+    $(window).scroll ->
+      if $('#loot-list-more').is(':visible')
+        forgeView.fetchMoreLoot()
+  
+  fetchMoreLoot: ->
+    clearTimeout(@fetchMoreLootTimeout)
+    @fetchMoreLootTimeout = setTimeout ->
+      Loot.fetchMore(10)
+    , 500
 
   displayAllLoot: ->
     Loot.forEach (loot) =>
@@ -62,7 +77,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
   displayLoot: (loot) ->
     lootView = new ForgeCraft.Views.LootView id: loot.id, model: loot, el: $('#loot-template').find('.loot').clone().get(0)
     lootView.render()
-    lootView.display()
+    lootView.addToLootList()
 
   clearOres: ->
     $('#ores').html('')

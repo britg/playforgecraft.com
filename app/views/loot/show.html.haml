@@ -1,7 +1,8 @@
-#equipper
+#equipper.container
 
-  %h1 Equip Loot
+  .loot-wrap
 
-  = render "items/loot", :loot => @loot
+    = render "items/loot", :loot => @loot
 
-  = render "shared/heroes", :player => current_player
+  .heroes-wrap
+    = render "heroes/heroes", :player => current_player
