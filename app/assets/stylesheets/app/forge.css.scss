@@ -98,8 +98,13 @@ html.game.no-touch {
       background-color: rgba(100,100,100,0.3);
     }
 
+    &.immoveable {
+      @include opacity(0.4)
+    }
+
     .status {
-      display: block;
+      /* display: block; */
+      display: none;
       width: $status-height;
       height: $status-width;
       background: image_url("moveable.png") center no-repeat;

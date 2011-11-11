@@ -89,9 +89,11 @@ class ForgeCraft.Views.OreView extends Backbone.View
     console.log "Updating moveability"
 
     if @model.get("moveable")
-      $(@el).find('.status').removeClass('immoveable');
+      # $(@el).find('.status').removeClass('immoveable')
+      $(@el).removeClass('immoveable')
     else
-      $(@el).find('.status').addClass('immoveable');
+      # $(@el).find('.status').addClass('immoveable')
+      $(@el).addClass('immoveable')
 
   moveBlocked: () ->
     $(@el).effect("shake", { times: 3, distance: 10 }, 50)
