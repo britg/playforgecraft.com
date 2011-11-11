@@ -16,6 +16,8 @@ class ForgeCraft.Views.LootView extends Backbone.View
     $(@el).find('.name').addClass(@model.get("item_attributes").type)
     $(@el).find('.name').html(@model.get("item_attributes").name)
 
+    $(@el).find('.level').find('.val').html(@model.get("level"))
+
     if @model.get("attack") > 0
       $(@el).find('.attack').find('.val').html(@model.get("attack"))
     else

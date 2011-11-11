@@ -30,7 +30,7 @@ class Loot < ActiveRecord::Base
 
   def serializable_hash(opts = {})
     super((opts||{}).merge( :only => [:id, :attack, :defense],
-                            :methods => [:item_attributes]))
+                            :methods => [:item_attributes, :level]))
   end
 
   def item_attributes

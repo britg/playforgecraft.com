@@ -37,7 +37,7 @@
 
   .icon {
     float: left;
-    margin-right: 10px;
+    margin-right: 10px !important;
     width: 50px;
     height: 50px;
   }
@@ -47,7 +47,29 @@
     display: block;
     width: 32px;
     height: 32px;
-    margin-top: 10px;
+    margin-top: 23px;
+    margin-bottom: -55px;
+  }
+
+  .level {
+    display: block;
+    position: relative;
+    top: 37px;
+    left: 14px;
+    width: 30px;
+    height: 10px;
+    margin-right: -10px;
+    margin-bottom: -10px;
+    text-align: right;
+
+    color: $text-color;
+    font-size: 69%;
+    margin-left: 10px;
+
+    .val {
+      font-size: 175%;
+      color: $highlight-color;
+    }
   }
 
   .name {
@@ -58,6 +80,7 @@
     font-size: 175%;
     line-height: 1;
     color: $highlight-color;
+    margin-left: 10px;
   }
 
   .type-icon {

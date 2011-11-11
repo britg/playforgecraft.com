@@ -1,6 +1,10 @@
 .loot{ :class => loot.to_css_classes, "data-id" => loot.to_param }
 
   = link_to image_tag("loot/sell.png", :class => "sell-image"), "javascript:void(0)", :class => "sell-action", :"data-external" => true, :title => "Sell"
+
+  .level
+    lvl
+    %span.val= loot.level
   
   = image_tag loot.icon, :class => "icon"
 
@@ -10,7 +14,7 @@
     
     - if loot.attack and loot.attack > 0
       %span.attack
-        + 
+        +
         %span.val= loot.attack
         = image_tag "loot/attack.png", :class => "type-icon"
     
