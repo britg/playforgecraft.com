@@ -77,6 +77,10 @@ class Ore < ActiveRecord::Base
 
   end
 
+  def to_param
+    name
+  end
+
   def to_s
     name
   end

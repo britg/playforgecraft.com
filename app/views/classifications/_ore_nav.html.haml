@@ -4,4 +4,4 @@
   - for ore in Ore.browsable
 
     %li
-      = link_to image_tag(ore.tile) + "#{ore} (#{Item.item_count(classification, ore)})", armory_items_path(classification, :ore => ore.to_param), :title => ore, :class => "ore-icon"
+      = link_to image_tag(ore.tile) + "#{ore} (#{Item.item_count(classification, ore)})", armory_ore_path(classification, ore), :title => ore, :class => "ore-icon"

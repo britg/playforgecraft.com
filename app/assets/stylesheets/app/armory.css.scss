@@ -1,7 +1,13 @@
 @import "base";
 
 #armory-page {
-  margin: $content-top 10px;
+  margin: 10px;
+}
+
+.editable {
+  input {
+    width: 50px;
+  }
 }
 
 #class-nav {
@@ -111,6 +117,12 @@
     .icon {
       width: 20px;
       vertical-align: -5px;
+    }
+  }
+
+  .ore {
+    img{
+      width: 20px;
     }
   }
 }

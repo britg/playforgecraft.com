@@ -10,3 +10,6 @@ en:
 
   stories:
     default: "%{item}'s forging and history has been lost to time. Perhaps one day an adventurous scholar will unveil its origin story; no doubt wrought with blood and battle..."
+
+  confirms:
+    destroy_item: "Deleting this item will remove it from all players. Are you sure you want to delete it?"

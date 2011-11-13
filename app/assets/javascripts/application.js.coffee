@@ -22,6 +22,7 @@ $ ->
   window.playerView = new ForgeCraft.Views.PlayerView el: $('#profile').get(0), model: player
   window.menuView = new ForgeCraft.Views.MenuView
   window.equipperView = new ForgeCraft.Views.EquipperView
+  window.armoryView = new ForgeCraft.Views.ArmoryView
 
   # History
   forging = (window.location.pathname == "/forge")
@@ -34,9 +35,6 @@ $ ->
       Backbone.history.navigate(r, true)
 
       return false
-
-
-
 
 # $(function () {
   

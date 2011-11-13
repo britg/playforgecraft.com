@@ -6,6 +6,8 @@ class Item < ActiveRecord::Base
   belongs_to :rarity
   belongs_to :item_set
 
+  has_many :loot, :class_name => "Loot"
+
   validates_presence_of :name
   validates_presence_of :genre
   validates_presence_of :classification
@@ -14,8 +16,7 @@ class Item < ActiveRecord::Base
 
   before_validation :default_genre
   before_save :ensure_item_set_rarity
-
-  has_paper_trail
+  after_destroy :remove_loot
 
   has_attached_file :icon,
     :storage => :s3,
@@ -33,7 +34,7 @@ class Item < ActiveRecord::Base
     :default_url => lambda { |a| a.instance.classification.default_art.url },
     :styles => { :full => ["640x960#", :jpg], :normal => ["320x480#", :jpg], :small => ["160x240#", :jpg] }
 
-  default_scope order("rarity_id asc, name asc")
+  default_scope order("level desc, rarity_id asc, name asc")
 
   Rarity::DEFAULTS.each do |r|
     scope r.downcase.to_sym, joins(:rarity).where("rarities.name = ?", r)
@@ -48,7 +49,19 @@ class Item < ActiveRecord::Base
   class << self
 
     def item_count(type, ore)
-      Item.where(:classification_id => type.id, :ore_id => ore.id).count
+      Item.of_class(type).of_ore(ore).count
+    end
+
+    def of_ore(ore)
+      where(:ore_id => ore)
+    end
+
+    def of_class(classification)
+      where(:classification_id => classification)
+    end
+
+    def of_rarity(rarity)
+      where(:rarity_id => rarity)     
     end
 
     def armory_dump
@@ -106,6 +119,10 @@ class Item < ActiveRecord::Base
 
   def default_cost
     ore.cost + classification.cost
+  end
+
+  def remove_loot
+    Loot.unscoped.where(:item_id => self.id).delete_all
   end
 
   protected

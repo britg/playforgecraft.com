@@ -1,4 +1,4 @@
-.loot{ :class => loot.to_css_classes, "data-id" => loot.to_param }
+.loot{ :class => "#{loot.to_css_classes} launch-equipper", "data-id" => loot.to_param }
 
   = link_to image_tag("loot/sell.png", :class => "sell-image"), "javascript:void(0)", :class => "sell-action", :"data-external" => true, :title => "Sell"
 

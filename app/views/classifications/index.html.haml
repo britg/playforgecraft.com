@@ -1,12 +1,13 @@
 
-#armory-page
+#armory-page.container-fluid
   
-  #class-nav
+  #class-nav.sidebar
     
     = render "shared/class_nav"
 
-  #armory-content
-
-    #loot-spotlight
+  #armory.content
     
-      %h1 Armory
+    = render "items/table", :items => Item.all
+
+    
+    

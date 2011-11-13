@@ -1,15 +1,15 @@
 
 class ItemsController < ApplicationController
 
-  before_filter :find_class
+  before_filter :armory_nav
   respond_to :html, :js
 
   def index
-    @ore = Ore.find(params[:ore])
-    @items = @class.items.order("level").where(:ore_id => @ore.to_param)
+    @items = Item.all
   end
 
   def show
+    select_nav('armory')
     @item = Item.find(params[:id])
   end
 
@@ -42,6 +42,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    require_admin!
     @item = Item.find_by_id(params[:id])
     @item.destroy
 
@@ -50,8 +51,8 @@ class ItemsController < ApplicationController
 
   protected
 
-  def find_class
-    @class = Classification.find_by_name(params[:armory_id].try(:singularize))
+  def armory_nav
+    select_nav('armory')
   end
 
 end

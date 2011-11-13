@@ -17,10 +17,15 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     "register": "register"
 
     "forge": "forge"
+
     "armory": "armory"
+    "armory/:class": "class"
+
     "battles": "battles"
 
     "loot/:id": "loot"
+
+    "items/:ident": "item"
 
     ":player": "player"
 
@@ -54,7 +59,15 @@ class ForgeCraft.Routers.Router extends Backbone.Router
 
   armory: ->
     menuView.selectNav('armory')
-    @load '/armory'
+    @load('/armory')
+
+  class: (classification)->
+    menuView.selectNav('armory')
+    @load('/armory/' + classification)
+
+  item: (ident) ->
+    menuView.selectNav('armory')
+    @load('/items/' + ident)
 
   # Battle
 

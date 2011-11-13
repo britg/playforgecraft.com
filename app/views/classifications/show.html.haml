@@ -1,10 +1,12 @@
 
-#armory
+#armory.container-fluid
 
-  #class-nav
+  #class-nav.sidebar
 
     = render "shared/class_nav"
   
-  #armory-content.tab-control
+  #armory-content.content
     
     = render "ore_nav", :classification => @classification
+
+    = render "items/table", :items => @classification.items

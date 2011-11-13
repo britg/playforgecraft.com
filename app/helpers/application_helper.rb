@@ -13,7 +13,7 @@ module ApplicationHelper
       :cssclass => "editable",
       :height => "none",
       :width => "none",
-      :placeholder => "Click to edit #{field}"
+      :placeholder => "0"
     }.merge(opts)
     
     editable_field_if admin?, obj, field, opts

@@ -2,22 +2,19 @@
 %table.item-table
   
   %thead
+    
     %tr
-      %th Name
+      %th Item
 
-      %th Lvl Req
+      %th Ore
 
-      %th
-        - if @class.weapon?
-          Attack Min
-        - else
-          Defense Min
+      %th Level
+
+      %th Attack
       
-      %th
-        - if @class.weapon?
-          Attack Max
-        - else
-          Defense Max
+      %th Defense
+
+      %th Forged?
 
       - if admin?
         %th
@@ -26,10 +23,13 @@
 
     - for item in items
 
-      %tr
+      %tr{ :id => dom_id(item, 'row') }
         %td.name
           = link_to image_tag(item.icon.url(:tiny), :class => "icon"), item_path(item)
-          = link_to item, item_path(item), :class => item.rarity
+          = link_to item, armory_path(item), :class => item.rarity
+
+        %td.ore
+          = image_tag item.ore.tile.url(:small), :title => item.ore, :alt => item.ore
 
         %td
           = admin_field item, :level
@@ -37,17 +37,21 @@
         %td
           - if item.weapon?
             = admin_field item, :attack_min
-          - else
+            = "-"
             = admin_field item, :attack_max
 
         %td
-          - if item.weapon?
-            = admin_field item, :attack_max
-          - else
+          - if item.armor?
+            = admin_field item, :defense_min
+            = "-"
             = admin_field item, :defense_max
+
+        %td
+          - if found = current_player.loot.best(item)
+            = link_to "Yes", loot_path(found), :"data-id" => found.id, :class => "launch-equipper", :"data-external" => true
 
         - if admin?
           %td
-            = link_to "Edit", edit_armory_item_path(@class, item), :rel => "modal"
+            = link_to "Edit", edit_item_path(item.classification, item), :rel => "modal"
             |
-            = link_to "Delete", armory_item_path(@class, item), :confirm => "Really delete?", :method => :delete, :remote => true
+            = link_to "Delete", armory_path(item), :confirm => t("confirms.destroy_item"), :method => :delete, :remote => true, :"data-external" => true, :class => "delete-item", :"data-item-id" => item.id

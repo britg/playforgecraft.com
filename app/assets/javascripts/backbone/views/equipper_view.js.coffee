@@ -7,9 +7,10 @@ class ForgeCraft.Views.EquipperView extends Backbone.View
 
   bindLootClicks: ->
     self = @
-    $('.loot').live 'click', ->
+    $('.launch-equipper').live 'click', ->
       id = $(@).attr("data-id")
       self.activateEquipper(id)
+      return false
 
   bindSellClicks: ->
     self = @

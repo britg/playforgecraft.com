@@ -6,6 +6,7 @@ class ClassificationsController < ApplicationController
   end
 
   def show
+    select_nav("armory")
     @classification = Classification.find_by_name(params[:id].singularize)
   end
   

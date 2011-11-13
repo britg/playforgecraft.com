@@ -26,6 +26,16 @@ class Loot < ActiveRecord::Base
       item = Item.where(:classification_id => classification, :ore_id => ore).random
     end
 
+    def best item
+      scope = Loot.scoped
+      scope = scope.where(:item_id => item)
+
+      scope = scope.order("attack desc") if item.weapon?
+      scope = scope.order("defense desc") if item.armor?
+
+      scope.first
+    end
+
   end
 
   def serializable_hash(opts = {})

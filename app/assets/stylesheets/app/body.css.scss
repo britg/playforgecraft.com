@@ -15,6 +15,13 @@ body {
 
 }
 
+table {
+  
+  td {
+    border-color: $light-border-color;
+  }
+}
+
 .topbar {
   background: #222;
   @include background(linear-gradient(top left, #222, #000),

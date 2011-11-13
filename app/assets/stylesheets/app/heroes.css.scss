@@ -58,10 +58,11 @@
       margin-right: 10px;
       margin-left: 10px;
       text-align: center;
+      color: darken($highlight-color, 70%);
 
       &.enabled {
         font-weight: bold;
-        color: $advanced-color;
+        color: $highlight-color;
       }
     }
 
@@ -79,6 +80,10 @@
         margin-right: 9px;
         margin-left: 9px;
         border: solid 1px $advanced-color;
+      }
+
+      &.disabled {
+        @include opacity(0.5);
       }
 
       &.common {

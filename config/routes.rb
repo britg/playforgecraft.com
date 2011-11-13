@@ -35,12 +35,9 @@ ForgeCraft::Application.routes.draw do
   resources :battles
 
   # Armory
+  resources :armory, :controller => :items, :only => [:show, :index, :destroy]
+  resources :items
 
-  match 'armory/Sets' => "item_sets#index"
-  resources :items, :only => [:show, :update]
-  resources :armory, :controller => "classifications" do
-    resources :items
-  end
   resources :item_sets
 
   # Chat

@@ -1,11 +1,10 @@
 
-#items-content
+#armory-page.container-fluid
+  
+  #class-nav.sidebar
+    
+    = render "shared/class_nav"
 
-  - if admin?
-    = link_to "Add Item", new_armory_item_path(@class, :ore => @ore.to_param), :rel => "modal", :class => "button", :id => "add-item-button"
-
-  %h2 #{@ore} #{@class}
-
-  .items
-
-    = render "table", :items => @items
+  #armory.content
+    
+    = render "items/table", :items => Item.all
