@@ -10,18 +10,22 @@ class ForgeCraft.Views.LootView extends Backbone.View
   render: ->
     console.log "Rendering loot with", @model
 
+    # Basic properties
     $(@el).addClass(@model.get("item_attributes").type).attr("id", "loot-" + @model.get("id"))
     $(@el).attr("data-id", @model.get('id'))
     $(@el).find('.icon').attr('src', @model.get("item_attributes").icon_url)
     $(@el).find('.name').addClass(@model.get("item_attributes").type)
     $(@el).find('.name').html(@model.get("item_attributes").name)
+    $(@el).data("view", @)
 
+    # Level
     level = @model.get("level")
     $(@el).find('.level').find('.val').html(level)
 
     if player.get("level") < level
       $(@el).find('.level').addClass('toohigh')
 
+    # Stats
     if @model.get("attack") > 0
       $(@el).find('.attack').find('.val').html(@model.get("attack"))
     else
@@ -32,8 +36,13 @@ class ForgeCraft.Views.LootView extends Backbone.View
     else
       $(@el).find('.defense').remove()
 
-    $(@el).data("view", @)
-    $(@el).find('.sell-action').twipsy()
+    # Sell action
+    if @model.get("equipped?")
+      $(@el).find('.equipped-indicator').removeClass('hidden')
+      $(@el).find('.sell-action').addClass('hidden')
+    else
+      $(@el).find('.equipped-indicator').addClass('hidden')
+      $(@el).find('.sell-action').removeClass('hidden')
 
   addToLootList: ->
     $(@el).hide()

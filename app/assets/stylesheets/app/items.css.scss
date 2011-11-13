@@ -1,5 +1,14 @@
 @import "base";
 
+@mixin loot-action {
+  float: right;
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-top: 23px !important;
+  margin-bottom: -55px !important;
+}
+
 .loot {
 
   border: solid 1px;
@@ -43,12 +52,11 @@
   }
 
   .sell-action {
-    float: right;
-    display: block;
-    width: 32px;
-    height: 32px;
-    margin-top: 23px;
-    margin-bottom: -55px;
+    @include loot-action;
+  }
+
+  .equipped-indicator {
+    @include loot-action;
   }
 
   .level {

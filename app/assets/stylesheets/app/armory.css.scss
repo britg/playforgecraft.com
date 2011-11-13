@@ -11,14 +11,9 @@
 }
 
 #class-nav {
-  @include column(4, true);
 }
 
 .class-nav {
-  padding: 20px 0;
-  margin: 0;
-  margin-top: 63px;
-
   li {
     display: block;
     padding: 10px 0 10px 10px;
@@ -111,20 +106,19 @@
 }
 
 .item-table {
+
+  .icon {
+    width: 20px;
+  }
+
   .name {
     font-size: 125%;
 
     .icon {
-      width: 20px;
       vertical-align: -5px;
     }
   }
 
-  .ore {
-    img{
-      width: 20px;
-    }
-  }
 }
 
 #breadcrumbs {

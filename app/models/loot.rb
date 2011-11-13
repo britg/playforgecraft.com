@@ -26,13 +26,23 @@ class Loot < ActiveRecord::Base
       item = Item.where(:classification_id => classification, :ore_id => ore).random
     end
 
+    def of_item item
+      where(:item_id => item)
+    end
+
     def best item
       scope = Loot.scoped
-      scope = scope.where(:item_id => item)
+      scope = scope.of_item item
 
-      scope = scope.order("attack desc") if item.weapon?
-      scope = scope.order("defense desc") if item.armor?
+      if item.weapon?
+        scope = scope.order("attack desc")
+      else
+        scope = scope.order("defense desc")
+      end
 
+      scope.each do |loot|
+        return loot unless loot.equipped?
+      end
       scope.first
     end
 
@@ -40,7 +50,7 @@ class Loot < ActiveRecord::Base
 
   def serializable_hash(opts = {})
     super((opts||{}).merge( :only => [:id, :attack, :defense],
-                            :methods => [:item_attributes, :level]))
+                            :methods => [:item_attributes, :level, :equipped?]))
   end
 
   def item_attributes

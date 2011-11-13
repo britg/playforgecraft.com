@@ -54,6 +54,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
 
     Loot.bind "add", @displayLoot, @
     Loot.bind "reset", @displayAllLoot, @
+    Loot.bind "ForgeCraft::ReachedBottomOfLootList", @reflectBottomOfLootList, @
     Loot.reset(ForgeCraft.Config.loot)
 
     $('.more-loot').click ->
@@ -61,10 +62,11 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
       return false
 
     $(window).scroll ->
-      if $('#loot-list-more').is(':visible')
+      if isScrolledIntoView($('#loot-list-more'))
         forgeView.fetchMoreLoot()
   
   fetchMoreLoot: ->
+    return if Loot.fetchLootLock is on
     clearTimeout(@fetchMoreLootTimeout)
     @fetchMoreLootTimeout = setTimeout ->
       Loot.fetchMore(10)
@@ -78,6 +80,10 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     lootView = new ForgeCraft.Views.LootView id: loot.id, model: loot, el: $('#loot-template').find('.loot').clone().get(0)
     lootView.render()
     lootView.addToLootList()
+
+  reflectBottomOfLootList: ->
+    $('#loot-list-more').remove()
+    $(window).unbind('scroll')
 
   clearOres: ->
     $('#ores').html('')

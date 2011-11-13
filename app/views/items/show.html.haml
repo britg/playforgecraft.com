@@ -1,26 +1,14 @@
 
 #armory.container-fluid
 
-  #class-nav.sidebar
+  .sidebar
 
-    = render "shared/class_nav"
+    %h2 Forgings
+
+    - current_player.loot.of_item(@item).each do |l|
+      = render "items/loot", :loot => l
   
   #armory.content
-
-    %ul#breadcrumbs
-      
-      %li
-        = link_to "#{@item.classification}".html_safe, armory_path(@item.classification)
-
-      %li.spacer &rarr;
-
-      %li
-        = link_to "#{@item.ore}".html_safe, armory_path(@item.classification, :anchor => @item.ore.to_s)
-
-      %li.spacer &rarr;
-
-      %li
-        %span{ :class => @item.rarity }= @item
 
     #item-content
 

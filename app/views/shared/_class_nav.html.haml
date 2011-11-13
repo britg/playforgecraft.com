@@ -1,8 +1,4 @@
 %ul.class-nav
-
-  %li{ :class => ("selected" if params[:action] == "index") }
-    = link_to image_tag(asset_path("codex.png")), armory_index_path, :class => "class-icon"
-    = link_to "Codex", armory_index_path, :class => "class-name"
   
   - for type in Classification.all
 

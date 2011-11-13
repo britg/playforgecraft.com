@@ -1,6 +1,8 @@
 .loot{ :class => "#{loot.to_css_classes} launch-equipper", "data-id" => loot.to_param }
 
-  = link_to image_tag("loot/sell.png", :class => "sell-image"), "javascript:void(0)", :class => "sell-action", :"data-external" => true, :title => "Sell"
+  
+  = image_tag "loot/equipped.png", :class => "equipped-indicator #{'hidden' unless loot.equipped?}", :title => "Equipped"
+  = link_to image_tag("loot/sell.png", :class => "sell-image"), "javascript:void(0)", :class => "sell-action #{'hidden' if loot.equipped?}", :"data-external" => true, :title => "Sell"
 
   .level{ :class => ("toohigh" if loot.level > current_player.try(:level))}
     lvl
