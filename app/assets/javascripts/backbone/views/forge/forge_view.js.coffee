@@ -54,7 +54,6 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
 
     Loot.bind "add", @displayLoot, @
     Loot.bind "reset", @displayAllLoot, @
-    Loot.bind "ForgeCraft::ReachedBottomOfLootList", @reflectBottomOfLootList, @
     Loot.reset(ForgeCraft.Config.loot)
 
     $('.more-loot').click ->

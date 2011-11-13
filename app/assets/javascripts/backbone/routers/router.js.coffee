@@ -5,9 +5,12 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     flashView.hide()
     loadingView.show()
     $(window).unbind('resize')
+    
     $('#content').load path, ->
       loadingView.hide()
       callback.apply() if callback?
+
+      $('#item-table').dataTable()
     
   routes:
 
