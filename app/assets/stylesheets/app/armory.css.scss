@@ -23,12 +23,22 @@
         padding: 3px 5px;
         padding-right: 0;
         margin-bottom: 3px;
+        width: 110px;
       }
     }
 
     label {
       text-align: left;
     }
+
+    .icon {
+      width: 20px;
+      vertical-align: -5px;
+    }
+  }
+
+  .create-item {
+    float: right;
   }
 }
 

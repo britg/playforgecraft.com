@@ -4,6 +4,11 @@ class ForgeCraft.Views.ArmoryView extends Backbone.View
     @bindItemDelete()
     @bindFilterChange()
 
+    @bindItemCreateLink()
+    @bindItemEditLink()
+
+    @bindItemFormCallbacks()
+
   bindItemDelete: ->
     $('.delete-item').live "ajax:complete", (e) ->
       item_id = $(e.target).attr("data-item-id")
@@ -52,3 +57,28 @@ class ForgeCraft.Views.ArmoryView extends Backbone.View
     loadingView.show()
     $('#item-table-wrap').load uri, ->
       loadingView.hide()
+
+  bindItemCreateLink: ->
+    $('.create-item').live 'click', ->
+      $.facebox ajax: "/items/new"
+
+      return false
+
+    
+
+  bindItemEditLink: ->
+    $('.edit-item').live 'click', ->
+      item_id = $(this).attr("rel")
+      $.facebox ajax: "/items/" + item_id + "/edit"
+
+      return false
+
+  bindItemFormCallbacks: ->
+
+    $('#new_item, .edit_item').live 'ajax:beforeSend', ->
+      loadingView.show()
+
+    $('#new_item, .edit_item').live 'ajax:complete', ->
+      loadingView.hide()
+      $(document).trigger 'close.facebox'
+      window.armoryView.applyFilter()

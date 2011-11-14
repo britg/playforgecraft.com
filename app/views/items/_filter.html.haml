@@ -13,7 +13,9 @@
               %li
                 %label{ :for => dom_id(c) }
                   %input{ :id => dom_id(c), :rel => :filter, :type => :radio, :name => "classification", :value => c.id, :checked => (params[:classification].to_s == c.id.to_s) }
-                  %span= c
+                  %span
+                    = image_tag(c.default_icon.url(:tiny), :class => "icon")
+                    = c
 
     .span2
 
@@ -45,7 +47,9 @@
               %li
                 %label{ :for => dom_id(o) }
                   %input{ :id => dom_id(o), :rel => :filter, :type => :checkbox, :name => "ores[]", :value => o.id, :checked => (params[:ores].include?(o.id)) }
-                  %span= o
+                  %span
+                    = image_tag(o.tile.url(:small), :class => "icon")
+                    = o
 
     .span2
 
@@ -60,6 +64,6 @@
               %li
                 %label{ :for => dom_id(r) }
                   %input{ :id => dom_id(r), :rel => :filter, :type => :checkbox, :name => "rarities[]", :value => r.id, :checked => (params[:rarities].include?(r.id))  }
-                  %span= r.name
+                  %span{ :class => r.to_css_class }= r.name
 
   .clearfix

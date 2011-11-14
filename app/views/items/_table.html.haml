@@ -57,6 +57,6 @@
 
           - if admin?
             %td
-              = link_to "Edit", edit_item_path(item.classification, item), :rel => "modal"
+              = link_to "Edit", edit_item_path(item), :class => "edit-item", :rel => item.id
               |
               = link_to "Delete", armory_path(item), :confirm => t("confirms.destroy_item"), :method => :delete, :remote => true, :"data-external" => true, :class => "delete-item", :"data-item-id" => item.id

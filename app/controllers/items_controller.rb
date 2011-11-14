@@ -18,9 +18,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @ore = Ore.find(params[:ore])
-    @item = @class.items.build( :name => "#{@ore} #{@class.to_s.singularize}", 
-                                :ore_id => @ore.to_param )
+    @item = Item.new( :name => "Item Name" )
   end
 
   def create

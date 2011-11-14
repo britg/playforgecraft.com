@@ -25,6 +25,13 @@ class Rarity < ActiveRecord::Base
 
   end
 
+  def to_css_class
+    if name == "Set"
+      return "itemset"
+    end
+    to_s
+  end
+
   def common?
     name == "Common"
   end

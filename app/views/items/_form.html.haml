@@ -1,38 +1,51 @@
 
-= form_for [:armory, item], :remote => true do |f|
+= form_for item, :remote => true do |f|
   
-  .form-section
+  .clearfix
     = f.label :name
-    %br
-    = f.text_field :name, :class => "required"
+    .input
+      = f.text_field :name, :class => "required"
 
-  .form-section
+  .clearfix
     = f.label :classification_id, "Class"
-    %br
-    = f.select :classification_id, Classification.to_select_options, :class => "required"
+    .input
+      = f.select :classification_id, Classification.to_select_options, :class => "required"
 
-  .form-section
+  .clearfix
     = f.label :ore_id, "Ore"
-    %br
-    = f.select :ore_id, Ore.to_select_options, :class => "required"
+    .input
+      = f.select :ore_id, Ore.to_select_options, :class => "required"
 
-  .form-section
+  .clearfix
     = f.label :rarity_id, "Rarity"
-    %br
-    = f.select :rarity_id, Rarity.to_select_options, :class => "required"
+    .input
+      = f.select :rarity_id, Rarity.to_select_options, :class => "required"
 
-  .form-section
-    = f.submit "Save"
+  .clearfix
+    = f.label :level
+    .input
+      = f.text_field :level
 
-:javascript
+  .clearfix
+    = f.label :attack_min
+    .input
+      = f.text_field :attack_min
 
-  $('#new_item, .edit_item')
-    
-    .bind('ajax:complete', function () {
-      ForgeCraft.reloadSelectedTab();
-      $(document).trigger('close.facebox');
-    })
+  .clearfix
+    = f.label :attack_max
+    .input
+      = f.text_field :attack_max
 
-    .bind('ajax:error', function () {
-      
-    });
+  .clearfix
+    = f.label :defense_min
+    .input
+      = f.text_field :defense_min
+
+  .clearfix
+    = f.label :defense_max
+    .input
+      = f.text_field :defense_max
+
+  .actions
+
+    = f.submit "Save", :class => "btn primary"
