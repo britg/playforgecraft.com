@@ -9,6 +9,8 @@ class ForgeCraft.Views.ArmoryView extends Backbone.View
 
     @bindItemFormCallbacks()
 
+    @bindItemSold()
+
   bindItemDelete: ->
     $('.delete-item').live "ajax:complete", (e) ->
       item_id = $(e.target).attr("data-item-id")
@@ -82,3 +84,10 @@ class ForgeCraft.Views.ArmoryView extends Backbone.View
       loadingView.hide()
       $(document).trigger 'close.facebox'
       window.armoryView.applyFilter()
+
+  bindItemSold: ->
+    window.Loot.bind "destroy", @removeItem, @
+
+  removeItem: (model) ->
+    $('.loot[data-id=' + model.get("id") + ']').fadeOut ->
+      $(this).remove()
