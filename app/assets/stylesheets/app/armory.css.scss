@@ -35,6 +35,19 @@
       width: 20px;
       vertical-align: -5px;
     }
+
+    .span2.first {
+      margin-left: 0;
+      width: 120px;
+
+      li {
+        width: 120px;
+      }
+    }
+
+    .span2.second {
+      margin-left: 10px;
+    }
   }
 
   .create-item {
