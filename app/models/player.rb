@@ -118,4 +118,8 @@ class Player < ActiveRecord::Base
     heroes.where(:hero_class_id => HeroClass.ranger).first
   end
 
+  def level_range
+    ((level-1) / 10)
+  end
+
 end

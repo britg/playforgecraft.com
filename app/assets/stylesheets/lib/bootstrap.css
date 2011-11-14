@@ -187,7 +187,7 @@ body {
   font-size: 13px;
   font-weight: normal;
   line-height: 18px;
-  color: #404040;
+  color: #aaa;
 }
 .container {
   width: 940px;
@@ -406,7 +406,7 @@ h4,
 h5,
 h6 {
   font-weight: bold;
-  color: #404040;
+  color: #aaa;
 }
 h1 small,
 h2 small,
@@ -579,7 +579,7 @@ fieldset legend {
   padding-left: 150px;
   font-size: 19.5px;
   line-height: 1;
-  color: #404040;
+  color: #aaa;
   *padding: 0 0 5px 145px;
   /* IE6-7 */
 
@@ -615,7 +615,7 @@ label {
   float: left;
   width: 130px;
   text-align: right;
-  color: #404040;
+  color: #aaa;
 }
 form .input {
   margin-left: 150px;
@@ -919,11 +919,9 @@ textarea[readonly] {
   cursor: not-allowed;
 }
 .actions {
-  background: #f5f5f5;
   margin-top: 18px;
   margin-bottom: 18px;
   padding: 17px 20px 18px 150px;
-  border-top: 1px solid #ddd;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
   border-radius: 0 0 3px 3px;
@@ -1389,7 +1387,7 @@ table .headerSortUp.purple, table .headerSortDown.purple {
 .topbar input:focus, .topbar input.focused {
   outline: 0;
   background-color: #ffffff;
-  color: #404040;
+  color: #aaa;
   text-shadow: 0 1px 0 #ffffff;
   border: 0;
   padding: 5px 10px;

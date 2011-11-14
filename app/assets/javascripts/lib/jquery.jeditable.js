@@ -90,7 +90,7 @@
                     || $.editable.types['defaults'].element;
         var reset    = $.editable.types[settings.type].reset 
                     || $.editable.types['defaults'].reset;
-        var callback = settings.callback || function() { ForgeCraft.reloadSelectedTab(); };
+        var callback = settings.callback || function() { };
         var onedit   = settings.onedit   || function() { }; 
         var onsubmit = settings.onsubmit || function() { };
         var onreset  = settings.onreset  || function() { };

@@ -4,27 +4,31 @@
 
     %h1.player= player_slug(@player)
 
-  .completion
+  %table.completion
 
-    .total
-      %span.count= @player.item_count
-      total items
-      (#{@player.item_percent}%)
-    
-    .rare
-      %span.count= @player.rare_count
-      rares
-      (#{@player.rare_percent}%)
+    %tbody
 
-    .epic
-      %span.count= @player.epic_count
-      epics
-      (#{@player.epic_percent}%)
+      %tr
 
-    .itemset
-      %span.count= @player.set_count
-      sets
-      (#{@player.set_percent}%)
+        %td.total
+          %span.count= @player.item_count
+          total items
+          (#{@player.item_percent}%)
+        
+        %td.rare
+          %span.count= @player.rare_count
+          rares
+          (#{@player.rare_percent}%)
+
+        %td.epic
+          %span.count= @player.epic_count
+          epics
+          (#{@player.epic_percent}%)
+
+        %td.itemset
+          %span.count= @player.set_count
+          sets
+          (#{@player.set_percent}%)
 
   .hero-wrap
     = render "heroes/heroes", :player => @player, :loot => nil

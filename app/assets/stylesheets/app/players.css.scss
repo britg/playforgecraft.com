@@ -26,46 +26,21 @@
     margin-bottom: 0;
   }
 
-  .completion {
+  table.completion {
 
     text-align: center;
     @include clearfix;
     margin-bottom: 20px;
-    
-    .rare {
-      @include column(6);
-    }
+    vertical-align: bottom;
 
-    .epic {
-      @include column(6);
-    }
-
-    .itemset {
-      @include column(6);
-    }
-
-    .total {
-      @include column(6, true);
+    td {
+      vertical-align: bottom;
+      border: 0;
+      padding: 20px 0;
     }
 
     .count {
       font-size: 400%;
-    }
-
-  }
-
-  .games {
-
-    #workorders {
-      @include column(8);
-    }
-    
-    #singleplayer {
-      @include column(8);
-    }
-
-    #multiplayer {
-      @include column(8, true);
     }
 
   }

@@ -5,7 +5,11 @@ class ItemsController < ApplicationController
   respond_to :html, :js
 
   def index
-    @items = Item.all
+    @items = parse_filters
+
+    if params[:filter].present?
+      render(:partial => "items/table", :locals => {:items => @items}) and return
+    end
   end
 
   def show
@@ -53,6 +57,37 @@ class ItemsController < ApplicationController
 
   def armory_nav
     select_nav('armory')
+  end
+
+  def parse_filters
+
+    parse_class
+    parse_level
+    parse_ores
+    parse_rarity
+    
+    @filtered = Item.of_class(params[:classification]) \
+                .in_range(params[:level_range]) \
+                .of_ore(params[:ores])
+                .of_rarity(params[:rarities])
+    @filtered
+
+  end
+
+  def parse_class
+    params[:classification] = 1 unless params[:classification].present?
+  end
+
+  def parse_level
+    params[:level_range] = current_player.level_range unless params[:level_range].present?
+  end
+
+  def parse_ores
+    params[:ores] = [1, 2, 3, 4, 5, 6] unless params[:ores].present?
+  end
+
+  def parse_rarity
+    params[:rarities] = [1, 2, 3, 4, 5] unless params[:rarities].present?
   end
 
 end

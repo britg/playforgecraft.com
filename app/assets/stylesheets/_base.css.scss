@@ -1,6 +1,5 @@
-@import "blueprint";
+@import "compass/utilities/general/clearfix";
 @import "compass/css3";
-@import "fancy-buttons";
 
 $background-color: #1b1c1e;
 $input-background-color: #777;
@@ -33,19 +32,6 @@ $sidebar-width: 250px;
 
 @mixin default_padding {
   padding: 20px;
-}
-
-@mixin font {
-  /*font-size: 12px/18px;*/
-  /*font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;*/
-}
-
-@mixin button {
-  @include fancy-button($rare-color, 100%, 5px, 0px);
-  margin-top: 1px;
-  padding: 0.45em 1em;
-  font-weight: normal;
-  @include font;
 }
 
 @mixin common {
@@ -140,7 +126,6 @@ $sidebar-width: 250px;
 
 @mixin forgecraft {
 
-  @include font;
   background: $background-color asset_url("background.png", image);
   text-align: left;
   color: $text-color;
@@ -158,10 +143,6 @@ $sidebar-width: 250px;
     display: none !important;
   }
 
-  .button {
-    @include button;
-  }
-
   a {
 
     @include highlighted-text;
@@ -175,9 +156,10 @@ $sidebar-width: 250px;
       @include highlighted-text;
     }
 
-    &.button {
-      @include button;
-    }
+  }
+
+  label {
+    color: $text-color;
   }
 
   .inset {
@@ -192,39 +174,6 @@ $sidebar-width: 250px;
     @include default_padding;
   }
 
-  label {
-    font-weight: normal;
-    font-size: 125%;
-    color: $rare-color;
-
-    &.error {
-      display: block;
-    }
-  }
-
-  input.text, input[type="text"], input.email, 
-  input[type="email"], input.pasword, input[type="password"],
-  select {
-    background: $input-background-color;
-    border: solid 1px $input-background-color;
-    color: $highlight-color;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;
-    margin-bottom: 20px;
-    font-size: 125%;
-    @include border-radius(5px);
-
-    &.error {
-      text-align: left;
-      font-weight: normal;
-      font-size: 100%;
-    }
-  }
-
-  input.button, input[type="button"], input.submit, input[type="submit"] {
-    @include button;
-    margin-bottom: 20px;
-  }
-
   .notice, .alert, .error {
     text-align: center;
     text-shadow: none;
@@ -236,30 +185,6 @@ $sidebar-width: 250px;
 
   #facebox {
     @include inset;
-  }
-
-  .ui-tabs-hide {
-    display: none;
-  }
-
-  table {
-
-    td {
-      vertical-align: top;
-    }
-    
-    
-    th {
-      background: none;
-    }
-  }
-
-  form.editable {
-    
-    textarea {
-      width: 95%;
-      display: block;
-    }
   }
 
   .copyright {

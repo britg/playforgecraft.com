@@ -9,8 +9,6 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     $('#content').load path, ->
       loadingView.hide()
       callback.apply() if callback?
-
-      $('#item-table').dataTable()
     
   routes:
 

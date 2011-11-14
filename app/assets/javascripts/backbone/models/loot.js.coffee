@@ -7,7 +7,7 @@ class ForgeCraft.Models.Loot extends Backbone.Model
 
   sell: ->
     self = @
-    loadingView.show()
+    
     @destroy success: (model, response) ->
       player.set(response.player)
       loadingView.hide()
@@ -38,4 +38,15 @@ class ForgeCraft.Collections.Loot extends Backbone.Collection
     if response.length < 1
       forgeView.reflectBottomOfLootList()
     Loot.fetchLootLock = off
+
+  sell: (loot_id) ->
+    loadingView.show()
+
+    loot = @get(loot_id)
+
+    unless loot? 
+      loot = new ForgeCraft.Models.Loot id: loot_id
+      window.Loot.add(loot)
+
+    loot.sell()
   

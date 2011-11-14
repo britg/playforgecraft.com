@@ -16,8 +16,9 @@ class ForgeCraft.Views.EquipperView extends Backbone.View
     self = @
     $('.loot').find('.sell-action').live 'click', (e) ->
       loot_id = $(this).parent().attr("data-id")
-      loot = Loot.get(loot_id)
-      loot.sell()
+      Loot.sell(loot_id)
+      # loot = Loot.get(loot_id)
+      # loot.sell()
 
       $(document).trigger("close.facebox")
       e.preventDefault()

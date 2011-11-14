@@ -2,21 +2,42 @@
 <div id="login-page">
 
   <div id="login-form" class="col-content">
-    <h3>Log In</h3>
 
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       
-      <div><%= f.label :email %><br />
-      <%= f.email_field :email, :class => "required email" %></div>
+      <fieldset>
+      <legend>Log In</legend>
 
-      <div><%= f.label :password %><br />
-      <%= f.password_field :password, :class => "required" %></div>
+      <div class="clearfix"><%= f.label :email %>
+        <div class="input">
+          <%= f.email_field :email, :class => "required email" %>
+        </div>
+      </div>
+
+      <div class="clearfix">
+        <%= f.label :password %>
+        <div class="input">
+          <%= f.password_field :password, :class => "required" %>
+        </div>
+      </div>
 
       <% if devise_mapping.rememberable? -%>
-        <div><%= f.check_box :remember_me, :checked => true %> <%= f.label :remember_me %></div>
+        <div class="input">
+          
+          <ul class="inputs-list">
+            <li>
+              <label>
+                <%= f.check_box :remember_me, :checked => true %>
+                <span>Remember me?</span>
+              </label>
+            </li>
+          </ul>
+
+        </div>
       <% end -%>
 
-      <div><%= f.submit "Sign in" %></div>
+      <div class="actions"><%= f.submit "Sign in", :class => "btn primary" %></div>
+      </fieldset>
     <% end %>
 
     <%= render :partial => "devise/shared/links" %>

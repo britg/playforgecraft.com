@@ -1,0 +1,18 @@
+%fieldset
+  %legend Forged
+
+  .input
+    %ul.inputs-list
+      %li
+        %label
+          %input#forge-state-forged{ :type => :radio, :name => "forge_state", :value => "forged", :checked => (params[:forge_state] == 'forged') }
+          %span Only forged items
+      %li
+        %label
+          %input#forge-state-unforged{ :type => :radio, :name => "forge_state", :value => "unforged", :checked => (params[:forge_state] == 'unforged') }
+          %span Only unforged items
+      
+      %li
+        %label
+          %input#forge-state-all{ :type => :radio, :name => "forge_state", :value => "all", :checked => (params[:forge_state] == 'all') }
+          %span Both

@@ -1,59 +1,62 @@
 
-%table#item-table.item-table
-  
-  %thead
+- if items.count < 1
+  %h3 There are no items matching the criteria.
+- else
+  %table#item-table.item-table
     
-    %tr
-
-      %th= image_tag("loot/forged.png", :class => "icon")
-
-      %th Item
-
-      %th Ore
-
-      %th Level
-
-      %th= image_tag("loot/attack.png", :class => "icon")
+    %thead
       
-      %th= image_tag("loot/defense.png", :class => "icon")
+      %tr
 
-      - if admin?
-        %th
+        %th= image_tag("loot/forged.png", :class => "icon")
 
-  %tbody
+        %th Item
 
-    - for item in items
+        %th Ore
 
-      %tr{ :id => dom_id(item, 'row') }
+        %th Level
+
+        %th= image_tag("loot/attack.png", :class => "icon")
         
-        %td
-          - if found = current_player.loot.best(item)
-            = link_to image_tag("loot/forged.png", :class => "icon"), loot_path(found), :"data-id" => found.id, :class => "launch-equipper", :"data-external" => true
-
-        %td.name
-          = link_to image_tag(item.icon.url(:tiny), :class => "icon"), item_path(item)
-          = link_to item, armory_path(item), :class => item.rarity
-
-        %td.ore
-          = image_tag item.ore.tile.url(:small), :title => item.ore, :alt => item.ore, :class => "icon"
-
-        %td
-          = admin_field item, :level
-
-        %td
-          - if item.weapon?
-            = admin_field item, :attack_min
-            = "-"
-            = admin_field item, :attack_max
-
-        %td
-          - if item.armor?
-            = admin_field item, :defense_min
-            = "-"
-            = admin_field item, :defense_max
+        %th= image_tag("loot/defense.png", :class => "icon")
 
         - if admin?
+          %th
+
+    %tbody
+
+      - for item in items
+
+        %tr{ :id => dom_id(item, 'row') }
+          
           %td
-            = link_to "Edit", edit_item_path(item.classification, item), :rel => "modal"
-            |
-            = link_to "Delete", armory_path(item), :confirm => t("confirms.destroy_item"), :method => :delete, :remote => true, :"data-external" => true, :class => "delete-item", :"data-item-id" => item.id
+            - if found = current_player.loot.best(item)
+              = link_to image_tag("loot/forged.png", :class => "icon"), loot_path(found), :"data-id" => found.id, :class => "launch-equipper", :"data-external" => true
+
+          %td.name
+            = link_to image_tag(item.icon.url(:tiny), :class => "icon"), item_path(item)
+            = link_to item, armory_path(item), :class => item.rarity
+
+          %td.ore
+            = image_tag item.ore.tile.url(:small), :title => item.ore, :alt => item.ore, :class => "icon"
+
+          %td
+            = admin_field item, :level
+
+          %td
+            - if item.weapon?
+              = admin_field item, :attack_min
+              = "-"
+              = admin_field item, :attack_max
+
+          %td
+            - if item.armor?
+              = admin_field item, :defense_min
+              = "-"
+              = admin_field item, :defense_max
+
+          - if admin?
+            %td
+              = link_to "Edit", edit_item_path(item.classification, item), :rel => "modal"
+              |
+              = link_to "Delete", armory_path(item), :confirm => t("confirms.destroy_item"), :method => :delete, :remote => true, :"data-external" => true, :class => "delete-item", :"data-item-id" => item.id

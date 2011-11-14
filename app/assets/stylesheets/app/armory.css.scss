@@ -2,70 +2,31 @@
 
 #armory-page {
   margin: 10px;
+
+  background: image_url("sidebar-fade.png") -10px top no-repeat;
+
+  .sidebar {
+
+    padding-top: 60px;
+    
+    legend {
+      margin-left: 0;
+      padding-left: 0;
+      font-size: 16px;
+      color: $highlight-color;
+    }
+
+    label {
+      text-align: left;
+    }
+  }
 }
 
 .editable {
   input {
-    width: 50px;
+    width: 30px;
+    text-align: center;
   }
-}
-
-#class-nav {
-}
-
-.class-nav {
-  li {
-    display: block;
-    padding: 10px 0 10px 10px;
-    font-size: 125%;
-    
-    .class-icon {
-      img {
-        width: 25px;
-        margin-right: 5px;
-        vertical-align: -7px;
-      }
-    }
-
-  }
-}
-
-.ore-nav {
-
-  @include gutter;
-
-  li {
-    list-style-type: none;
-    display: inline;
-    float: left;
-    padding: 20px;
-
-    a {
-      &:hover {
-        border: 0;
-      }
-    }
-
-    &.ui-tabs-selected {
-      background: #272727;
-    }
-
-    .ore-icon {
-      img {
-        width: 25px;
-        margin-right: 5px;
-        vertical-align: -7px;
-      }
-    }
-  }
-}
-
-#add-item-button {
-  float: right;
-} 
-
-#new-item {
-  padding: 20px;
 }
 
 #items-content {

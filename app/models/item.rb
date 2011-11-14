@@ -64,6 +64,13 @@ class Item < ActiveRecord::Base
       where(:rarity_id => rarity)     
     end
 
+    def in_range(range)
+      min = range.to_i * 10 + 1
+      max = min + 9
+      min = 0 if min < 10
+      where(["level between ? and ?", min, max])
+    end
+
     def armory_dump
       {
         :version => Version.last.try(:id)||0,

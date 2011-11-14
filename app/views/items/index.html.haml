@@ -5,5 +5,8 @@
     = render "items/filter"
 
   #armory.content
+
+    %h1#context Armory
     
-    = render "items/table", :items => Item.all
+    #item-table-wrap
+      = render "items/table", :items => @items
