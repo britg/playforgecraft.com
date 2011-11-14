@@ -4,6 +4,7 @@
   margin: 10px;
 
   background: image_url("sidebar-fade.png") -10px top no-repeat;
+  min-height: 768px;
 
   .sidebar {
 
@@ -14,6 +15,15 @@
       padding-left: 0;
       font-size: 16px;
       color: $highlight-color;
+    }
+
+    .inputs-list {
+      li {
+        @include inset;
+        padding: 3px 5px;
+        padding-right: 0;
+        margin-bottom: 3px;
+      }
     }
 
     label {
