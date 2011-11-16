@@ -174,15 +174,6 @@ $sidebar-width: 250px;
     @include default_padding;
   }
 
-  .notice, .alert, .error {
-    text-align: center;
-    text-shadow: none;
-
-    font-size: 125%;
-    font-weight: bold;
-    @include border-radius(5px);
-  }
-
   #facebox {
     @include inset;
   }

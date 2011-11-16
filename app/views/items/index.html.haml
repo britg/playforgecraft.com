@@ -8,11 +8,10 @@
 
     - if admin?
       = link_to "Create Item", new_item_path, :class => "btn primary create-item", :"data-external" => true
-
-    %h1#context Armory
     
     #item-table-wrap
-      = render "items/table", :items => @items
 
-    - if admin?
+      = render "items/table", :items => @items, :context => @context
+
+    - if admin? and @items.any?
       = link_to "Create Item", new_item_path, :class => "btn primary create-item", :"data-external" => true

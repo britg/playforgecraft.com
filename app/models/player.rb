@@ -20,9 +20,15 @@ class Player < ActiveRecord::Base
   before_create :starting_level
 
   class << self
+
     def ladder
       order("level desc")
     end
+
+    def range(range_id)
+      "#{(range_id.to_i*10+1)}-#{(range_id.to_i+1)*10}"
+    end
+
   end
 
   def to_s

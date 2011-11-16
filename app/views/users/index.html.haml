@@ -13,7 +13,7 @@
       = form_for @new_email do |f|
         
         = f.text_field :address, :class => ["text", "required", "email"], :title => "Enter your email address"
-        = f.submit "Notify Me"
+        = f.submit "Notify Me", :class => "btn primary"
 
       %p Your address will be permanently deleted as soon as you're notified.
 

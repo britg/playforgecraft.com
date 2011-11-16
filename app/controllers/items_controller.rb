@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
     @items = parse_filters
 
     if params[:filter].present?
-      render(:partial => "items/table", :locals => {:items => @items}) and return
+      render(:partial => "items/table", :locals => {:items => @items, :context => @context}) and return
     end
   end
 
@@ -59,8 +59,10 @@ class ItemsController < ApplicationController
 
   def parse_filters
 
-    parse_class
+    @context_arr = []
+
     parse_level
+    parse_class
     parse_ores
     parse_rarity
     
@@ -68,16 +70,20 @@ class ItemsController < ApplicationController
                 .in_range(params[:level_range]) \
                 .of_ore(params[:ores])
                 .of_rarity(params[:rarities])
+
+    @context = @context_arr.join(' ')
     @filtered
 
   end
 
-  def parse_class
-    params[:classification] = 1 unless params[:classification].present?
-  end
-
   def parse_level
     params[:level_range] = current_player.level_range unless params[:level_range].present?
+    @context_arr << "Level #{Player.range(params[:level_range])}"
+  end
+
+  def parse_class
+    params[:classification] = 1 unless params[:classification].present?
+    @context_arr << "#{Classification.find_by_id(params[:classification])}"
   end
 
   def parse_ores

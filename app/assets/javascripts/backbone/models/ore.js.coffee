@@ -248,7 +248,7 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
     yes
 
   createForgeable: (classification, ores) ->
-    console.log("Creating forgeable with class", classification)
+    # console.log("Creating forgeable with class", classification)
     # debugger;
     forgeable = new ForgeCraft.Models.Forgeable
       ores: ores

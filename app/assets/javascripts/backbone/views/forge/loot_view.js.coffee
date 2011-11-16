@@ -8,7 +8,7 @@ class ForgeCraft.Views.LootView extends Backbone.View
     @model.bind "destroy", @destroy, @
   
   render: ->
-    console.log "Rendering loot with", @model
+    # console.log "Rendering loot with", @model
 
     # Basic properties
     $(@el).addClass(@model.get("item_attributes").type).attr("id", "loot-" + @model.get("id"))

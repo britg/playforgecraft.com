@@ -24,12 +24,6 @@
         #logo-wrap
           = link_to image_tag("logo.png", :id => "logo"), root_path
 
-      #flash-wrap
-        - if flash.any?
-          - for key, msg in flash
-            .flash{ :class => key }
-              %p= msg
-
       #loading
         = image_tag "loading.gif"
 
