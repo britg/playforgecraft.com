@@ -76,9 +76,10 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
       @displayLoot(loot)
 
   displayLoot: (loot) ->
-    lootView = new ForgeCraft.Views.LootView id: loot.id, model: loot, el: $('#loot-template').find('.loot').clone().get(0)
-    lootView.render()
-    lootView.addToLootList()
+    if $('#loot-list').length > 0
+      lootView = new ForgeCraft.Views.LootView id: loot.id, model: loot, el: $('#loot-template').find('.loot').clone().get(0)
+      lootView.render()
+      lootView.addToLootList()
 
   reflectBottomOfLootList: ->
     $('#loot-list-more').remove()
