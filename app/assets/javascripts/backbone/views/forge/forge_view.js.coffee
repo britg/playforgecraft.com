@@ -26,7 +26,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @renderForge()
     @renderLoot()
 
-    if $('body').hasClass('no-touch')
+    unless Modernizr.touch
       $(window).unbind('resize').resize =>
         @renderForge()
 
