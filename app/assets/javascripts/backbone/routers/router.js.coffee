@@ -8,6 +8,7 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     
     $('#content').load path, ->
       loadingView.hide()
+      window.router.trigger "ForgeCraft::ViewLoaded", path
       callback.apply() if callback?
     
   routes:
@@ -54,8 +55,7 @@ class ForgeCraft.Routers.Router extends Backbone.Router
   forge: ->
     console.log "Triggering"
     menuView.selectNav('forge')
-    @load '/forge', ->
-      window.forgeView = new ForgeCraft.Views.ForgeView el: $('#forge').get(0)
+    @load '/forge'
 
   # Armory
 

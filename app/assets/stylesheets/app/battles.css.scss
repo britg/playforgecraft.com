@@ -1,4 +1,61 @@
 @import "base";
 
+$action-sidebar-width: 250px;
+
 #battles-page {
+}
+
+#battle {
+  
+  .battlers {
+    margin-right: $action-sidebar-width + 10px;
+
+    .player-bar {
+      margin-bottom: 10px;
+    }
+    
+  }
+
+  .log {
+    width: $action-sidebar-width;
+    float: right;
+    @include inset;
+
+    .new_message {
+      padding: 10px;
+    }
+
+    .action-list {
+      margin-left: 10px;
+      margin-right: 5px;
+      list-style-type: none;
+
+      li {
+        list-style-type: none;
+      }
+    }
+
+  }
+
+  .battler-wrap {
+    width: 50%;
+    height: 100%;
+    float: left;
+
+    background: image_url("sidebar-fade.png") right top no-repeat;
+
+    &.opponent {
+      background: none;
+    }
+
+  }
+
+  .battler {
+    padding: 10px 0 0 20px;
+
+    .hero {
+      margin-bottom: 10px;
+    }
+  }
+
 }

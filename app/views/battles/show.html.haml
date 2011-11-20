@@ -1,3 +1,30 @@
 #battle
-  
-  %h1 Battle!
+
+  .log
+
+    .new_message
+
+      = form_for [@battle, @new_action] do |f|
+        = f.hidden_field :type, :value => :message
+        = f.hidden_field :player_id, :value => current_player.to_param
+        = f.text_field :message
+
+    %ul.action-list
+      
+      - @battle.actions.each do |action|
+        %li.log-action= action
+
+  .battlers
+
+    .battler-wrap.you
+      .battler
+        .player-bar
+          %h2.player= current_player.name
+
+        .hero-wrap
+          = render "heroes/heroes", :player => current_player, :loot => nil
+    
+    .battler-wrap.opponent
+      .battler
+        .player-bar
+          %h2.player Ragnar of Thane

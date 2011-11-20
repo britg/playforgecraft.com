@@ -30,6 +30,9 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
       $(window).unbind('resize').resize =>
         @renderForge()
 
+    $(document).unbind('orientationchange').bind 'orientationchange', =>
+      @renderForge()
+
   initializeActiveForge: ->
     window.activeForgeView = new ForgeCraft.Views.ActiveForgeView el: $('#active-forge').get(0)
     activeForgeView.bind "ForgeCraft:activeForgeComplete", @forgeWithAccuracy, @
