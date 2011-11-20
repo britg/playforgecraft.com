@@ -1,3 +1,20 @@
-#battles-page
+#battles-page.container
 
-  %h1 Battles
+  .row
+
+    .span8
+      %h2 Single Player
+
+      - if current_player.active_battle.present?
+        = link_to "Resume Battle", battle_path(current_player.active_battle), :class => "btn primary"
+
+      - else
+        
+        = form_for :battle do |f|
+          
+          = f.hidden_field :mode, :value => :singleplayer
+
+          = f.submit "Start a Singleplayer Battle", :class => "btn primary"
+
+    .span8
+      %h2 Multiplayer

@@ -156,4 +156,16 @@ class PlayerTest < ActiveSupport::TestCase
 
   end
 
+  context "with battles" do
+    
+    setup do
+      @battle = Battle.create :player_ids => [@player.id], :mode => :singleplayer
+    end
+
+    should "have an active_singleplayer battle" do
+      assert_equal @battle, @player.current_singleplayer
+    end
+
+  end
+
 end

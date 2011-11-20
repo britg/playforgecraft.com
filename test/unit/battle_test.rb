@@ -12,6 +12,10 @@ class BattleTest < ActiveSupport::TestCase
       assert_not_nil Battle.multiplayer
     end
 
+    should "have an active scope" do
+      assert_not_nil Battle.active
+    end
+
   end
 
   context "A Battle" do

@@ -134,6 +134,10 @@ class Player < ActiveRecord::Base
     Battle.where(:player_ids => self.id)
   end
 
+  def active_battle
+    battles.singleplayer.active.first
+  end
+
   def won? battle
     battle.winner == self
   end

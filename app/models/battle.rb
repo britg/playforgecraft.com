@@ -24,6 +24,19 @@ class Battle
       where(:mode => :multiplayer)
     end
 
+    def active
+      where(:finished => false)
+    end
+
+    def singleplayer_for player
+      if player.battles.singleplayer.active.any?
+        return player.battles.singleplayer.active.first
+      end
+
+      Battle.create :player_ids => [player.id],
+                    :mode => :singleplayer
+    end
+
   end
 
   def winner

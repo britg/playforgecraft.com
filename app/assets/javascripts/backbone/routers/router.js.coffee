@@ -23,6 +23,7 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     "armory/:class": "class"
 
     "battles": "battles"
+    "battles/:id": "battle"
 
     "loot/:id": "loot"
 
@@ -75,3 +76,7 @@ class ForgeCraft.Routers.Router extends Backbone.Router
   battles: ->
     menuView.selectNav('battle')
     @load '/battles'
+
+  battle: (id) ->
+    menuView.selectNav('battle')
+    @load '/battles/' + id
