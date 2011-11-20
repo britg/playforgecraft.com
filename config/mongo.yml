@@ -1,0 +1,17 @@
+defaults: &defaults
+  host: 127.0.0.1
+  port: 27017
+  database: forgecraft
+
+development:
+  <<: *defaults
+  database: forgecraft
+
+test:
+  <<: *defaults
+  database: forgecraft_test
+
+# set these environment variables on your prod server
+production:
+  <<: *defaults
+  host: mongodb://heroku:193170bs@staff.mongohq.com:10064/app929333

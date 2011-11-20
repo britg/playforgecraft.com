@@ -50,3 +50,6 @@ gem 'activeadmin'
 gem 'meta_search', '>= 1.1.0.pre'
 gem 'paper_trail'
 gem 'rails-backbone'
+
+gem 'mongo_mapper'
+gem 'bson_ext', '>= 1.4'
