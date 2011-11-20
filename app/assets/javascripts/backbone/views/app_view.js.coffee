@@ -21,7 +21,8 @@ class ForgeCraft.Views.AppView extends Backbone.View
     window.forgeView = new ForgeCraft.Views.ForgeView el: $('#forge').get(0)
 
   startBattle: ->
-    window.battleView = new ForgeCraft.Views.BattleView el: $('#battle').get(0)
+    battle = new ForgeCraft.Models.Battle(ForgeCraft.Config.battle)
+    window.battleView = new ForgeCraft.Views.BattleView el: $('#battle').get(0), model: battle
 
   bindInternalLinks: ->
 

@@ -2,18 +2,27 @@ class Action
   include MongoMapper::EmbeddedDocument
   plugin MongoMapper::Plugins::Timestamps
 
-  belongs_to :battle
+  embedded_in :battle
 
   TYPES = [ :message ]
 
   key :message,     String
   key :player_id,   Integer
+  key :player_name, String
   key :type,        String
 
   timestamps!
 
+  def serializable_hash opts={}
+    super((opts||{}).merge(:methods => [:to_log]))
+  end
+
   def to_s
-    message
+    to_log
+  end
+
+  def to_log
+    "#{player_name}: #{message}"
   end
 
 end

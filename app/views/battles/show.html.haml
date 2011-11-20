@@ -4,14 +4,18 @@
 
     .new_message
 
-      = form_for [@battle, @new_action] do |f|
-        = f.hidden_field :type, :value => :message
-        = f.hidden_field :player_id, :value => current_player.to_param
-        = f.text_field :message
+      = form_for [@battle, Action.new], :remote => true, :format => :json do |f|
+        
+        = fields_for :battle_action do |action|
+          
+          = action.hidden_field :type, :value => :message
+          = action.hidden_field :player_id, :value => current_player.id
+          = action.hidden_field :player_name, :value => current_player.to_param
+          = action.text_field :message
 
     %ul.action-list
       
-      - @battle.actions.each do |action|
+      - @battle.actions.reverse.each do |action|
         %li.log-action= action
 
   .battlers
@@ -28,3 +32,7 @@
       .battler
         .player-bar
           %h2.player Ragnar of Thane
+
+:javascript
+
+  ForgeCraft.Config.battle = #{@battle.to_json}
