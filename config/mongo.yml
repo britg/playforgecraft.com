@@ -14,4 +14,8 @@ test:
 # set these environment variables on your prod server
 production:
   <<: *defaults
-  host: mongodb://heroku:193170bs@staff.mongohq.com:10064/app929333
+  host: staff.mongohq.com
+  port: 10064
+  databse: app929333
+  username: heroku
+  password: 193170bs
