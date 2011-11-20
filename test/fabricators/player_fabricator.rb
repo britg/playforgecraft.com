@@ -1,5 +1,5 @@
 Fabricator(:player) do
-  name "Herb"
+  name "Cheese"
   level 1
   experience 1
 end

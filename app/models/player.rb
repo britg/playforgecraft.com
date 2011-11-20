@@ -128,4 +128,14 @@ class Player < ActiveRecord::Base
     ((level-1) / 10)
   end
 
+  # Battles
+
+  def battles
+    Battle.where(:player_ids => self.id)
+  end
+
+  def won? battle
+    battle.winner == self
+  end
+
 end

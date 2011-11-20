@@ -50,8 +50,7 @@ class PlayerTest < ActiveSupport::TestCase
   end
 
   should "set initial level to 1" do
-    player = Player.create(:name => "Cheese")
-    assert_equal 1, player.level
+    assert_equal 1, @player.level
   end
 
   should "return name for to_s" do
