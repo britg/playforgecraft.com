@@ -16,6 +16,6 @@ production:
   <<: *defaults
   host: staff.mongohq.com
   port: 10064
-  databse: app929333
+  database: app929333
   username: heroku
   password: 193170bs
