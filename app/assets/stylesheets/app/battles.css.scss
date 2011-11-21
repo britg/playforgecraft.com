@@ -11,6 +11,11 @@ $action-sidebar-width: 250px;
   }
 }
 
+.battle-stub {
+  @include inset;
+  padding: 10px;
+}
+
 #battle {
   
   .battlers {

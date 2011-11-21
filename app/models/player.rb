@@ -32,7 +32,7 @@ class Player < ActiveRecord::Base
   end
 
   def to_s
-    "#{name} (#{level})"
+    "#{name}"
   end
 
   def to_param

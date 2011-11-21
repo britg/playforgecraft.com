@@ -14,6 +14,10 @@ class Opponent
 
   end
 
+  def to_s
+    name
+  end
+
   def to_css_class
     "advanced"
   end

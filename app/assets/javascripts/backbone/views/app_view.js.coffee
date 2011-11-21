@@ -13,6 +13,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
     self = @
     flashView.hide()
     loadingView.show()
+    @hideAllPopovers()
     $(window).unbind('resize')
     
     $('#content').load path, ->
@@ -74,3 +75,6 @@ class ForgeCraft.Views.AppView extends Backbone.View
         out
 
     })
+
+  hideAllPopovers: ->
+    $('.popover').remove()

@@ -85,7 +85,7 @@ class Battle
     self.second_player = Opponent.opponent_for(self.first_player)
   end
 
-  def cast_heroes
+  def snapshot_heroes
     
   end
 
