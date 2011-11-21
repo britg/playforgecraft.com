@@ -32,7 +32,9 @@ ForgeCraft::Application.routes.draw do
   # Battles
 
   resources :heroes
-  resources :battles
+  resources :battles do
+    resources :actions
+  end
 
   # Armory
   resources :armory, :controller => :items, :only => [:show, :index, :destroy]
@@ -46,9 +48,7 @@ ForgeCraft::Application.routes.draw do
 
   # Player
 
-  resources :players, :only => [:index, :show] do
-    resources :actions, :only => :create
-  end
+  resources :players, :only => [:index, :show]
   get "ladder", :to => "players#index"
   get 'menu', :to => "players#edit", :as => :menu
   get ':playername', :to => "players#show", :as => :player

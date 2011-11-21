@@ -1,3 +1,43 @@
 #battle
-  
-  %h1 Battle!
+
+  .log
+
+    .new_message
+
+      = form_for [@battle, Action.new], :remote => true, :format => :json do |f|
+        
+        = fields_for :battle_action do |action|
+          
+          = action.hidden_field :type, :value => :message
+          = action.hidden_field :player_id, :value => current_player.id
+          = action.hidden_field :player_name, :value => current_player.to_param
+          = action.text_field :message
+
+    %ul.action-list
+      
+      - @battle.actions.reverse.each do |action|
+        %li.log-action= render "actions/log_#{action.type}", :action => action
+
+  .battlers
+
+    .battler-wrap.you
+      .battler
+        .player-bar
+          %h2.player= current_player.name
+
+        .hero-wrap
+          = render "heroes/heroes", :player => current_player, :loot => nil
+    
+    .battler-wrap.opponent
+      .battler
+        .player-bar
+          %h2.player Ragnar of Thane
+
+#log-templates
+  - Action::TYPES.each do |action_type|
+    
+    = render "actions/log_#{action_type}", :action => Action.new(:type => action_type)
+
+:javascript
+
+  ForgeCraft.Config.battle = #{@battle.to_json}

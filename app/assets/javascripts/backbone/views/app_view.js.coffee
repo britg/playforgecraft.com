@@ -6,10 +6,23 @@ class ForgeCraft.Views.AppView extends Backbone.View
     @bindInternalLinks()
     @bindAlerts()
 
-  startHistory: ->
+    window.router.bind "ForgeCraft::ViewLoaded", @startAppContext, @
+    @startAppContext(window.location.pathname)
 
-    forging = (window.location.pathname == "/forge")
-    Backbone.history.start(pushState: true, silent: !forging)
+  startHistory: ->
+    Backbone.history.start(pushState: true, silent: true)
+
+  startAppContext: (path) ->
+    console.log "Starting app context with", path
+    @startForge() if path == '/forge'
+    @startBattle() if path.match '/battles/'  
+  
+  startForge: ->
+    window.forgeView = new ForgeCraft.Views.ForgeView el: $('#forge').get(0)
+
+  startBattle: ->
+    battle = new ForgeCraft.Models.Battle(ForgeCraft.Config.battle)
+    window.battleView = new ForgeCraft.Views.BattleView el: $('#battle').get(0), model: battle
 
   bindInternalLinks: ->
 

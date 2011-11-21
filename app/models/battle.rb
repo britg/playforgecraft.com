@@ -8,6 +8,8 @@ class Battle
   key :finished,    Boolean, :default => false
   key :winner_id,   Integer
 
+  has_many :actions
+
   timestamps!
 
   validates_presence_of :player_ids
