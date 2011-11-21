@@ -131,7 +131,7 @@ class Player < ActiveRecord::Base
   # Battles
 
   def battles
-    Battle.where(:player_ids => self.id)
+    Battle.where(:first_player_id => self.id)
   end
 
   def active_battle

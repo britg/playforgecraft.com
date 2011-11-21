@@ -23,15 +23,15 @@
     .battler-wrap.you
       .battler
         .player-bar
-          %h2.player= current_player.name
+          %h2.player= @battle.first_player.name
 
         .hero-wrap
-          = render "heroes/heroes", :player => current_player, :loot => nil
+          = render "heroes/heroes", :player => @battle.first_player, :loot => nil
     
     .battler-wrap.opponent
       .battler
         .player-bar
-          %h2.player Ragnar of Thane
+          %h2.player= @battle.second_player.name
 
 #log-templates
   - Action::TYPES.each do |action_type|

@@ -19,6 +19,7 @@ class BattlesController < ApplicationController
 
   def show
     @battle = Battle.find(params[:id])
+    redirect_to battles_path and return unless @battle.present?
   end
 
   #-----

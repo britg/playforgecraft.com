@@ -4,7 +4,7 @@
 
     .singleplayer.battle-mode.span8
 
-      %h2.mode Single Player
+      %h2.mode Current Battle
 
       - if current_player.active_battle.present?
         = render "battle_stub", :battle => current_player.active_battle
@@ -15,9 +15,9 @@
         = form_for :battle do |f|
           
           = f.hidden_field :mode, :value => :singleplayer
-          = f.hidden_field :player_ids, :value => current_player.id
+          = f.hidden_field :first_player_id, :value => current_player.id
 
-          = f.submit "Start a Singleplayer Battle", :class => "btn primary"
+          = f.submit "Start Battle &rarr;".html_safe, :class => "btn primary"
 
     .multiplayer.battle-mode.span8
       %h2.mode Multiplayer
