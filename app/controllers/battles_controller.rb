@@ -8,7 +8,6 @@ class BattlesController < ApplicationController
 
   def create
     @battle = Battle.new(params[:battle])
-    @battle.player_ids << current_player.id
 
     if @battle.save
       redirect_to battle_path(@battle)
