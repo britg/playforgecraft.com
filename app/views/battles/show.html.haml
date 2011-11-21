@@ -16,7 +16,7 @@
     %ul.action-list
       
       - @battle.actions.reverse.each do |action|
-        %li.log-action= action
+        %li.log-action= render "actions/log_#{action.type}", :action => action
 
   .battlers
 

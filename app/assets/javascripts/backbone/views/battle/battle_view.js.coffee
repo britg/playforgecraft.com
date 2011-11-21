@@ -4,6 +4,7 @@ class ForgeCraft.Views.BattleView extends Backbone.View
 
     @render()
     @bindActionResponse()
+    @bindWindowResize()
 
   render: ->
 
@@ -11,6 +12,12 @@ class ForgeCraft.Views.BattleView extends Backbone.View
     $('#battle').css height: battleHeight
     $('.battler-wrap').css height: battleHeight
     $('.log').css height: battleHeight
+
+  bindWindowResize: ->
+    self = @
+    unless Modernizr.touch
+      $(window).unbind('resize').resize ->
+        self.render()
 
   bindActionResponse: ->
     self = @
