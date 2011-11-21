@@ -33,7 +33,7 @@ module ApplicationHelper
   end
 
   def equipment_icon(loot)
-    image_tag(loot.icon, :class => "loot-icon", :title => loot.name, :"data-type" => loot.to_css_classes, :"data-level" => loot.level, :"data-attack" => loot.attack, :"data-defense" => loot.defense)
+    image_tag(loot.icon, :class => "loot-icon launch-equipper", :"data-id" => loot.id, :title => loot.name, :"data-type" => loot.to_css_classes, :"data-level" => loot.level, :"data-attack" => loot.attack, :"data-defense" => loot.defense)
   end
 
   def tile_image(t)

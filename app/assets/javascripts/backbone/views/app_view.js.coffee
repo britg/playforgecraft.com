@@ -52,6 +52,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
     $('.notice').alert()
 
   bindPopovers: ->
+    return if Modernizr.touch
     $('.loot-icon').popover({
       html: true
       title: ->
