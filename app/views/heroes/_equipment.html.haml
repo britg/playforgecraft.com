@@ -15,7 +15,7 @@
           = plus_minus(loot.attack)
 
     .equipped-item
-      = image_tag(hero.weapon1.icon) if hero.weapon1.present?
+      = equipment_icon(hero.weapon1) if hero.weapon1.present?
 
   - if hero.ranger?
     .slot-spacer
@@ -32,7 +32,7 @@
             = plus_minus(loot.attack)
 
       .equipped-item
-        = image_tag(hero.weapon2.icon) if hero.weapon2.present?
+        = equipment_icon(hero.weapon2) if hero.weapon2.present?
 
   .slot.armor{ :class => "#{'enabled' if armor_equippable} #{hero.armor.to_css_classes if hero.armor.present?}", :rel => "armor", :"data-hero-id" => hero.id }
 
@@ -44,7 +44,7 @@
           = plus_minus(loot.defense)
 
     .equipped-item
-      = image_tag(hero.armor.icon) if hero.armor.present?
+      = equipment_icon(hero.armor) if hero.armor.present?
 
   .slot.leggings{ :class => "#{'enabled' if leggings_equippable} #{hero.leggings.to_css_classes if hero.leggings.present?}", :rel => "leggings", :"data-hero-id" => hero.id }
 
@@ -56,7 +56,7 @@
           = plus_minus(loot.defense)
 
     .equipped-item
-      = image_tag(hero.leggings.icon) if hero.leggings.present?
+      = equipment_icon(hero.leggings) if hero.leggings.present?
 
 .explain
 

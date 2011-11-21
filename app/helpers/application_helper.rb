@@ -32,6 +32,10 @@ module ApplicationHelper
     link_to "#{loot_icon(item)} #{item}".html_safe, item_path(item), :class => [item.rarity, "loot-with-icon"]
   end
 
+  def equipment_icon(loot)
+    image_tag(loot.icon, :class => "loot-icon", :title => loot.name, :"data-type" => loot.to_css_classes, :"data-level" => loot.level, :"data-attack" => loot.attack, :"data-defense" => loot.defense)
+  end
+
   def tile_image(t)
     image_tag Ore.tile_cache(t.ore_id), 
               :class => t.to_ore, 

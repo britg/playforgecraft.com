@@ -195,5 +195,18 @@ $sidebar-width: 250px;
     background-color: rgba($background-color, 0.7);
   }
 
+  .popover .inner {
+    background: $background-color;
+  }
+
+  .popover .title {
+    background: $dark-border-color;
+  }
+
+  .popover .content {
+    background: $light-border-color;
+  }
+
+
 }
 

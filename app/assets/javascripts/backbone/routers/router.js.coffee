@@ -2,14 +2,7 @@ class ForgeCraft.Routers.Router extends Backbone.Router
   initialize: (options) ->
 
   load: (path, callback) ->
-    flashView.hide()
-    loadingView.show()
-    $(window).unbind('resize')
-    
-    $('#content').load path, ->
-      loadingView.hide()
-      window.router.trigger "ForgeCraft::ViewLoaded", path
-      callback.apply() if callback?
+    appView.load(path, callback)
     
   routes:
 

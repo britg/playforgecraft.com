@@ -17,3 +17,9 @@
   - if @loot.level <= current_player.level
     .heroes-wrap
       = render "heroes/heroes", :player => current_player, :loot => @loot
+
+:javascript
+  
+  $(function () {
+    appView.bindPopovers()
+  })
