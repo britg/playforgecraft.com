@@ -33,6 +33,11 @@
         .player-bar
           %h2.player Ragnar of Thane
 
+#log-templates
+  - Action::TYPES.each do |action_type|
+    
+    = render "actions/log_#{action_type}", :action => Action.new(:type => action_type)
+
 :javascript
 
   ForgeCraft.Config.battle = #{@battle.to_json}

@@ -11,7 +11,10 @@ class ForgeCraft.Views.BattleView extends Backbone.View
     battleHeight = $(window).height() - $('.topbar').height()
     $('#battle').css height: battleHeight
     $('.battler-wrap').css height: battleHeight
-    $('.log').css height: battleHeight
+    logHeight = $('.log').height()
+
+    if logHeight < battleHeight
+      $('.log').css minHeight: battleHeight
 
   bindWindowResize: ->
     self = @
@@ -31,6 +34,7 @@ class ForgeCraft.Views.BattleView extends Backbone.View
 
   displayNewAction: (action) ->
 
-    console.log "Displaying new action!", action
-    $('.action-list').prepend('<li class="log-action">' + action.get("to_log") + '</li>')
+    actionView = new ForgeCraft.Views.ActionView model: action
+    actionView.render()
+
     $('#battle_action_message').val('')
