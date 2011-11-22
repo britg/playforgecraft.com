@@ -10,7 +10,7 @@ class BattlesController < ApplicationController
     @battle = Battle.new(params[:battle])
 
     if @battle.save
-      redirect_to battle_path(@battle)
+      render :json => @battle
     else
       render :json => @battle.errors
     end

@@ -2,16 +2,18 @@
 
   .log
 
-    .new_message
+    - if @battle.multiplayer?
 
-      = form_for [@battle, Action.new], :remote => true, :format => :json do |f|
-        
-        = fields_for :battle_action do |action|
+      .new_message
+
+        = form_for [@battle, Action.new], :remote => true, :format => :json do |f|
           
-          = action.hidden_field :type, :value => :message
-          = action.hidden_field :player_id, :value => current_player.id
-          = action.hidden_field :player_name, :value => current_player.to_param
-          = action.text_field :message
+          = fields_for :battle_action do |action|
+            
+            = action.hidden_field :type, :value => :message
+            = action.hidden_field :player_id, :value => current_player.id
+            = action.hidden_field :player_name, :value => current_player.to_param
+            = action.text_field :message
 
     %ul.action-list
       

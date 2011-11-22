@@ -4,7 +4,7 @@ class Action
 
   embedded_in :battle
 
-  TYPES = [ :message, :action ]
+  TYPES = [ :message, :action, :notification ]
 
   key :message,     String
   key :player_id,   Integer

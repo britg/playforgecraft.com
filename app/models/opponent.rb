@@ -7,7 +7,9 @@ class Opponent
   class << self
 
     def opponent_for player
-      create :name => NameGenerator.create,
+      rand = Random.new
+      name = group_names[rand(group_names.count-1)]
+      create :name => name,
              :level => player.level
     end
 
@@ -27,6 +29,21 @@ class Opponent
       ranger = HeroSnapshot.new(opposing_ranger.attributes)
       ranger.name = NameGenerator.create
       ranger
+    end
+
+    def group_names
+      [ "Travelling Bandits",
+        "Highwaymen",
+        "Angry Dwarves",
+        "Mercenaries",
+        "Kragg Caravan",
+        "Thjodrynn's Vanguard",
+        "Orc Scouts",
+        "Pirates",
+        "Forsworn Legion",
+        "Escaped Miners",
+        "Shamblers"
+      ]
     end
 
   end

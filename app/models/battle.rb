@@ -4,9 +4,9 @@ class Battle
   MODES = [ :singleplayer, :multiplayer ]
 
   key :first_player_id,   Integer
-  key :second_player_id,  String # Opponents have string ids
-  key :winner_id,         Integer
-  key :loser_id,          Integer
+  key :second_player_id,  String # Opponents may have string ids
+  key :winner_id,         String
+  key :loser_id,          String
   key :mode,              String
   key :finished,          Boolean, :default => false
   key :finish_reason,     String
@@ -40,22 +40,28 @@ class Battle
   before_validation :choose_opponent, :if => :singleplayer?
   before_validation :snapshot_heroes
 
+  after_create :start_actions
+
   class << self
     
     def singleplayer
-      where(:mode => :singleplayer)
+      sorted.where(:mode => :singleplayer)
     end
 
     def multiplayer
-      where(:mode => :multiplayer)
+      sorted.where(:mode => :multiplayer)
     end
 
     def active
-      where(:finished => false)
+      sorted.where(:finished => false)
     end
 
     def finished
-      where(:finished => true)
+      sorted.where(:finished => true)
+    end
+
+    def sorted
+      sort("created_at desc")
     end
 
   end
@@ -73,11 +79,11 @@ class Battle
   end
 
   def winner
-    Player.find_by_id(self.winner_id)
+    Opponent.find_by_id(self.winner_id)||Player.find_by_id(self.winner_id)
   end
 
   def loser
-    Player.find_by_id(self.loser_id)
+    Opponent.find_by_id(self.loser_id)||Player.find_by_id(self.loser_id)
   end
 
   def first_player
@@ -97,9 +103,14 @@ class Battle
     self.second_player_id = player.id
   end
 
+  def result_for current_player
+    return "victory" if winner_id.to_s == current_player.id.to_s
+    "defeat"
+  end
+
   def forfeit forfeiter
     loser_id = forfeiter.id
-    winner_id = 0
+    winner_id = (first_player == forfeiter ? second_player_id : first_player_id)
 
     update_attributes(:finished => true, 
                       :finish_reason => 'forfeit',
@@ -135,6 +146,11 @@ class Battle
     self.second_warrior = Opponent.warrior_for(self.first_warrior)
     self.second_thief = Opponent.thief_for(self.first_thief)
     self.second_ranger = Opponent.ranger_for(self.first_ranger)
+  end
+
+  def start_actions
+    start_action = self.actions.build(:message => "It's your turn!", :type => :notification)
+    start_action.save
   end
 
 end

@@ -9,6 +9,12 @@ $action-sidebar-width: 250px;
   .mode {
     margin-bottom: 1em;
   }
+
+  .current-battle {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: solid 1px $light-border-color;
+  }
 }
 
 .battle-stub {
@@ -31,6 +37,18 @@ $action-sidebar-width: 250px;
   .forfeit-link {
     float: right;
     color: $light-border-color;
+  }
+
+  .result {
+    float: right;
+
+    &.defeat {
+      color: $blood-color;
+    }
+
+    &.victory {
+      color: $advanced-color;
+    }
   }
 
   table.stats {
@@ -72,10 +90,18 @@ $action-sidebar-width: 250px;
     .action-list {
       margin-left: 10px;
       margin-right: 5px;
+      margin-top: 10px;
       list-style-type: none;
 
       li {
         list-style-type: none;
+      }
+    }
+
+    .action {
+      &.notification {
+        color: $highlight-color;
+        font-weight: bold;
       }
     }
 

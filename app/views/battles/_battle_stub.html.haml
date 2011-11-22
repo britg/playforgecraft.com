@@ -8,8 +8,12 @@
       %br
       = link_to "Forfeit", battle_path(battle), :method => :delete, :remote => true, :confirm => "Forfeit this battle and pay your opponent 200g?", :class => "forfeit-link", :"data-external" => true
 
+  - if battle.finished?
+    %h3.result{ :class => battle.result_for(current_player) }= battle.result_for(current_player).capitalize
+
   %h3
-    %span{ :class => battle.first_player.to_css_class }= battle.first_player
+    - unless battle.singleplayer?
+      %span{ :class => battle.first_player.to_css_class }= battle.first_player
     vs
     %span{ :class => battle.second_player.to_css_class }= battle.second_player
 
@@ -32,8 +36,8 @@
         %td.stat Started
         %td.val= timeago(battle.created_at)
         
-        %td.stat Last Move
-        %td.val= timeago(battle.updated_at)
+        %td.stat Last Action
+        %td.val= battle.actions.last.try(:message)
 
 
   .clear

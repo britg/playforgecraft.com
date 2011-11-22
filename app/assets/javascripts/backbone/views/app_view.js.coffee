@@ -29,6 +29,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
 
     @startForge() if path == '/forge'
     @startBattle() if path.match '/battles/'
+    @startBattleLobby() if path.match /\/battles$/
 
     @bindPopovers()
 
@@ -40,6 +41,15 @@ class ForgeCraft.Views.AppView extends Backbone.View
   startBattle: ->
     battle = new ForgeCraft.Models.Battle(ForgeCraft.Config.battle)
     window.battleView = new ForgeCraft.Views.BattleView el: $('#battle').get(0), model: battle
+
+  startBattleLobby: ->
+
+    $('#new_battle').bind "ajax:complete", (event, response) ->
+      new_battle = JSON.parse(response.responseText)
+      Backbone.history.navigate("battles/" + new_battle.id, true)
+
+    $('.battle-stub').each (i, stub) ->
+      battleStubView = new ForgeCraft.Views.BattleStubView el: $(this).get(0)
 
   bindInternalLinks: ->
 

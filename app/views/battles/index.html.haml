@@ -6,7 +6,7 @@
 
       .current-battle
 
-        %h2.mode Current Battle
+        %h2.mode Singleplayer
 
         - if current_player.active_battle.present?
           = render "battle_stub", :battle => current_player.active_battle
@@ -14,7 +14,7 @@
 
         - else
           
-          = form_for :battle do |f|
+          = form_for Battle.new, :remote => true, :format => :json do |f|
             
             = f.hidden_field :mode, :value => :singleplayer
             = f.hidden_field :first_player_id, :value => current_player.id
@@ -23,8 +23,6 @@
 
       - if @previous_battles.any?
         .previous-battles
-
-          %h2.mode Previous Battles
 
           - @previous_battles.each do |previous|
             
