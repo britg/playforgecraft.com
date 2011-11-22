@@ -7,9 +7,26 @@ class Opponent
   class << self
 
     def opponent_for player
-      o = self.find_by_level(player.level)
-      o ||= create :name => "Ragnar of Thane",
-                   :level => player.level
+      create :name => NameGenerator.create,
+             :level => player.level
+    end
+
+    def warrior_for opposing_warrior
+      warrior = HeroSnapshot.new(opposing_warrior.attributes)
+      warrior.name = NameGenerator.create
+      warrior
+    end
+
+    def thief_for opposing_thief
+      thief = HeroSnapshot.new(opposing_thief.attributes)
+      thief.name = NameGenerator.create
+      thief
+    end
+
+    def ranger_for opposing_ranger
+      ranger = HeroSnapshot.new(opposing_ranger.attributes)
+      ranger.name = NameGenerator.create
+      ranger
     end
 
   end
@@ -19,7 +36,7 @@ class Opponent
   end
 
   def to_css_class
-    "advanced"
+    "itemset"
   end
 
 end

@@ -26,12 +26,15 @@
           %h2.player= @battle.first_player.name
 
         .hero-wrap
-          = render "heroes/heroes", :player => @battle.first_player, :loot => nil
+          = render "hero_snapshots", :warrior => @battle.first_warrior, :thief => @battle.first_thief, :ranger => @battle.first_ranger
     
     .battler-wrap.opponent
       .battler
         .player-bar
           %h2.player= @battle.second_player.name
+
+        .hero-wrap
+          = render "hero_snapshots", :warrior => @battle.second_warrior, :thief => @battle.second_thief, :ranger => @battle.second_ranger
 
 #log-templates
   - Action::TYPES.each do |action_type|

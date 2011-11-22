@@ -13,7 +13,40 @@ $action-sidebar-width: 250px;
 
 .battle-stub {
   @include inset;
+  @include clearfix;
+
   padding: 10px;
+  margin-bottom: 10px;
+
+  .controls {
+    float: right;
+    @include clearfix;
+    margin-top: 10px;
+  }
+
+  .battle-link {
+    float: right;
+  }
+
+  .forfeit-link {
+    float: right;
+    color: $light-border-color;
+  }
+
+  table.stats {
+    font-size: 81%;
+
+    td {
+      padding: 5px;
+      border: 0;
+
+      &.stat {
+        width: 60px;
+        text-align: right;
+        color: $light-border-color;
+      }
+    }
+  }
 }
 
 #battle {

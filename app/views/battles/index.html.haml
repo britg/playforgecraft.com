@@ -4,20 +4,33 @@
 
     .singleplayer.battle-mode.span8
 
-      %h2.mode Current Battle
+      .current-battle
 
-      - if current_player.active_battle.present?
-        = render "battle_stub", :battle => current_player.active_battle
-        
+        %h2.mode Current Battle
 
-      - else
-        
-        = form_for :battle do |f|
+        - if current_player.active_battle.present?
+          = render "battle_stub", :battle => current_player.active_battle
           
-          = f.hidden_field :mode, :value => :singleplayer
-          = f.hidden_field :first_player_id, :value => current_player.id
 
-          = f.submit "Start Battle &rarr;".html_safe, :class => "btn primary"
+        - else
+          
+          = form_for :battle do |f|
+            
+            = f.hidden_field :mode, :value => :singleplayer
+            = f.hidden_field :first_player_id, :value => current_player.id
+
+            = f.submit "Start Battle".html_safe, :class => "btn primary"
+
+      - if @previous_battles.any?
+        .previous-battles
+
+          %h2.mode Previous Battles
+
+          - @previous_battles.each do |previous|
+            
+            = render "battle_stub", :battle => previous
+
+      
 
     .multiplayer.battle-mode.span8
       %h2.mode Multiplayer

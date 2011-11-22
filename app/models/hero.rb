@@ -22,6 +22,10 @@ class Hero < ActiveRecord::Base
 
   end
 
+  def to_s
+    name||job.to_s
+  end
+
   def warrior?
     @is_warrior ||= (job == HeroClass.warrior)
   end

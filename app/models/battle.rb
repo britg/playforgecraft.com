@@ -6,6 +6,7 @@ class Battle
   key :first_player_id,   Integer
   key :second_player_id,  String # Opponents have string ids
   key :winner_id,         Integer
+  key :loser_id,          Integer
   key :mode,              String
   key :finished,          Boolean, :default => false
   key :finish_reason,     String
@@ -13,15 +14,31 @@ class Battle
 
   has_many :actions
 
+  has_one :first_warrior, :class_name => "HeroSnapshot"
+  has_one :first_thief, :class_name => "HeroSnapshot"
+  has_one :first_ranger, :class_name => "HeroSnapshot"
+
+  has_one :second_warrior, :class_name => "HeroSnapshot"
+  has_one :second_thief, :class_name => "HeroSnapshot"
+  has_one :second_ranger, :class_name => "HeroSnapshot"
+
   timestamps!
 
   validates_presence_of :first_player_id
+  validates_presence_of :first_warrior
+  validates_presence_of :first_thief
+  validates_presence_of :first_ranger
+
   validates_presence_of :second_player_id
+  validates_presence_of :second_warrior
+  validates_presence_of :second_thief
+  validates_presence_of :second_ranger
+
   validates_presence_of :mode
   validates_inclusion_of :mode, :in => MODES.map(&:to_s)
 
   before_validation :choose_opponent, :if => :singleplayer?
-  after_create :snapshot_heroes
+  before_validation :snapshot_heroes
 
   class << self
     
@@ -35,6 +52,10 @@ class Battle
 
     def active
       where(:finished => false)
+    end
+
+    def finished
+      where(:finished => true)
     end
 
   end
@@ -55,6 +76,10 @@ class Battle
     Player.find_by_id(self.winner_id)
   end
 
+  def loser
+    Player.find_by_id(self.loser_id)
+  end
+
   def first_player
     Player.find_by_id(self.first_player_id)
   end
@@ -73,10 +98,13 @@ class Battle
   end
 
   def forfeit forfeiter
-    winner_id = (first_player.id == forfeiter.id ? second_player_id : first_player_id)
+    loser_id = forfeiter.id
+    winner_id = 0
+
     update_attributes(:finished => true, 
                       :finish_reason => 'forfeit',
-                      :winner_id => winner_id)
+                      :winner_id => winner_id,
+                      :loser_id => loser_id)
   end
 
   # Callbacks
@@ -86,7 +114,27 @@ class Battle
   end
 
   def snapshot_heroes
-    
+    self.snapshot_first_player_heroes
+    self.generate_opponent_heroes if self.singleplayer?
+    self.snapshot_second_player_heroes if self.multiplayer?
+  end
+
+  def snapshot_first_player_heroes
+    self.first_warrior = HeroSnapshot.snapshot_of(self.first_player.warrior)
+    self.first_thief = HeroSnapshot.snapshot_of(self.first_player.thief)
+    self.first_ranger = HeroSnapshot.snapshot_of(self.first_player.ranger)
+  end
+
+  def snapshot_second_player_heroes
+    self.second_warrior = HeroSnapshot.snapshot_of(self.second_player.warrior)
+    self.second_thief = HeroSnapshot.snapshot_of(self.second_player.thief)
+    self.second_ranger = HeroSnapshot.snapshot_of(self.second_player.ranger)
+  end
+
+  def generate_opponent_heroes
+    self.second_warrior = Opponent.warrior_for(self.first_warrior)
+    self.second_thief = Opponent.thief_for(self.first_thief)
+    self.second_ranger = Opponent.ranger_for(self.first_ranger)
   end
 
 end

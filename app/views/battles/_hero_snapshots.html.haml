@@ -1,0 +1,29 @@
+.heroes.row
+
+  .hero.warrior.span-one-third
+    .inner
+      
+      %h2.name= warrior
+
+      .stats
+
+        = render "heroes/stats", :hero => warrior
+
+
+  .hero.thief.span-one-third
+    .inner
+      
+      %h2.name= thief
+
+      .stats
+
+        = render "heroes/stats", :hero => thief
+
+  .hero.ranger.span-one-third
+    .inner
+      
+      %h2.name= ranger
+
+      .stats
+
+        = render "heroes/stats", :hero => ranger

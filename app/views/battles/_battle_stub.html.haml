@@ -1,8 +1,43 @@
 .battle-stub
 
-  %h4 
+  - unless battle.finished?
+    .controls
+
+      = link_to "Resume Battle", battle_path(battle), :class => "btn primary battle-link"
+      %br
+      %br
+      = link_to "Forfeit", battle_path(battle), :method => :delete, :remote => true, :confirm => "Forfeit this battle and pay your opponent 200g?", :class => "forfeit-link", :"data-external" => true
+
+  %h3
     %span{ :class => battle.first_player.to_css_class }= battle.first_player
     vs
     %span{ :class => battle.second_player.to_css_class }= battle.second_player
 
-  = link_to "Resume Battle", battle_path(battle), :class => "btn primary"
+  %table.stats
+    
+    %tbody
+
+      - if battle.finished?
+        
+        %tr
+          
+          %td.stat Victor
+          %td.val= battle.winner
+          
+          %td.stat Defeated
+          %td.val= battle.loser
+
+      %tr
+        
+        %td.stat Started
+        %td.val= timeago(battle.created_at)
+        
+        %td.stat Last Move
+        %td.val= timeago(battle.updated_at)
+
+
+  .clear
+
+  
+
+  

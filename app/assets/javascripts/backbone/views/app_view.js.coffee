@@ -28,9 +28,11 @@ class ForgeCraft.Views.AppView extends Backbone.View
     console.log "Starting app context with", path
 
     @startForge() if path == '/forge'
-    @startBattle() if path.match '/battles/'  
+    @startBattle() if path.match '/battles/'
 
     @bindPopovers()
+
+    $('abbr.timeago').timeago()
   
   startForge: ->
     window.forgeView = new ForgeCraft.Views.ForgeView el: $('#forge').get(0)

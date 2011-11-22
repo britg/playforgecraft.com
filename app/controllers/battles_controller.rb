@@ -3,7 +3,7 @@ class BattlesController < ApplicationController
   before_filter :require_player!, :set_nav
 
   def index
-      
+    @previous_battles = current_player.battles.finished.limit(10)
   end
 
   def create
@@ -20,6 +20,12 @@ class BattlesController < ApplicationController
   def show
     @battle = Battle.find(params[:id])
     redirect_to battles_path and return unless @battle.present?
+  end
+
+  def destroy
+    @battle = Battle.find(params[:id])
+    @battle.forfeit(current_player)
+    render :json => { :result => :success }
   end
 
   #-----
