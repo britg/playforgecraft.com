@@ -12,7 +12,7 @@ class HeroSnapshot
   key :defense,     Integer
   key :weapon1_id,  Integer
   key :weapon2_id,  Integer
-  key :armor_id,   Integer
+  key :armor_id,    Integer
   key :leggings_id, Integer
 
   class << self

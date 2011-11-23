@@ -12,6 +12,9 @@ class ForgeCraft.Views.ActionView extends Backbone.View
     if @model.get("type") == 'message'
       @buildMessage()
 
+    if @model.get("type") == 'action'
+      @buildAction()
+
     $('.action-list').prepend($(@el))
 
   buildMessage: ->
@@ -19,3 +22,8 @@ class ForgeCraft.Views.ActionView extends Backbone.View
     $(@el).html @template().clone()
     $(@el).find('.actor').html @model.get("player_name")
     $(@el).find('.content').html @model.get("message")
+
+  buildAction: ->
+    
+    $(@el).html @template().clone()
+    $(@el).find('.content').html @model.get("message")    

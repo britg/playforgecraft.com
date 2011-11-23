@@ -1,6 +1,6 @@
-.heroes.row
+.heroes
 
-  .hero.warrior.span-one-third
+  .hero.warrior{ :id => warrior.id, :class => (controllable ? "controllable" : "enemy" ) }
     .inner
       
       %h2.name= warrior
@@ -9,8 +9,21 @@
 
         = render "heroes/stats", :hero => warrior
 
+      - if controllable
 
-  .hero.thief.span-one-third
+        .actions
+          
+          = link_to "Attack", "#", :external => true, :class => "btn action attack primary", :"data-action" => "attack"
+          = link_to "Defend", "#", :external => true, :class => "btn action defend special danger", :"data-action" => "defend"
+
+        .attack.explanation
+          %h3 Choose an enemy to attack &rarr;
+
+        .target.explanation
+          %h3.content
+
+
+  .hero.thief{ :id => thief.id, :class => (controllable ? "controllable" : "enemy" ) }
     .inner
       
       %h2.name= thief
@@ -18,8 +31,21 @@
       .stats
 
         = render "heroes/stats", :hero => thief
+      
+      - if controllable
+        
+        .actions
+          
+          = link_to "Attack", "#", :external => true, :class => "btn action attack primary", :"data-action" => "attack"
+          = link_to "Steal", "#", :external => true, :class => "btn action steal special info", :"data-action" => "steal"
 
-  .hero.ranger.span-one-third
+        .attack.explanation
+          %h3 Choose an enemy to attack &rarr;
+
+        .target.explanation
+          %h3.content
+
+  .hero.ranger{ :id => ranger.id, :class => (controllable ? "controllable" : "enemy" ) }
     .inner
       
       %h2.name= ranger
@@ -27,3 +53,16 @@
       .stats
 
         = render "heroes/stats", :hero => ranger
+
+      - if controllable
+
+        .actions
+          
+          = link_to "Attack", "#", :external => true, :class => "btn action attack primary", :"data-action" => "attack"
+          = link_to "Multishot", "#", :external => true, :class => "btn action multishot special success", :"data-action" => "multishot"
+
+        .attack.explanation
+          %h3 Choose an enemy to attack &rarr;
+
+        .target.explanation
+          %h3.content

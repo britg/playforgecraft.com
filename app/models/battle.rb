@@ -24,23 +24,11 @@ class Battle
 
   timestamps!
 
-  validates_presence_of :first_player_id
-  validates_presence_of :first_warrior
-  validates_presence_of :first_thief
-  validates_presence_of :first_ranger
-
-  validates_presence_of :second_player_id
-  validates_presence_of :second_warrior
-  validates_presence_of :second_thief
-  validates_presence_of :second_ranger
-
   validates_presence_of :mode
   validates_inclusion_of :mode, :in => MODES.map(&:to_s)
 
-  before_validation :choose_opponent, :if => :singleplayer?
-  before_validation :snapshot_heroes
-
-  after_create :start_actions
+  before_create :choose_opponent, :if => :singleplayer?
+  before_create :snapshot_heroes
 
   class << self
     
@@ -64,6 +52,14 @@ class Battle
       sort("created_at desc")
     end
 
+  end
+
+  def serializable_hash(opts={})
+    super((opts||{}).merge(:methods => [:first_player, :second_player, :plays]))
+  end
+
+  def plays
+    Playbook.first.plays
   end
 
   def singleplayer?
@@ -146,11 +142,6 @@ class Battle
     self.second_warrior = Opponent.warrior_for(self.first_warrior)
     self.second_thief = Opponent.thief_for(self.first_thief)
     self.second_ranger = Opponent.ranger_for(self.first_ranger)
-  end
-
-  def start_actions
-    start_action = self.actions.build(:message => "It's your turn!", :type => :notification)
-    start_action.save
   end
 
 end

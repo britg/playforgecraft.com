@@ -1,0 +1,2 @@
+Fabricator(:playbook) do
+end

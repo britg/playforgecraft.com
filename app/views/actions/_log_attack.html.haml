@@ -1,0 +1,4 @@
+.action
+
+  %span.content= "#{action.player_name}'s #{action.hero_name} attacked #{action.target_name} for #{number_with_delimiter(action.damage_dealt)} damage"
+  %span.timestamp= timeago(action.created_at)

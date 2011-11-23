@@ -69,7 +69,7 @@ $action-sidebar-width: 250px;
 
 #battle {
   
-  .battlers {
+  .squads {
     margin-right: $action-sidebar-width + 10px;
 
     .player-bar {
@@ -107,24 +107,66 @@ $action-sidebar-width: 250px;
 
   }
 
-  .battler-wrap {
+  .squad-wrap {
     width: 50%;
     height: 100%;
     float: left;
 
     background: image_url("sidebar-fade.png") right top no-repeat;
 
-    &.opponent {
+    &.enemy {
       background: none;
     }
 
   }
 
-  .battler {
-    padding: 10px 0 0 20px;
+  .squad {
+    padding: 10px 20px 0 20px;
 
     .hero {
       margin-bottom: 10px;
+      max-width: 350px;
+      @include border-radius(5px);
+
+      .actions {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        display: none;
+      }
+
+      .action {
+        
+        &.attack {
+        }
+
+        &.special {
+        }
+      }
+
+
+      &.active {
+        border: solid 1px $advanced-color;
+        @include box-shadow(rgba($advanced-color, 0.4) 0 0 15px, rgba($advanced-color, 0.2) 0 0 3px 1px inset);
+
+        .actions {
+          display: block;
+        }
+      }
+
+      &.action-target {
+        @include box-shadow(rgba($common-color, 0.4) 0 0 5px, rgba($common-color, 0.2) 0 0 3px 1px inset);
+
+        &:hover {
+          @include box-shadow(rgba($common-color, 0.8) 0 0 10px, rgba($common-color, 0.2) 0 0 3px 1px inset);
+        }
+      }
+
+      .explanation {
+        display: none;
+        text-align: center;
+      }
+
     }
   }
 

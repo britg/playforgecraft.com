@@ -20,23 +20,23 @@
       - @battle.actions.reverse.each do |action|
         %li.log-action= render "actions/log_#{action.type}", :action => action
 
-  .battlers
+  .squads
 
-    .battler-wrap.you
-      .battler
+    .squad-wrap.you
+      .squad
         .player-bar
           %h2.player= @battle.first_player.name
 
-        .hero-wrap
-          = render "hero_snapshots", :warrior => @battle.first_warrior, :thief => @battle.first_thief, :ranger => @battle.first_ranger
+        .heroes-wrap
+          = render "hero_snapshots", :warrior => @battle.first_warrior, :thief => @battle.first_thief, :ranger => @battle.first_ranger, :controllable => (@battle.first_player == current_player)
     
-    .battler-wrap.opponent
-      .battler
+    .squad-wrap.enemy
+      .squad
         .player-bar
           %h2.player= @battle.second_player.name
 
-        .hero-wrap
-          = render "hero_snapshots", :warrior => @battle.second_warrior, :thief => @battle.second_thief, :ranger => @battle.second_ranger
+        .heroes-wrap
+          = render "hero_snapshots", :warrior => @battle.second_warrior, :thief => @battle.second_thief, :ranger => @battle.second_ranger, :controllable => (@battle.second_player == current_player)
 
 #log-templates
   - Action::TYPES.each do |action_type|

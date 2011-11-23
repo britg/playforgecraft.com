@@ -33,7 +33,11 @@ ForgeCraft::Application.routes.draw do
 
   resources :heroes
   resources :battles do
-    resources :actions
+    resources :actions do
+      collection do
+        post :commit  
+      end
+    end
   end
 
   # Armory

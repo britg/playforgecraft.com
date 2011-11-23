@@ -13,6 +13,18 @@ class ActionsController < ApplicationController
     
   end
 
+  def commit
+    new_actions = []
+    if params[:actions].present?
+      params[:actions].each do |i, action_data|
+        action = @battle.actions.build action_data
+        action.save
+        new_actions << action
+      end
+    end
+    render :json => new_actions
+  end
+
   #------
 
   def find_battle
