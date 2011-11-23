@@ -1,9 +1,6 @@
 class Opponent
   include Mongoid::Document
-
-  # key :name, String
-  # key :level, Integer
-
+  
   field :name
   field :level, :type => Integer
 

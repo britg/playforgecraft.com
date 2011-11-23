@@ -3,16 +3,6 @@ class HeroSnapshot
 
   embedded_in :battle
 
-  # key :name,        String
-  # key :job_id,      Integer
-  # key :job_name,    String
-  # key :attack,      Integer
-  # key :defense,     Integer
-  # key :weapon1_id,  Integer
-  # key :weapon2_id,  Integer
-  # key :armor_id,    Integer
-  # key :leggings_id, Integer
-
   field :name
   field :job_id, :type => Integer
   field :job_name

@@ -6,22 +6,12 @@ class Action
 
   TYPES = [ :message, :attack, :notification ]
 
-  # key :message,     String
-  # key :player_id,   String
-  # key :player_name, String
-  # key :hero_id,     String
-  # key :hero_name,   String
-  # key :type,        String
-  # key :play,        Integer
-  # key :target_id,   String
-  # key :target_name, String
-  # key :damage_dealt, Integer
-
   field :type
   field :play, :type => Integer
   field :player_id
   field :player_type
-  field :hero_snapshot_id
+  field :hero_id
+  field :hero_type
   field :target_id
   field :target_type
   field :message
@@ -44,18 +34,13 @@ class Action
   end
 
   def hero
-    return nil unless hero_snapshot_id.present?
-    @hero ||= HeroSnapshot.find(hero_snapshot_id)
+    return nil unless hero_type.present?
+    @hero ||= battle.send("first_#{hero_type}")
   end
 
   def target
-    return nil unless target_id.present?
-    @target ||= Opponent.find(target_id) if target_type == 'opponent'
-    @target ||= Player.find(target_id)
-  end
-
-  def to_log
-    "#{player}: #{message}"
+    return nil unless target_type.present?
+    @target ||= battle.send("second_#{hero_type}")
   end
 
   def is_attack?

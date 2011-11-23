@@ -17,6 +17,9 @@ class ActionsController < ApplicationController
     new_actions = []
     if params[:actions].present?
       params[:actions].each do |i, action_data|
+        action_data.merge!({"player_id" => current_player.id, "player_type" => 'player'})
+
+        puts action_data.inspect
         action = @battle.actions.build action_data
         action.save
         new_actions << action

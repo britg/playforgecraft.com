@@ -1,8 +1,4 @@
 class ForgeCraft.Models.Action extends Backbone.Model
-
-  defaults:
-    player_name: ->
-      window.player.get("name")
   
 
 class ForgeCraft.Collections.Actions extends Backbone.Collection

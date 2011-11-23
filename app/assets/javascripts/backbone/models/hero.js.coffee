@@ -23,6 +23,14 @@ class ForgeCraft.Models.Hero extends Backbone.Model
 
   chooseAttackTarget: (enemy) ->
     @deactivate()
-    action = new ForgeCraft.Models.Action type: "attack", play: battle.get("currentPlay"), target_id: enemy.get("id"), target_name: enemy.get("name"), hero_id: @get("id"), hero_name: @get("name")
+
+    action = new ForgeCraft.Models.Action 
+      type: "attack"
+      play: battle.get("currentPlay")
+      target_id: enemy.get("_id")
+      target_type: enemy.get("job_name")
+      hero_id: @get("_id")
+      hero_type: @get("job_name")
+
     battle.pendingActions.add action
     battle.trigger "ForgeCraft::PlayComplete"

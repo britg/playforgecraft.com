@@ -38,7 +38,7 @@
         .heroes-wrap
           = render "hero_snapshots", :warrior => @battle.second_warrior, :thief => @battle.second_thief, :ranger => @battle.second_ranger, :controllable => (@battle.second_player == current_player)
 
-#log-templates
+#log-templates.view-templates
   - Action::TYPES.each do |action_type|
     
     = render "actions/log_#{action_type}", :action => Action.new(:type => action_type)

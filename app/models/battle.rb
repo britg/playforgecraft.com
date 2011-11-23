@@ -4,14 +4,6 @@ class Battle
 
   MODES = [ :singleplayer, :multiplayer ]
 
-  # key :first_player_id,   Integer
-  # key :second_player_id,  String # Opponents may have string ids
-  # key :winner_id,         String
-  # key :loser_id,          String
-  # key :mode,              String
-  # key :finished,          Boolean, :default => false
-  # key :finish_reason,     String
-
   field :first_player_id, :type => Integer
   field :second_player_id
   field :winner_id
