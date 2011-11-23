@@ -47,7 +47,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
 
     $('#new_battle').bind "ajax:complete", (event, response) ->
       new_battle = JSON.parse(response.responseText)
-      Backbone.history.navigate("battles/" + new_battle.id, true)
+      Backbone.history.navigate("battles/" + new_battle._id, true)
 
     $('.battle-stub').each (i, stub) ->
       battleStubView = new ForgeCraft.Views.BattleStubView el: $(this).get(0)

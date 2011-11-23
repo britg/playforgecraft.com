@@ -1,7 +1,7 @@
 class Playbook
-  include MongoMapper::Document
+  include Mongoid::Document
 
-  has_many :plays
+  embeds_many :plays
 
   class << self
 

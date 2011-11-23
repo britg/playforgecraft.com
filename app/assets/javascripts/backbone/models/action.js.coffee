@@ -9,7 +9,7 @@ class ForgeCraft.Collections.Actions extends Backbone.Collection
 
   model:  ForgeCraft.Models.Action
   url:    ->
-    battle.id + "/actions"
+    battle.get("_id") + "/actions"
 
   commitActions: ->
     console.log "Committing actions", @url()

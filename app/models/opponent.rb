@@ -1,8 +1,11 @@
 class Opponent
-  include MongoMapper::Document
+  include Mongoid::Document
 
-  key :name, String
-  key :level, Integer
+  # key :name, String
+  # key :level, Integer
+
+  field :name
+  field :level, :type => Integer
 
   class << self
 

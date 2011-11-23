@@ -1,28 +1,39 @@
 class Battle
-  include MongoMapper::Document
+  include Mongoid::Document
+  include Mongoid::Timestamps
 
   MODES = [ :singleplayer, :multiplayer ]
 
-  key :first_player_id,   Integer
-  key :second_player_id,  String # Opponents may have string ids
-  key :winner_id,         String
-  key :loser_id,          String
-  key :mode,              String
-  key :finished,          Boolean, :default => false
-  key :finish_reason,     String
+  # key :first_player_id,   Integer
+  # key :second_player_id,  String # Opponents may have string ids
+  # key :winner_id,         String
+  # key :loser_id,          String
+  # key :mode,              String
+  # key :finished,          Boolean, :default => false
+  # key :finish_reason,     String
+
+  field :first_player_id, :type => Integer
+  field :second_player_id
+  field :winner_id
+  field :winner_type
+  field :loser_id
+  field :loser_type
+  field :mode
+  field :finished, :type => Boolean, :default => false
+  field :finish_reason
+
+  index :first_player_id
+  index :second_player_id
   
+  embeds_many :actions
 
-  has_many :actions
+  embeds_one :first_warrior, :class_name => "HeroSnapshot"
+  embeds_one :first_thief, :class_name => "HeroSnapshot"
+  embeds_one :first_ranger, :class_name => "HeroSnapshot"
 
-  has_one :first_warrior, :class_name => "HeroSnapshot"
-  has_one :first_thief, :class_name => "HeroSnapshot"
-  has_one :first_ranger, :class_name => "HeroSnapshot"
-
-  has_one :second_warrior, :class_name => "HeroSnapshot"
-  has_one :second_thief, :class_name => "HeroSnapshot"
-  has_one :second_ranger, :class_name => "HeroSnapshot"
-
-  timestamps!
+  embeds_one :second_warrior, :class_name => "HeroSnapshot"
+  embeds_one :second_thief, :class_name => "HeroSnapshot"
+  embeds_one :second_ranger, :class_name => "HeroSnapshot"
 
   validates_presence_of :mode
   validates_inclusion_of :mode, :in => MODES.map(&:to_s)
@@ -49,7 +60,7 @@ class Battle
     end
 
     def sorted
-      sort("created_at desc")
+      desc("created_at")
     end
 
   end
@@ -75,15 +86,17 @@ class Battle
   end
 
   def winner
-    Opponent.find_by_id(self.winner_id)||Player.find_by_id(self.winner_id)
+    @winner ||= Opponent.find(winner_id) if winner_type == 'opponent'
+    @winner ||= Player.find(winner_id)
   end
 
   def loser
-    Opponent.find_by_id(self.loser_id)||Player.find_by_id(self.loser_id)
+    @loser ||= Opponent.find(self.loser_id) if loser_type == 'opponent'
+    @loser ||= Player.find(self.loser_id)
   end
 
   def first_player
-    Player.find_by_id(self.first_player_id)
+    Player.find(self.first_player_id)
   end
 
   def first_player= player
@@ -91,8 +104,8 @@ class Battle
   end
 
   def second_player
-    return Opponent.find_by_id(self.second_player_id) if singleplayer?
-    return Player.find_by_id(self.second_player_id) if multiplayer?
+    return Opponent.find(self.second_player_id) if singleplayer?
+    return Player.find(self.second_player_id) if multiplayer?
   end
 
   def second_player= player
@@ -111,7 +124,9 @@ class Battle
     update_attributes(:finished => true, 
                       :finish_reason => 'forfeit',
                       :winner_id => winner_id,
-                      :loser_id => loser_id)
+                      :winner_type => "opponent",
+                      :loser_id => loser_id,
+                      :loser_type => "player")
   end
 
   # Callbacks
@@ -145,6 +160,3 @@ class Battle
   end
 
 end
-
-Battle.ensure_index :first_player_id
-Battle.ensure_index :second_player_id

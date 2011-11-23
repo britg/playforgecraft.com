@@ -1,19 +1,27 @@
 class HeroSnapshot
-  include MongoMapper::EmbeddedDocument
-  plugin MongoMapper::Plugins::Timestamps
-  plugin MongoMapper::Plugins::Associations
+  include Mongoid::Document
 
   embedded_in :battle
 
-  key :name,        String
-  key :job_id,      Integer
-  key :job_name,    String
-  key :attack,      Integer
-  key :defense,     Integer
-  key :weapon1_id,  Integer
-  key :weapon2_id,  Integer
-  key :armor_id,    Integer
-  key :leggings_id, Integer
+  # key :name,        String
+  # key :job_id,      Integer
+  # key :job_name,    String
+  # key :attack,      Integer
+  # key :defense,     Integer
+  # key :weapon1_id,  Integer
+  # key :weapon2_id,  Integer
+  # key :armor_id,    Integer
+  # key :leggings_id, Integer
+
+  field :name
+  field :job_id, :type => Integer
+  field :job_name
+  field :attack, :type => Integer
+  field :defense, :type => Integer
+  field :weapon1_id, :type => Integer
+  field :weapon2_id, :type => Integer
+  field :armor_id, :type => Integer
+  field :leggings_id, :type => Integer
 
   class << self
 
