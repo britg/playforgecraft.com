@@ -1,4 +1,11 @@
-.action
+.action.attack
 
-  %span.content= "#{action.player}'s #{action.hero.to_s} attacked #{action.target.to_s} for #{number_with_delimiter(action.damage_dealt)} damage"
+  %span.player.advanced= "#{action.player}"
+  =":" 
+  %span.hero{:class => action.hero.try(:to_css_class)}= "#{action.hero.to_s}"
+  attacked 
+  %span.target{:class => action.target.try(:to_css_class)}= "#{action.target.to_s}" 
+  for 
+  %span.damage= "#{number_with_delimiter(action.damage_dealt)}"
+  damage
   %span.timestamp= timeago(action.created_at)

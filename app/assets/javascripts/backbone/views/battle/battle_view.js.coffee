@@ -68,3 +68,5 @@ class ForgeCraft.Views.BattleView extends Backbone.View
     @enemyWarriorView.disableActionTarget()
     @enemyThiefView.disableActionTarget()
     @enemyRangerView.disableActionTarget()
+
+  

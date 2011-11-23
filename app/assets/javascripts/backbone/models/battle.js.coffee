@@ -14,8 +14,17 @@ class ForgeCraft.Models.Battle extends Backbone.Model
     currentPlay: null
 
   initialize: ->
+    
+    # Actions that have been committed to the server (do not need to be replayed)
     @actions = new ForgeCraft.Collections.Actions(@get("actions"))
+
+    # Actions that have not been sent to the server
     @pendingActions = new ForgeCraft.Collections.Actions
+
+    # Actions returned from the server
+    @queuedActions = new ForgeCraft.Collections.Actions
+    @queuedActions.bind "add", @processQueue, @
+
     @initializeHeroes()
     @bind "ForgeCraft::PlayComplete", @continue, @
 
@@ -76,6 +85,23 @@ class ForgeCraft.Models.Battle extends Backbone.Model
   fastForward: ->
     console.log "Synching pending actions and fast forwarding", @pendingActions
     @pendingActions.commitActions()
+
+  processQueue: ->
+    return if battle.queuedActions.length < 1
+    clearTimeout(@queueTimeout)
+
+    @queueTimeout = setTimeout ->
+      console.log "Processing Queue!"
+      action = battle.queuedActions.at(0)
+      battle.queuedActions.remove(action)
+      battle.processAction(action)
+      battle.processQueue()
+    , 1000
+
+  processAction: (action) ->
+    console.log "Processing action:", action
+    battle.actions.add action
+
 
 class ForgeCraft.Collections.Battles extends Backbone.Collection
 

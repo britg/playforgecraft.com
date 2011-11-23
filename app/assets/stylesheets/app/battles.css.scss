@@ -103,6 +103,22 @@ $action-sidebar-width: 250px;
         color: $highlight-color;
         font-weight: bold;
       }
+
+      .ranger {
+        @include ranger;
+      }
+
+      .warrior {
+        @include warrior;
+      }
+
+      .thief {
+        @include thief;
+      }
+
+      .damage {
+        color: $highlight-color;
+      }
     }
 
   }

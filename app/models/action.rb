@@ -20,11 +20,7 @@ class Action
   before_create :run_action
 
   def serializable_hash opts={}
-    super((opts||{}).merge(:methods => [:to_log]))
-  end
-
-  def to_s
-    to_log
+    super((opts||{}).merge(:methods => [:player, :hero, :target]))
   end
 
   def player
@@ -40,7 +36,7 @@ class Action
 
   def target
     return nil unless target_type.present?
-    @target ||= battle.send("second_#{hero_type}")
+    @target ||= battle.send("second_#{target_type}")
   end
 
   def is_attack?

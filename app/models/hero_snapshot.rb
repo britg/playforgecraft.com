@@ -33,4 +33,8 @@ class HeroSnapshot
     name||job_name.titleize
   end
 
+  def to_css_class
+    job_name
+  end
+
 end

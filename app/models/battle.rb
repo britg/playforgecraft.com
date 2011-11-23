@@ -121,6 +121,10 @@ class Battle
                       :loser_type => "player")
   end
 
+  def reset
+    actions.destroy_all
+  end
+
   # Callbacks
 
   def choose_opponent
