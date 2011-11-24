@@ -12,6 +12,9 @@ class HeroSnapshot
   field :weapon2_id, :type => Integer
   field :armor_id, :type => Integer
   field :leggings_id, :type => Integer
+  field :alive, :type => Boolean, :default => true
+
+  before_save :observe_death
 
   class << self
 
@@ -39,16 +42,55 @@ class HeroSnapshot
 
   def take_damage amount
     self.defense -= amount
-    self.defense = 0 if self.defense < 0
   end
 
   def take_damage! amount
-    take_damage amount
-    save
+    self.take_damage amount
+    self.save
   end
 
   def calculate_damage target
     attack
+  end
+
+  def alive?
+    alive
+  end
+
+  def dead?
+    !alive?
+  end
+
+  def should_die?
+    defense <= 0 and alive?
+  end
+
+  def die
+    self.defense = 0
+    self.alive = false
+    dead?
+  end
+
+  def die!
+    die
+    save
+  end
+
+  def resurrect starting_defense=1
+    self.defense = starting_defense
+    self.alive = true
+  end
+
+  def resurrect! starting_defense=1
+    resurrect starting_defense
+    save
+  end
+
+  #----
+
+  def observe_death
+    die if should_die?
+    true
   end
 
 end

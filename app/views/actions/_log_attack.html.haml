@@ -4,7 +4,7 @@
   =":" 
   %span.hero{:class => action.hero.try(:to_css_class)}= "#{action.hero.to_s}"
   attacked 
-  %span.target{:class => action.target.try(:to_css_class)}= "#{action.target.to_s}" 
+  %span.target{:class => action.targetted.try(:to_css_class)}= "#{action.targetted.to_s}" 
   for 
   %span.damage= "#{number_with_delimiter(action.damage_dealt)}"
   damage

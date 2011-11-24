@@ -25,10 +25,28 @@ class ForgeCraft.Views.ActionView extends Backbone.View
     $(@el).find('.actor').html @model.get("player_name")
     $(@el).find('.content').html @model.get("message")
 
+  playerName: ->
+    @model.get("player").name
+
+  heroName: ->
+    @model.get("hero").name
+
+  heroJobName: ->
+    @model.get("hero").job_name
+
+  targettedName: ->
+    @model.get("targetted").name
+
+  targettedJobName: ->
+    @model.get("targetted").job_name
+
+  damageDealt: ->
+    @model.get("damage_dealt")
+
   buildAttack: ->
     console.log "Building attack", @model
     $(@el).html @template().clone()
-    $(@el).find('.player').html(@model.get("player").name)
-    $(@el).find('.hero').html(@model.get("hero").name).addClass(@model.get("hero").job_name)
-    $(@el).find('.target').html(@model.get("target").name).addClass(@model.get("target").job_name)
-    $(@el).find('.damage').html(@model.get("damage_dealt"))
+    $(@el).find('.player').html @playerName()
+    $(@el).find('.hero').html(@heroName()).addClass(@heroJobName())
+    $(@el).find('.target').html(@targettedName()).addClass(@targettedJobName())
+    $(@el).find('.damage').html(@damageDealt())

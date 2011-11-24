@@ -20,7 +20,7 @@ class Action
   before_create :perform
 
   def serializable_hash opts={}
-    super((opts||{}).merge(:methods => [:player, :hero, :target]))
+    super((opts||{}).merge(:methods => [:player, :hero, :targetted]))
   end
 
   def player
@@ -34,9 +34,9 @@ class Action
     @hero ||= battle.hero_by_id(hero_id)
   end
 
-  def target
+  def targetted
     return nil unless target_id.present?
-    @target ||= battle.hero_by_id(target_id)
+    @targetted ||= battle.hero_by_id(target_id)
   end
 
   def attack?
@@ -50,8 +50,8 @@ class Action
   end
 
   def perform_attack
-    self.damage_dealt = hero.calculate_damage(target)
-    target.take_damage! self.damage_dealt
+    self.damage_dealt = hero.calculate_damage(self.targetted)
+    self.targetted.take_damage! damage_dealt
   end
 
 end
