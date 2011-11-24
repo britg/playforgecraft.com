@@ -17,7 +17,7 @@ class Action
   field :message
   field :damage_dealt, :type => Integer
 
-  before_create :run_action
+  before_create :perform
 
   def serializable_hash opts={}
     super((opts||{}).merge(:methods => [:player, :hero, :target]))
@@ -30,23 +30,28 @@ class Action
   end
 
   def hero
-    return nil unless hero_type.present?
-    @hero ||= battle.send("first_#{hero_type}")
+    return nil unless hero_id.present?
+    @hero ||= battle.hero_by_id(hero_id)
   end
 
   def target
-    return nil unless target_type.present?
-    @target ||= battle.send("second_#{target_type}")
+    return nil unless target_id.present?
+    @target ||= battle.hero_by_id(target_id)
   end
 
-  def is_attack?
+  def attack?
     self.type.to_s == 'attack'
   end
 
   #----
 
-  def run_action
-    self.damage_dealt = 10
+  def perform
+    perform_attack if attack?
+  end
+
+  def perform_attack
+    self.damage_dealt = hero.calculate_damage(target)
+    target.take_damage! self.damage_dealt
   end
 
 end

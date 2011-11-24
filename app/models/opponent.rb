@@ -14,19 +14,25 @@ class Opponent
     end
 
     def warrior_for opposing_warrior
-      warrior = HeroSnapshot.new(opposing_warrior.attributes)
+      atts = opposing_warrior.attributes.dup
+      atts.delete("_id")
+      warrior = HeroSnapshot.new(atts)
       warrior.name = NameGenerator.create
       warrior
     end
 
     def thief_for opposing_thief
-      thief = HeroSnapshot.new(opposing_thief.attributes)
+      atts = opposing_thief.attributes.dup
+      atts.delete("_id")
+      thief = HeroSnapshot.new(atts)
       thief.name = NameGenerator.create
       thief
     end
 
     def ranger_for opposing_ranger
-      ranger = HeroSnapshot.new(opposing_ranger.attributes)
+      atts = opposing_ranger.attributes.dup
+      atts.delete("_id")
+      ranger = HeroSnapshot.new(atts)
       ranger.name = NameGenerator.create
       ranger
     end

@@ -37,4 +37,18 @@ class HeroSnapshot
     job_name
   end
 
+  def take_damage amount
+    self.defense -= amount
+    self.defense = 0 if self.defense < 0
+  end
+
+  def take_damage! amount
+    take_damage amount
+    save
+  end
+
+  def calculate_damage target
+    attack
+  end
+
 end

@@ -109,6 +109,22 @@ class Battle
     "defeat"
   end
 
+  def player_by_id ident
+    return first_player if (ident.to_s == first_player_id)
+    return second_player
+  end
+
+  def heroes
+    [first_warrior, first_thief, first_ranger, 
+     second_warrior, second_thief, second_ranger]
+  end
+
+  def hero_by_id ident
+    heroes.each do |hero|
+      return hero if hero.id.to_s == ident.to_s
+    end
+  end
+
   def forfeit forfeiter
     loser_id = forfeiter.id
     winner_id = (first_player == forfeiter ? second_player_id : first_player_id)
