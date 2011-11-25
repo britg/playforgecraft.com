@@ -110,8 +110,14 @@ class ForgeCraft.Models.Battle extends Backbone.Model
     console.log "Processing action:", action
     battle.actions.add action
 
+    if action.get("hero")?
+      console.log "Updating hero conditions"
+      hero = battle.heroes.get(action.get("hero_id"))
+      hero.set action.get("hero")
+      hero.set last_action: action.get("id")
+
     if action.get("targetted")?
-      console.log "Updating hero conditions", action.get("target_id"), action.get("targetted")
+      console.log "Updating target conditions", action.get("target_id"), action.get("targetted")
       hero = battle.heroes.get(action.get("target_id"))
       hero.set action.get("targetted")
 

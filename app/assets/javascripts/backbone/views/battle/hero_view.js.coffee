@@ -8,6 +8,7 @@ class ForgeCraft.Views.HeroView extends Backbone.View
     @model.bind "change:active", @reflectActiveState, @
     @model.bind "change:alive", @reflectAliveState, @
     @model.bind "change:defense", @reflectDamage, @
+    @model.bind "change:last_action", @reflectPerformedAction, @
 
   reflectActiveState: ->
     console.log "Reflecting active state", @model
@@ -91,5 +92,8 @@ class ForgeCraft.Views.HeroView extends Backbone.View
       , 500
 
   reflectDamage: ->
-     $(@el).effect("shake", { times: 3, distance: 10 }, 50)
-     $(@el).find('.stat.defense').find('.val').html(@model.get("defense"))
+    $(@el).effect("shake", { times: 3, distance: 10 }, 50)
+    $(@el).find('.stat.defense').find('.val').html(@model.get("defense"))
+
+  reflectPerformedAction: ->
+    @hideExplanation()

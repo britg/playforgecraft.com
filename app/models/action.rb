@@ -21,7 +21,7 @@ class Action
   before_create :snapshot_conditions
 
   def serializable_hash opts={}
-    super((opts||{}).merge(:methods => [:player, :hero, :targetted]))
+    super((opts||{}).merge(:methods => [:id, :player, :hero, :targetted]))
   end
 
   def player
