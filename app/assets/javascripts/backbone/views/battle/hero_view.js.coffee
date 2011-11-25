@@ -6,6 +6,8 @@ class ForgeCraft.Views.HeroView extends Backbone.View
   initialize: ->
     console.log "Initializing hero view", @model
     @model.bind "change:active", @reflectActiveState, @
+    @model.bind "change:alive", @reflectAliveState, @
+    @model.bind "change:defense", @reflectDamage, @
 
   reflectActiveState: ->
     console.log "Reflecting active state", @model
@@ -81,3 +83,13 @@ class ForgeCraft.Views.HeroView extends Backbone.View
     $(@el).css cursor: "inherit"
     $(@el).unbind 'click'
     
+  reflectAliveState: ->
+    if @model.get("alive") == false
+
+      setTimeout =>
+        $(@el).fadeOut()
+      , 500
+
+  reflectDamage: ->
+     $(@el).effect("shake", { times: 3, distance: 10 }, 50)
+     $(@el).find('.stat.defense').find('.val').html(@model.get("defense"))

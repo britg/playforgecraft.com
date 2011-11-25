@@ -13,28 +13,12 @@ class Opponent
              :level => player.level
     end
 
-    def warrior_for opposing_warrior
-      atts = opposing_warrior.attributes.dup
+    def hero_opponent_attributes hero, owner
+      atts = hero.attributes.dup
       atts.delete("_id")
-      warrior = HeroSnapshot.new(atts)
-      warrior.name = NameGenerator.create
-      warrior
-    end
-
-    def thief_for opposing_thief
-      atts = opposing_thief.attributes.dup
-      atts.delete("_id")
-      thief = HeroSnapshot.new(atts)
-      thief.name = NameGenerator.create
-      thief
-    end
-
-    def ranger_for opposing_ranger
-      atts = opposing_ranger.attributes.dup
-      atts.delete("_id")
-      ranger = HeroSnapshot.new(atts)
-      ranger.name = NameGenerator.create
-      ranger
+      atts["owner_id"] = owner.id
+      atts["name"] = NameGenerator.create
+      atts
     end
 
     def group_names

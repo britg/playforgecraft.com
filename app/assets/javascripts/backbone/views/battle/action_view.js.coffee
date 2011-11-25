@@ -8,6 +8,8 @@ class ForgeCraft.Views.ActionView extends Backbone.View
 
   render: ->
     console.log "Rendering log action of type", @model.get("type")
+
+    $(@el).html @template().clone()
   
     if @model.get("type") == 'message'
       @buildMessage()
@@ -15,15 +17,12 @@ class ForgeCraft.Views.ActionView extends Backbone.View
     if @model.get("type") == 'attack'
       @buildAttack()
 
+    if @model.get("type") == 'notification'
+      @buildNotification()
+
     $(@el).hide()
     $('.action-list').prepend($(@el))
     $(@el).fadeIn()
-
-  buildMessage: ->
-
-    $(@el).html @template().clone()
-    $(@el).find('.actor').html @model.get("player_name")
-    $(@el).find('.content').html @model.get("message")
 
   playerName: ->
     @model.get("player").name
@@ -43,10 +42,17 @@ class ForgeCraft.Views.ActionView extends Backbone.View
   damageDealt: ->
     @model.get("damage_dealt")
 
+  
+  buildMessage: ->
+    $(@el).find('.actor').html @model.get("player_name")
+    $(@el).find('.content').html @model.get("message")
+
   buildAttack: ->
     console.log "Building attack", @model
-    $(@el).html @template().clone()
     $(@el).find('.player').html @playerName()
     $(@el).find('.hero').html(@heroName()).addClass(@heroJobName())
     $(@el).find('.target').html(@targettedName()).addClass(@targettedJobName())
     $(@el).find('.damage').html(@damageDealt())
+
+  buildNotification: ->
+    $(@el).find('.content').html @model.get("message")

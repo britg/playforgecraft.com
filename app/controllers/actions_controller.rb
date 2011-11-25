@@ -14,24 +14,20 @@ class ActionsController < ApplicationController
   end
 
   def commit
-    new_actions = []
-    if params[:actions].present?
-      params[:actions].each do |i, action_data|
-
-        action_data.merge!({"player_id" => current_player.id, 
-                            "player_type" => 'player'})
-
-        action = @battle.actions.create action_data
-        new_actions << action
-      end
-    end
-    render :json => new_actions
+    process_actions if params[:actions].present?
+    render :json => @battle.processed_actions
   end
 
   #------
 
   def find_battle
     @battle = Battle.find(params[:battle_id])
+  end
+
+  def process_actions
+    params[:actions].each do |i, action_data|
+      @battle.process_action current_player, action_data
+    end
   end
 
 end

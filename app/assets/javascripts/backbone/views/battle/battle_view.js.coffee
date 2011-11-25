@@ -16,6 +16,8 @@ class ForgeCraft.Views.BattleView extends Backbone.View
 
     @initializeHeroViews()
 
+    @model.bind "change", @checkConditions, @
+
   render: ->
 
     battleHeight = $(window).height() - $('.topbar').height()
@@ -69,4 +71,21 @@ class ForgeCraft.Views.BattleView extends Backbone.View
     @enemyThiefView.disableActionTarget()
     @enemyRangerView.disableActionTarget()
 
+  checkConditions: ->
+
+    if @model.get("finished") == true
+      @finish()
+
+  finish: ->
+
+    if @model.get("winner_id") == window.player.id
+      msg = "(Placeholder) You won!"
+    
+    if @model.get("loser_id") == window.player.id
+      msg = "(Placeholder) You lost..."
+
+    setTimeout =>
+      alert msg
+      Backbone.history.navigate('battles', true)
+    , 500
   

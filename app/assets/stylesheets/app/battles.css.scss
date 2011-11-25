@@ -99,7 +99,8 @@ $action-sidebar-width: 250px;
     }
 
     .action {
-      &.notification {
+      
+      &.important {
         color: $highlight-color;
         font-weight: bold;
       }

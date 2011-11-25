@@ -34,3 +34,7 @@ class ForgeCraft.Models.Hero extends Backbone.Model
 
     battle.pendingActions.add action
     battle.trigger "ForgeCraft::PlayComplete"
+
+class ForgeCraft.Collections.Heroes extends Backbone.Collection
+
+  model: ForgeCraft.Models.Hero

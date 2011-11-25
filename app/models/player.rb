@@ -40,7 +40,7 @@ class Player < ActiveRecord::Base
   end
 
   def serializable_hash(opts={})
-    super((opts||{}).merge(:only => [:name, :level, :coins]))
+    super((opts||{}).merge(:only => [:id, :name, :level, :coins]))
   end
 
   def starting_level

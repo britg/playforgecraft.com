@@ -18,14 +18,7 @@ class Battle
   index :second_player_id
   
   embeds_many :actions
-
-  embeds_one :first_warrior, :class_name => "HeroSnapshot"
-  embeds_one :first_thief, :class_name => "HeroSnapshot"
-  embeds_one :first_ranger, :class_name => "HeroSnapshot"
-
-  embeds_one :second_warrior, :class_name => "HeroSnapshot"
-  embeds_one :second_thief, :class_name => "HeroSnapshot"
-  embeds_one :second_ranger, :class_name => "HeroSnapshot"
+  embeds_many :battle_heroes
 
   validates_presence_of :mode
   validates_inclusion_of :mode, :in => MODES.map(&:to_s)
@@ -58,7 +51,18 @@ class Battle
   end
 
   def serializable_hash(opts={})
-    super((opts||{}).merge(:methods => [:first_player, :second_player, :plays]))
+    super((opts||{}).merge(:methods => [:first_player, :second_player, :plays, :first_warrior, :second_warrior, :first_thief, :second_thief, :first_ranger, :second_ranger]))
+  end
+
+  def conditions
+    {
+      :finished => finished,
+      :finish_reason => finish_reason,
+      :winner_id => winner_id,
+      :winner_type => winner_type,
+      :loser_id => loser_id,
+      :loser_type => loser_type
+    }
   end
 
   def plays
@@ -88,7 +92,7 @@ class Battle
   end
 
   def first_player
-    Player.find(self.first_player_id)
+    @first_player ||= Player.find(self.first_player_id)
   end
 
   def first_player= player
@@ -96,8 +100,9 @@ class Battle
   end
 
   def second_player
-    return Opponent.find(self.second_player_id) if singleplayer?
-    return Player.find(self.second_player_id) if multiplayer?
+    (@second_player ||= Opponent.find(self.second_player_id)) if singleplayer?
+    (@second_player ||= Player.find(self.second_player_id)) if multiplayer?
+    @second_player
   end
 
   def second_player= player
@@ -114,14 +119,44 @@ class Battle
     return second_player
   end
 
-  def heroes
-    [first_warrior, first_thief, first_ranger, 
-     second_warrior, second_thief, second_ranger]
+  def first_warrior
+    @first_warrior ||= \
+    battle_heroes.where(:owner_id => first_player_id, :job_name => "warrior").first
   end
 
-  def hero_by_id ident
-    heroes.each do |hero|
-      return hero if hero.id.to_s == ident.to_s
+  def first_thief
+    @first_thief ||= \
+    battle_heroes.where(:owner_id => first_player_id, :job_name => "thief").first
+  end
+
+  def first_ranger
+    @first_ranger ||= \
+    battle_heroes.where(:owner_id => first_player_id, :job_name => "ranger").first
+  end
+
+  def second_warrior
+    @second_warrior ||= \
+    battle_heroes.where(:owner_id => second_player_id, :job_name => "warrior").first
+  end
+
+  def second_thief
+    @second_thief ||= \
+    battle_heroes.where(:owner_id => second_player_id, :job_name => "thief").first
+  end
+  
+  def second_ranger
+    @second_ranger ||= \
+    battle_heroes.where(:owner_id => second_player_id, :job_name => "ranger").first
+  end
+
+  def find_hero ident
+    battle_heroes.where(:_id => ident).first    
+  end
+
+  def available_target default
+    return default if default.alive?
+    [second_warrior, second_thief, second_ranger].each do |hero|
+      return hero if hero.alive?
     end
   end
 
@@ -141,6 +176,68 @@ class Battle
     actions.destroy_all
   end
 
+  def processed_actions
+    @processed_actions ||= []
+  end
+
+  def add_processed_action action
+    @processed_actions ||= []
+    @processed_actions << action
+  end
+
+  def process_action player, action_data
+    action_data.merge!({"player_id" => player.id, 
+                        "player_type" => 'player'})
+    action = actions.create action_data
+    add_processed_action(action)
+    action.perform
+    check_conditions
+  end
+
+  def first_player_alive?
+    [first_warrior, first_thief, first_ranger].each do |hero|
+      return true if hero.alive?
+    end
+    false
+  end
+
+  def second_player_alive?
+    [second_warrior, second_thief, second_ranger].each do |hero|
+      return true if hero.alive?
+    end
+    false
+  end
+
+  def check_conditions
+    end_battle unless first_player_alive? and second_player_alive?
+  end
+
+  def end_battle
+    winner = (first_player_alive? ? first_player : second_player)
+    loser = (first_player_alive? ? second_player : first_player)
+
+    update_attributes(:finished => true,
+                      :finish_reason => 'complete',
+                      :winner_id => winner.id,
+                      :winner_type => (winner.class == Player ? 'player' : 'opponent'),
+                      :loser_id => loser.id,
+                      :loser_type => (loser.class == Player ? 'player' : 'opponent'))
+    
+    end_action = self.actions.create :type => :end
+    add_processed_action(end_action)
+  end
+
+  def log_death(hero)
+    action = actions.create :type => :notification,
+                            :message => "#{hero} has died!",
+                            :play => current_play
+    add_processed_action(action)
+  end
+
+  def current_play
+    actions.last.try(:play)||0
+  end
+
   # Callbacks
 
   def choose_opponent
@@ -148,27 +245,27 @@ class Battle
   end
 
   def snapshot_heroes
-    self.snapshot_first_player_heroes
-    self.generate_opponent_heroes if self.singleplayer?
-    self.snapshot_second_player_heroes if self.multiplayer?
+    snapshot_first_player_heroes
+    generate_opponent_heroes if singleplayer?
+    snapshot_second_player_heroes if multiplayer?
   end
 
   def snapshot_first_player_heroes
-    self.first_warrior = HeroSnapshot.snapshot_of(self.first_player.warrior)
-    self.first_thief = HeroSnapshot.snapshot_of(self.first_player.thief)
-    self.first_ranger = HeroSnapshot.snapshot_of(self.first_player.ranger)
+    first_player.heroes.each do |hero|
+      battle_heroes.build BattleHero.snapshot_of(hero, first_player)
+    end
   end
 
   def snapshot_second_player_heroes
-    self.second_warrior = HeroSnapshot.snapshot_of(self.second_player.warrior)
-    self.second_thief = HeroSnapshot.snapshot_of(self.second_player.thief)
-    self.second_ranger = HeroSnapshot.snapshot_of(self.second_player.ranger)
+    second_player.heroes.each do |hero|
+      battle_heroes.build BattleHero.snapshot_of(hero, first_player)
+    end
   end
 
   def generate_opponent_heroes
-    self.second_warrior = Opponent.warrior_for(self.first_warrior)
-    self.second_thief = Opponent.thief_for(self.first_thief)
-    self.second_ranger = Opponent.ranger_for(self.first_ranger)
+    [first_warrior, first_thief, first_ranger].each do |battle_hero|
+      battle_heroes.build Opponent.hero_opponent_attributes(battle_hero, second_player)
+    end
   end
 
 end

@@ -13,6 +13,8 @@ class ForgeCraft.Models.Battle extends Backbone.Model
 
     currentPlay: null
 
+    finished: false
+
   initialize: ->
     
     # Actions that have been committed to the server (do not need to be replayed)
@@ -33,6 +35,8 @@ class ForgeCraft.Models.Battle extends Backbone.Model
 
   initializeHeroes: ->
     
+    @heroes = new ForgeCraft.Collections.Heroes()
+
     @set 
       controllableWarrior: new ForgeCraft.Models.Hero(@get("first_warrior"))
       controllableThief: new ForgeCraft.Models.Hero(@get("first_thief"))
@@ -40,6 +44,10 @@ class ForgeCraft.Models.Battle extends Backbone.Model
       enemyWarrior: new ForgeCraft.Models.Hero(@get("second_warrior"))
       enemyThief: new ForgeCraft.Models.Hero(@get("second_thief"))
       enemyRanger: new ForgeCraft.Models.Hero(@get("second_ranger"))
+
+    @heroes.add [@get("controllableWarrior"), @get("controllableThief"),
+                @get("controllableRanger"),  @get("enemyWarrior"),
+                @get("enemyThief"),  @get("enemyRanger")]
 
   continue: ->
 
@@ -101,6 +109,15 @@ class ForgeCraft.Models.Battle extends Backbone.Model
   processAction: (action) ->
     console.log "Processing action:", action
     battle.actions.add action
+
+    if action.get("targetted")?
+      console.log "Updating hero conditions", action.get("target_id"), action.get("targetted")
+      hero = battle.heroes.get(action.get("target_id"))
+      hero.set action.get("targetted")
+
+    if action.get("conditions")?
+      console.log "Updating battle condiitons", action.get("conditions")
+      battle.set action.get("conditions")
 
 
 class ForgeCraft.Collections.Battles extends Backbone.Collection

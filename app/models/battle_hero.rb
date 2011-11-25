@@ -1,9 +1,10 @@
-class HeroSnapshot
+class BattleHero
   include Mongoid::Document
 
   embedded_in :battle
 
   field :name
+  field :owner_id
   field :job_id, :type => Integer
   field :job_name
   field :attack, :type => Integer
@@ -18,8 +19,9 @@ class HeroSnapshot
 
   class << self
 
-    def snapshot_of hero
+    def snapshot_of hero, owner
       {:name => hero.name,
+       :owner_id => owner.id,
        :job_id => hero.hero_class_id,
        :job_name => hero.job.to_s,
        :attack => hero.attack,
@@ -30,6 +32,10 @@ class HeroSnapshot
        :leggings_id => hero.leggings.try(:id)}
     end
 
+  end
+
+  def serializable_hash(opts={})
+    super((opts||{}).merge(:methods => [:id]))
   end
 
   def to_s
@@ -68,6 +74,7 @@ class HeroSnapshot
   def die
     self.defense = 0
     self.alive = false
+    battle.log_death(self)
     dead?
   end
 
