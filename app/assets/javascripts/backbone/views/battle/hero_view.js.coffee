@@ -44,7 +44,7 @@ class ForgeCraft.Views.HeroView extends Backbone.View
 
   beginAttack: ->
     self = @
-    $(@el).find('.actions').hide()
+    $(@el).addClass('choosing')
     @showExplanation('attack')
     battleView.enableActionTargets ->
       self.chooseAttackTarget.apply(self, arguments)
@@ -54,7 +54,7 @@ class ForgeCraft.Views.HeroView extends Backbone.View
 
     enemy = enemyView.model
     @model.chooseAttackTarget(enemy)
-
+    $(@el).removeClass('choosing')
     @showExplanation('target', "Attacking " + enemy.get("name"))
 
   beginDefend: ->
@@ -97,3 +97,4 @@ class ForgeCraft.Views.HeroView extends Backbone.View
 
   reflectPerformedAction: ->
     @hideExplanation()
+    $(@el).effect("pulsate", { times: 2 }, 50)

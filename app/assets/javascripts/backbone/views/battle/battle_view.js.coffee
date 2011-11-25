@@ -77,7 +77,9 @@ class ForgeCraft.Views.BattleView extends Backbone.View
       @finish()
 
   finish: ->
-
+    @model.stopQueue()
+    @model.clearQueue()
+    
     if @model.get("winner_id") == window.player.id
       msg = "(Placeholder) You won!"
     

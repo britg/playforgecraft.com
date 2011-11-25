@@ -169,6 +169,12 @@ $action-sidebar-width: 250px;
         .actions {
           display: block;
         }
+
+        &.choosing {
+          .actions {
+            display: none;
+          }
+        }
       }
 
       &.action-target {

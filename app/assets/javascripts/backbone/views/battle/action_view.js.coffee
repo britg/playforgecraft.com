@@ -41,7 +41,6 @@ class ForgeCraft.Views.ActionView extends Backbone.View
 
   damageDealt: ->
     @model.get("damage_dealt")
-
   
   buildMessage: ->
     $(@el).find('.actor').html @model.get("player_name")

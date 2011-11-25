@@ -25,3 +25,5 @@ class ForgeCraft.Collections.Actions extends Backbone.Collection
         battle.queuedActions.add action
 
       loadingView.hide()
+
+    @reset()

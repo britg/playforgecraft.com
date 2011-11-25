@@ -30,6 +30,8 @@ class ForgeCraft.Models.Battle extends Backbone.Model
     @initializeHeroes()
     @bind "ForgeCraft::PlayComplete", @continue, @
 
+    @actions.bind "add", @setCurrentPlayFromAction, @
+
   log_action: (params) ->
     @actions.add params
 
@@ -50,6 +52,7 @@ class ForgeCraft.Models.Battle extends Backbone.Model
                 @get("enemyThief"),  @get("enemyRanger")]
 
   continue: ->
+    return if @get("finished") == true
 
     if @get("currentPlay")?
       nextPlay = @get("currentPlay") + 1
@@ -66,6 +69,9 @@ class ForgeCraft.Models.Battle extends Backbone.Model
     console.log "Continuing with next play: ", nextPlay
 
     @runPlay(nextPlay)
+
+  setCurrentPlayFromAction: ->
+    @set currentPlay: @getLastAction().get("play")
 
   getLastAction: ->
     num_actions = @actions.length
@@ -95,7 +101,10 @@ class ForgeCraft.Models.Battle extends Backbone.Model
     @pendingActions.commitActions()
 
   processQueue: ->
-    return if battle.queuedActions.length < 1
+    if battle.queuedActions.length < 1
+      @continue()
+      return
+
     clearTimeout(@queueTimeout)
 
     @queueTimeout = setTimeout ->
@@ -106,6 +115,12 @@ class ForgeCraft.Models.Battle extends Backbone.Model
       battle.processQueue()
     , 1000
 
+  stopQueue: ->
+    clearTimeout(@queueTimeout)
+
+  clearQueue: ->
+    @queuedActions.reset()
+
   processAction: (action) ->
     console.log "Processing action:", action
     battle.actions.add action
@@ -113,13 +128,13 @@ class ForgeCraft.Models.Battle extends Backbone.Model
     if action.get("hero")?
       console.log "Updating hero conditions"
       hero = battle.heroes.get(action.get("hero_id"))
-      hero.set action.get("hero")
+      hero.set action.get("hero_conditions")
       hero.set last_action: action.get("id")
 
     if action.get("targetted")?
-      console.log "Updating target conditions", action.get("target_id"), action.get("targetted")
+      console.log "Updating target conditions", action.get("target_id"), action.get("target_conditions")
       hero = battle.heroes.get(action.get("target_id"))
-      hero.set action.get("targetted")
+      hero.set action.get("target_conditions")
 
     if action.get("conditions")?
       console.log "Updating battle condiitons", action.get("conditions")

@@ -7,6 +7,11 @@ class ForgeCraft.Models.Hero extends Backbone.Model
     active: false
 
   runPlay: (playName) ->
+    if @get("alive") == false
+      console.log "I'm dead! Moving on"
+      battle.trigger "ForgeCraft::PlayComplete"
+      return
+      
     console.log "Hero running play", playName
     @chooseAction() if playName == 'choose_action'
 

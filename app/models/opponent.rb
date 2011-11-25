@@ -17,6 +17,7 @@ class Opponent
       atts = hero.attributes.dup
       atts.delete("_id")
       atts["owner_id"] = owner.id
+      atts["owner_type"] = "opponent"
       atts["name"] = NameGenerator.create
       atts
     end

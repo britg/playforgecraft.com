@@ -153,11 +153,26 @@ class Battle
     battle_heroes.where(:_id => ident).first    
   end
 
-  def available_target default
-    return default if default.alive?
-    [second_warrior, second_thief, second_ranger].each do |hero|
-      return hero if hero.alive?
+  def first_player_heroes
+    [first_warrior, first_thief, first_ranger]
+  end
+
+  def second_player_heroes
+    [second_warrior, second_thief, second_ranger]
+  end
+
+  def available_target_for player, default=nil
+    return default if default.present? and default.alive?
+
+    pool = (player == first_player ? second_player_heroes : first_player_heroes)
+    alive = []
+    pool.each do |hero|
+      alive << hero if hero.alive?
     end
+
+    return alive.sample if alive.any?
+
+    nil
   end
 
   def forfeit forfeiter
@@ -195,14 +210,14 @@ class Battle
   end
 
   def first_player_alive?
-    [first_warrior, first_thief, first_ranger].each do |hero|
+    first_player_heroes.each do |hero|
       return true if hero.alive?
     end
     false
   end
 
   def second_player_alive?
-    [second_warrior, second_thief, second_ranger].each do |hero|
+    second_player_heroes.each do |hero|
       return true if hero.alive?
     end
     false
@@ -236,6 +251,29 @@ class Battle
 
   def current_play
     actions.last.try(:play)||0
+  end
+
+  def continue
+    continue_singleplayer if singleplayer?
+    continue_multiplayer if multiplayer?
+  end
+
+  def continue_singleplayer
+    opponent_actions
+    start_next_round
+  end
+
+  def opponent_actions
+    second_player_heroes.each do |hero|
+      hero.auto_attack if hero.alive?
+    end
+  end
+
+  def start_next_round
+    action = actions.create :type => :notification,
+                            :message => "It's your turn",
+                            :play => -1
+    add_processed_action(action)
   end
 
   # Callbacks

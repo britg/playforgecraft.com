@@ -1,6 +1,6 @@
 .action.attack
 
-  %span.player.advanced= "#{action.player}"
+  %span.player{ :class => (action.player.class == Opponent ? 'itemset' : 'advanced') }= "#{action.player}"
   =":" 
   %span.hero{:class => action.hero.try(:to_css_class)}= "#{action.hero.to_s}"
   attacked 

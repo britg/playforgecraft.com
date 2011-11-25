@@ -5,6 +5,7 @@ class BattleHero
 
   field :name
   field :owner_id
+  field :owner_type
   field :job_id, :type => Integer
   field :job_name
   field :attack, :type => Integer
@@ -22,10 +23,13 @@ class BattleHero
     def snapshot_of hero, owner
       {:name => hero.name,
        :owner_id => owner.id,
+       :owner_type => (owner.class == Player ? 'player' : 'opponent'),
        :job_id => hero.hero_class_id,
        :job_name => hero.job.to_s,
        :attack => hero.attack,
        :defense => hero.defense,
+       # :attack => 1,
+       # :defense => 10,
        :weapon1_id => hero.weapon1.try(:id),
        :weapon2_id => hero.weapon2.try(:id),
        :armor_id => hero.armor.try(:id),
@@ -44,6 +48,11 @@ class BattleHero
 
   def to_css_class
     job_name
+  end
+
+  def owner
+    @owner ||= Opponent.find(owner_id) if owner_type == 'opponent'
+    @owner ||= Player.find(owner_id)
   end
 
   def take_damage amount
@@ -91,6 +100,20 @@ class BattleHero
   def resurrect! starting_defense=1
     resurrect starting_defense
     save
+  end
+
+  def auto_attack
+    available_target = battle.available_target_for owner
+    return unless available_target
+    action = battle.actions.create :type => :attack,
+                                  :player_id => owner.id,
+                                  :player_type => 'opponent',
+                                  :hero_id => self.id,
+                                  :hero_type => self.job_name,
+                                  :target_id => available_target.id,
+                                  :target_type => available_target.job_name
+    action.perform
+    battle.add_processed_action(action)
   end
 
   #----
