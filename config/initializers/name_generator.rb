@@ -1,0 +1,1 @@
+require 'name_generator/name_generator'

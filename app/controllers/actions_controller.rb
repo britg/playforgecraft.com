@@ -13,10 +13,22 @@ class ActionsController < ApplicationController
     
   end
 
+  def commit
+    process_actions params[:actions]
+    render :json => @battle.processed_actions
+  end
+
   #------
 
   def find_battle
     @battle = Battle.find(params[:battle_id])
+  end
+
+  def process_actions actions
+    (actions||[]).each do |i, action_data|
+      @battle.process_action current_player, action_data
+    end
+    @battle.continue
   end
 
 end

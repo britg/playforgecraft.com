@@ -5,6 +5,7 @@ class Item < ActiveRecord::Base
   belongs_to :ore
   belongs_to :rarity
   belongs_to :item_set
+  belongs_to :zone
 
   has_many :loot, :class_name => "Loot"
 

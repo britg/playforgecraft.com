@@ -13,6 +13,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
     self = @
     flashView.hide()
     loadingView.show()
+    @hideAllPopovers()
     $(window).unbind('resize')
     
     $('#content').load path, ->
@@ -27,16 +28,34 @@ class ForgeCraft.Views.AppView extends Backbone.View
     console.log "Starting app context with", path
 
     @startForge() if path == '/forge'
-    @startBattle() if path.match '/battles/'  
+    @startBattle() if path.match '/battles/'
+    @startBattleLobby() if path.match /\/battles$/
+    @startMap() if path.match '/map'
 
     @bindPopovers()
+
+    $('abbr.timeago').timeago()
   
   startForge: ->
     window.forgeView = new ForgeCraft.Views.ForgeView el: $('#forge').get(0)
 
   startBattle: ->
-    battle = new ForgeCraft.Models.Battle(ForgeCraft.Config.battle)
-    window.battleView = new ForgeCraft.Views.BattleView el: $('#battle').get(0), model: battle
+    window.battle = new ForgeCraft.Models.Battle(ForgeCraft.Config.battle)
+    window.battleView = new ForgeCraft.Views.BattleView el: $('#battle').get(0), model: window.battle
+    window.battle.continue()
+
+  startBattleLobby: ->
+
+    $('#new_battle').bind "ajax:complete", (event, response) ->
+      new_battle = JSON.parse(response.responseText)
+      Backbone.history.navigate("battles/" + new_battle._id, true)
+
+    $('.battle-stub').each (i, stub) ->
+      battleStubView = new ForgeCraft.Views.BattleStubView el: $(this).get(0)
+
+  startMap: ->
+    window.map = new ForgeCraft.Models.Map()
+    window.mapView = new ForgeCraft.Views.MapView()
 
   bindInternalLinks: ->
 
@@ -52,6 +71,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
     $('.notice').alert()
 
   bindPopovers: ->
+    return if Modernizr.touch
     $('.loot-icon').popover({
       html: true
       title: ->
@@ -73,3 +93,6 @@ class ForgeCraft.Views.AppView extends Backbone.View
         out
 
     })
+
+  hideAllPopovers: ->
+    $('.popover').remove()

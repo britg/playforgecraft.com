@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111109175230) do
+ActiveRecord::Schema.define(:version => 20111126010315) do
 
   create_table "actions", :force => true do |t|
     t.integer  "game_id"
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(:version => 20111109175230) do
     t.datetime "art_updated_at"
     t.text     "story"
     t.integer  "cost"
+    t.integer  "zone_id"
   end
 
   add_index "items", ["active"], :name => "index_items_on_active"
@@ -221,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20111109175230) do
   add_index "items", ["item_set_id"], :name => "index_items_on_item_set_id"
   add_index "items", ["ore_id"], :name => "index_items_on_ore_id"
   add_index "items", ["rarity_id"], :name => "index_items_on_rarity_id"
+  add_index "items", ["zone_id"], :name => "index_items_on_zone_id"
 
   create_table "levels", :force => true do |t|
     t.integer   "level"
@@ -272,10 +274,12 @@ ActiveRecord::Schema.define(:version => 20111109175230) do
     t.integer   "avatar_file_size"
     t.timestamp "avatar_updated_at"
     t.integer   "coins",               :default => 1000
+    t.integer   "zone_id"
   end
 
   add_index "players", ["name"], :name => "index_players_on_name", :unique => true
   add_index "players", ["user_id"], :name => "index_players_on_user_id", :unique => true
+  add_index "players", ["zone_id"], :name => "index_players_on_zone_id"
 
   create_table "rarities", :force => true do |t|
     t.string    "name"
@@ -348,5 +352,14 @@ ActiveRecord::Schema.define(:version => 20111109175230) do
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
+  create_table "zones", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "lower_level"
+    t.integer  "upper_level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

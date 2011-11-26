@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+  def timeago(time, options = {})
+    options[:class] ||= "timeago"
+    content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
+  end
+
   def selected(item)
     "selected" if (@nav_item == item)
   end
@@ -33,7 +38,7 @@ module ApplicationHelper
   end
 
   def equipment_icon(loot)
-    image_tag(loot.icon, :class => "loot-icon", :title => loot.name, :"data-type" => loot.to_css_classes, :"data-level" => loot.level, :"data-attack" => loot.attack, :"data-defense" => loot.defense)
+    image_tag(loot.icon, :class => "loot-icon", :"data-id" => loot.id, :title => loot.name, :"data-type" => loot.to_css_classes, :"data-level" => loot.level, :"data-attack" => loot.attack, :"data-defense" => loot.defense)
   end
 
   def tile_image(t)
@@ -56,9 +61,13 @@ module ApplicationHelper
     content_tag(:span, player.title, :class => "title")
   end
 
+  def player_zone player
+    content_tag(:span, player.zone, :class => "title")
+  end
+
   def player_slug player
     content_tag :span, :class => "player-slug" do
-      [player_name(player), player_level(player), player_title(player)].join(" ").html_safe
+      [player_name(player), player_level(player), player_zone(player)].join(" ").html_safe
     end
   end
 

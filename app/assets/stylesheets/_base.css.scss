@@ -207,6 +207,12 @@ $sidebar-width: 250px;
     background: $light-border-color;
   }
 
+  #facebox {
+    .close {
+      @include opacity(1);
+      background: transparent;
+    }    
+  }
 
 }
 

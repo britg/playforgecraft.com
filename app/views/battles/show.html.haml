@@ -2,38 +2,43 @@
 
   .log
 
-    .new_message
+    - if @battle.multiplayer?
 
-      = form_for [@battle, Action.new], :remote => true, :format => :json do |f|
-        
-        = fields_for :battle_action do |action|
+      .new_message
+
+        = form_for [@battle, Action.new], :remote => true, :format => :json do |f|
           
-          = action.hidden_field :type, :value => :message
-          = action.hidden_field :player_id, :value => current_player.id
-          = action.hidden_field :player_name, :value => current_player.to_param
-          = action.text_field :message
+          = fields_for :battle_action do |action|
+            
+            = action.hidden_field :type, :value => :message
+            = action.hidden_field :player_id, :value => current_player.id
+            = action.hidden_field :player_name, :value => current_player.to_param
+            = action.text_field :message
 
     %ul.action-list
       
       - @battle.actions.reverse.each do |action|
         %li.log-action= render "actions/log_#{action.type}", :action => action
 
-  .battlers
+  .squads
 
-    .battler-wrap.you
-      .battler
+    .squad-wrap.you
+      .squad
         .player-bar
-          %h2.player= current_player.name
+          %h2.player= @battle.first_player.name
 
-        .hero-wrap
-          = render "heroes/heroes", :player => current_player, :loot => nil
+        .heroes-wrap
+          = render "hero_snapshots", :warrior => @battle.first_warrior, :thief => @battle.first_thief, :ranger => @battle.first_ranger, :controllable => (@battle.first_player == current_player)
     
-    .battler-wrap.opponent
-      .battler
+    .squad-wrap.enemy
+      .squad
         .player-bar
-          %h2.player Ragnar of Thane
+          %h2.player= @battle.second_player.name
 
-#log-templates
+        .heroes-wrap
+          = render "hero_snapshots", :warrior => @battle.second_warrior, :thief => @battle.second_thief, :ranger => @battle.second_ranger, :controllable => (@battle.second_player == current_player)
+
+#log-templates.view-templates
   - Action::TYPES.each do |action_type|
     
     = render "actions/log_#{action_type}", :action => Action.new(:type => action_type)

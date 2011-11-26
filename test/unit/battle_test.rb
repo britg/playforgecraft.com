@@ -23,7 +23,7 @@ class BattleTest < ActiveSupport::TestCase
     setup do
       @player1 = Fabricate(:player, :name => "1")
       @player2 = Fabricate(:player, :name => "2")
-      @battle = Battle.create :player_ids => [@player1.id, @player2.id], :mode => :singleplayer
+      @battle = Battle.create :first_player_id => @player1.id, :second_player_id => @player2.id, :mode => :singleplayer
     end
 
     should "default to unfinished" do

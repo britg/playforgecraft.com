@@ -34,6 +34,9 @@
 
             %li
               = link_to "Profile", player_path(current_player), :class => "profile nav-item #{selected('profile')}", :title => "Profile", :"data-placement" => "below"
+            
+            %li
+              = link_to "Map", map_path, :class => "map nav-item #{selected('map')}", :title => "Map", :"data-placement" => "below"
 
             %li
               = link_to "Forge", forge_path, :class => "forge nav-item #{selected('forge')}", :title => "Forge", :"data-placement" => "below"

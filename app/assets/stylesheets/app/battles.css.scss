@@ -3,11 +3,73 @@
 $action-sidebar-width: 250px;
 
 #battles-page {
+
+  padding-top: 20px;
+
+  .mode {
+    margin-bottom: 1em;
+  }
+
+  .current-battle {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: solid 1px $light-border-color;
+  }
+}
+
+.battle-stub {
+  @include inset;
+  @include clearfix;
+
+  padding: 10px;
+  margin-bottom: 10px;
+
+  .controls {
+    float: right;
+    @include clearfix;
+    margin-top: 10px;
+  }
+
+  .battle-link {
+    float: right;
+  }
+
+  .forfeit-link {
+    float: right;
+    color: $light-border-color;
+  }
+
+  .result {
+    float: right;
+
+    &.defeat {
+      color: $blood-color;
+    }
+
+    &.victory {
+      color: $advanced-color;
+    }
+  }
+
+  table.stats {
+    font-size: 81%;
+
+    td {
+      padding: 5px;
+      border: 0;
+
+      &.stat {
+        width: 60px;
+        text-align: right;
+        color: $light-border-color;
+      }
+    }
+  }
 }
 
 #battle {
   
-  .battlers {
+  .squads {
     margin-right: $action-sidebar-width + 10px;
 
     .player-bar {
@@ -28,6 +90,7 @@ $action-sidebar-width: 250px;
     .action-list {
       margin-left: 10px;
       margin-right: 5px;
+      margin-top: 10px;
       list-style-type: none;
 
       li {
@@ -35,26 +98,98 @@ $action-sidebar-width: 250px;
       }
     }
 
+    .action {
+      
+      &.important {
+        color: $highlight-color;
+        font-weight: bold;
+      }
+
+      .ranger {
+        @include ranger;
+      }
+
+      .warrior {
+        @include warrior;
+      }
+
+      .thief {
+        @include thief;
+      }
+
+      .damage {
+        color: $highlight-color;
+      }
+    }
+
   }
 
-  .battler-wrap {
+  .squad-wrap {
     width: 50%;
     height: 100%;
     float: left;
 
     background: image_url("sidebar-fade.png") right top no-repeat;
 
-    &.opponent {
+    &.enemy {
       background: none;
     }
 
   }
 
-  .battler {
-    padding: 10px 0 0 20px;
+  .squad {
+    padding: 10px 20px 0 20px;
 
     .hero {
       margin-bottom: 10px;
+      max-width: 350px;
+      @include border-radius(5px);
+
+      .actions {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        display: none;
+      }
+
+      .action {
+        
+        &.attack {
+        }
+
+        &.special {
+        }
+      }
+
+
+      &.active {
+        border: solid 1px $advanced-color;
+        @include box-shadow(rgba($advanced-color, 0.4) 0 0 15px, rgba($advanced-color, 0.2) 0 0 3px 1px inset);
+
+        .actions {
+          display: block;
+        }
+
+        &.choosing {
+          .actions {
+            display: none;
+          }
+        }
+      }
+
+      &.action-target {
+        @include box-shadow(rgba($common-color, 0.4) 0 0 5px, rgba($common-color, 0.2) 0 0 3px 1px inset);
+
+        &:hover {
+          @include box-shadow(rgba($common-color, 0.8) 0 0 10px, rgba($common-color, 0.2) 0 0 3px 1px inset);
+        }
+      }
+
+      .explanation {
+        display: none;
+        text-align: center;
+      }
+
     }
   }
 

@@ -21,6 +21,10 @@ ForgeCraft::Application.routes.draw do
   root :to => "users#index"
   get "about", :to => "users#index", :as => :about
 
+  # Map
+  resources :zones
+  get "map", :to => "zones#index", :as => :map
+
   # Forge
 
   resource :forge, :only => [:show, :create]
@@ -33,7 +37,11 @@ ForgeCraft::Application.routes.draw do
 
   resources :heroes
   resources :battles do
-    resources :actions
+    resources :actions do
+      collection do
+        post :commit  
+      end
+    end
   end
 
   # Armory
@@ -48,7 +56,9 @@ ForgeCraft::Application.routes.draw do
 
   # Player
 
-  resources :players, :only => [:index, :show]
+  resources :players, :only => [:index, :show] do
+    resource :zone, :only => [:update]
+  end
   get "ladder", :to => "players#index"
   get 'menu', :to => "players#edit", :as => :menu
   get ':playername', :to => "players#show", :as => :player

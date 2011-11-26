@@ -1,0 +1,11 @@
+.action.attack
+
+  %span.player{ :class => (action.player.class == Opponent ? 'itemset' : 'advanced') }= "#{action.player}"
+  =":" 
+  %span.hero{:class => action.hero.try(:to_css_class)}= "#{action.hero.to_s}"
+  attacked 
+  %span.target{:class => action.targetted.try(:to_css_class)}= "#{action.targetted.to_s}" 
+  for 
+  %span.damage= "#{number_with_delimiter(action.damage_dealt)}"
+  damage
+  %span.timestamp= timeago(action.created_at)

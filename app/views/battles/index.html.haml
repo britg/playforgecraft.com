@@ -1,20 +1,34 @@
 #battles-page.container
 
-  .row
+  #battle-modes.row
 
-    .span8
-      %h2 Single Player
+    .singleplayer.battle-mode.span8
 
-      - if current_player.active_battle.present?
-        = link_to "Resume Battle", battle_path(current_player.active_battle), :class => "btn primary"
+      .current-battle
 
-      - else
-        
-        = form_for :battle do |f|
+        %h2.mode Singleplayer
+
+        - if current_player.active_battle.present?
+          = render "battle_stub", :battle => current_player.active_battle
           
-          = f.hidden_field :mode, :value => :singleplayer
 
-          = f.submit "Start a Singleplayer Battle", :class => "btn primary"
+        - else
+          
+          = form_for Battle.new, :remote => true, :format => :json do |f|
+            
+            = f.hidden_field :mode, :value => :singleplayer
+            = f.hidden_field :first_player_id, :value => current_player.id
 
-    .span8
-      %h2 Multiplayer
+            = f.submit "Start Battle".html_safe, :class => "btn primary"
+
+      - if @previous_battles.any?
+        .previous-battles
+
+          - @previous_battles.each do |previous|
+            
+            = render "battle_stub", :battle => previous
+
+      
+
+    .multiplayer.battle-mode.span8
+      %h2.mode Multiplayer

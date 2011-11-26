@@ -1,6 +1,7 @@
 class Player < ActiveRecord::Base
 
   belongs_to :user
+  belongs_to :zone
 
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
@@ -32,15 +33,15 @@ class Player < ActiveRecord::Base
   end
 
   def to_s
-    "#{name} (#{level})"
+    "#{name}"
   end
 
   def to_param
     name
   end
 
-  def serializable_hash(opts)
-    super((opts||{}).merge(:only => [:name, :level, :coins]))
+  def serializable_hash(opts={})
+    super((opts||{}).merge(:only => [:id, :name, :level, :coins], :methods => [:zone]))
   end
 
   def starting_level
@@ -131,7 +132,7 @@ class Player < ActiveRecord::Base
   # Battles
 
   def battles
-    Battle.where(:player_ids => self.id)
+    Battle.where(:first_player_id => self.id)
   end
 
   def active_battle
@@ -140,6 +141,14 @@ class Player < ActiveRecord::Base
 
   def won? battle
     battle.winner == self
+  end
+
+  def travel_to zone
+    self.update_attributes(:zone => zone)
+  end
+
+  def can_travel_to? zone
+    level >= zone.lower_level
   end
 
 end
