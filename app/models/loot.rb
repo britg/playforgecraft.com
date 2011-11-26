@@ -2,6 +2,11 @@ class Loot < ActiveRecord::Base
 
   default_scope order("id desc").where(:available => true)
 
+  COMMON_THRESHOLD = 90.0
+  ADVANCED_THRESHOLD = 99.0
+  RARE_THRESHOLD = 99.9
+  EPIC_THRESHOLD = 100.0
+
   belongs_to :player
   belongs_to :game
   belongs_to :action
@@ -23,7 +28,25 @@ class Loot < ActiveRecord::Base
     end
 
     def roll classification, ore, accuracy, zone
-      item = Item.where(:classification_id => classification, :ore_id => ore, :zone_id => zone).random
+      rarity = roll_rarity(accuracy)
+      item = Item.where(:classification_id => classification, :ore_id => ore, :zone_id => zone, :rarity_id => rarity.try(:id)).random
+    end
+
+    def roll_rarity accuracy=0
+      rand = Random.new
+      chance = rand.rand(1000).to_f/10.0
+
+      if chance < COMMON_THRESHOLD
+        return Rarity.common
+      elsif chance < ADVANCED_THRESHOLD
+        return Rarity.advanced
+      elsif chance < RARE_THRESHOLD
+        return Rarity.rare
+      elsif chance <= EPIC_THRESHOLD
+        return Rarity.epic
+      end
+
+      return Rarity.common
     end
 
     def of_item item

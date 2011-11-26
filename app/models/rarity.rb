@@ -23,6 +23,26 @@ class Rarity < ActiveRecord::Base
       Rarity.find_by_name(sym.to_s.capitalize)
     end
 
+    def common
+      find_by_name("Common")
+    end
+
+    def advanced
+      find_by_name("Advanced")
+    end
+
+    def rare
+      find_by_name("Rare")
+    end
+
+    def set
+      find_by_name("Set")
+    end
+
+    def epic
+      find_by_name("Epic")
+    end
+
   end
 
   def to_css_class

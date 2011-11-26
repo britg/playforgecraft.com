@@ -27,10 +27,6 @@ class ForgeCraft.Views.ArmoryView extends Backbone.View
     classification = $('input[name=classification]:checked').val()
     uri += '&classification=' + classification
 
-    # Level
-    levelRange = $('input[name=level_range]:checked').val()
-    uri += '&level_range=' + levelRange
-
     # Ore
     ores = []
     ores_uri = ''
