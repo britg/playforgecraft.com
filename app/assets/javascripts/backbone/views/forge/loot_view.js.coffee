@@ -47,7 +47,11 @@ class ForgeCraft.Views.LootView extends Backbone.View
   addToLootList: ->
     $(@el).hide()
 
-    first_loot_id = Loot.at(1).get("id")
+    if Loot.length > 0 and Loot.at(1)?
+      first_loot_id = Loot.at(1).get("id")
+    else
+      first_loot_id = 0
+    
     this_id = @model.get("id")
 
     if this_id > first_loot_id
