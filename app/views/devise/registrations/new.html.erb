@@ -9,6 +9,10 @@
         <%= devise_error_messages! %>
 
         <%= f.fields_for :player do |p| %>
+
+          <%= p.hidden_field :level, :value => 1 %>
+          <%= p.hidden_field :zone_id, :value => Zone.first.try(:id) %>
+
           <div><%= p.label :name, "Player Name" %><br />
           <%= p.text_field :name, :class => "required" %></div>
         <% end %>

@@ -1,0 +1,16 @@
+#map
+
+  %h3 (Placeholder) Select a map region below to travel there.
+
+  = form_for current_player, :url => player_zone_path(current_player), :remote => true, :html => {:id => "traveller", :class => "form-stacked"} do |f|
+    
+    .fieldset
+
+      .clearfix
+        .input
+          .inputs-list
+            - Zone.all.each do |zone|
+              %li
+                = f.radio_button :zone_id, zone.to_param, :disabled => !current_player.can_travel_to?(zone)
+                = f.label "zone_id_#{zone.to_param}", zone.title
+    

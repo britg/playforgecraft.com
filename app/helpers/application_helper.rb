@@ -61,9 +61,13 @@ module ApplicationHelper
     content_tag(:span, player.title, :class => "title")
   end
 
+  def player_zone player
+    content_tag(:span, player.zone, :class => "title")
+  end
+
   def player_slug player
     content_tag :span, :class => "player-slug" do
-      [player_name(player), player_level(player), player_title(player)].join(" ").html_safe
+      [player_name(player), player_level(player), player_zone(player)].join(" ").html_safe
     end
   end
 

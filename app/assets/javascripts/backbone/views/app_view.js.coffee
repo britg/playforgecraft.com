@@ -30,6 +30,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
     @startForge() if path == '/forge'
     @startBattle() if path.match '/battles/'
     @startBattleLobby() if path.match /\/battles$/
+    @startMap() if path.match '/map'
 
     @bindPopovers()
 
@@ -51,6 +52,10 @@ class ForgeCraft.Views.AppView extends Backbone.View
 
     $('.battle-stub').each (i, stub) ->
       battleStubView = new ForgeCraft.Views.BattleStubView el: $(this).get(0)
+
+  startMap: ->
+    window.map = new ForgeCraft.Models.Map()
+    window.mapView = new ForgeCraft.Views.MapView()
 
   bindInternalLinks: ->
 
