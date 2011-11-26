@@ -61,19 +61,26 @@ class ItemsController < ApplicationController
 
     @context_arr = []
 
-    parse_level
+    # parse_level
+    parse_zone
     parse_class
     parse_ores
     parse_rarity
     
     @filtered = Item.of_class(params[:classification]) \
-                .in_range(params[:level_range]) \
+                .of_zone(params[:zone_id])
                 .of_ore(params[:ores])
                 .of_rarity(params[:rarities])
 
     @context = @context_arr.join(' ')
     @filtered
 
+  end
+
+  def parse_zone
+    params[:zone_id] = (current_player.zone.try(:id)||Zone.first.try(:id)) unless params[:zone_id].present?
+    zone = Zone.find_by_id(params[:zone_id])
+    @context_arr << zone.name
   end
 
   def parse_level

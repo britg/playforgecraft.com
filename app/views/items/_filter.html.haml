@@ -20,17 +20,17 @@
     .span2.second
 
       %fieldset
-        %legend Level
-
+        
+        %legend Map Region
         .input
 
           %ul.inputs-list
-            - 10.times do |i|
+            - Zone.all.each do |zone|
               
               %li
-                %label{ :for => "level-range-#{i}" }
-                  %input{ :id => "level-range-#{i}", :rel => :filter, :type => :radio, :name => "level_range", :value => i, :checked => (params[:level_range].to_i == i.to_i) }
-                  %span= "#{(10*i + 1)}-#{(10*i + 10)}"
+                %label{ :for => "zone-#{zone.id}" }
+                  %input{ :id => "zone-#{zone.id}", :rel => :filter, :type => :radio, :name => "zone_id", :value => zone.id, :checked => (params[:zone_id].to_i == zone.id.to_i), :disabled => !current_player.can_travel_to?(zone) }
+                  %span= zone.name
 
   .row
 

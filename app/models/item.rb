@@ -35,7 +35,7 @@ class Item < ActiveRecord::Base
     :default_url => lambda { |a| a.instance.classification.default_art.url },
     :styles => { :full => ["640x960#", :jpg], :normal => ["320x480#", :jpg], :small => ["160x240#", :jpg] }
 
-  default_scope order("level desc, rarity_id desc, name asc")
+  default_scope order("rarity_id desc, name asc")
 
   Rarity::DEFAULTS.each do |r|
     scope r.downcase.to_sym, joins(:rarity).where("rarities.name = ?", r)
@@ -51,6 +51,10 @@ class Item < ActiveRecord::Base
 
     def item_count(type, ore)
       Item.of_class(type).of_ore(ore).count
+    end
+
+    def of_zone(zone)
+      where(:zone_id => zone)
     end
 
     def of_ore(ore)
