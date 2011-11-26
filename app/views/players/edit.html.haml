@@ -1,14 +1,13 @@
 #menu
   .settings-menu
-    %h3 Menu
 
     %ul
       %li
-        = link_to "Refresh", "javascript:window.location.reload();", "data-external" => true
+        = link_to "Refresh", "javascript:window.location.reload();", "data-external" => true, :class => "btn primary"
 
       - if admin?
         %li
-          = link_to "Admin", admin_dashboard_path, "data-external" => true
+          = link_to "Admin", admin_dashboard_path, "data-external" => true, :class => "btn primary"
       
       %li
-        = link_to "Logout", logout_path, "data-external" => true
+        = link_to "Logout", logout_path, "data-external" => true, :class => "btn danger"
