@@ -13,9 +13,9 @@
 
         %th Item
 
-        %th Ore
+        %th Region
 
-        %th Level
+        %th Ore
 
         %th= image_tag("loot/attack.png", :class => "icon")
         
@@ -38,11 +38,10 @@
             = link_to image_tag(item.icon.url(:tiny), :class => "icon"), item_path(item)
             = link_to item, armory_path(item), :class => item.rarity
 
+          %td.region= item.zone
+
           %td.ore
             = image_tag item.ore.tile.url(:small), :title => item.ore, :alt => item.ore, :class => "icon"
-
-          %td
-            = admin_field item, :level
 
           %td
             - if item.weapon?

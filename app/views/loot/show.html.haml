@@ -6,17 +6,14 @@
 
   .explain
     
-    - if @loot.level > current_player.level
-      %p This item's level is too high to equip now. Level up by winning battles with your heroes.
-    - elsif @loot.equipped?
+    - if @loot.equipped?
       %p This item is equipped!
 
     - else
       %p Select an enabled slot below to equip this item
 
-  - if @loot.level <= current_player.level
-    .heroes-wrap
-      = render "heroes/heroes", :player => current_player, :loot => @loot
+  .heroes-wrap
+    = render "heroes/heroes", :player => current_player, :loot => @loot
 
 :javascript
   

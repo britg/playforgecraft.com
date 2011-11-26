@@ -22,9 +22,9 @@
       = f.select :rarity_id, Rarity.to_select_options, :class => "required"
 
   .clearfix
-    = f.label :level
+    = f.label :zone_id, "Map Zone"
     .input
-      = f.text_field :level
+      = f.select :zone_id, Zone.for_select
 
   .clearfix
     = f.label :attack_min
