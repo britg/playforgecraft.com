@@ -1,7 +1,7 @@
 class ZonesController < ApplicationController
 
   def index
-    
+    select_nav 'map'    
   end
 
   def update

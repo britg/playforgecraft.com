@@ -64,7 +64,7 @@ table {
   position: fixed;
   top: 0;
   right: 10px;
-  width: $sidebar-width - 10px;
+  width: 285px;
   height: $profile-height;
   margin: 0;
   padding: 0;
@@ -130,6 +130,15 @@ table {
 
           &.selected {
             background-position: center -320px;          
+          }
+        }
+
+        &.map {
+          
+          background-position: center -440px;
+
+          &.selected {
+            background-position: center -400px;          
           }
         }
       }

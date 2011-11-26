@@ -23,6 +23,8 @@ class ForgeCraft.Routers.Router extends Backbone.Router
 
     "items/:ident": "item"
 
+    "map" : "map"
+
     ":player": "player"
 
   # User
@@ -63,6 +65,10 @@ class ForgeCraft.Routers.Router extends Backbone.Router
   item: (ident) ->
     menuView.selectNav('armory')
     @load('/items/' + ident)
+
+  map: ->
+    menuView.selectNav('map')
+    @load('/map')
 
   # Battle
 
