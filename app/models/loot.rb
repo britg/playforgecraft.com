@@ -14,7 +14,7 @@ class Loot < ActiveRecord::Base
   class << self
 
     def generate classification, ore, accuracy, player
-      item = roll classification, ore, accuracy, player.level
+      item = roll classification, ore, accuracy, player.zone
       return nil unless item
 
       loot = Loot.new( :item => item, :player => player )
@@ -22,8 +22,8 @@ class Loot < ActiveRecord::Base
       loot
     end
 
-    def roll classification, ore, accuracy, level
-      item = Item.where(:classification_id => classification, :ore_id => ore).random
+    def roll classification, ore, accuracy, zone
+      item = Item.where(:classification_id => classification, :ore_id => ore, :zone_id => zone).random
     end
 
     def of_item item
