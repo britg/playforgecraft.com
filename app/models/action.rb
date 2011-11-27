@@ -57,8 +57,6 @@ class Action
     self.type.to_s == 'end'
   end
 
-  #----
-
   def perform
     perform_attack if attack?
     snapshot_hero_conditions
@@ -69,8 +67,8 @@ class Action
     return unless actual_target.present?
 
     self.update_targetted(actual_target)
-    self.damage_dealt = hero.calculate_damage(self.targetted)
-    self.targetted.take_damage! damage_dealt
+    self.update_attributes(:damage_dealt => hero.calculate_damage(self.targetted))
+    self.targetted.take_damage! self.damage_dealt
   end
 
   def snapshot_battle_conditions
