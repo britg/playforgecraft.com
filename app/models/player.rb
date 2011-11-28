@@ -42,7 +42,7 @@ class Player < ActiveRecord::Base
   end
 
   def serializable_hash(opts={})
-    super((opts||{}).merge(:only => [:id, :name, :level, :coins], :methods => [:zone]))
+    super((opts||{}).merge(:only => [:id, :name, :level, :coins], :methods => [:zone, :forge]))
   end
 
   def starting_level
@@ -152,12 +152,39 @@ class Player < ActiveRecord::Base
     battle.winner == self
   end
 
-  def travel_to mine
-    self.update_attributes(:mine => mine, :zone => mine.zone)
+  # Mines
+
+  def travel_to target_mine
+    self.update_attributes(:mine => target_mine, :zone => target_mine.zone)
+    create_forge(target_mine) unless has_forge?(target_mine)
   end
 
   def can_travel_to? mine
     true
+  end
+
+  # Forges
+
+  def forges
+    Forge.where(:player_id => id)
+  end
+
+  def forge
+    return nil unless mine_id.present?
+    Forge.where(:player_id => id, :mine_id => mine_id).first
+  end
+
+  def forge_for target_mine
+    forges.where(:mine_id => target_mine.try(:id)).first
+  end
+
+  def create_forge target_mine
+    return false unless target_mine.try(:id)
+    forges.create :mine_id => target_mine.try(:id)
+  end
+
+  def has_forge? target_mine
+    forge_for(target_mine).present?
   end
 
 end

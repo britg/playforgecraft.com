@@ -1,9 +1,10 @@
 #forge
 
   #sidebar
+    %h3= @forge
 
-    #player-bar
-      .coins= number_with_delimiter current_player.coins
+    #progress
+      = render "forges/progress", :forge => @forge
     
     #loot-list
 

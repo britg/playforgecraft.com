@@ -27,7 +27,7 @@ ForgeCraft::Application.routes.draw do
 
   # Forge
 
-  resource :forge, :only => [:show, :create]
+  resources :forges, :only => [:show, :create]
   resources :ores, :only => [:index] do
     post :swap, :on => :collection
   end

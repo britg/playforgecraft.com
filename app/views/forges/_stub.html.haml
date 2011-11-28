@@ -1,0 +1,6 @@
+.forge-stub{ :id => forge.to_param, :class => ("last" if last) }
+  .details
+    %h4= forge
+
+    .progress-wrap
+      = render "forges/progress", :forge => forge

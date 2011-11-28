@@ -30,17 +30,25 @@
           Epics
           (#{@player.epic_percent}%)
 
-  .section.mines
+  .section.forges-wrap
 
-    %h1.heading Forges
+    %h1.heading 
+      Forges
 
-    - if current_player.mine.present?
-
+    - if current_player.forges.active.any?
+      .forges
+        - current_player.forges.active.each_with_index do |forge, index|
+          = render "forges/stub", :forge => forge, :last => ((index+1)%3==0)
+      
+      .clear
+      
     - else
       %p 
-        Visit the 
+        You have no active forges! Visit the 
         = map_link("Map")
         and select a mine to start forging.
+
+      = link_to "Select a Mine", map_index_path, :class => "btn primary"
 
   .section.hero-wrap
     %h1.heading Vanguard

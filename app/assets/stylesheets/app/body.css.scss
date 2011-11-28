@@ -20,6 +20,10 @@ table {
   }
 }
 
+.clear {
+  clear: both;
+}
+
 .topbar {
   background: #222;
   @include background(linear-gradient(top left, #222, #000),

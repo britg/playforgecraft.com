@@ -1,7 +1,7 @@
 #map
 
   .sidebar
-    = render "mine_details", :mine => @mine
+    = render "mine_details", :mine => @mine, :forge => current_player.forge_for(@mine)
 
   .map-wrap
 

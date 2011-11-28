@@ -27,9 +27,8 @@ class ForgeCraft.Views.AppView extends Backbone.View
   startAppContext: (path) ->
     console.log "Starting app context with", path
 
-    @startForge() if path == '/forge'
+    @startForge() if path.match '/forges/'
     @startBattle() if path.match '/battles/'
-    @startBattleLobby() if path.match /\/battles$/
     @startMap() if path.match '/map'
 
     @bindPopovers()
@@ -43,15 +42,6 @@ class ForgeCraft.Views.AppView extends Backbone.View
     window.battle = new ForgeCraft.Models.Battle(ForgeCraft.Config.battle)
     window.battleView = new ForgeCraft.Views.BattleView el: $('#battle').get(0), model: window.battle
     window.battle.continue()
-
-  startBattleLobby: ->
-
-    $('#new_battle').bind "ajax:complete", (event, response) ->
-      new_battle = JSON.parse(response.responseText)
-      Backbone.history.navigate("battles/" + new_battle._id, true)
-
-    $('.battle-stub').each (i, stub) ->
-      battleStubView = new ForgeCraft.Views.BattleStubView el: $(this).get(0)
 
   startMap: ->
     mapView.bindTravelActions()
