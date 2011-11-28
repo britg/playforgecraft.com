@@ -67,8 +67,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
       title: ->
         classes = $(this).attr("data-type")
         title = $(this).attr('data-original-title')
-        level = $(this).attr('data-level')
-        return '<span class="' + classes + '">' + title + '</span> <span class="level">lvl ' + level + '</span>'
+        return '<span class="' + classes + '">' + title + '</span>'
       content: ->
         attack = $(this).attr('data-attack')
         defense = $(this).attr('data-defense')
