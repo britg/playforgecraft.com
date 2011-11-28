@@ -11,7 +11,7 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     "login": "login"
     "register": "register"
 
-    "forge": "forge"
+    "forges/:ident": "forge"
 
     "armory": "armory"
     "armory/:class": "class"
@@ -24,6 +24,7 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     "items/:ident": "item"
 
     "map" : "map"
+    "map/:ident" : "mapShow"
 
     ":player": "player"
 
@@ -46,11 +47,10 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     @load("/" + player)
 
   # Forge
-        
-  forge: ->
-    console.log "Triggering"
+
+  forge: (ident) ->
     menuView.selectNav('forge')
-    @load '/forge'
+    @load '/forges/' + ident
 
   # Armory
 
@@ -69,6 +69,10 @@ class ForgeCraft.Routers.Router extends Backbone.Router
   map: ->
     menuView.selectNav('map')
     @load('/map')
+
+  mapShow: (ident) ->
+    menuView.selectNav('map')
+    @load('/map/' + ident)
 
   # Battle
 

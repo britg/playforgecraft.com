@@ -17,6 +17,7 @@ $ ->
 
   # Models
   window.player       = new ForgeCraft.Models.Player ForgeCraft.Config.player
+  window.map          = new ForgeCraft.Models.Map
 
   # Views
   window.flashView    = new ForgeCraft.Views.FlashView el: $('#flash-wrap').get(0)
@@ -25,7 +26,6 @@ $ ->
   window.menuView     = new ForgeCraft.Views.MenuView
   window.equipperView = new ForgeCraft.Views.EquipperView
   window.armoryView   = new ForgeCraft.Views.ArmoryView
+  window.mapView      = new ForgeCraft.Views.MapView()
 
   window.appView      = new ForgeCraft.Views.AppView
-
-  

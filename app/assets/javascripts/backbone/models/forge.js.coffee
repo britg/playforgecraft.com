@@ -1,3 +1,6 @@
+class ForgeCraft.Models.Forge extends Backbone.Model
+  
+
 class ForgeCraft.Models.Forgeable extends Backbone.Model
   
   defaults:
@@ -60,7 +63,7 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
 
   unableToPurchase: (params) ->
     @unmarkOres()
-    player.trigger("ForgeCraft:NeedMoreCoins")
+    forge.trigger "ForgeCraft:NeedMoreCoins"
     player.set(params.player)
     Ores.refresh()
 
@@ -76,7 +79,7 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
 class ForgeCraft.Collections.Forgings extends Backbone.Collection
   
   model: ForgeCraft.Models.Forgeable
-  url: '/forge.json'
+  url: '/loot.json'
 
   onRender: ->
     @reset()

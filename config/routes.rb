@@ -22,16 +22,16 @@ ForgeCraft::Application.routes.draw do
   get "about", :to => "users#index", :as => :about
 
   # Map
-  resources :zones
-  get "map", :to => "zones#index", :as => :map
+  resources :map, :controller => "mines", :only => [:index, :show]
+  # get "map", :to => "zones#index", :as => :map
 
   # Forge
 
-  resource :forge, :only => [:show, :create]
+  resources :forges, :only => [:show, :create]
   resources :ores, :only => [:index] do
     post :swap, :on => :collection
   end
-  resources :loot, :only => [:index, :show, :destroy]
+  resources :loot, :only => [:index, :create, :show, :destroy]
 
   # Battles
 
@@ -57,8 +57,9 @@ ForgeCraft::Application.routes.draw do
   # Player
 
   resources :players, :only => [:index, :show] do
-    resource :zone, :only => [:update]
+    resource :mine, :only => [:update]
   end
+
   get "ladder", :to => "players#index"
   get 'menu', :to => "players#edit", :as => :menu
   get ':playername', :to => "players#show", :as => :player

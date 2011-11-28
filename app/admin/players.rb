@@ -1,14 +1,10 @@
-ActiveAdmin.register Zone do
-
-  menu :label => "Map"
+ActiveAdmin.register Player do
 
   scope :all
 
   index do
     column :id
     column :name
-    column :range
-
     default_actions
   end
   

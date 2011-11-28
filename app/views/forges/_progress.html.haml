@@ -1,0 +1,12 @@
+.progress
+
+  .funds
+    Funds:
+    %span.amount= number_with_delimiter(forge.funds)
+    remaining
+
+  .percent
+    %span.amount= forge.progress_percent
+    = "% complete"
+
+  .bar

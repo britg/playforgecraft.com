@@ -1,3 +1,29 @@
+@import "base";
+
 #map {
-  padding: 20px;
+
+  @include clearfix;
+
+  .sidebar {
+    width: 250px;
+    float: right;
+    @include inset;
+
+    .details {
+      padding: 10px;
+
+      .progress-wrap {
+        margin-bottom: 20px;
+      }
+    }
+
+  }
+
+  .map-wrap {
+    margin-right: 250px;
+
+    .placeholder {
+      padding: 20px;
+    }
+  }
 }

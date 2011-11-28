@@ -1,6 +1,7 @@
 class Zone < ActiveRecord::Base
   has_many :items
   has_many :players
+  has_many :mines
 
   validates_presence_of :name
   validates_presence_of :lower_level
@@ -27,6 +28,10 @@ class Zone < ActiveRecord::Base
 
   def title
     "#{name} lvl #{lower_level}-#{upper_level}"
+  end
+
+  def range
+    "#{lower_level}-#{upper_level}"
   end
   
 end

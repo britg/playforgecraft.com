@@ -10,27 +10,50 @@
 
       %tr
 
+        %td.mines
+          %span.count= @player.mine_count
+          Mines Complete
+          (#{@player.mine_percent}%)
+
         %td.total
           %span.count= @player.item_count
-          total items
+          Total Items
           (#{@player.item_percent}%)
         
         %td.rare
           %span.count= @player.rare_count
-          rares
+          Rares
           (#{@player.rare_percent}%)
 
         %td.epic
           %span.count= @player.epic_count
-          epics
+          Epics
           (#{@player.epic_percent}%)
 
-        %td.itemset
-          %span.count= @player.set_count
-          sets
-          (#{@player.set_percent}%)
+  .section.forges-wrap
 
-  .hero-wrap
+    %h1.heading 
+      Forges
+
+    - if current_player.forges.active.any?
+      .forges
+        - current_player.forges.active.each_with_index do |forge, index|
+          = render "forges/stub", :forge => forge, :last => ((index+1)%3==0), :current => (current_player.forge == forge)
+      
+      .clear
+      
+    - else
+      %p 
+        You have no active forges! Visit the 
+        = map_link("Map")
+        and select a mine to start forging.
+
+  .section.hero-wrap
+    %h1.heading Vanguard
+    %p 
+      Your Vanguard protects against attacks while you forge. Equip them with your best gear at the 
+      = link_to "Armory", armory_index_path
+
     = render "heroes/heroes", :player => @player, :loot => nil
 
   .clear

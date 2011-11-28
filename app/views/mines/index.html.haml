@@ -1,0 +1,9 @@
+#map
+
+  .sidebar
+    - if current_player.mine.present?
+      = render "mine_details", :mine => current_player.mine
+
+  .map-wrap
+
+    = render "map"

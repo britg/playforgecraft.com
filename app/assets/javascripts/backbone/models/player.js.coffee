@@ -5,6 +5,9 @@ class ForgeCraft.Models.Player extends Backbone.Model
     level: 0
     coins: 0
 
+  initialize: ->
+    @bind "change:forge", @updateForge, @
+
   equip: (hero_id, slot, loot_id) ->
     console.log "Equipping loot", loot_id
 
@@ -19,6 +22,9 @@ class ForgeCraft.Models.Player extends Backbone.Model
       loadingView.hide()
       if $('#facebox').length > 0
         $('#facebox').find('.content').html(response)
+
+  updateForge: ->
+    forge.set(@get("forge"))
   
 class ForgeCraft.Collections.PlayersCollection extends Backbone.Collection
   model: ForgeCraft.Models.Player

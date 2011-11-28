@@ -27,9 +27,8 @@ class ForgeCraft.Views.AppView extends Backbone.View
   startAppContext: (path) ->
     console.log "Starting app context with", path
 
-    @startForge() if path == '/forge'
+    @startForge() if path.match '/forges/'
     @startBattle() if path.match '/battles/'
-    @startBattleLobby() if path.match /\/battles$/
     @startMap() if path.match '/map'
 
     @bindPopovers()
@@ -37,25 +36,16 @@ class ForgeCraft.Views.AppView extends Backbone.View
     $('abbr.timeago').timeago()
   
   startForge: ->
-    window.forgeView = new ForgeCraft.Views.ForgeView el: $('#forge').get(0)
+    window.forge = new ForgeCraft.Models.Forge(ForgeCraft.Config.forge)
+    window.forgeView = new ForgeCraft.Views.ForgeView el: $('#forge').get(0), model: window.forge
 
   startBattle: ->
     window.battle = new ForgeCraft.Models.Battle(ForgeCraft.Config.battle)
     window.battleView = new ForgeCraft.Views.BattleView el: $('#battle').get(0), model: window.battle
     window.battle.continue()
 
-  startBattleLobby: ->
-
-    $('#new_battle').bind "ajax:complete", (event, response) ->
-      new_battle = JSON.parse(response.responseText)
-      Backbone.history.navigate("battles/" + new_battle._id, true)
-
-    $('.battle-stub').each (i, stub) ->
-      battleStubView = new ForgeCraft.Views.BattleStubView el: $(this).get(0)
-
   startMap: ->
-    window.map = new ForgeCraft.Models.Map()
-    window.mapView = new ForgeCraft.Views.MapView()
+    mapView.bindTravelActions()
 
   bindInternalLinks: ->
 
@@ -77,8 +67,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
       title: ->
         classes = $(this).attr("data-type")
         title = $(this).attr('data-original-title')
-        level = $(this).attr('data-level')
-        return '<span class="' + classes + '">' + title + '</span> <span class="level">lvl ' + level + '</span>'
+        return '<span class="' + classes + '">' + title + '</span>'
       content: ->
         attack = $(this).attr('data-attack')
         defense = $(this).attr('data-defense')

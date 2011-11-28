@@ -1,0 +1,17 @@
+.details
+
+  - if mine.present?
+
+    %h3.name= mine.name
+    %p.description= mine.description
+
+    - if forge.present?
+      .progress-wrap
+        = render "forges/progress", :forge => forge
+
+
+    = link_to "Forge at the #{mine.name}", "#", :class => "travel btn primary", "data-mine-id" => mine.id
+
+  - else
+    
+    %h3 Select a mine on the map

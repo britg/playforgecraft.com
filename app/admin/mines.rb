@@ -1,15 +1,13 @@
-ActiveAdmin.register Zone do
-
-  menu :label => "Map"
-
+ActiveAdmin.register Mine do
+  
   scope :all
 
   index do
     column :id
     column :name
-    column :range
+    column :zone
+    column :starting_funds
 
     default_actions
   end
-  
 end
