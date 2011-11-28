@@ -106,8 +106,8 @@ class Player < ActiveRecord::Base
   end
 
   def purchase!(cost)
-    return false if cost > coins
-    decrement!(:coins, cost)
+    return false if cost > forge.funds
+    forge.inc(:funds, -cost)
     true
   end
 
@@ -156,7 +156,7 @@ class Player < ActiveRecord::Base
 
   def travel_to target_mine
     self.update_attributes(:mine => target_mine, :zone => target_mine.zone)
-    create_forge(target_mine) unless has_forge?(target_mine)
+    start_forge(target_mine) unless has_forge?(target_mine)
   end
 
   def can_travel_to? mine
@@ -178,9 +178,9 @@ class Player < ActiveRecord::Base
     forges.where(:mine_id => target_mine.try(:id)).first
   end
 
-  def create_forge target_mine
+  def start_forge target_mine
     return false unless target_mine.try(:id)
-    forges.create :mine_id => target_mine.try(:id)
+    forges.create :mine_id => target_mine.try(:id), :funds => target_mine.starting_funds
   end
 
   def has_forge? target_mine

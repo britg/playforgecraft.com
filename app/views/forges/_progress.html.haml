@@ -1,6 +1,11 @@
 .progress
-  %span.loot-count= "#{forge.loot.count} items forged"
-  %span.percent= "#{forge.progress_percent}% complete"
 
+  .funds
+    %span.amount= number_with_delimiter(forge.funds)
+    coins
+
+  .percent
+    %span.amount= forge.progress_percent
+    = "% complete"
 
   .bar

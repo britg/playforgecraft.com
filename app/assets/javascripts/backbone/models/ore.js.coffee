@@ -117,6 +117,10 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
       oreTwo.trigger("ForgeCraft:MoveBlock") unless oreTwo.get("moveable")
       return
 
+    if forge.get("funds") < 1
+      forge.trigger "ForgeCraft:NeedMoreCoins"
+      return
+
     @swapOres(oreOne, oreTwo)
 
     $.post '/ores/swap.json', {}, (response) ->
@@ -127,8 +131,7 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
         oreTwo.useMovement()
       else
         Ores.swapOres(oreOne, oreTwo)
-        player.trigger "ForgeCraft:NeedMoreCoins"
-      
+        forge.trigger "ForgeCraft:NeedMoreCoins"
 
       Ores.refresh()
       player.set(response.player)

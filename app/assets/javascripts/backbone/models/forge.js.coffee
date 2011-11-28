@@ -63,7 +63,7 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
 
   unableToPurchase: (params) ->
     @unmarkOres()
-    player.trigger("ForgeCraft:NeedMoreCoins")
+    forge.trigger "ForgeCraft:NeedMoreCoins"
     player.set(params.player)
     Ores.refresh()
 

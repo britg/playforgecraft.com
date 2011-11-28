@@ -3,6 +3,7 @@ class Forge
 
   field :mine_id, :type => Integer
   field :player_id, :type => Integer
+  field :funds, :type => Integer
   field :complete, :type => Boolean, :default => false
 
   index [:player_id, :mine_id], :unique => true
@@ -16,7 +17,7 @@ class Forge
   end
 
   def serializable_hash(opts={})
-    super((opts||{}).merge(:methods => [:id]))
+    super((opts||{}).merge(:methods => [:id, :progress_percent]))
   end
 
   def to_s

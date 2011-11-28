@@ -15,13 +15,15 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     touchcancel:"stopWatchingMovement"
 
   initialize: ->
-    window.Forge = new ForgeCraft.Models.Forge(ForgeCraft.Config.forge)
+    
+    @model.bind "change:funds", @updateFunds, @
+    @model.bind "change:progress_percent", @updateProgressPercent, @
+    @model.bind "ForgeCraft:NeedMoreCoins", @shakeFunds, @
+
     window.Ores = new ForgeCraft.Collections.OresCollection
     Ores.bind "add", @displayOre, @
     Ores.bind "reveal", @displayAllOres, @
     Ores.bind "reset", @clearOres, @
-
-    playerView.createLootDropZones()
 
     @initializeActiveForge()
     @renderForge()
@@ -192,6 +194,10 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
 
   attemptForge: ->
     return if @oreLock
+    if forge.get("funds") < 1
+      forge.trigger "ForgeCraft:NeedMoreCoins"
+      return
+      
     if @refOre and not @swapOre
       if @forgeable = @refOre.get("forgeable")
         rand = Math.floor(Math.random()*5)
@@ -214,3 +220,14 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @refOre = undefined
     @swapOre = undefined
     @watching = false
+
+  updateFunds: ->
+    console.log "Updating funds to", @model.get("funds")
+    $('.funds').find('.amount').html(@model.get("funds"))
+
+  shakeFunds: ->
+    $('.funds').effect("shake", { times: 3, distance: 10 }, 50)
+
+  updateProgressPercent: ->
+    console.log "Updating progress percent to", @model.get("progress_percent")
+    $('.percent').find('.amount').html(@model.get("progress_percent"))
