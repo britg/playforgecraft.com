@@ -32,7 +32,15 @@
 
   .section.mines
 
-    %h1.heading Mines
+    %h1.heading Forges
+
+    - if current_player.mine.present?
+
+    - else
+      %p 
+        Visit the 
+        = map_link("Map")
+        and select a mine to start forging.
 
   .section.hero-wrap
     %h1.heading Vanguard

@@ -4,12 +4,21 @@ class ApplicationController < ActionController::Base
 
   layout :detect_layout
 
-  helper_method :admin?, :current_user, :current_player
+  helper_method :admin?, :current_user, :current_player,
+                :current_zone, :current_mine
 
   protected
 
   def current_player
-    current_user.try(:player)
+    @current_player ||= current_user.try(:player)
+  end
+
+  def current_zone
+    @current_zone ||= current_player.try(:zone)
+  end
+
+  def current_mine
+    @current_mine ||= current_player.try(:mine)
   end
 
   def not_authorized_response

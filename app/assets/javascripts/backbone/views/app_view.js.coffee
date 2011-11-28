@@ -54,8 +54,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
       battleStubView = new ForgeCraft.Views.BattleStubView el: $(this).get(0)
 
   startMap: ->
-    window.map = new ForgeCraft.Models.Map()
-    window.mapView = new ForgeCraft.Views.MapView()
+    mapView.bindTravelActions()
 
   bindInternalLinks: ->
 

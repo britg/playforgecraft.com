@@ -4,15 +4,24 @@ class ForgeCraft.Views.MapView extends Backbone.View
   className: 'map'
   
   initialize: ->
-    self = @
-    $('input[name="player[zone_id]"]').change ->
-      zone_id = $(@).val()
 
-      loadingView.show()
-      $.post '/players/' + player.get("name") + '/zone', {
-        _method: "PUT",
-        player: {zone_id: zone_id}
-      }, self.travel
+  showMine: ->
+    $('#map.details').load
+
+  bindTravelActions: ->
+    self = @
+    $('.travel').click ->
+      mine_id = $(@).attr("data-mine-id")
+      self.startTravel(mine_id)
+      return false
+
+  startTravel: (mine_id)->
+    console.log "Starting travel with mine id", mine_id
+    loadingView.show()
+    $.post '/players/' + player.get("name") + '/mine', {
+      _method: "PUT",
+      player: {mine_id: mine_id}
+    }, @travel
 
   travel: (response) ->
     console.log "Travelling!", response

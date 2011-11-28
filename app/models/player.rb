@@ -152,12 +152,12 @@ class Player < ActiveRecord::Base
     battle.winner == self
   end
 
-  def travel_to zone
-    self.update_attributes(:zone => zone)
+  def travel_to mine
+    self.update_attributes(:mine => mine, :zone => mine.zone)
   end
 
-  def can_travel_to? zone
-    level >= zone.lower_level
+  def can_travel_to? mine
+    true
   end
 
 end

@@ -77,4 +77,8 @@ module ApplicationHelper
     content_tag(:span, "0", :class => "zero")
   end
 
+  def map_link text, image_width=20
+    content_tag(:span, link_to(text, map_index_path), :class => "map-link")
+  end
+
 end
