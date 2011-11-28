@@ -1,5 +1,7 @@
 ActiveAdmin.register Zone do
 
+  menu :label => "Map"
+
   scope :all
 
   index do
