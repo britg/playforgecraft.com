@@ -6,6 +6,7 @@ ActiveAdmin.register Mine do
     column :id
     column :name
     column :zone
+    column :starting_funds
 
     default_actions
   end
