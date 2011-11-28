@@ -11,20 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111126010315) do
+ActiveRecord::Schema.define(:version => 20111128053004) do
 
   create_table "actions", :force => true do |t|
-    t.integer  "game_id"
-    t.integer  "player_id"
-    t.integer  "loot_id"
-    t.integer  "turn"
-    t.string   "action"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "forgeable_accuracy"
-    t.string   "forgeable_class"
-    t.string   "forgeable_ore"
-    t.boolean  "forgeable_mana_crystal", :default => false
+    t.integer   "game_id"
+    t.integer   "player_id"
+    t.integer   "loot_id"
+    t.integer   "turn"
+    t.string    "action"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "forgeable_accuracy"
+    t.string    "forgeable_class"
+    t.string    "forgeable_ore"
+    t.boolean   "forgeable_mana_crystal", :default => false
   end
 
   add_index "actions", ["game_id", "turn"], :name => "index_actions_on_game_id_and_turn", :unique => true
@@ -74,19 +74,19 @@ ActiveRecord::Schema.define(:version => 20111126010315) do
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
   create_table "classifications", :force => true do |t|
-    t.integer  "genre_id"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "default_icon_file_name"
-    t.string   "default_icon_content_type"
-    t.integer  "default_icon_file_size"
-    t.datetime "default_icon_updated_at"
-    t.string   "default_art_file_name"
-    t.string   "default_art_content_type"
-    t.integer  "default_art_file_size"
-    t.datetime "default_art_updated_at"
-    t.integer  "cost",                      :default => 1
+    t.integer   "genre_id"
+    t.string    "name"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "default_icon_file_name"
+    t.string    "default_icon_content_type"
+    t.integer   "default_icon_file_size"
+    t.timestamp "default_icon_updated_at"
+    t.string    "default_art_file_name"
+    t.string    "default_art_content_type"
+    t.integer   "default_art_file_size"
+    t.timestamp "default_art_updated_at"
+    t.integer   "cost",                      :default => 1
   end
 
   create_table "emails", :force => true do |t|
@@ -111,22 +111,22 @@ ActiveRecord::Schema.define(:version => 20111126010315) do
   end
 
   create_table "games", :force => true do |t|
-    t.string   "game_type"
-    t.integer  "challenger_id"
-    t.integer  "challengee_id"
-    t.integer  "winner_id"
-    t.integer  "loser_id"
-    t.integer  "challenger_attack_score",    :default => 0
-    t.integer  "challenger_defense_score",   :default => 0
-    t.integer  "challengee_attack_score",    :default => 0
-    t.integer  "challengee_defense_score",   :default => 0
-    t.integer  "start_turns",                :default => 0
-    t.integer  "challenger_turns_remaining", :default => 0
-    t.integer  "challengee_turns_remaining", :default => 0
-    t.datetime "challenger_last_action"
-    t.datetime "challengee_last_action"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "game_type"
+    t.integer   "challenger_id"
+    t.integer   "challengee_id"
+    t.integer   "winner_id"
+    t.integer   "loser_id"
+    t.integer   "challenger_attack_score",    :default => 0
+    t.integer   "challenger_defense_score",   :default => 0
+    t.integer   "challengee_attack_score",    :default => 0
+    t.integer   "challengee_defense_score",   :default => 0
+    t.integer   "start_turns",                :default => 0
+    t.integer   "challenger_turns_remaining", :default => 0
+    t.integer   "challengee_turns_remaining", :default => 0
+    t.timestamp "challenger_last_action"
+    t.timestamp "challengee_last_action"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "games", ["challengee_id"], :name => "index_games_on_challengee_id"
@@ -142,18 +142,18 @@ ActiveRecord::Schema.define(:version => 20111126010315) do
   end
 
   create_table "hero_classes", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "name"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "hero_slots", :force => true do |t|
-    t.integer  "hero_id"
-    t.integer  "player_id"
-    t.integer  "loot_id"
-    t.string   "slot"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "hero_id"
+    t.integer   "player_id"
+    t.integer   "loot_id"
+    t.string    "slot"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "hero_slots", ["hero_id"], :name => "index_hero_slots_on_hero_id"
@@ -161,13 +161,13 @@ ActiveRecord::Schema.define(:version => 20111126010315) do
   add_index "hero_slots", ["player_id"], :name => "index_hero_slots_on_player_id"
 
   create_table "heroes", :force => true do |t|
-    t.integer  "player_id"
-    t.integer  "hero_class_id"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "attack",        :default => 10
-    t.integer  "defense",       :default => 10
+    t.integer   "player_id"
+    t.integer   "hero_class_id"
+    t.string    "name"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "attack",        :default => 10
+    t.integer   "defense",       :default => 10
   end
 
   add_index "heroes", ["player_id"], :name => "index_heroes_on_player_id"
@@ -188,32 +188,32 @@ ActiveRecord::Schema.define(:version => 20111126010315) do
   end
 
   create_table "items", :force => true do |t|
-    t.integer  "genre_id"
-    t.integer  "classification_id"
-    t.integer  "rarity_id"
-    t.integer  "ore_id"
-    t.integer  "item_set_id"
-    t.string   "name"
-    t.text     "description"
-    t.integer  "attack_min"
-    t.integer  "attack_max"
-    t.integer  "defense_min"
-    t.integer  "defense_max"
-    t.boolean  "active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "level",             :default => 0
-    t.string   "icon_file_name"
-    t.string   "icon_content_type"
-    t.integer  "icon_file_size"
-    t.datetime "icon_updated_at"
-    t.string   "art_file_name"
-    t.string   "art_content_type"
-    t.integer  "art_file_size"
-    t.datetime "art_updated_at"
-    t.text     "story"
-    t.integer  "cost"
-    t.integer  "zone_id"
+    t.integer   "genre_id"
+    t.integer   "classification_id"
+    t.integer   "rarity_id"
+    t.integer   "ore_id"
+    t.integer   "item_set_id"
+    t.string    "name"
+    t.text      "description"
+    t.integer   "attack_min"
+    t.integer   "attack_max"
+    t.integer   "defense_min"
+    t.integer   "defense_max"
+    t.boolean   "active"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "level",             :default => 0
+    t.string    "icon_file_name"
+    t.string    "icon_content_type"
+    t.integer   "icon_file_size"
+    t.timestamp "icon_updated_at"
+    t.string    "art_file_name"
+    t.string    "art_content_type"
+    t.integer   "art_file_size"
+    t.timestamp "art_updated_at"
+    t.text      "story"
+    t.integer   "cost"
+    t.integer   "zone_id"
   end
 
   add_index "items", ["active"], :name => "index_items_on_active"
@@ -234,32 +234,45 @@ ActiveRecord::Schema.define(:version => 20111126010315) do
   add_index "levels", ["level"], :name => "index_levels_on_level", :unique => true
 
   create_table "loots", :force => true do |t|
-    t.integer  "player_id"
-    t.integer  "game_id"
-    t.integer  "action_id"
-    t.integer  "item_id"
-    t.integer  "attack"
-    t.integer  "defense"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "available",  :default => true
+    t.integer   "player_id"
+    t.integer   "game_id"
+    t.integer   "action_id"
+    t.integer   "item_id"
+    t.integer   "attack"
+    t.integer   "defense"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.boolean   "available",  :default => true
+    t.integer   "mine_id"
   end
 
   add_index "loots", ["action_id"], :name => "index_loots_on_action_id", :unique => true
   add_index "loots", ["game_id"], :name => "index_loots_on_game_id"
   add_index "loots", ["item_id"], :name => "index_loots_on_item_id"
+  add_index "loots", ["mine_id"], :name => "index_loots_on_mine_id"
   add_index "loots", ["player_id"], :name => "index_loots_on_player_id"
 
-  create_table "ores", :force => true do |t|
+  create_table "mines", :force => true do |t|
+    t.integer  "zone_id"
     t.string   "name"
-    t.integer  "rank"
+    t.string   "description"
+    t.text     "story"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "tile_file_name"
-    t.string   "tile_content_type"
-    t.integer  "tile_file_size"
-    t.datetime "tile_updated_at"
-    t.integer  "cost",              :default => 1
+  end
+
+  add_index "mines", ["zone_id"], :name => "index_mines_on_zone_id"
+
+  create_table "ores", :force => true do |t|
+    t.string    "name"
+    t.integer   "rank"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "tile_file_name"
+    t.string    "tile_content_type"
+    t.integer   "tile_file_size"
+    t.timestamp "tile_updated_at"
+    t.integer   "cost",              :default => 1
   end
 
   create_table "players", :force => true do |t|
@@ -275,8 +288,10 @@ ActiveRecord::Schema.define(:version => 20111126010315) do
     t.timestamp "avatar_updated_at"
     t.integer   "coins",               :default => 1000
     t.integer   "zone_id"
+    t.integer   "mine_id"
   end
 
+  add_index "players", ["mine_id"], :name => "index_players_on_mine_id"
   add_index "players", ["name"], :name => "index_players_on_name", :unique => true
   add_index "players", ["user_id"], :name => "index_players_on_user_id", :unique => true
   add_index "players", ["zone_id"], :name => "index_players_on_zone_id"
@@ -310,13 +325,13 @@ ActiveRecord::Schema.define(:version => 20111126010315) do
   add_index "tiles_turns", ["turn_id"], :name => "index_tiles_turns_on_turn_id"
 
   create_table "turns", :force => true do |t|
-    t.integer  "game_id"
-    t.integer  "player_id"
-    t.integer  "loot_id"
-    t.integer  "number"
-    t.string   "action"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "game_id"
+    t.integer   "player_id"
+    t.integer   "loot_id"
+    t.integer   "number"
+    t.string    "action"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "turns", ["game_id", "number"], :name => "index_turns_on_game_id_and_number", :unique => true
@@ -354,12 +369,12 @@ ActiveRecord::Schema.define(:version => 20111126010315) do
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
 
   create_table "zones", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "lower_level"
-    t.integer  "upper_level"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "name"
+    t.string    "description"
+    t.integer   "lower_level"
+    t.integer   "upper_level"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
 end

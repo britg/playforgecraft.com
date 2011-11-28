@@ -10,27 +10,33 @@
 
       %tr
 
+        %td.mines
+          %span.count= @player.mine_count
+          Mines Complete
+          (#{@player.mine_percent}%)
+
         %td.total
           %span.count= @player.item_count
-          total items
+          Total Items
           (#{@player.item_percent}%)
         
         %td.rare
           %span.count= @player.rare_count
-          rares
+          Rares
           (#{@player.rare_percent}%)
 
         %td.epic
           %span.count= @player.epic_count
-          epics
+          Epics
           (#{@player.epic_percent}%)
 
-        %td.itemset
-          %span.count= @player.set_count
-          sets
-          (#{@player.set_percent}%)
+  .section.mines
 
-  .hero-wrap
+    %h1.heading Mines
+
+  .section.hero-wrap
+    %h1.heading Vanguard
+
     = render "heroes/heroes", :player => @player, :loot => nil
 
   .clear

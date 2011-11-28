@@ -2,6 +2,7 @@ class Player < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :zone
+  belongs_to :mine
 
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
@@ -93,6 +94,14 @@ class Player < ActiveRecord::Base
   end
 
   def work_order_percent
+    0
+  end
+
+  def mine_count
+    0
+  end
+
+  def mine_percent
     0
   end
 
