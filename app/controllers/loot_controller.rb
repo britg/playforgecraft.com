@@ -26,6 +26,7 @@ class LootController < ApplicationController
     replacements = Ore.random_set(params[:forging][:ore_count])
 
     if loot.save
+      loot.generate_battle if Loot.random_battle?
       render :json => { :purchased => true, :loot => loot, :replacements => replacements, :player => current_player }
     else
       render :json => { :purchased => false, :player => current_player }

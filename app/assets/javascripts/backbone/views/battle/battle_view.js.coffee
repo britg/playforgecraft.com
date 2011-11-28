@@ -13,6 +13,7 @@ class ForgeCraft.Views.BattleView extends Backbone.View
     @render()
     @bindActionResponse()
     @bindWindowResize()
+    @bindFleeButton()
 
     @initializeHeroViews()
 
@@ -88,6 +89,11 @@ class ForgeCraft.Views.BattleView extends Backbone.View
 
     setTimeout =>
       alert msg
-      Backbone.history.navigate('battles', true)
+      Backbone.history.navigate('forges/' + @model.get("forge_id"), true)
     , 500
   
+  bindFleeButton: ->
+    $(@el).find('.forfeit-link').bind 'ajax:complete', @onForfeitComplete
+
+  onForfeitComplete: ->
+    Backbone.history.navigate "forges/" + window.battle.get("forge_id"), true

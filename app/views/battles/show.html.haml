@@ -29,6 +29,9 @@
 
         .heroes-wrap
           = render "hero_snapshots", :warrior => @battle.first_warrior, :thief => @battle.first_thief, :ranger => @battle.first_ranger, :controllable => (@battle.first_player == current_player)
+
+        .flee
+          = link_to "Flee the battle", battle_path(@battle), :method => :delete, :remote => true, :confirm => "Flee this battle?", :class => "forfeit-link btn danger", :"data-external" => true
     
     .squad-wrap.enemy
       .squad

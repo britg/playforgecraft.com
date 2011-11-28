@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111128195355) do
+ActiveRecord::Schema.define(:version => 20111128213503) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -245,6 +245,7 @@ ActiveRecord::Schema.define(:version => 20111128195355) do
     t.boolean   "available",  :default => true
     t.integer   "mine_id"
     t.string    "forge_id"
+    t.string    "battle_id"
   end
 
   add_index "loots", ["action_id"], :name => "index_loots_on_action_id", :unique => true

@@ -140,6 +140,12 @@ class ForgeCraft.Models.Battle extends Backbone.Model
       console.log "Updating battle condiitons", action.get("conditions")
       battle.set action.get("conditions")
 
+  forfeit: (callback) ->
+    $.post "/battles/" + @get("id"), {
+      "_method": "DELETE"
+    }, ->
+      callback.apply() if callback?
+
 
 class ForgeCraft.Collections.Battles extends Backbone.Collection
 

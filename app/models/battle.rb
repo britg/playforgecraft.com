@@ -14,6 +14,9 @@ class Battle
   field :finished, :type => Boolean, :default => false
   field :finish_reason
 
+  field :loot_id
+  field :forge_id
+
   index :first_player_id
   index :second_player_id
   

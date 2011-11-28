@@ -231,3 +231,6 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
   updateProgressPercent: ->
     console.log "Updating progress percent to", @model.get("progress_percent")
     $('.percent').find('.amount').html(@model.get("progress_percent"))
+
+  startBattle: (ident) ->
+    Backbone.history.navigate "battles/" + ident, true

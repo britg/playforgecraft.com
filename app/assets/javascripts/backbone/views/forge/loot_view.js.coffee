@@ -60,6 +60,25 @@ class ForgeCraft.Views.LootView extends Backbone.View
       $('#loot-list').append($(@el))
 
     $(@el).fadeIn()
+
+    @startBattle(@model.get("battle_id")) if @model.get("battle_required?")
+  
+  startBattle: (ident) ->
+    self = @
+    $(@el).effect("shake", { times: 3, distance: 10 }, 50)
+
+    battle = new ForgeCraft.Models.Battle id: ident
+
+    setTimeout ->
+      if confirm("(Placeholder) You've been attacked! Defend yourself or flee?")
+        forgeView.startBattle(ident)
+      else
+        alert("(Placeholder) The bandits stole 200g and [Item]!");
+        battle.forfeit()
+    , 1000
+
+  fleeBattle: ->
+
       
   makeDraggable: ->
     $(@el).draggable({ revert: 'invalid' })

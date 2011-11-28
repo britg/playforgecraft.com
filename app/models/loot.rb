@@ -69,11 +69,16 @@ class Loot < ActiveRecord::Base
       scope.first
     end
 
+    def random_battle?
+      rand = Random.new
+      rand.rand(10) == 1
+    end
+
   end
 
   def serializable_hash(opts = {})
-    super((opts||{}).merge( :only => [:id, :attack, :defense],
-                            :methods => [:item_attributes, :level, :equipped?]))
+    super((opts||{}).merge( :only => [:id, :attack, :defense, :battle_id],
+                            :methods => [:item_attributes, :level, :equipped?, :battle_required?, :battle_won?]))
   end
 
   def item_attributes
@@ -168,6 +173,30 @@ class Loot < ActiveRecord::Base
     else
       (self.defense||0) - (other_loot.defense||0)
     end
+  end
+
+  # Battle
+
+  def battle
+    return nil unless battle_id.present?
+    Battle.find(battle_id)
+  end
+
+  def generate_battle
+    random_battle = Battle.create :mode => "singleplayer",
+                                  :first_player_id => player_id,
+                                  :forge_id => self.forge_id,
+                                  :loot_id => self.id
+    self.battle_id = random_battle.id.to_s
+    self.save
+  end
+
+  def battle_required?
+    battle.present? and !battle.finished?
+  end
+
+  def battle_won?
+    battle_required? and battle.finished? and battle.winner_id == player.id
   end
 
 end
