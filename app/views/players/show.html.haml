@@ -48,10 +48,11 @@
         = map_link("Map")
         and select a mine to start forging.
 
-      = link_to "Select a Mine", map_index_path, :class => "btn primary"
-
   .section.hero-wrap
     %h1.heading Vanguard
+    %p 
+      Your Vanguard protects against attacks while you forge. Equip them with your best gear at the 
+      = link_to "Armory", armory_index_path
 
     = render "heroes/heroes", :player => @player, :loot => nil
 

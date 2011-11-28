@@ -38,7 +38,7 @@ module ApplicationHelper
   end
 
   def equipment_icon(loot)
-    image_tag(loot.icon, :class => "loot-icon", :"data-id" => loot.id, :title => loot.name, :"data-type" => loot.to_css_classes, :"data-level" => loot.level, :"data-attack" => loot.attack, :"data-defense" => loot.defense)
+    image_tag(loot.icon, :class => "loot-icon", :"data-id" => loot.id, :title => loot.name, :"data-type" => loot.to_css_classes, :"data-attack" => loot.attack, :"data-defense" => loot.defense)
   end
 
   def tile_image(t)
@@ -67,7 +67,7 @@ module ApplicationHelper
 
   def player_slug player
     content_tag :span, :class => "player-slug" do
-      [player_name(player), player_level(player), player_zone(player)].join(" ").html_safe
+      [player_name(player), player_zone(player)].join(" ").html_safe
     end
   end
 
