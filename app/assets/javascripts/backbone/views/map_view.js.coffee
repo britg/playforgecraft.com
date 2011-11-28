@@ -35,5 +35,5 @@ class ForgeCraft.Views.MapView extends Backbone.View
 
   bindForgeStubClicks: ->
     $('.forge-stub').live 'click', ->
-      forge_id = $(this).attr("id")
-      mapView.travelTo forge_id
+      mine_id = $(this).attr("data-mine-id")
+      mapView.changeMine mine_id

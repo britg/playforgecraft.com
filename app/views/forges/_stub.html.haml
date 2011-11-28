@@ -1,4 +1,4 @@
-.forge-stub{ :id => forge.to_param, :class => ("last" if last) }
+.forge-stub{ :id => forge.to_param, :class => "#{'last' if last} #{'current' if current}", "data-mine-id" => forge.mine_id }
   .details
     %h4= forge
 

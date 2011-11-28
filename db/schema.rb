@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111128053004) do
+ActiveRecord::Schema.define(:version => 20111128190456) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -244,9 +244,11 @@ ActiveRecord::Schema.define(:version => 20111128053004) do
     t.timestamp "updated_at"
     t.boolean   "available",  :default => true
     t.integer   "mine_id"
+    t.string    "forge_id"
   end
 
   add_index "loots", ["action_id"], :name => "index_loots_on_action_id", :unique => true
+  add_index "loots", ["forge_id"], :name => "index_loots_on_forge_id"
   add_index "loots", ["game_id"], :name => "index_loots_on_game_id"
   add_index "loots", ["item_id"], :name => "index_loots_on_item_id"
   add_index "loots", ["mine_id"], :name => "index_loots_on_mine_id"

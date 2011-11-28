@@ -15,6 +15,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     touchcancel:"stopWatchingMovement"
 
   initialize: ->
+    window.Forge = new ForgeCraft.Models.Forge(ForgeCraft.Config.forge)
     window.Ores = new ForgeCraft.Collections.OresCollection
     Ores.bind "add", @displayOre, @
     Ores.bind "reveal", @displayAllOres, @

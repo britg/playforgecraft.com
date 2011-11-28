@@ -32,7 +32,7 @@ class Forge
   end
 
   def loot
-    Loot.where(:mine_id => mine_id)
+    Loot.where(:forge_id => to_param)
   end
 
   # Progress

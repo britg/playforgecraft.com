@@ -22,7 +22,7 @@ class Loot < ActiveRecord::Base
       item = roll classification, ore, accuracy, player.zone
       return nil unless item
 
-      loot = Loot.new( :item => item, :player => player )
+      loot = Loot.new( :item => item, :player => player, :forge_id => player.forge.to_param, :mine_id => player.mine_id )
       loot.set_stats accuracy
       loot
     end
@@ -90,6 +90,10 @@ class Loot < ActiveRecord::Base
 
   def to_css_classes
     item.try(:to_css_classes)
+  end
+
+  def forge
+    Forge.find(forge_id)
   end
 
   def icon
