@@ -112,7 +112,7 @@ class Player < ActiveRecord::Base
   end
 
   def sell!(cost)
-    increment!(:coins, cost)
+    forge.inc(:funds, cost)
     true
   end
 
