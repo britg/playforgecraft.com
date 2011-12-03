@@ -2,6 +2,7 @@ class Mine < ActiveRecord::Base
 
   belongs_to :zone
   has_many :players
+  has_many :requirements
 
   def to_param
     "#{id}-#{name.gsub(/[^a-zA-Z0-9]+/, '-')}"

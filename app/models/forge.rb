@@ -8,6 +8,10 @@ class Forge
 
   index [:player_id, :mine_id], :unique => true
 
+  embeds_many :progresses
+
+  after_create :create_progresses
+
   class << self
 
     def active
@@ -39,7 +43,49 @@ class Forge
   # Progress
 
   def progress_percent
-    0
+    req_quantity = 0
+    progress_quantity = 0
+    
+    progresses.each do |p|
+      req_quantity += p.requirement.quantity
+      progress_quantity += p.quantity
+    end
+
+    return 0 if req_quantity < 1
+
+    ((progress_quantity.to_f / req_quantity.to_f) * 100.0).round
+  end
+
+  def update_progress loot
+    progresses.each do |p|
+      p.increment_with_loot loot
+    end
+  end
+
+  def create_progresses
+    mine.requirements.each do |req|
+      progresses.create :requirement_id => req.id
+    end
+  end
+
+  def requirements
+    progresses.map(&:requirement)
+  end
+
+  def finished?
+    progresses.each do |p|
+      return false unless p.complete?
+    end
+    true
+  end
+
+  def complete?
+    complete
+  end
+
+  def check_completion
+    self.update_attributes(:complete => finished?) if finished?
+    true
   end
 
 end

@@ -35,10 +35,10 @@
     %h1.heading 
       Forges
 
-    - if current_player.forges.active.any?
+    - if @player.forges.active.any?
       .forges
-        - current_player.forges.active.each_with_index do |forge, index|
-          = render "forges/stub", :forge => forge, :last => ((index+1)%3==0), :current => (current_player.forge == forge)
+        - @player.forges.active.each_with_index do |forge, index|
+          = render "forges/stub", :forge => forge, :last => ((index+1)%3==0), :current => (@player.forge == forge)
       
       .clear
       
@@ -52,7 +52,7 @@
     %h1.heading Vanguard
     %p 
       Your Vanguard protects against attacks while you forge. Equip them with your best gear at the 
-      = link_to "Armory", armory_index_path
+      = link_to "Armory &rarr;".html_safe, armory_index_path
 
     = render "heroes/heroes", :player => @player, :loot => nil
 

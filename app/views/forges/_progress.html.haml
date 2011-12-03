@@ -9,4 +9,10 @@
     %span.amount= forge.progress_percent
     = "% complete"
 
+  .requirements
+
+    %ul
+      - forge.progresses.each do |prog|
+        %li= prog
+
   .bar
