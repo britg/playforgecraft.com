@@ -84,8 +84,7 @@ class Forge
   end
 
   def check_completion
-    self.update_attributes(:complete => finished?) if finished?
-    true
+    self.update_attributes(:complete => true) if finished?
   end
 
 end
