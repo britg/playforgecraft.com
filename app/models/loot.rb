@@ -13,7 +13,7 @@ class Loot < ActiveRecord::Base
   belongs_to :item
 
   before_create :purchase
-  after_create :update_progress
+  after_save :update_progress
 
   validates_presence_of :item
 

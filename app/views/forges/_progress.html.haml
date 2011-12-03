@@ -13,6 +13,8 @@
 
     %ul
       - forge.progresses.each do |prog|
-        %li= prog
+        %li
+          = prog
+          = "complete" if prog.complete?
 
   .bar

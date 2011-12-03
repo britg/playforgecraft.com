@@ -58,7 +58,11 @@ class Forge
 
   def update_progress loot
     progresses.each do |p|
-      p.increment_with_loot loot
+      if loot.available? and !loot.equipped?
+        p.increment_with_loot loot  
+      else
+        p.decrement_with_loot loot
+      end
     end
   end
 
@@ -84,7 +88,7 @@ class Forge
   end
 
   def check_completion
-    self.update_attributes(:complete => true) if finished?
+    self.update_attributes(:complete => finished?)
   end
 
 end

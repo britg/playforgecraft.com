@@ -1,14 +1,17 @@
 class Progress
   include Mongoid::Document
+  
   embedded_in :forge
+  
   field :requirement_id, :type => Integer
   field :quantity, :type => Integer, :default => 0
   field :complete, :type => Boolean, :default => false
 
-  after_update :check_completion
+  attr_accessor :updating_completion
+  before_update :check_completion, :unless => :updating_completion
 
   def to_s
-    "#{quantity}/#{requirement.to_s}"
+    out = "#{quantity}/#{requirement.to_s}"
   end
 
   def requirement
@@ -31,6 +34,11 @@ class Progress
   def increment_with_loot loot
     return if complete?
     self.update_attributes(:quantity => quantity+1) if counts?(loot)
+  end
+
+  def decrement_with_loot loot
+    return if quantity == 0
+    self.update_attributes(:quantity => quantity-1) if counts?(loot)
   end
 
   def counts? loot
@@ -59,8 +67,7 @@ class Progress
   end
 
   def check_completion
-    return true if complete?
-    self.update_attributes(:complete => true) if finished?
+    self.update_attributes(:complete => finished?, :updating_completion => true)
     forge.check_completion
   end
 
