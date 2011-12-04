@@ -61,9 +61,10 @@
           %ul.inputs-list
             - Rarity.all.each do |r|
               
-              %li
-                %label{ :for => dom_id(r) }
-                  %input{ :id => dom_id(r), :rel => :filter, :type => :checkbox, :name => "rarities[]", :value => r.id, :checked => (params[:rarities].include?(r.id))  }
-                  %span{ :class => r.to_css_class }= r.name
+              - unless r.set?
+                %li
+                  %label{ :for => dom_id(r) }
+                    %input{ :id => dom_id(r), :rel => :filter, :type => :checkbox, :name => "rarities[]", :value => r.id, :checked => (params[:rarities].include?(r.id))  }
+                    %span{ :class => r.to_css_class }= r.name
 
   .clearfix
