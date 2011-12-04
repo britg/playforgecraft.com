@@ -272,12 +272,6 @@ html.no-touch {
   width: 298px;
   margin-right: 20px;
   margin-bottom: 10px;
-  cursor: pointer;
-
-  &:hover {
-    border: solid 1px $rare-color;
-    @include box-shadow(rgba($rare-color, 0.4) 0 0 15px, rgba($rare-color, 0.2) 0 0 3px 1px inset);
-  }
 
   &.current {
     border: solid 1px $advanced-color;

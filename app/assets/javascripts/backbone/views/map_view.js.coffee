@@ -4,7 +4,6 @@ class ForgeCraft.Views.MapView extends Backbone.View
   className: 'map'
   
   initialize: ->
-    @bindForgeStubClicks()
 
   refresh: ->
     @topBarHeight   = $('.topbar').height();
@@ -37,8 +36,3 @@ class ForgeCraft.Views.MapView extends Backbone.View
 
   travelTo: (forge_id) ->
     Backbone.history.navigate("forges/" + forge_id, true)
-
-  bindForgeStubClicks: ->
-    $('.forge-stub').live 'click', ->
-      mine_id = $(this).attr("data-mine-id")
-      mapView.changeMine mine_id

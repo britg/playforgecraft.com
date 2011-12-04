@@ -1,6 +1,6 @@
 .battle-stub
 
-  - unless battle.finished? or current_player != forge.player
+  - unless battle.finished? or current_player != battle.first_player
     .controls
 
       = link_to "Continue", battle_path(battle), :class => "btn primary battle-link"
