@@ -8,7 +8,7 @@ class Player < ActiveRecord::Base
   validates_uniqueness_of :name, :case_sensitive => false
 
   has_many :loot, :class_name => "Loot"
-  has_many :items, :through => :loot
+  has_many :items, :through => :loot, :uniq => true
   has_many :heroes
   has_many :slots, :class_name => "HeroSlot"
 
@@ -35,6 +35,10 @@ class Player < ActiveRecord::Base
 
   def to_s
     "#{name}"
+  end
+
+  def admin?
+    user.try(:admin?)
   end
 
   def to_param
@@ -97,12 +101,12 @@ class Player < ActiveRecord::Base
     0
   end
 
-  def mine_count
-    0
+  def forge_count
+    @forge_count ||= forges.completed.count
   end
 
-  def mine_percent
-    0
+  def forge_percent
+    @forge_percent ||= (forge_count.to_f / Mine.count.to_f * 100).round rescue 0
   end
 
   def purchase!(cost)

@@ -4,9 +4,6 @@
     .controls
 
       = link_to "Resume Battle", battle_path(battle), :class => "btn primary battle-link"
-      %br
-      %br
-      = link_to "Forfeit", battle_path(battle), :method => :delete, :remote => true, :confirm => "Forfeit this battle and pay your opponent 200g?", :class => "forfeit-link", :"data-external" => true
 
   - if battle.finished?
     %h3.result{ :class => battle.result_for(current_player) }= battle.result_for(current_player).capitalize

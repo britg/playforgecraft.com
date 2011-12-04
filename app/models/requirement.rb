@@ -21,7 +21,7 @@ class Requirement < ActiveRecord::Base
     if description_fields.any?
       return description_fields.join(' ')
     else
-      return "Items"
+      return "Any Item"
     end
   end
 

@@ -11,9 +11,9 @@
       %tr
 
         %td.mines
-          %span.count= @player.mine_count
-          Mines Complete
-          (#{@player.mine_percent}%)
+          %span.count= @player.forge_count
+          Forge Complete
+          (#{@player.forge_percent}%)
 
         %td.total
           %span.count= @player.item_count
@@ -48,9 +48,7 @@
       
         - else
           %p 
-            You have no active forges! Visit the 
-            = map_link("Map")
-            and select a mine to start forging.
+            = link_to "Visit the Map to Start Forging", map_index_path, :class => 'btn primary'
 
       - if @player.forges.completed.any?
         .section.forges-wrap
@@ -77,8 +75,14 @@
         
         %h1.heading Battles
 
-        - @player.battles.desc(:created_at).limit(10).each do |battle|
-          = render "battles/battle_stub", :battle => battle
+        - if @player.battles.any?
+
+          - @player.battles.desc(:created_at).limit(10).each do |battle|
+            = render "battles/battle_stub", :battle => battle
+
+        - else
+          
+          %p You have not fought any battles, yet.
 
   
 

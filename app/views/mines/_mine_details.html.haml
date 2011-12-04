@@ -9,7 +9,7 @@
       .progress-wrap
         = render "forges/progress", :forge => forge
 
-    - if forge.complete?
+    - if forge.try(:complete?)
       
       %h3 Complete!
     

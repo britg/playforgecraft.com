@@ -57,6 +57,11 @@ class ItemsController < ApplicationController
     select_nav('armory')
   end
 
+  def item_pool
+    return Item if current_player.admin?
+    return current_player.items
+  end
+
   def parse_filters
 
     @context_arr = []
@@ -67,7 +72,7 @@ class ItemsController < ApplicationController
     parse_ores
     parse_rarity
     
-    @filtered = Item.of_class(params[:classification]) \
+    @filtered = item_pool.of_class(params[:classification]) \
                 .of_zone(params[:zone_id])
                 .of_ore(params[:ores])
                 .of_rarity(params[:rarities])
