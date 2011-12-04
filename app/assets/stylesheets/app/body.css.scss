@@ -41,6 +41,12 @@ table {
   .game-title {
     margin-left: 20px;
     text-shadow: #000 1px 1px 1px;
+    font-weight: bold;
+
+    .icon {
+      height: 41px;
+      vertical-align: -10px;
+    }
   }
 }
 

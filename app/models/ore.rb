@@ -75,6 +75,10 @@ class Ore < ActiveRecord::Base
       mapping
     end
 
+    def dragonsteel
+      Ore.find_by_name("Dragonsteel")
+    end
+
   end
 
   def to_param
