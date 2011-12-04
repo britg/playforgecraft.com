@@ -1,4 +1,10 @@
 .forge-stub{ :id => forge.to_param, :class => "#{'last' if last} #{'current' if current}", "data-mine-id" => forge.mine_id }
+
+  - unless forge.complete?
+    .controls
+      
+      = link_to "Continue", forge_path(forge), :class => "btn primary"
+    
   .details
     %h4= forge
 

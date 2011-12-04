@@ -207,6 +207,10 @@ $sidebar-width: 250px;
     background: $light-border-color;
   }
 
+  .topbar a {
+    text-shadow: #000 1px 1px 1px;
+  }
+
   #facebox {
     .close {
       @include opacity(1);

@@ -288,6 +288,12 @@ html.no-touch {
     margin-right: 0;
   }
 
+  .controls {
+    float: right;
+    margin-top: 20px;
+    margin-right: 10px;
+  }
+
   .details {
     @include clearfix;
     padding: 10px;
