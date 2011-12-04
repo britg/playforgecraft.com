@@ -21,7 +21,7 @@
 
         %tr
           %td.rank= i+1
-          %td.score= player.score
+          %td.score= number_with_delimiter player.score
           %td.name= link_to player.name, player_path(player)
 
           %td.count
