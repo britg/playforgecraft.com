@@ -78,7 +78,7 @@
         - if @player.battles.any?
 
           - @player.battles.desc(:created_at).limit(10).each do |battle|
-            = render "battles/battle_stub", :battle => battle
+            = render "battles/battle_stub", :battle => battle, :context_player => @player
 
         - else
           
