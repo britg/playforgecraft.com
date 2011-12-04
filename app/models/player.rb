@@ -1,11 +1,16 @@
 class Player < ActiveRecord::Base
 
+  RESERVED_NAMES = ["ladder", "player", "players", "battles", "forges", "map", "armory", "items", "item", "loot", "loots", "admin", "users", "user", "session", "sessions", "ore", "ores", "classifications", "classification", "rarity", "rarities", "hero", "heroes", "topic", "topics", "menu", "settings", "admin_logout", "login", "logout", "register", "forum", "home", "contact", "about"]
+
   belongs_to :user
   belongs_to :zone
   belongs_to :mine
 
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
+  validates_presence_of :url_name
+  validates_uniqueness_of :url_name, :case_sensitive => false
+  validates :url_name, :exclusion => { :in => Player::RESERVED_NAMES, :message => "Sorry, your player name is a reserved word" }
 
   has_many :loot, :class_name => "Loot"
   has_many :items, :through => :loot, :uniq => true
@@ -19,7 +24,7 @@ class Player < ActiveRecord::Base
     :path => "/:class/:id/:attachment/:style.:extension",
     :styles => { :full => ["200x200#", :jpg], :thumb => ["100x100#", :jpg], :tiny => ["50x50#", :jpg] }
 
-  before_create :starting_level
+  before_validation :generate_url_name
 
   class << self
 
@@ -42,15 +47,20 @@ class Player < ActiveRecord::Base
   end
 
   def to_param
-    name
+    url_name
   end
 
   def serializable_hash(opts={})
     super((opts||{}).merge(:only => [:id, :name, :level, :coins], :methods => [:zone, :forge]))
   end
 
-  def starting_level
-    self.level = 1 unless self.level.present?
+  def generate_url_name
+    self.url_name = self.name.gsub /[^a-zA-Z0-9\-]+/, '-'
+  end
+
+  def generate_url_name!
+    generate_url_name
+    save
   end
 
   def to_css_class

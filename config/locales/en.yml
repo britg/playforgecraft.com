@@ -2,6 +2,10 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+
+  validations:
+    reserved_name: "Sorry, your player name is a reserved word"
+    
   notices:
     email_thanks: "Thanks! We'll notify you as soon as ForgeCraft is ready."
     player_required: "Please log in or create an account to proceed."

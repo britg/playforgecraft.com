@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111129010911) do
+ActiveRecord::Schema.define(:version => 20111204201011) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -293,10 +293,12 @@ ActiveRecord::Schema.define(:version => 20111129010911) do
     t.integer   "coins",               :default => 1000
     t.integer   "zone_id"
     t.integer   "mine_id"
+    t.string    "url_name"
   end
 
   add_index "players", ["mine_id"], :name => "index_players_on_mine_id"
   add_index "players", ["name"], :name => "index_players_on_name", :unique => true
+  add_index "players", ["url_name"], :name => "index_players_on_url_name", :unique => true
   add_index "players", ["user_id"], :name => "index_players_on_user_id", :unique => true
   add_index "players", ["zone_id"], :name => "index_players_on_zone_id"
 

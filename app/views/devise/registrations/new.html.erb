@@ -1,35 +1,55 @@
 
-<div id="register-content">
-  <h2>Create an Account</h2>
+<div id="register-page">
 
-  <div id="register-form" class="inset">
-    <div class="col-content">
-      <% resource.build_player %>
-      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
+  <div id="register-form" class="col-content">
 
-        <%= f.fields_for :player do |p| %>
+    <% resource.build_player %>
 
-          <%= p.hidden_field :level, :value => 1 %>
-          <%= p.hidden_field :zone_id, :value => Zone.first.try(:id) %>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 
-          <div><%= p.label :name, "Player Name" %><br />
-          <%= p.text_field :name, :class => "required" %></div>
-        <% end %>
+      <%= devise_error_messages! %>
 
-        <div><%= f.label :email %><br />
-        <%= f.email_field :email, :class => "required email" %></div>
+      <fieldset>
+      <legend>Sign Up</legend>
 
-        <div><%= f.label :password %><br />
-        <%= f.password_field :password, :class => "required" %></div>
+      <%= f.fields_for :player do |p| %>
 
-        <div><%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, :class => "required" %></div>
+        <%= p.hidden_field :level, :value => 1 %>
+        <%= p.hidden_field :zone_id, :value => Zone.first.try(:id) %>
 
-        <div><%= f.submit "Sign up" %></div>
+        <div class="clearfix">
+          <%= p.label :name, "Player Name" %>
+          <div class="input">
+            <%= p.text_field :name, :class => "required" %>
+          </div>
+        </div>
       <% end %>
 
-      <%= render :partial => "devise/shared/links" %>
-    </div>
+      <div class="clearfix">
+        <%= f.label :email %>
+        <div class="input">
+          <%= f.email_field :email, :class => "required email" %>
+        </div>
+      </div>
+
+      <div class="clearfix">
+        <%= f.label :password %>
+        <div class="input">
+          <%= f.password_field :password, :class => "required" %>
+        </div>
+      </div>
+
+      <div class="clearfix">
+        <%= f.label :password_confirmation %>
+        <div class="input">
+          <%= f.password_field :password_confirmation, :class => "required" %>
+        </div>
+      </div>
+
+      <div class="actions"><%= f.submit "Sign up", :class => "btn primary" %></div>
+    <% end %>
+
+    <%= render :partial => "devise/shared/links" %>
+
   </div>
 </div>
