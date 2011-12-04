@@ -8,6 +8,8 @@
   
   .hero {
 
+    margin-bottom: 10px;
+
     .inner {
       @include inset;
       padding: 10px;

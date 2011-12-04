@@ -6,7 +6,8 @@ class ForgesController < ApplicationController
   respond_to :json
 
   def show
-    @forge = Forge.find(params[:id])
+    @forge = Forge.where(:_id => params[:id]).first
+    redirect_to(player_path(current_player)) and return unless @forge.present?
     @loot = @forge.loot.limit(20)
   end
 

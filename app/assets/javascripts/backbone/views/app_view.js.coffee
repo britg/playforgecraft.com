@@ -46,6 +46,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
 
   startMap: ->
     mapView.bindTravelActions()
+    mapView.refresh()
 
   bindInternalLinks: ->
 

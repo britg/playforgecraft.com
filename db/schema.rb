@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111128213503) do
+ActiveRecord::Schema.define(:version => 20111129010911) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -306,6 +306,19 @@ ActiveRecord::Schema.define(:version => 20111128213503) do
     t.timestamp "created_at"
     t.timestamp "updated_at"
   end
+
+  create_table "requirements", :force => true do |t|
+    t.integer  "mine_id"
+    t.integer  "ore_id"
+    t.integer  "classification_id"
+    t.integer  "genre_id"
+    t.integer  "rarity_id"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "requirements", ["mine_id"], :name => "index_requirements_on_mine_id"
 
   create_table "tiles", :force => true do |t|
     t.integer   "game_id"

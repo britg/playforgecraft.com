@@ -27,7 +27,7 @@ class ForgeCraft.Collections.Loot extends Backbone.Collection
     return if @fetchLootLock is on
     @activateFetchLootLock()
     last = @at @length-1
-    @fetch data: {last: last.get("id"), limit: count}, add: true, success: @releaseFetchLootLock
+    @fetch data: {last: last.get("id"), forge_id: forge.get("id"), limit: count}, add: true, success: @releaseFetchLootLock
 
   activateFetchLootLock: ->
     console.log "Activating fetch loot lock"

@@ -13,6 +13,7 @@ class Loot < ActiveRecord::Base
   belongs_to :item
 
   before_create :purchase
+  after_save :update_progress
 
   validates_presence_of :item
 
@@ -85,7 +86,6 @@ class Loot < ActiveRecord::Base
     return {} unless item
     {
       :name => item.name,
-      :description => item.description,
       :icon_url => item.icon_url,
       :type => to_css_classes,
       :param => item.to_param,
@@ -197,6 +197,10 @@ class Loot < ActiveRecord::Base
 
   def battle_won?
     battle_required? and battle.finished? and battle.winner_id == player.id
+  end
+
+  def update_progress
+    forge.update_progress(self)
   end
 
 end

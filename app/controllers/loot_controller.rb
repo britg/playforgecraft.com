@@ -4,13 +4,14 @@ class LootController < ApplicationController
   respond_to :json
 
   def index
+    @forge = Forge.find(params[:forge_id])
     last = params[:last]
     limit = params[:limit]
 
     if last
-      @loot = current_player.loot.where(["id < ?", last]).limit(limit)
+      @loot = @forge.loot.where(["id < ?", last]).limit(limit)
     else
-      @loot = current_player.loot.limit(limit)
+      @loot = @forge.loot.limit(limit)
     end
     
     respond_with @loot
