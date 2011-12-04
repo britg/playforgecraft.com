@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
   layout :detect_layout
 
+  before_filter :update_last_active
+
   helper_method :admin?, :current_user, :current_player,
                 :current_zone, :current_mine
 
@@ -49,6 +51,11 @@ class ApplicationController < ActionController::Base
 
   def select_nav(item)
     @nav_item = item
+  end
+
+  def update_last_active
+    return unless current_player.present?
+    current_player.touch(:last_active_at)
   end
 
 end

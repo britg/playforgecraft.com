@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111204201011) do
+ActiveRecord::Schema.define(:version => 20111204204349) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -294,6 +294,7 @@ ActiveRecord::Schema.define(:version => 20111204201011) do
     t.integer   "zone_id"
     t.integer   "mine_id"
     t.string    "url_name"
+    t.datetime  "last_active_at"
   end
 
   add_index "players", ["mine_id"], :name => "index_players_on_mine_id"
