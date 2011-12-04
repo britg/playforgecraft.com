@@ -18,7 +18,9 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     
     @model.bind "change:funds", @updateFunds, @
     @model.bind "change:progress_percent", @updateProgressPercent, @
+    @model.bind "change:complete", @complete, @
     @model.bind "ForgeCraft:NeedMoreCoins", @shakeFunds, @
+
 
     window.Ores = new ForgeCraft.Collections.OresCollection
     Ores.bind "add", @displayOre, @
@@ -46,6 +48,8 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @clearOres()
     loadingView.show()
 
+    @correctSidebarHeight()
+
     clearTimeout @redrawTimeout
 
     @redrawTimeout = setTimeout =>
@@ -53,6 +57,11 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
       @initializeOres()
       loadingView.hide()
     , 500
+
+  correctSidebarHeight: ->
+    @topBarHeight   = $('.topbar').height();
+    @htmlHeight     = $('html').height();
+    $('#sidebar').css minHeight: @htmlHeight - @topBarHeight
 
   renderLoot: ->
     Loot.unbind "add"
@@ -120,10 +129,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     Ores.numCols    = @cols
     Ores.numRows    = @rows
 
-    # @lootListHeight = $('#sidebar').height() - $('#loot-list').position().top
-    # $('#loot-list').css('height', @lootListHeight)
-
-    console.log "Ores width:", @oresWidth, "height:", @oresHeight, "cols:", @cols, "rows:", @rows
+    # console.log "Ores width:", @oresWidth, "height:", @oresHeight, "cols:", @cols, "rows:", @rows
 
   initializeOres: ->
 
@@ -234,3 +240,9 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
 
   startBattle: (ident) ->
     Backbone.history.navigate "battles/" + ident, true
+
+  complete: ->
+    $('#ores').fadeOut ->
+      $('#ores')
+        .html("(Placeholder) Congrats, you completed this forge.")
+        .fadeIn()

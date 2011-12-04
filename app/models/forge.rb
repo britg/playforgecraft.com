@@ -18,6 +18,10 @@ class Forge
       where(:complete => false)
     end
 
+    def completed
+      where(:complete => true)
+    end
+
   end
 
   def serializable_hash(opts={})

@@ -11,7 +11,13 @@
     - if @forge.loot.count > 20
       = link_to "Loading ...", "javascript:void(0)", :id => "loot-list-more", :class => "more-loot", :"data-external" => false
 
-  #ores
+  - if @forge.complete?
+    #complete
+      (Placeholder) This forge is complete
+  - else
+  
+    #ores
+
 
   = render "active_forge"
 

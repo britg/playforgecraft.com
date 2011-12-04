@@ -68,6 +68,14 @@ class Battle
     }
   end
 
+  def forge
+    Forge.where(:_id => forge_id).first
+  end
+
+  def mine
+    forge.try(:mine)
+  end
+
   def plays
     Playbook.first.plays
   end

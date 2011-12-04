@@ -10,5 +10,8 @@
         %ul
 
           - zone.mines.each do |mine|
-            %li= link_to mine, map_path(mine), "data-mine-id" => mine.id
+            %li
+              = link_to mine, map_path(mine), "data-mine-id" => mine.id
+              - if current_player.forge_for(mine).try(:complete?)
+                Complete!
     

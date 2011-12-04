@@ -21,23 +21,13 @@
     
     %tbody
 
-      - if battle.finished?
-        
-        %tr
-          
-          %td.stat Victor
-          %td.val= battle.winner
-          
-          %td.stat Defeated
-          %td.val= battle.loser
-
       %tr
+        
+        %td.stat Mine
+        %td.val= battle.mine
         
         %td.stat Started
         %td.val= timeago(battle.created_at)
-        
-        %td.stat Last Action
-        %td.val= battle.actions.last.try(:message)
 
 
   .clear

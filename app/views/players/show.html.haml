@@ -30,30 +30,56 @@
           Epics
           (#{@player.epic_percent}%)
 
-  .section.forges-wrap
+  .row
 
-    %h1.heading 
-      Forges
+    .span-one-third
 
-    - if @player.forges.active.any?
-      .forges
-        - @player.forges.active.each_with_index do |forge, index|
-          = render "forges/stub", :forge => forge, :last => ((index+1)%3==0), :current => (@player.forge == forge)
+      .section.forges-wrap
+
+        %h1.heading 
+          Active Forges
+
+        - if @player.forges.active.any?
+          .forges
+            - @player.forges.active.each_with_index do |forge, index|
+              = render "forges/stub", :forge => forge, :last => ((index+1)%3==0), :current => (@player.forge == forge)
+          
+          .clear
       
-      .clear
+        - else
+          %p 
+            You have no active forges! Visit the 
+            = map_link("Map")
+            and select a mine to start forging.
+
+      - if @player.forges.completed.any?
+        .section.forges-wrap
+
+          %h1.heading
+            Completed Forges
+
+          .forges
+            - @player.forges.completed.each_with_index do |forge, index|
+              = render "forges/stub", :forge => forge, :last => ((index+1)%3==0), :current => false
+        
+          .clear
+    
+    .span-one-third
+
+      .section.hero-wrap
+        %h1.heading Vanguard
+
+        = render "heroes/heroes", :player => @player, :loot => nil
+
+    .span-one-third
       
-    - else
-      %p 
-        You have no active forges! Visit the 
-        = map_link("Map")
-        and select a mine to start forging.
+      .section.battle-wrap
+        
+        %h1.heading Battles
 
-  .section.hero-wrap
-    %h1.heading Vanguard
-    %p 
-      Your Vanguard protects against attacks while you forge. Equip them with your best gear at the 
-      = link_to "Armory &rarr;".html_safe, armory_index_path
+        - @player.battles.desc(:created_at).limit(10).each do |battle|
+          = render "battles/battle_stub", :battle => battle
 
-    = render "heroes/heroes", :player => @player, :loot => nil
+  
 
   .clear

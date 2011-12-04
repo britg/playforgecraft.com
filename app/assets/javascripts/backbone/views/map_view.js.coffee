@@ -6,6 +6,11 @@ class ForgeCraft.Views.MapView extends Backbone.View
   initialize: ->
     @bindForgeStubClicks()
 
+  refresh: ->
+    @topBarHeight   = $('.topbar').height();
+    @htmlHeight     = $('html').height();
+    $('.sidebar').css minHeight: @htmlHeight - @topBarHeight
+
   showMine: ->
     $('#map.details').load
 
