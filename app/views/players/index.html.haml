@@ -15,7 +15,7 @@
         %th Items
         %th Rares
         %th Epics
-        %th Work Orders
+        %th Player Since
       
       - Player.ladder.each_with_index do |player, i|
 
@@ -41,5 +41,4 @@
             (#{player.epic_percent}%)
 
           %td.count
-            = player.work_order_count
-            (#{player.work_order_percent}%)
+            = timeago(player.created_at)

@@ -24,7 +24,7 @@ class Player < ActiveRecord::Base
   class << self
 
     def ladder
-      order("level desc")
+      Player.all.sort_by{ |p| -p.score }
     end
 
     def range(range_id)
