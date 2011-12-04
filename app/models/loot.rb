@@ -86,7 +86,6 @@ class Loot < ActiveRecord::Base
     return {} unless item
     {
       :name => item.name,
-      :description => item.description,
       :icon_url => item.icon_url,
       :type => to_css_classes,
       :param => item.to_param,

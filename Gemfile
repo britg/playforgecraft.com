@@ -27,7 +27,7 @@ group :test do
 end
 
 group :development do
-  gem 'rails-dev-tweaks'
+  gem 'rails-dev-tweaks', '~> 0.5.1'
   gem 'sqlite3'
 
   # To use debugger

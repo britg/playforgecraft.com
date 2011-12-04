@@ -167,8 +167,8 @@ GEM
       coffee-script (~> 2.2.0)
       ejs (~> 1.0.0)
       rails (~> 3.1.0)
-    rails-dev-tweaks (0.4.0)
-      rails (~> 3.1.0.rc4)
+    rails-dev-tweaks (0.5.1)
+      rails (~> 3.1.0)
     railties (3.1.0)
       actionpack (= 3.1.0)
       activesupport (= 3.1.0)
@@ -250,7 +250,7 @@ DEPENDENCIES
   pg
   rails (= 3.1.0)
   rails-backbone
-  rails-dev-tweaks
+  rails-dev-tweaks (~> 0.5.1)
   ruby-debug19
   sass-rails (~> 3.1.0)
   shoulda
