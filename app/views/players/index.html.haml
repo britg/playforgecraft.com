@@ -1,8 +1,8 @@
-#ladder-page
+#ladder-page.container
 
   .heading.padded
 
-    %h1 Singleplayer Ladder
+    %h1 Player Ladder
 
     %table#ladder
 
@@ -11,11 +11,10 @@
         %th Rank
         %th Score
         %th Player
-        %th Level
+        %th Forges Complete
         %th Items
         %th Rares
         %th Epics
-        %th Sets
         %th Work Orders
       
       - Player.ladder.each_with_index do |player, i|
@@ -24,7 +23,10 @@
           %td.rank= i+1
           %td.score= player.score
           %td.name= link_to player.name, player_path(player)
-          %td.level= player.level
+
+          %td.count
+            = player.forge_count
+            (#{player.forge_percent}%)
 
           %td.count
             = player.item_count
@@ -37,10 +39,6 @@
           %td.count.epic
             = player.epic_count
             (#{player.epic_percent}%)
-
-          %td.count.itemset
-            = player.set_count
-            (#{player.set_percent}%)
 
           %td.count
             = player.work_order_count

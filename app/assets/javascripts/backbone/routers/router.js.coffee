@@ -19,6 +19,8 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     "battles": "battles"
     "battles/:id": "battle"
 
+    "ladder": "ladder"
+
     "loot/:id": "loot"
 
     "items/:ident": "item"
@@ -73,6 +75,12 @@ class ForgeCraft.Routers.Router extends Backbone.Router
   mapShow: (ident) ->
     menuView.selectNav('map')
     @load('/map/' + ident)
+
+  # Ladder
+
+  ladder: ->
+    menuView.selectNav('ladder')
+    @load("/ladder")
 
   # Battle
 

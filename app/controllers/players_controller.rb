@@ -1,5 +1,9 @@
 class PlayersController < ApplicationController
 
+  def index
+    select_nav 'ladder'
+  end
+
   def show
     select_nav("profile")
     @player = Player.find_by_name(params[:playername])

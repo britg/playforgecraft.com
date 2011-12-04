@@ -109,6 +109,10 @@ class Player < ActiveRecord::Base
     @forge_percent ||= (forge_count.to_f / Mine.count.to_f * 100).round rescue 0
   end
 
+  def score
+    item_percent + rare_percent + epic_percent + forge_percent
+  end
+
   def purchase!(cost)
     return false if cost > forge.funds
     forge.inc(:funds, -cost)
