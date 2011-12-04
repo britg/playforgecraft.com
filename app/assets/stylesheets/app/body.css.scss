@@ -42,10 +42,19 @@ table {
     margin-left: 20px;
     text-shadow: #000 1px 1px 1px;
     font-weight: bold;
+    color: $epic-color;
 
     .icon {
-      height: 41px;
-      vertical-align: -10px;
+      height: 36px;
+      vertical-align: -9px;
+    }
+
+    .title {
+      font-size: 90%;
+    }
+
+    a:hover {
+      text-decoration: none;
     }
   }
 }
