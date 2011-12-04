@@ -21,7 +21,9 @@
       - if current_player
       
         #logo-wrap
-          = link_to image_tag("logo.png", :id => "logo"), root_path
+          / = link_to image_tag("logo.png", :id => "logo"), root_path
+          %h1.game-title 
+            = link_to "Forgecraft", root_path
 
       #loading
         = image_tag "loading.gif"
