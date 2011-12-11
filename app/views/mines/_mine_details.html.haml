@@ -5,15 +5,25 @@
     %h3.name= mine.name
     %p.description= mine.description
 
-    - if forge.present?
-      .progress-wrap
-        = render "forges/progress", :forge => forge
+    - if current_player.can_travel_to? mine
 
-      = link_to "Continue Forging", "#", :class => "travel btn primary", "data-mine-id" => mine.id
-    
+      - if forge.present?
+        .progress-wrap
+          = render "forges/progress", :forge => forge
+
+        = link_to "Continue Forging", "#", :class => "travel btn primary", "data-mine-id" => mine.id
+      
+      - else
+
+        = link_to "Start a Forge Here", "#", :class => "travel btn primary", "data-mine-id" => mine.id
+
     - else
+      
+      %p You must complete forging at the following mines to access this mine:
+      %ul
+        - mine.required_mines.each do |req_mine|
 
-      = link_to "Start a Forge Here", "#", :class => "travel btn primary", "data-mine-id" => mine.id
+          %li= link_to req_mine, map_path(req_mine)
 
   - else
     

@@ -177,7 +177,14 @@ class Player < ActiveRecord::Base
     start_forge(target_mine) unless has_forge?(target_mine)
   end
 
-  def can_travel_to? mine
+  def completed_mines
+    @completed_mines ||= forges.where(:complete => true).map(&:mine)
+  end
+
+  def can_travel_to? target_mine
+    target_mine.required_mines.each do |req_mine|
+      return false unless self.completed_mines.include?(req_mine)
+    end
     true
   end
 

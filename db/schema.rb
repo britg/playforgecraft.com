@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111211180334) do
+ActiveRecord::Schema.define(:version => 20111211183719) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -309,6 +309,15 @@ ActiveRecord::Schema.define(:version => 20111211180334) do
   add_index "players", ["url_name"], :name => "index_players_on_url_name", :unique => true
   add_index "players", ["user_id"], :name => "index_players_on_user_id", :unique => true
   add_index "players", ["zone_id"], :name => "index_players_on_zone_id"
+
+  create_table "prerequisites", :force => true do |t|
+    t.integer  "mine_id"
+    t.integer  "required_mine_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "prerequisites", ["mine_id"], :name => "index_prerequisites_on_mine_id"
 
   create_table "rarities", :force => true do |t|
     t.string    "name"

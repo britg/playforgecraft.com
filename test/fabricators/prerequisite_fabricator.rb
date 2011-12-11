@@ -1,0 +1,2 @@
+Fabricator(:prerequisite) do
+end
