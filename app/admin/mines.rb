@@ -8,7 +8,7 @@ ActiveAdmin.register Mine do
     column :zone
     
     column :starting_funds do |mine|
-      mine.requires_funding? ? mine.starting_funds : "No funds required"
+      mine.requires_funding? ? mine.starting_funds.to_s : "No funds required"
     end
 
     column "Requirements" do |mine|
