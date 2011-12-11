@@ -117,7 +117,7 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
       oreTwo.trigger("ForgeCraft:MoveBlock") unless oreTwo.get("moveable")
       return
 
-    if forge.get("funds") < 1
+    unless forge.hasEnoughFunds(2)
       forge.trigger "ForgeCraft:NeedMoreCoins"
       return
 

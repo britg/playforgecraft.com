@@ -1,4 +1,8 @@
 class ForgeCraft.Models.Forge extends Backbone.Model
+
+  hasEnoughFunds: (amount) ->
+    return yes unless @get("requires_funding")
+    @get("funds") > amount
   
 
 class ForgeCraft.Models.Forgeable extends Backbone.Model

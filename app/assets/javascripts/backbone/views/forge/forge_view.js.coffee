@@ -200,7 +200,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
 
   attemptForge: ->
     return if @oreLock
-    if forge.get("funds") < 1
+    unless forge.hasEnoughFunds(2)
       forge.trigger "ForgeCraft:NeedMoreCoins"
       return
       
@@ -228,6 +228,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @watching = false
 
   updateFunds: ->
+    return unless @model.get("requires_funding")
     console.log "Updating funds to", @model.get("funds")
     $('.funds').find('.amount').html(@model.get("funds"))
 
