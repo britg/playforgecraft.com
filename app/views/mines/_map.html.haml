@@ -3,7 +3,7 @@
   %p (Placeholder -- an interactive map with the zones and mines located. Unavailable zones are covered with fog-of-war, and some mines in the visible zones are greyed out.) 
     
   %ul
-    - @zones.each do |zone|
+    - @zones.first.tap do |zone|
       %li
         %h4.zone= zone
         
