@@ -8,10 +8,12 @@
     - if forge.present?
       .progress-wrap
         = render "forges/progress", :forge => forge
+
+      = link_to "Continue Forging", "#", :class => "travel btn primary", "data-mine-id" => mine.id
     
     - else
 
-      = link_to "Forge at the #{mine.name}", "#", :class => "travel btn primary", "data-mine-id" => mine.id
+      = link_to "Start a Forge Here", "#", :class => "travel btn primary", "data-mine-id" => mine.id
 
   - else
     

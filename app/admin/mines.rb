@@ -34,6 +34,8 @@ ActiveAdmin.register Mine do
       f.input :starting_funds
       f.input :max_rarity
       f.input :battle_chance
+      f.input :x
+      f.input :y
     end
 
     f.object.requirements.build

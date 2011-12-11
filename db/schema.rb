@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111210213850) do
+ActiveRecord::Schema.define(:version => 20111211180334) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -268,6 +268,8 @@ ActiveRecord::Schema.define(:version => 20111210213850) do
     t.integer  "max_rarity_id"
     t.boolean  "item_id"
     t.integer  "battle_chance"
+    t.integer  "x"
+    t.integer  "y"
   end
 
   add_index "mines", ["zone_id"], :name => "index_mines_on_zone_id"

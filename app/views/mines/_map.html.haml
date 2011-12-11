@@ -1,6 +1,4 @@
-.placeholder
-
-  %p (Placeholder -- an interactive map with the zones and mines located. Unavailable zones are covered with fog-of-war, and some mines in the visible zones are greyed out.) 
+.map
     
   %ul
     - @zones.first.tap do |zone|
@@ -11,7 +9,4 @@
 
           - zone.mines.each do |mine|
             %li
-              = link_to mine, map_path(mine), "data-mine-id" => mine.id
-              - if current_player.forge_for(mine).try(:complete?)
-                Complete!
-    
+              = link_to mine, map_path(mine), "data-mine-id" => mine.id, :class => "marker #{'selected' if @mine == mine}", :style => "left: #{mine.x}px; top: #{mine.y}px;"

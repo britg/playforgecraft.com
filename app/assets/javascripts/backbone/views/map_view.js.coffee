@@ -9,6 +9,7 @@ class ForgeCraft.Views.MapView extends Backbone.View
     @topBarHeight   = $('.topbar').height();
     @htmlHeight     = $('html').height();
     $('.sidebar').css minHeight: @htmlHeight - @topBarHeight
+    $('#map').find('.map').css minHeight: @htmlHeight - @topBarHeight
 
   showMine: ->
     $('#map.details').load
