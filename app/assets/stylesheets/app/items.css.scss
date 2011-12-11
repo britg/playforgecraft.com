@@ -53,6 +53,7 @@
 
   .sell-action {
     @include loot-action;
+    display: none;
   }
 
   .equipped-indicator {
