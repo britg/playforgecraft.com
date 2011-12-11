@@ -288,8 +288,32 @@ html.no-touch {
     margin-right: 10px;
   }
 
+  .name {
+    color: $forge-color;
+  }
+
   .details {
     @include clearfix;
     padding: 10px;
+  }
+}
+
+.progress {
+  
+  .funds {
+    .amount {
+      font-weight: bold;
+      font-size: 125%;
+      color: $highlight-color;
+
+      .infinite {
+        font-size: 150%;
+      }
+    }
+
+    .icon {
+      width: 15px;
+      vertical-align: -3px;
+    }
   }
 }

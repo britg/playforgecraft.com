@@ -1,12 +1,11 @@
 .forge-stub{ :id => forge.to_param, :class => "#{'last' if last} #{'current' if current}", "data-mine-id" => forge.mine_id }
 
-  - unless forge.complete? or current_player != forge.player
+  - if current_player.can_forge_at? forge
     .controls
-      
-      = link_to "Continue", forge_path(forge), :class => "btn primary"
+      = link_to "Forge", forge_path(forge), :class => "btn primary"
     
   .details
-    %h4= forge
+    %h3.name= forge
 
     .progress-wrap
       = render "forges/progress", :forge => forge

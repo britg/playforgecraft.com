@@ -17,6 +17,7 @@
 
     .name {
       margin-bottom: 0;
+      text-transform: capitalize;
     }
 
     .stats {
@@ -36,6 +37,10 @@
         font-size: 250%;
         line-height: 1;
         color: $highlight-color;
+      }
+
+      table td {
+        border: 0;
       }
     }
 
