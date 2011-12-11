@@ -91,15 +91,27 @@ class Item < ActiveRecord::Base
       Ore.all.each do |ore|
         Rarity.all.each do |rarity|
           Classification.all.each do |classification|
-            exists = Item.where(:ore_id => ore.id, :rarity_id => rarity.id, :zone_id => zone.id, :classification_id => classification.id)
-            next unless exists
-            item = Item.new(:ore_id => ore.id, :rarity_id => rarity.id, :zone_id => zone.id, :classification_id => classification.id, :name => "#{rarity.to_s.capitalize} #{ore.to_s.capitalize} #{classification.to_s.singularize}", :genre_id => classification.genre_id)
+            
+            item = Item.where(  :ore_id => ore.id, 
+                                :rarity_id => rarity.id, 
+                                :zone_id => zone.id, 
+                                :classification_id => classification.id ).first
+            
+            unless item.present?
+              item = Item.new(  :ore_id => ore.id, 
+                                :rarity_id => rarity.id, 
+                                :zone_id => zone.id, 
+                                :classification_id => classification.id, 
+                                :name => "#{rarity.to_s.capitalize} #{ore.to_s.capitalize} #{classification.to_s.singularize}", 
+                                :genre_id => classification.genre_id)
+            end
+            
             if item.weapon?
-              item.attack_min = ((rarity.rank+1)*(ore.rank+1)*classification.id)*7
-              item.attack_max = ((rarity.rank+1)*(ore.rank+1)*classification.id)*10
+              item.attack_min = ((rarity.rank+1)*(ore.rank+1)*classification.id)*1.8
+              item.attack_max = ((rarity.rank+1)*(ore.rank+1)*classification.id)*3.6
             else
-              item.defense_min = ((rarity.rank+1)*(ore.rank+1)*classification.id)*17
-              item.defense_max = ((rarity.rank+1)*(ore.rank+1)*classification.id)*37
+              item.defense_min = ((rarity.rank+1)*(ore.rank+1)*classification.id)*2.6
+              item.defense_max = ((rarity.rank+1)*(ore.rank+1)*classification.id)*4.2
             end
             item.save
           end
