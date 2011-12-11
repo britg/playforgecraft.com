@@ -40,6 +40,7 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
     Ores.clearForgeables()
     @markOres()
     @save @toJSON, success: @convertToLootIfPurchased
+    Crafty.audio.play("forge")
 
   markOres: ->
     $.each @get("ores"), (i, ore) ->

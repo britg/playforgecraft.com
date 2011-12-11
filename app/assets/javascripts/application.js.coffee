@@ -29,3 +29,6 @@ $ ->
   window.mapView      = new ForgeCraft.Views.MapView()
 
   window.appView      = new ForgeCraft.Views.AppView
+
+  Crafty.audio.add "swap", "/sounds/swap_stone.mp3"
+  Crafty.audio.add "forge", "/sounds/forge.mp3"

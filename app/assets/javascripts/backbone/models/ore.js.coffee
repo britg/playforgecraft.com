@@ -33,7 +33,8 @@ class ForgeCraft.Models.Ore extends Backbone.Model
 class ForgeCraft.Collections.OresCollection extends Backbone.Collection
   
   model: ForgeCraft.Models.Ore
-  url: '/ores'
+  url: ->
+    '/forges/' + forge.get("id") + '/ores'
 
   numCols: 0
   numRows: 0
@@ -110,6 +111,8 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
     oreOne.set x: oreTwoX, y: oreTwoY
     oreTwo.set x: oreOneX, y: oreOneY
 
+    Crafty.audio.play("swap")
+
   swapOresAndValidate: (oreOne, oreTwo) ->
 
     unless oreOne.get("moveable") and oreTwo.get("moveable")
@@ -123,7 +126,7 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
 
     @swapOres(oreOne, oreTwo)
 
-    $.post '/ores/swap.json', {}, (response) ->
+    $.post '/forges/' + forge.get("id") + '/ores/swap.json', {}, (response) ->
       console.log "Swap response", response
       
       if response.purchased

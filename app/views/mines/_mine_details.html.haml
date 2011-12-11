@@ -5,6 +5,7 @@
     %h3.name= mine.name
     %p.description= mine.description
 
+
     - if current_player.can_travel_to? mine
 
       - if forge.present?
@@ -14,10 +15,23 @@
         = link_to "Continue Forging", "#", :class => "travel btn primary", "data-mine-id" => mine.id
       
       - else
+        .requirements
+          %p Clear this mine by forging:
+
+          %ul
+            - mine.requirements.each do |req|
+              %li= req
 
         = link_to "Start a Forge Here", "#", :class => "travel btn primary", "data-mine-id" => mine.id
 
     - else
+
+      .requirements
+        %p Clear this mine by forging:
+
+        %ul
+          - mine.requirements.each do |req|
+            %li= req
       
       %p You must complete forging at the following mines to access this mine:
       %ul

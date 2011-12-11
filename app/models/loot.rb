@@ -43,14 +43,13 @@ class Loot < ActiveRecord::Base
       rand        = Random.new
       chance      = rand.rand(1000).to_f/10.0
       rarity      = Rarity.common
-      max_rarity  = forge.max_rarity
 
-      if forge.has_rarity?(Rarity.advanced) and chance < ADVANCED_THRESHOLD
-        return Rarity.advanced
-      elsif forge.has_rarity?(Rarity.rare) and chance < RARE_THRESHOLD
-        return Rarity.rare
-      elsif forge.has_rarity?(Rarity.epic) and chance <= EPIC_THRESHOLD
+      if forge.has_rarity?(Rarity.epic) and chance >= EPIC_THRESHOLD
         return Rarity.epic
+      elsif forge.has_rarity?(Rarity.rare) and chance > RARE_THRESHOLD
+        return Rarity.rare
+      elsif forge.has_rarity?(Rarity.advanced) and chance > ADVANCED_THRESHOLD
+        return Rarity.advanced
       end
 
       return rarity

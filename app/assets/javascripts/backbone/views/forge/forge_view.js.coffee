@@ -230,7 +230,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
   updateFunds: ->
     return unless @model.get("requires_funding")
     console.log "Updating funds to", @model.get("funds")
-    $('.funds').find('.amount').html(@model.get("funds"))
+    $('.funds').find('.amount').html(number_with_delimiter(@model.get("funds")))
 
   shakeFunds: ->
     $('.funds').effect("shake", { times: 3, distance: 10 }, 50)
