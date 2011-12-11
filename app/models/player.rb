@@ -198,9 +198,11 @@ class Player < ActiveRecord::Base
 
   def start_forge target_mine
     return false unless target_mine.try(:id)
-    forges.create :mine_id => target_mine.try(:id), 
+    forges.create :mine_id => target_mine.try(:id),
+                  :zone_id => target_mine.zone.try(:id),
                   :requires_funding => target_mine.requires_funding?,
-                  :funds => target_mine.starting_funds
+                  :funds => target_mine.starting_funds,
+                  :battle_chance => target_mine.battle_chance
   end
 
   def has_forge? target_mine

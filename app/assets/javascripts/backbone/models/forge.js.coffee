@@ -83,7 +83,8 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
 class ForgeCraft.Collections.Forgings extends Backbone.Collection
   
   model: ForgeCraft.Models.Forgeable
-  url: '/loot.json'
+  url: ->
+    "/forges/" + window.forge.get("id") + "/loot.json"
 
   onRender: ->
     @reset()

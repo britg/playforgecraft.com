@@ -2,10 +2,12 @@ class Forge
   include Mongoid::Document
 
   field :mine_id, :type => Integer
+  field :zone_id, :type => Integer
   field :player_id, :type => Integer
   field :funds, :type => Integer
   field :complete, :type => Boolean, :default => false
   field :requires_funding, :type => Boolean, :default => true
+  field :battle_chance, :type => Integer
 
   index [:player_id, :mine_id], :unique => true
 
@@ -35,6 +37,10 @@ class Forge
 
   def mine
     Mine.find(mine_id)
+  end
+
+  def zone
+    Zone.find(zone_id)
   end
 
   def player

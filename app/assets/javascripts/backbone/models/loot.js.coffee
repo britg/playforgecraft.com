@@ -15,7 +15,7 @@ class ForgeCraft.Models.Loot extends Backbone.Model
 class ForgeCraft.Collections.Loot extends Backbone.Collection
 
   model: ForgeCraft.Models.Loot
-  url: '/loot'
+  url: "/loot"
 
   fetchLootLock: off
 

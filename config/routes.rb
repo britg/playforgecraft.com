@@ -27,11 +27,13 @@ ForgeCraft::Application.routes.draw do
 
   # Forge
 
-  resources :forges, :only => [:show, :create]
+  resources :forges, :only => [:show, :create] do
+    resources :loot, :only => [:create]
+  end
   resources :ores, :only => [:index] do
     post :swap, :on => :collection
   end
-  resources :loot, :only => [:index, :create, :show, :destroy]
+  resources :loot, :only => [:index, :show, :destroy]
 
   # Battles
 

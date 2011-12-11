@@ -19,24 +19,27 @@ class Loot < ActiveRecord::Base
 
   class << self
 
-    def generate classification, ore, accuracy, player
-      item = roll classification, ore, accuracy, player.zone
+    def generate classification, ore, accuracy, player, forge
+      item = roll classification, ore, accuracy, player, forge
       return nil unless item
 
       loot = Loot.new( :item => item, 
                        :player => player, 
-                       :forge_id => player.forge.to_param, 
+                       :forge_id => forge.to_param,
                        :mine_id => player.mine_id )
       loot.set_stats accuracy
       loot
     end
 
-    def roll classification, ore, accuracy, zone
-      rarity = roll_rarity(accuracy)
-      item = Item.where(:classification_id => classification, :ore_id => ore, :zone_id => zone, :rarity_id => rarity.try(:id)).random
+    def roll classification, ore, accuracy, player, forge
+      rarity = roll_rarity(accuracy, forge)
+      item = Item.where(:classification_id => classification, 
+                        :ore_id => ore, 
+                        :zone_id => forge.zone_id,
+                        :rarity_id => rarity.try(:id)).random
     end
 
-    def roll_rarity accuracy=0
+    def roll_rarity accuracy=0, forge
       rand = Random.new
       chance = rand.rand(1000).to_f/10.0
 
@@ -73,9 +76,10 @@ class Loot < ActiveRecord::Base
       scope.first
     end
 
-    def random_battle?
-      rand = Random.new
-      rand.rand(10) == 1
+    def random_battle? forge
+      return false unless forge.battle_chance.present?
+      return false unless forge.battle_chance > 0
+      Random.new.rand(100) <= forge.battle_chance
     end
 
   end
@@ -133,6 +137,7 @@ class Loot < ActiveRecord::Base
   def purchase
     return unless player
     return unless item
+    return true unless forge.requires_funding?
     player.purchase!(buy_price)
   end
 
