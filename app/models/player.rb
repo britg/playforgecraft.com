@@ -170,6 +170,12 @@ class Player < ActiveRecord::Base
     battle.winner == self
   end
 
+  # Zones
+
+  def can_access_zone? target_zone
+    false
+  end
+
   # Mines
 
   def travel_to target_mine

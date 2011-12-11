@@ -29,7 +29,7 @@
               
               %li
                 %label{ :for => "zone-#{zone.id}" }
-                  %input{ :id => "zone-#{zone.id}", :rel => :filter, :type => :radio, :name => "zone_id", :value => zone.id, :checked => (params[:zone_id].to_i == zone.id.to_i), :disabled => !current_player.can_travel_to?(zone) }
+                  %input{ :id => "zone-#{zone.id}", :rel => :filter, :type => :radio, :name => "zone_id", :value => zone.id, :checked => (params[:zone_id].to_i == zone.id.to_i), :disabled => !current_player.can_access_zone?(zone) }
                   %span= zone.name
 
   .row
