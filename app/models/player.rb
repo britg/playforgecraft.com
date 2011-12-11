@@ -198,11 +198,18 @@ class Player < ActiveRecord::Base
 
   def start_forge target_mine
     return false unless target_mine.try(:id)
-    forges.create :mine_id => target_mine.try(:id), :funds => target_mine.starting_funds
+    forges.create :mine_id => target_mine.try(:id), 
+                  :requires_funding => target_mine.requires_funding?,
+                  :funds => target_mine.starting_funds
   end
 
   def has_forge? target_mine
     forge_for(target_mine).present?
+  end
+
+  def can_forge_at? forge
+    return unless forge.player_id == self.id
+    !forge.complete? or !forge.mine.requires_funding?
   end
 
 end

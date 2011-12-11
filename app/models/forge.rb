@@ -5,6 +5,7 @@ class Forge
   field :player_id, :type => Integer
   field :funds, :type => Integer
   field :complete, :type => Boolean, :default => false
+  field :requires_funding, :type => Boolean, :default => true
 
   index [:player_id, :mine_id], :unique => true
 
@@ -89,6 +90,10 @@ class Forge
 
   def complete?
     complete
+  end
+
+  def requires_funding?
+    requires_funding
   end
 
   def check_completion
