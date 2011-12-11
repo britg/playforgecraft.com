@@ -8,10 +8,6 @@
     - if forge.present?
       .progress-wrap
         = render "forges/progress", :forge => forge
-
-    - if forge.try(:complete?)
-      
-      %h3 Complete!
     
     - else
 
