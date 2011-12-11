@@ -9,20 +9,18 @@
         %span.infinite &#8734;
       = image_tag "coin.png", :class => "icon"
 
-  .percent
-    %span.amount= forge.progress_percent
-    = "% complete"
+  .completion
+    .bar-wrap
+      .bar{ :style => "width: #{forge.progress_percent}%" }
+
+    .percent
+      %span.amount= forge.progress_percent
+      = "% complete"
 
   .requirements
 
     %ul
       - forge.progresses.each do |prog|
-        %li
-          = prog
-          = "complete" if prog.complete?
-
-  - if forge.try(:complete?)
-    
-    %h3 Complete!
-
-  .bar
+        %li{ :id => dom_id(prog), :class => ("complete" if prog.complete?) }
+          %span{ :id => dom_id(prog, "quantity") }= prog.quantity
+          = "/ #{prog.requirement.to_s}"

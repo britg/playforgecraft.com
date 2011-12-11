@@ -301,6 +301,8 @@ html.no-touch {
 .progress {
   
   .funds {
+    margin-bottom: 10px;
+
     .amount {
       font-weight: bold;
       font-size: 125%;
@@ -308,12 +310,52 @@ html.no-touch {
 
       .infinite {
         font-size: 150%;
+        vertical-align: -1px;
       }
     }
 
     .icon {
       width: 15px;
       vertical-align: -3px;
+    }
+  }
+
+  .completion {
+    margin-bottom: 10px;
+  }
+
+  .bar-wrap {
+    @include inset;
+    height: 10px;
+    width: 95%;
+    overflow: hidden;
+
+    .bar {
+      background: $rare-color;
+      width: 0;
+      height: 10px;
+      @include border-radius(5px);
+    }
+  }
+
+  .percent {
+    font-size: 90%;
+    text-align: center;
+    color: $highlight-color;
+    display: none;
+  }
+
+  .requirements {
+    ul {
+
+      li {
+        list-style-type: none;
+        color: $highlight-color;
+        
+        &.complete {
+          color: $advanced-color;
+        }
+      }
     }
   }
 }

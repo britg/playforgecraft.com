@@ -11,7 +11,7 @@
     - if @forge.loot.count > 20
       = link_to "Loading ...", "javascript:void(0)", :id => "loot-list-more", :class => "more-loot", :"data-external" => false
 
-  - if @forge.complete?
+  - if @forge.complete? and @forge.requires_funding?
     #complete
       (Placeholder) This forge is complete
   - else
