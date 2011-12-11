@@ -24,23 +24,23 @@ class Rarity < ActiveRecord::Base
     end
 
     def common
-      find_by_name("Common")
+      @common ||= find_by_name("Common")
     end
 
     def advanced
-      find_by_name("Advanced")
+      @advanced ||= find_by_name("Advanced")
     end
 
     def rare
-      find_by_name("Rare")
+      @rare ||= find_by_name("Rare")
     end
 
     def set
-      find_by_name("Set")
+      @set ||= find_by_name("Set")
     end
 
     def epic
-      find_by_name("Epic")
+      @epic ||= find_by_name("Epic")
     end
 
   end

@@ -40,20 +40,20 @@ class Loot < ActiveRecord::Base
     end
 
     def roll_rarity accuracy=0, forge
-      rand = Random.new
-      chance = rand.rand(1000).to_f/10.0
+      rand        = Random.new
+      chance      = rand.rand(1000).to_f/10.0
+      rarity      = Rarity.common
+      max_rarity  = forge.max_rarity
 
-      if chance < COMMON_THRESHOLD
-        return Rarity.common
-      elsif chance < ADVANCED_THRESHOLD
+      if forge.has_rarity?(Rarity.advanced) and chance < ADVANCED_THRESHOLD
         return Rarity.advanced
-      elsif chance < RARE_THRESHOLD
+      elsif forge.has_rarity?(Rarity.rare) and chance < RARE_THRESHOLD
         return Rarity.rare
-      elsif chance <= EPIC_THRESHOLD
+      elsif forge.has_rarity?(Rarity.epic) and chance <= EPIC_THRESHOLD
         return Rarity.epic
       end
 
-      return Rarity.common
+      return rarity
     end
 
     def of_item item

@@ -39,6 +39,14 @@ class Forge
     Mine.find(mine_id)
   end
 
+  def max_rarity
+    @max_rarity ||= mine.max_rarity
+  end
+
+  def has_rarity? rarity
+    rarity.rank <= max_rarity.rank
+  end
+
   def zone
     Zone.find(zone_id)
   end

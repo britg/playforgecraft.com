@@ -55,7 +55,7 @@ class LootController < ApplicationController
   #-----
 
   def find_forge
-    @forge = Forge.find(params[:forge_id])
+    @forge = Forge.where(:_id => params[:forge_id]).first
   end
 
 end
