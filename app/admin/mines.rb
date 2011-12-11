@@ -6,14 +6,21 @@ ActiveAdmin.register Mine do
     column :id
     column :name
     column :zone
-    column :starting_funds
+    
+    column :starting_funds do |mine|
+      mine.requires_funding? ? mine.starting_funds : "No funds required"
+    end
+
     column "Requirements" do |mine|
       reqs = []
       mine.requirements.each do |req|
         reqs << req
       end
-      reqs.join("\n")
+      reqs.join("<br />").html_safe
     end
+
+    column :max_rarity
+    column :battle_chance
 
     default_actions
   end
@@ -23,7 +30,10 @@ ActiveAdmin.register Mine do
     f.inputs "Details" do
       f.input :name
       f.input :zone
-      f.input :starting_funds  
+      f.input :requires_funding
+      f.input :starting_funds
+      f.input :max_rarity
+      f.input :battle_chance
     end
 
     f.object.requirements.build

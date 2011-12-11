@@ -4,7 +4,12 @@ class Mine < ActiveRecord::Base
   has_many :players
   has_many :requirements
 
-  accepts_nested_attributes_for :requirements
+  belongs_to :prize, :class_name => "Item"
+  belongs_to :max_rarity, :class_name => "Rarity", :foreign_key => "max_rarity_id"
+
+  accepts_nested_attributes_for :requirements, :reject_if => :all_blank
+
+  before_create :default_max_rarity, :default_battle_chance
 
   def to_param
     "#{id}-#{name.gsub(/[^a-zA-Z0-9]+/, '-')}"
@@ -12,6 +17,16 @@ class Mine < ActiveRecord::Base
 
   def to_s
     name
+  end
+
+  #-------
+
+  def default_max_rarity
+    self.max_rarity_id = Rarity.epic.try(:id) unless self.max_rarity_id.present?
+  end
+
+  def default_battle_chance
+    self.battle_chance = 5 unless self.battle_chance.present?
   end
   
 end
