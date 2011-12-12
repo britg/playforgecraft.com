@@ -206,9 +206,9 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
       
     if @refOre and not @swapOre
       if @forgeable = @refOre.get("forgeable")
-        rand = Math.floor(Math.random()*5)
-        console.log("Active Forge roll is " + rand)
-        if true
+        rand = Math.floor(Math.random()*10)
+        # console.log("Active Forge roll is " + rand)
+        if rand == 2
           activeForgeView.start()
         else
           @forgeable.forge()

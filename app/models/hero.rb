@@ -92,23 +92,23 @@ class Hero < ActiveRecord::Base
 
   def calculate_attack
     if warrior?
-      weapon1.try(:attack)||0
+      Item::MIN_ATTACK + (weapon1.try(:attack)||0)
     else
-      (weapon1.try(:attack)||0) + (weapon2.try(:attack)||0)
+      Item::MIN_ATTACK + (weapon1.try(:attack)||0) + (weapon2.try(:attack)||0)
     end
   end
 
   def calculate_defense
     if warrior?
-      (weapon2.try(:defense)||0) + (armor.try(:defense)||0) + (leggings.try(:defense)||0)
+      Item::MIN_DEFENSE + (weapon2.try(:defense)||0) + (armor.try(:defense)||0) + (leggings.try(:defense)||0)
     else
-      (armor.try(:defense)||0) + (leggings.try(:defense)||0)
+      Item::MIN_DEFENSE + (armor.try(:defense)||0) + (leggings.try(:defense)||0)
     end
   end
 
   def default_stats
-    self.attack = 10
-    self.defense = 20
+    self.attack = Item::MIN_ATTACK
+    self.defense = Item::MIN_DEFENSE
   end
 
   def create_slots
