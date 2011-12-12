@@ -1,4 +1,7 @@
 class Item < ActiveRecord::Base
+
+  MIN_ATTACK = 10
+  MIN_DEFENSE = 20
   
   belongs_to :genre
   belongs_to :classification
@@ -107,11 +110,11 @@ class Item < ActiveRecord::Base
             end
             
             if item.weapon?
-              item.attack_min = ((rarity.rank+1)*(ore.rank+1)*classification.id)*1.8
-              item.attack_max = ((rarity.rank+1)*(ore.rank+1)*classification.id)*3.6
+              item.attack_min = MIN_ATTACK + item.rating*1.8
+              item.attack_max = MIN_ATTACK + item.rating*3.6
             else
-              item.defense_min = ((rarity.rank+1)*(ore.rank+1)*classification.id)*2.6
-              item.defense_max = ((rarity.rank+1)*(ore.rank+1)*classification.id)*4.2
+              item.defense_min = MIN_DEFENSE + item.rating*2.6
+              item.defense_max = MIN_DEFENSE + item.rating*4.2
             end
             item.save
           end
@@ -155,6 +158,10 @@ class Item < ActiveRecord::Base
 
   def armor?
     genre.name == 'Armor'
+  end
+
+  def rating
+    ((rarity.rank+1)*(ore.rank+1)*classification.id)
   end
 
   def cost!

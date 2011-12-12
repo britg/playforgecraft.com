@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111211183719) do
+ActiveRecord::Schema.define(:version => 20111212002106) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -246,6 +246,7 @@ ActiveRecord::Schema.define(:version => 20111211183719) do
     t.integer   "mine_id"
     t.string    "forge_id"
     t.string    "battle_id"
+    t.integer   "rating"
   end
 
   add_index "loots", ["action_id"], :name => "index_loots_on_action_id", :unique => true
@@ -254,22 +255,22 @@ ActiveRecord::Schema.define(:version => 20111211183719) do
   add_index "loots", ["item_id"], :name => "index_loots_on_item_id"
   add_index "loots", ["mine_id"], :name => "index_loots_on_mine_id"
   add_index "loots", ["player_id"], :name => "index_loots_on_player_id"
+  add_index "loots", ["rating"], :name => "index_loots_on_rating"
 
   create_table "mines", :force => true do |t|
-    t.integer  "zone_id"
-    t.string   "name"
-    t.string   "description"
-    t.text     "story"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "starting_funds"
-    t.integer  "max_rarity_rank"
-    t.boolean  "requires_funding", :default => true
-    t.integer  "max_rarity_id"
-    t.boolean  "item_id"
-    t.integer  "battle_chance"
-    t.integer  "x"
-    t.integer  "y"
+    t.integer   "zone_id"
+    t.string    "name"
+    t.string    "description"
+    t.text      "story"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "starting_funds"
+    t.boolean   "requires_funding", :default => true
+    t.integer   "max_rarity_id"
+    t.boolean   "item_id"
+    t.integer   "battle_chance"
+    t.integer   "x"
+    t.integer   "y"
   end
 
   add_index "mines", ["zone_id"], :name => "index_mines_on_zone_id"
@@ -301,7 +302,7 @@ ActiveRecord::Schema.define(:version => 20111211183719) do
     t.integer   "zone_id"
     t.integer   "mine_id"
     t.string    "url_name"
-    t.datetime  "last_active_at"
+    t.timestamp "last_active_at"
   end
 
   add_index "players", ["mine_id"], :name => "index_players_on_mine_id"
@@ -311,10 +312,10 @@ ActiveRecord::Schema.define(:version => 20111211183719) do
   add_index "players", ["zone_id"], :name => "index_players_on_zone_id"
 
   create_table "prerequisites", :force => true do |t|
-    t.integer  "mine_id"
-    t.integer  "required_mine_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "mine_id"
+    t.integer   "required_mine_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "prerequisites", ["mine_id"], :name => "index_prerequisites_on_mine_id"
@@ -327,14 +328,14 @@ ActiveRecord::Schema.define(:version => 20111211183719) do
   end
 
   create_table "requirements", :force => true do |t|
-    t.integer  "mine_id"
-    t.integer  "ore_id"
-    t.integer  "classification_id"
-    t.integer  "genre_id"
-    t.integer  "rarity_id"
-    t.integer  "quantity"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "mine_id"
+    t.integer   "ore_id"
+    t.integer   "classification_id"
+    t.integer   "genre_id"
+    t.integer   "rarity_id"
+    t.integer   "quantity"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "requirements", ["mine_id"], :name => "index_requirements_on_mine_id"

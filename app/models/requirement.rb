@@ -14,7 +14,7 @@ class Requirement < ActiveRecord::Base
   end
 
   def description_fields
-    [rarity, ore, classification, genre].compact
+    [rarity.to_s.capitalize, ore, classification, genre].compact
   end
 
   def description

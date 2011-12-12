@@ -58,25 +58,17 @@
     .span-one-third
 
       .section.hero-wrap
-        %h1.heading Vanguard
+        %h1.heading Elite Guard
 
         = render "heroes/heroes", :player => @player, :loot => nil
 
     .span-one-third
       
-      .section.battle-wrap
-        
-        %h1.heading Battles
+      .section
 
-        - if @player.battles.any?
+        %h1.heading Best Loot
 
-          - @player.battles.desc(:created_at).limit(10).each do |battle|
-            = render "battles/battle_stub", :battle => battle, :context_player => @player
-
-        - else
-          
-          %p You have not fought any battles, yet.
-
-  
+        - current_player.loot.order("rating desc").limit(10).each do |loot|
+          = render "items/loot", :loot => loot
 
   .clear

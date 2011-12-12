@@ -1,6 +1,6 @@
 class Loot < ActiveRecord::Base
 
-  default_scope order("id desc").where(:available => true)
+  default_scope where(:available => true)
 
   COMMON_THRESHOLD = 90.0
   ADVANCED_THRESHOLD = 99.0
@@ -23,7 +23,8 @@ class Loot < ActiveRecord::Base
       item = roll classification, ore, accuracy, player, forge
       return nil unless item
 
-      loot = Loot.new( :item => item, 
+      loot = Loot.new( :item => item,
+                       :rating => item.rating,
                        :player => player, 
                        :forge_id => forge.to_param,
                        :mine_id => player.mine_id )
@@ -60,19 +61,7 @@ class Loot < ActiveRecord::Base
     end
 
     def best item
-      scope = Loot.scoped
-      scope = scope.of_item item
-
-      if item.weapon?
-        scope = scope.order("attack desc")
-      else
-        scope = scope.order("defense desc")
-      end
-
-      scope.each do |loot|
-        return loot unless loot.equipped?
-      end
-      scope.first
+      of_item(item).order("rating desc").first
     end
 
     def random_battle? forge
