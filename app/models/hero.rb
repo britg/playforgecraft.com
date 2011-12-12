@@ -8,6 +8,7 @@ class Hero < ActiveRecord::Base
   validates_presence_of :job
   validates_presence_of :player
 
+  before_create :default_stats
   after_create :create_slots
 
   class << self
@@ -103,6 +104,11 @@ class Hero < ActiveRecord::Base
     else
       (armor.try(:defense)||0) + (leggings.try(:defense)||0)
     end
+  end
+
+  def default_stats
+    self.attack = 10
+    self.defense = 20
   end
 
   def create_slots
