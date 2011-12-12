@@ -1,0 +1,31 @@
+#tooltips
+
+  %h1 Codex
+
+  .ores
+
+    %h2 Ores
+
+    %table
+
+      %tr
+
+        - Ore.defaults.each do |ore|
+          %td
+            %h4= ore
+            = image_tag(ore.tile.url(:normal))
+            
+
+  .classifications
+
+    %h2 Item Classes
+
+    %table
+
+      %tr
+
+        - Classification.all.each do |c|
+          %td
+
+            %h4= c
+            = image_tag(c.default_icon.url(:tiny))

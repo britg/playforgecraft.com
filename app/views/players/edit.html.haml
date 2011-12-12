@@ -2,6 +2,10 @@
   .settings-menu
 
     %ul
+      
+      %li 
+        = link_to "Codex", tooltips_path, :rel => "tooltip", "data-external" => true, :class => "btn primary"
+
       %li
         = link_to "Refresh", "javascript:window.location.reload();", "data-external" => true, :class => "btn primary"
 
@@ -11,3 +15,8 @@
       
       %li
         = link_to "Logout", logout_path, "data-external" => true, :class => "btn danger"
+
+
+:javascript
+
+  tooltipView.bindTooltips()

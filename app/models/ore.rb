@@ -79,6 +79,10 @@ class Ore < ActiveRecord::Base
       Ore.find_by_name("Dragonsteel")
     end
 
+    def defaults
+      Ore.where(:name => DEFAULTS)
+    end
+
   end
 
   def to_param

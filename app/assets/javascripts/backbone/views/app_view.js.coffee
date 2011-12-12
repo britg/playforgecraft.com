@@ -32,6 +32,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
     @startMap() if path.match '/map'
 
     @bindPopovers()
+    tooltipView.bindTooltips()
 
     $('abbr.timeago').timeago()
   

@@ -63,6 +63,10 @@ ForgeCraft::Application.routes.draw do
     resource :mine, :only => [:update]
   end
 
+  # Tooltips
+
+  resources :tooltips, :only => [:index, :show]
+
   get "ladder", :to => "players#index"
   get 'menu', :to => "players#edit", :as => :menu
   get ':playername', :to => "players#show", :as => :player

@@ -26,7 +26,8 @@ $ ->
   window.menuView     = new ForgeCraft.Views.MenuView
   window.equipperView = new ForgeCraft.Views.EquipperView
   window.armoryView   = new ForgeCraft.Views.ArmoryView
-  window.mapView      = new ForgeCraft.Views.MapView()
+  window.mapView      = new ForgeCraft.Views.MapView
+  window.tooltipView  = new ForgeCraft.Views.TooltipView
 
   window.appView      = new ForgeCraft.Views.AppView
 

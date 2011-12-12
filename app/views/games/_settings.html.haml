@@ -2,6 +2,8 @@
   .settings-menu
 
     %ul
+      %li 
+        = link_to "Codex", tooltips_path, :rel => "tooltip"
       %li
         = link_to "Refresh", "javascript:window.location.reload();"
       %li
@@ -9,4 +11,6 @@
       %li
         = link_to "Armory", armory_index_path
 
-    
+:javascript
+
+  tooltipView.bindTooltips()
