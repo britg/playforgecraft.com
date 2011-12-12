@@ -68,7 +68,7 @@
 
         %h1.heading Best Loot
 
-        - current_player.loot.order("rating desc").limit(10).each do |loot|
+        - @player.loot.order("rating desc").limit(10).each do |loot|
           = render "items/loot", :loot => loot
 
   .clear
