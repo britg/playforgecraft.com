@@ -206,9 +206,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
       
     if @refOre and not @swapOre
       if @forgeable = @refOre.get("forgeable")
-        rand = Math.floor(Math.random()*10)
-        # console.log("Active Forge roll is " + rand)
-        if rand == 2
+        if activeForgeView.shouldTrigger()
           activeForgeView.start()
         else
           @forgeable.forge()
@@ -216,7 +214,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @stopWatchingMovement()
 
   forgeWithAccuracy: (accuracy) ->
-    @forgeable.forge() if @forgeable?
+    @forgeable.forge(accuracy) if @forgeable?
 
   stopWatchingMovement: ->
     return unless @watching

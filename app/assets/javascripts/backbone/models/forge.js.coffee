@@ -32,13 +32,15 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
       classification: @get("classification")
       ore: @get("ore")
       ore_count: @get("ores").length
-      accuracy: 100
+      accuracy: @get("accuracy")
 
-  forge: ->
+  forge: (accuracy) ->
     return if @forging
     @forging = true
+    @set accuracy: accuracy
     Ores.clearForgeables()
     @markOres()
+    console.log "Forging with accuracy", @get("accuracy")
     @save @toJSON, success: @convertToLootIfPurchased
     Crafty.audio.play("forge")
 

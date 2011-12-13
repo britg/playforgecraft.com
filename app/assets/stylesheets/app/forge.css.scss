@@ -189,7 +189,7 @@ html.game.no-touch {
       top: $bar-top;
       left: 156px;*/
       display: block;
-      margin: 20px auto;
+      margin: 25% auto;
       margin-bottom: 10px;
       width: $bar-width;
       height: $bar-height;
@@ -254,6 +254,19 @@ html.game.no-touch {
       color: $highlight-color;
       margin-top: 60px;
       display: none;
+    }
+
+    .message {
+      text-align: center;
+      font-weight: bold;
+      color: $highlight-color;
+      display: block;
+      margin-top: -120px;
+      margin: 0 auto;
+      @include transition-property("font-size");
+      @include transition-duration("0.2s");
+      position: relative;
+      z-index: 10000
     }
   }
 }

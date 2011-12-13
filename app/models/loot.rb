@@ -43,7 +43,8 @@ class Loot < ActiveRecord::Base
     def roll_rarity accuracy=0, forge
       rand        = Random.new
       chance      = rand.rand(1000).to_f/10.0
-      rarity      = Rarity.common
+
+      rarity = (accuracy.present? and accuracy > 95) ? Rarity.advanced : Rarity.common
 
       if forge.has_rarity?(Rarity.epic) and chance >= EPIC_THRESHOLD
         return Rarity.epic

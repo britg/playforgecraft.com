@@ -7,6 +7,10 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
   initialize: ->
     self = @
     @bind "ForgeCraft:checkpointActivated", @checkpointActivated, @
+    @reset()
+
+  shouldTrigger: ->
+    Math.floor(Math.random()*10) == 1
 
   bar: ->
     $('#bar')
@@ -32,6 +36,7 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
     $(@el).find('#bar-container').html('<div id="bar" />');
     $(@el).find('.checkpoint img').show()
     $(@el).find('.marker').removeClass("activated")
+    $(@el).find('.message').css({fontSize:"100%"}).hide()
 
   start: ->
     @active = yes
@@ -42,8 +47,16 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
       @activateBar()
     , 1000
 
+  accuracy: ->
+    markerPos = $(@el).find('.marker').offset().left
+    barPos = @bar().offset().left + @bar().width()
+
+    console.log "marker position: ", markerPos, "bar position:", barPos
+
+    return (100 - Math.abs(markerPos - barPos))
+
   activateBar: ->
-    $('#bar').removeClass("new").addClass("activated")
+    @bar().removeClass("new").addClass("activated")
     @finishTimeout = setTimeout => 
       @finish() if @active
     , 1500
@@ -76,8 +89,25 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
   finish: ->
     @clearTimeouts()
     return unless @active
+    accuracy = @accuracy()
     @active = no
     @stop()
-    $(@el).fadeOut =>
-      @reset()
-      @trigger "ForgeCraft:activeForgeComplete", 100
+
+    setTimeout =>
+      $(@el).fadeOut =>
+        @reset()
+        @trigger "ForgeCraft:activeForgeComplete", accuracy
+    , 500
+
+    if accuracy > 95
+      @showPerfect()
+
+  showPerfect: ->
+    msg = $(@el).find('.message')
+    
+    msg.html("Perfect!").show()
+    setTimeout =>
+      msg.css fontSize: "800%"
+    , 100
+
+
