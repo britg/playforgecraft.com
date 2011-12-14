@@ -2,10 +2,9 @@ class Loot < ActiveRecord::Base
 
   default_scope where(:available => true)
 
-  COMMON_THRESHOLD = 90.0
-  ADVANCED_THRESHOLD = 99.0
-  RARE_THRESHOLD = 99.9
-  EPIC_THRESHOLD = 100.0
+  ADVANCED_THRESHOLD = 90.0
+  RARE_THRESHOLD = 94.9
+  EPIC_THRESHOLD = 99.0
 
   belongs_to :player
   belongs_to :game
@@ -84,7 +83,7 @@ class Loot < ActiveRecord::Base
       :name => item.name,
       :icon_url => item.icon_url,
       :type => to_css_classes,
-      :param => item.to_param,
+      :param => item.to_param, 
       :cost => item.cost!
     }
   end
@@ -119,8 +118,16 @@ class Loot < ActiveRecord::Base
 
   def set_stats accuracy
     # STUB
-    self.attack = self.item.attack_max
-    self.defense = self.item.defense_max
+    accuracy = Random.new.rand(50) unless accuracy
+    self.attack = stat_by_accuracy(item.attack_min, item.attack_max, accuracy)
+    self.defense = stat_by_accuracy(item.defense_min, item.defense_max, accuracy)
+  end
+
+  def stat_by_accuracy(min, max, accuracy)
+    return nil unless min.present? and max.present?
+    diff = max - min
+    pc = (accuracy.to_f/100.0) * diff
+    return (min + pc).round
   end
 
   def purchase
