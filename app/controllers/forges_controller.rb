@@ -9,6 +9,7 @@ class ForgesController < ApplicationController
     @forge = Forge.where(:_id => params[:id]).first
     redirect_to(player_path(current_player)) and return unless @forge.present?
     @loot = @forge.loot.limit(20)
+    current_player.update_attributes(:mine_id => @forge.mine_id)
   end
 
   def set_nav

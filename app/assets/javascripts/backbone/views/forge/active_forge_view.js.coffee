@@ -10,7 +10,7 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
     @reset()
 
   shouldTrigger: ->
-    Math.floor(Math.random()*10) == 1
+    Math.floor(Math.random()*7) == 1
 
   bar: ->
     $('#bar')
@@ -101,6 +101,9 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
 
     if accuracy > 95
       @showPerfect()
+
+    if accuracy > 90
+      @unlockBoard()
 
   showPerfect: ->
     msg = $(@el).find('.message')

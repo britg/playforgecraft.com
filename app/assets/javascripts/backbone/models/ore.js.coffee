@@ -131,7 +131,7 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
       
       if response.purchased
         oreOne.useMovement()
-        # oreTwo.useMovement()
+        oreTwo.useMovement()
       else
         Ores.swapOres(oreOne, oreTwo)
         forge.trigger "ForgeCraft:NeedMoreCoins"
