@@ -12,10 +12,10 @@
         %th Score
         %th Player
         %th Forges Complete
+        %th Battles Won
         %th Items
         %th Rares
         %th Epics
-        %th Last Active
       
       - Player.ladder.each_with_index do |player, i|
 
@@ -29,6 +29,10 @@
             (#{player.forge_percent}%)
 
           %td.count
+            = player.battle_win_count
+            (#{player.battle_win_percent}%)
+
+          %td.count
             = player.item_count
             (#{player.item_percent}%)
 
@@ -39,6 +43,3 @@
           %td.count.epic
             = player.epic_count
             (#{player.epic_percent}%)
-
-          %td.count
-            = timeago(player.last_active_at)

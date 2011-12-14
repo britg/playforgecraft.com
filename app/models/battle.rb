@@ -51,6 +51,10 @@ class Battle
       desc("created_at")
     end
 
+    def won_by(player_id)
+      where(:winner_id => player_id)
+    end
+
   end
 
   def serializable_hash(opts={})

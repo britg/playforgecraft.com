@@ -15,6 +15,11 @@
           Forge Complete
           (#{@player.forge_percent}%)
 
+        %td.mines
+          %span.count= @player.battle_win_count
+          Battles Won
+          (#{@player.battle_win_percent}%)
+
         %td.total
           %span.count= @player.item_count
           Total Items
@@ -46,7 +51,7 @@
           
           .clear
       
-        - else
+        - elsif @player == current_player
           %p 
             = link_to "Visit the Map to Start Forging", map_index_path, :class => 'btn primary'
 

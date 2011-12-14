@@ -119,6 +119,14 @@ class Player < ActiveRecord::Base
     @forge_percent ||= (forge_count.to_f / Mine.count.to_f * 100).round rescue 0
   end
 
+  def battle_win_count
+    @battle_win_count ||= battles.won_by(self.id).count
+  end
+
+  def battle_win_percent
+    @battle_win_percent ||= (battle_win_count.to_f / battles.count * 100).round rescue 0
+  end
+
   def score
     item_count + (rare_count * 16) + (epic_count * 57) + (forge_count * 76)
   end
