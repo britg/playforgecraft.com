@@ -27,7 +27,7 @@ body {
 }
 
 #new_player {
-  margin-top: 200px;
+  margin-top: 215px;
   width: 330px;
   padding-left: 0;
 
@@ -48,9 +48,20 @@ body {
 
 #more {
   padding-top: 20px;
+  color: $highlight-color;
 
   h1 {
     font-weight: bold;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.5em;
+
+    &.more {
+      font-size: 14px;
+      margin-bottom: 1.5em;
+    }
   }
 }
 

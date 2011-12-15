@@ -10,7 +10,12 @@ $ ->
 
   $('.start').click ->
     register()
+    return false
 
   $('#new_player').submit ->
     register()
+    return false
+
+  $('.log-in-link').click ->
+    $.facebox ajax: '/login'
     return false

@@ -4,7 +4,7 @@
     
     = form_for @new_player, :html => {:class => "form-stacked"} do |f|
 
-      %h4.lead Match gems to forge loot, equip your guards, and battle enemies everywhere you have a modern web browser.
+      %h4.lead Match ores to forge loot, equip your guards, and battle enemies everywhere you have a modern web browser.
 
       .clearfix
         = f.label :name, "Choose your player name:"
@@ -22,12 +22,31 @@
 
       .span-one-third
 
-        %h1 Forge
+        %p.lead
+          %strong More than just match-3
+        %p.more
+          Forgecraft combines the match-3 gameplay you know and love with an intuitive pattern system. Learn the item patterns and use your puzzle solving skills to complete levels.
+        
+        %p.more 
+          Use rarer ores to craft more powerful items, and master the Active Forge system to craft
+          %span.advanced advanced,
+          %span.rare rare,
+          and
+          %span.epic epic
+          items.
 
       .span-one-third
 
-        %h1 Battle
+        %p.lead
+          %strong Forging can be dangerous
+        %p.more
+          Fortunately, you can reserve your best loot for your Elite Guard. Keep your guards well equipped as bandits, thieves, and...
+          %em more powerful
+          enemies await you in the mines.
 
       .span-one-third
 
-        %h1 Explore
+        %p.lead
+          %strong Explore the world of Eldarus
+        %p.more 
+          Your adventures will lead you through a rich and mysterious world scarred by The Surge. Discover the secrets behind The Empire's power and journey to the ultimate forge atop the crystalized peaks of The Spire.
