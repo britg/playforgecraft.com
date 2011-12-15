@@ -54,6 +54,12 @@ body {
     font-weight: bold;
   }
 
+  img.shot {
+    @include border-radius(5px);
+    @include inset;
+    margin-bottom: 20px;
+  }
+
   p {
     font-size: 16px;
     line-height: 1.5em;
@@ -69,4 +75,14 @@ body {
   .game-title {
     margin-left: 0;
   }
+}
+
+#playnow {
+  text-align: center;
+  margin: 10px 0 50px 0;
+
+  .endplay {
+    font-size: 200%;
+  }
+
 }

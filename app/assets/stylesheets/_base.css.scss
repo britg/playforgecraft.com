@@ -68,6 +68,10 @@ $sidebar-width: 250px;
   color: darken($advanced-color, 20%) !important;
 }
 
+@mixin forge {
+  color: $forge-color;
+}
+
 @mixin rarity {
 
   .common {
@@ -158,6 +162,14 @@ $sidebar-width: 250px;
       @include highlighted-text;
     }
 
+  }
+
+  .guard {
+    @include warrior;
+  }
+
+  .forge {
+    @include forge;
   }
 
   label {

@@ -4,7 +4,7 @@
     
     = form_for @new_player, :html => {:class => "form-stacked"} do |f|
 
-      %h4.lead Match ores to forge loot, equip your guards, and battle enemies everywhere you have a modern web browser.
+      %h4.lead Match ores to forge items, equip your guards, and battle enemies everywhere you have a modern web browser.
 
       .clearfix
         = f.label :name, "Choose your player name:"
@@ -12,7 +12,7 @@
           = f.text_field :name
       
       .submit-wrap
-        = link_to "Get Started &rarr;".html_safe, register_path, :class => "btn primary start"
+        = link_to "Play the Preview &rarr;".html_safe, register_path, :class => "btn primary start"
 
 #more
 
@@ -24,6 +24,9 @@
 
         %p.lead
           %strong More than just match-3
+
+        = image_tag "home-forging.jpg", :class => "shot"
+
         %p.more
           Forgecraft combines the match-3 gameplay you know and love with an intuitive pattern system. Learn the item patterns and use your puzzle solving skills to complete levels.
         
@@ -39,8 +42,13 @@
 
         %p.lead
           %strong Forging can be dangerous
+
+        = image_tag "home-loot.jpg", :class => "shot"
+
         %p.more
-          Fortunately, you can reserve your best loot for your Elite Guard. Keep your guards well equipped as bandits, thieves, and...
+          Fortunately, you can reserve your best loot for your 
+          = "<span class=\"guard\">Elite Guard</span>.".html_safe
+          Keep your guards well equipped as bandits, rivals, and...
           %em more powerful
           enemies await you in the mines.
 
@@ -48,5 +56,17 @@
 
         %p.lead
           %strong Explore the world of Eldarus
+
+        = image_tag "home-map.jpg", :class => "shot"
+
         %p.more 
-          Your adventures will lead you through a rich and mysterious world scarred by The Surge. Discover the secrets behind The Empire's power and journey to the ultimate forge atop the crystalized peaks of The Spire.
+          Your adventures will lead you through a rich and mysterious world scarred by 
+          = "<span class=\"forge\">The Surge</span>.".html_safe
+          Discover the secrets behind The Empire's power and journey to the ultimate forge atop the crystalized peaks of 
+          = "<span class=\"forge\">The Spire</span>.".html_safe
+
+#playnow
+
+  .container
+  
+    = link_to "Play the Preview &rarr;".html_safe, register_path, :class => "btn primary start endplay"
