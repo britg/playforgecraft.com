@@ -1,4 +1,4 @@
-#tooltips
+#codex
 
   %h1 Codex
 
@@ -29,3 +29,5 @@
 
             %h4= c
             = image_tag(c.default_icon.url(:tiny))
+
+            = image_tag("codex/#{c.to_param.downcase}-pattern.png")

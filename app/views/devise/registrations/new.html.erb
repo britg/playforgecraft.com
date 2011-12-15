@@ -10,7 +10,7 @@
       <%= devise_error_messages! %>
 
       <fieldset>
-      <legend>Please Register</legend>
+      <legend>Please create an account</legend>
 
       <%= f.fields_for :player do |p| %>
 
@@ -56,3 +56,20 @@
 
   </div>
 </div>
+
+<script>
+    
+    var playerName = $('#user_player_attributes_name').val();
+    
+    if (playerName) {
+      $('#user_email').focus();
+    } else {
+      $('#user_player_attributes_name').focus();
+    }
+
+    $('.actions').find('a').click(function () {
+      $.facebox({ ajax: "/login" });
+      return false;
+    });
+
+</script>
