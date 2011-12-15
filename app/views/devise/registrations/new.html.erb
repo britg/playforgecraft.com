@@ -46,6 +46,21 @@
         </div>
       </div>
 
+      <% if devise_mapping.rememberable? -%>
+        <div class="input">
+          
+          <ul class="inputs-list">
+            <li>
+              <label>
+                <%= f.check_box :remember_me, :checked => true %>
+                <span>Remember me?</span>
+              </label>
+            </li>
+          </ul>
+
+        </div>
+      <% end -%>
+
       <div class="actions">
         <%= f.submit "Play Now &rarr;".html_safe, :class => "btn primary" %>
         <br />
