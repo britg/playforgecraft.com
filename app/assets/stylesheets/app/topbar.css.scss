@@ -33,6 +33,15 @@
       text-decoration: none;
     }
   }
+
+  .preview {
+    font-size: 10px;
+    font-weight: normal;
+    padding: 3px;
+    margin-left: -20px;
+    position: relative;
+    top: -14px;
+  }
 }
 
 #loading {
