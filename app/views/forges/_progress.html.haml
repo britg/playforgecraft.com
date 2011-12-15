@@ -24,4 +24,6 @@
         %li{ :id => dom_id(prog), :class => ("complete" if prog.complete?) }
           %span{ :id => dom_id(prog, "quantity") }= prog.quantity
           = "/ #{prog.requirement.to_s}"
-          = link_to image_tag("tooltip.png"), tooltips_path, :rel => "tooltip"
+
+          - unless forge.requires_funding?
+            = link_to image_tag("tooltip.png"), tooltips_path, :rel => "tooltip"
