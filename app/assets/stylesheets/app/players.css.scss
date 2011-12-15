@@ -26,6 +26,22 @@
     font-size: 500%;
     border-bottom: solid 1px $highlight-color;
     margin-bottom: 0;
+    line-height: 1em;
+  }
+
+  .score {
+    float: right;
+    margin-top: 33px;
+
+    .stat {
+      font-size: 150%;
+    }
+
+    .value {
+      font-size: 300%;
+      color: $highlight-color;
+      font-weight: bold;
+    }
   }
 
   table.completion {

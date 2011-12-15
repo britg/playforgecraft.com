@@ -2,6 +2,10 @@
 
   .heading
 
+    .score
+      %span.stat Score
+      %span.value= @player.score
+
     %h1.player= player_slug(@player)
 
   %table.completion

@@ -128,7 +128,7 @@ class Player < ActiveRecord::Base
   end
 
   def score
-    item_count + (rare_count * 16) + (epic_count * 57) + (forge_count * 76)
+    item_count + (rare_count * 16) + (epic_count * 57) + (forge_count * 76) + (battle_win_count*50)
   end
 
   def purchase!(cost)
