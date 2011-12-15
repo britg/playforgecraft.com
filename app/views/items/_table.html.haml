@@ -35,8 +35,8 @@
               = link_to image_tag("loot/forged.png", :class => "icon"), loot_path(found), :"data-id" => found.id, :class => "launch-equipper", :"data-external" => true
 
           %td.name
-            = link_to image_tag(item.icon.url(:tiny), :class => "icon"), item_path(item)
-            = link_to item, armory_path(item), :class => item.rarity
+            = image_tag(item.icon.url(:tiny), :class => "icon")
+            %span{ :class => item.rarity }= item
 
           %td.region= item.zone
 
