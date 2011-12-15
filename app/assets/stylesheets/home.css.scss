@@ -27,12 +27,18 @@ body {
 }
 
 #new_player {
-  margin-top: 225px;
-  width: 230px;
+  margin-top: 200px;
+  width: 330px;
   padding-left: 0;
 
   label {
     @include highlighted-text;
+  }
+
+  .lead {
+    line-height: 1.3em;
+    margin-bottom: 1em;
+    font-weight: bold;
   }
 }
 

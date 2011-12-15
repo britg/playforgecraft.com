@@ -4,13 +4,15 @@
     
     = form_for @new_player, :html => {:class => "form-stacked"} do |f|
 
+      %h4.lead Match gems to forge loot, equip your guards, and battle enemies everywhere you have a modern web browser.
+
       .clearfix
         = f.label :name, "Choose your player name:"
         .input
           = f.text_field :name
       
       .submit-wrap
-        = link_to "Play Now &rarr;".html_safe, register_path, :class => "btn primary start"
+        = link_to "Get Started &rarr;".html_safe, register_path, :class => "btn primary start"
 
 #more
 
@@ -28,4 +30,4 @@
 
       .span-one-third
 
-        %h1 Conquer
+        %h1 Explore
