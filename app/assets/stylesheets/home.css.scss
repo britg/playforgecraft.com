@@ -1,0 +1,48 @@
+ /*
+ *= require _base
+ *= require lib/bootstrap
+ *= require app/topbar
+ *= require_self
+ *= require lib/facebox
+ *= require app/users
+ */
+ 
+@import "base";
+
+body {
+  @include forgecraft;
+}
+
+.log-in-link {
+  font-weight: bold;
+  @include highlighted-text;
+  float: right;
+  margin-top: 10px;
+}
+
+#main-message {
+  background: $background-color image_url('home.jpg') center no-repeat;
+  border-bottom: solid 1px $dark-border-color;
+  height: 440px;
+}
+
+#new_player {
+  margin-top: 225px;
+  width: 230px;
+
+  label {
+    @include highlighted-text;
+  }
+}
+
+#player_name {
+  margin-bottom: 10px;
+}
+
+#more {
+  padding-top: 20px;
+
+  h1 {
+    font-weight: bold;
+  }
+}

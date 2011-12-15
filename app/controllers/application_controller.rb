@@ -29,6 +29,7 @@ class ApplicationController < ActionController::Base
 
   def detect_layout
     return nil if request.xhr?
+    return "home" if devise_controller?
     "application"
   end
 

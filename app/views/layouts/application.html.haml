@@ -17,38 +17,30 @@
   %body{ :class => params[:controller] }
 
     .topbar
-
-      - if current_player
       
-        #logo-wrap
-          / = link_to image_tag("logo.png", :id => "logo"), root_path
-          %h1.game-title 
-            = link_to image_tag("logo-icon.png", :class => "icon"), root_path
-            = link_to "Forgecraft", root_path, :class => "title"
+      = render "shared/logo"
 
       #loading
         = image_tag "loading.gif"
 
-      - if current_player
+      #navigation
+        
+        %ul.pages
 
-        #navigation
+          %li
+            = link_to "Profile", player_path(current_player), :class => "profile nav-item #{selected('profile')}", :title => "Profile", :"data-placement" => "below"
           
-          %ul.pages
+          %li
+            = link_to "Map", map_index_path, :class => "map nav-item #{selected('map')}", :title => "Map", :"data-placement" => "below"
 
-            %li
-              = link_to "Profile", player_path(current_player), :class => "profile nav-item #{selected('profile')}", :title => "Profile", :"data-placement" => "below"
-            
-            %li
-              = link_to "Map", map_index_path, :class => "map nav-item #{selected('map')}", :title => "Map", :"data-placement" => "below"
+          %li
+            = link_to "Armory", armory_index_path, :class => "armory nav-item #{selected('armory')}", :title => "Armory", :"data-placement" => "below"
 
-            %li
-              = link_to "Armory", armory_index_path, :class => "armory nav-item #{selected('armory')}", :title => "Armory", :"data-placement" => "below"
+          %li
+            = link_to "Ladder", ladder_path, :class => "ladder nav-item #{selected('ladder')}", :title => "Ladder", :"data-placement" => "below"
 
-            %li
-              = link_to "Ladder", ladder_path, :class => "ladder nav-item #{selected('ladder')}", :title => "Ladder", :"data-placement" => "below"
-
-            %li
-              = link_to "Menu", menu_path, :class => "menu nav-item", :title => "Menu", :"data-placement" => "below"
+          %li
+            = link_to "Menu", menu_path, :class => "menu nav-item", :title => "Menu", :"data-placement" => "below"
 
     #content
     

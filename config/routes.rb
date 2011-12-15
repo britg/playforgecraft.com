@@ -19,7 +19,7 @@ ForgeCraft::Application.routes.draw do
 
   resources :users, :only => [:index]
   root :to => "users#index"
-  get "about", :to => "users#index", :as => :about
+  get "home", :to => "users#home", :as => :home
 
   # Map
   resources :map, :controller => "mines", :only => [:index, :show]

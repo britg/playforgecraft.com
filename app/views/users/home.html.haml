@@ -1,0 +1,31 @@
+#main-message
+
+  .container
+    
+    = form_for @new_player, :html => {:class => "form-stacked"} do |f|
+
+      .clearfix
+        = f.label :name, "Choose your player name:"
+        .input
+          = f.text_field :name
+      
+      .submit-wrap
+        = link_to "Play Now &rarr;".html_safe, register_path, :class => "btn primary start"
+
+#more
+
+  .container
+
+    .row
+
+      .span-one-third
+
+        %h1 Forge
+
+      .span-one-third
+
+        %h1 Battle
+
+      .span-one-third
+
+        %h1 Conquer

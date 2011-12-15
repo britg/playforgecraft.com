@@ -10,7 +10,7 @@
       <%= devise_error_messages! %>
 
       <fieldset>
-      <legend>Sign Up</legend>
+      <legend>Please Register</legend>
 
       <%= f.fields_for :player do |p| %>
 
@@ -20,7 +20,7 @@
         <div class="clearfix">
           <%= p.label :name, "Player Name" %>
           <div class="input">
-            <%= p.text_field :name, :class => "required" %>
+            <%= p.text_field :name, :value => params[:name], :class => "required" %>
           </div>
         </div>
       <% end %>
@@ -46,10 +46,13 @@
         </div>
       </div>
 
-      <div class="actions"><%= f.submit "Sign up", :class => "btn primary" %></div>
+      <div class="actions">
+        <%= f.submit "Play Now &rarr;".html_safe, :class => "btn primary" %>
+        <br />
+        <br />
+        <%= render :partial => "devise/shared/links" %>
+      </div>
     <% end %>
-
-    <%= render :partial => "devise/shared/links" %>
 
   </div>
 </div>

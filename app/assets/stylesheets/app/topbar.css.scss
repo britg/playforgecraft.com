@@ -1,0 +1,156 @@
+@import "base";
+
+.topbar {
+  background: #222 image_url("topbar-bg.jpg");
+  /*@include background(linear-gradient(top left, #222, #000),
+                      radial-gradient(#000, #222 100px)); */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+#logo-wrap {
+  float: left;
+  
+  #logo {
+    height: $profile-height;
+  }
+
+  .game-title {
+    margin-left: 10px;
+    text-shadow: #000 1px 1px 1px;
+    font-weight: bold;
+    color: $epic-color;
+
+    .icon {
+      height: 36px;
+      vertical-align: -9px;
+    }
+
+    .title {
+      font-size: 90%;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+#loading {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 49%;
+}
+
+#profile {
+  width: $sidebar-width + 5px;
+  height: $profile-height;
+  padding: 10px 0 0 0;
+
+  .inner {
+    padding: 0 10px;
+  }
+
+  .welcome {
+    float: left;
+  }
+
+  .actions {
+    float: right;
+  }
+}
+
+#navigation {
+  position: fixed;
+  top: 0;
+  right: 10px;
+  width: 236px;
+  height: $profile-height;
+  margin: 0;
+  padding: 0;
+
+  ul.pages {
+    margin: 0;
+    margin-left: 6px;
+    padding: 0;
+
+    li {
+      display: inline;
+      float: left;
+
+      a.nav-item {
+        display: block;
+        padding: 0;
+        text-decoration: none;
+        float: left;
+        width: 46px;
+        height: $profile-height;
+        text-indent: -2000em;
+        background: image_url('menu/nav.png') center top no-repeat;
+
+        &.profile {
+          
+          background-position: center -40px;
+
+          &.selected {
+            background-position: center top;          
+          }
+        }
+
+        &.forge {
+          
+          background-position: center -120px;
+
+          &.selected {
+            background-position: center -80px;          
+          }
+        }
+
+        &.armory {
+          
+          background-position: center -200px;
+
+          &.selected {
+            background-position: center -160px;          
+          }
+        }
+
+        &.battle {
+          
+          background-position: center -280px;
+
+          &.selected {
+            background-position: center -240px;          
+          }
+        }
+
+        &.menu {
+          
+          background-position: center -360px;
+
+          &.selected {
+            background-position: center -320px;          
+          }
+        }
+
+        &.map {
+          
+          background-position: center -440px;
+
+          &.selected {
+            background-position: center -400px;          
+          }
+        }
+
+        &.ladder {
+          
+          background-position: center -520px;
+
+          &.selected {
+            background-position: center -480px;          
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,44 +1,4 @@
-@import "blueprint";
 @import "base";
-
-#splash-page {
-
-  display: block;
-  margin: 100px auto 0 auto;
-  width: 500px;
-  @include clearfix;
-
-  #join-mailing-list {
-    text-align: center;
-  }
-
-  #tagline {
-    margin-top: 20px;
-    margin-bottom: 30px;
-  }
-
-  #teaser {
-    @include column(12, true);
-    text-align: right;
-  }
-
-  #tease-image {
-    margin-top: 20px;
-  }
-
-  #new_email {
-    margin-bottom: 20px;
-
-    input {
-      display: inline;
-    }
-
-    #email_address {
-      width: 200px;
-    }
-  }
-
-}
 
 #login-page, #register-page {
   display: block;
