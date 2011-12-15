@@ -19,7 +19,6 @@ class Item < ActiveRecord::Base
   validates_presence_of :rarity
 
   before_validation :default_genre
-  before_save :ensure_item_set_rarity
   after_destroy :remove_loot
 
   has_attached_file :icon,
@@ -92,7 +91,7 @@ class Item < ActiveRecord::Base
 
     def seed zone
       Ore.all.each do |ore|
-        Rarity.all.each do |rarity|
+        Rarity.defaults.each do |rarity|
           Classification.all.each do |classification|
             
             item = Item.where(  :ore_id => ore.id, 
@@ -113,8 +112,8 @@ class Item < ActiveRecord::Base
               item.attack_min = MIN_ATTACK + item.rating*1.8
               item.attack_max = MIN_ATTACK + item.rating*3.6
             else
-              item.defense_min = MIN_DEFENSE + item.rating*2.6
-              item.defense_max = MIN_DEFENSE + item.rating*4.2
+              item.defense_min = MIN_DEFENSE + item.rating*2.2
+              item.defense_max = MIN_DEFENSE + item.rating*4.0
             end
             item.save
           end
@@ -161,7 +160,7 @@ class Item < ActiveRecord::Base
   end
 
   def rating
-    ((rarity.rank+1)*(ore.rank+1)*classification.id)
+    (((rarity.rank+1)*2)*((ore.rank+1))*classification.id)
   end
 
   def cost!
@@ -180,14 +179,6 @@ class Item < ActiveRecord::Base
 
   def default_genre
     self.genre = self.classification.try(:genre)
-  end
-
-  def ensure_item_set_rarity
-    if self.item_set_id.present?
-      self.rarity = Rarity.of(:set)
-    elsif self.rarity.set?
-      self.rarity = Rarity.of(:advanced)
-    end
   end
 
 end

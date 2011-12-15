@@ -43,6 +43,10 @@ class Rarity < ActiveRecord::Base
       @epic ||= find_by_name("Epic")
     end
 
+    def defaults
+      [common, advanced, rare, epic]
+    end
+
   end
 
   def to_css_class
