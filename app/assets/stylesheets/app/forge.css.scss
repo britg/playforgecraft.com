@@ -91,6 +91,10 @@ html.game.no-touch {
       background: image_url("tile-sprite.png") left -128px; 
     }
 
+    &.magite {
+      background: image_url("tile-sprite.png") left -128px; 
+    }
+
     &.mithril {
       background: image_url("tile-sprite.png") left -192px;
     }

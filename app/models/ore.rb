@@ -2,7 +2,7 @@ class Ore < ActiveRecord::Base
 
   default_scope order("rank asc")
 
-  DEFAULTS = ["Bone", "Bronze", "Iron", "Gold", "Mithril", "Dragonsteel"]
+  DEFAULTS = ["Bone", "Bronze", "Iron", "Magite", "Mithril", "Dragonsteel"]
   UNIT = 100.0/21.0
   CHANCES = [6.0*UNIT, 5.0*UNIT, 4.0*UNIT, 3.0*UNIT, 2.0*UNIT, 1.0*UNIT]
 
@@ -21,6 +21,10 @@ class Ore < ActiveRecord::Base
 
   # Class Methods
   class << self
+
+    def find ident
+      find_by_id(ident) || find_by_name(ident.singularize)
+    end
     
     def to_select_options
       all.map{ |o| [o.name, o.id] }
