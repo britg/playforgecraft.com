@@ -70,11 +70,7 @@ class ForgeCraft.Views.LootView extends Backbone.View
     battle = new ForgeCraft.Models.Battle id: ident
 
     setTimeout ->
-      if confirm("(Placeholder) You've been attacked! Defend yourself or flee?")
-        forgeView.startBattle(ident)
-      else
-        alert("(Placeholder) The bandits stole 200g and [Item]!");
-        battle.forfeit()
+      alert ("(Placeholder) You've been attacked! This is where a battle would start, if battles were in the game! Just make some clanging and slashing noises for now...")
     , 1000
 
   fleeBattle: ->
