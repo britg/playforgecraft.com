@@ -70,6 +70,7 @@ class ForgeCraft.Views.LootView extends Backbone.View
     battle = new ForgeCraft.Models.Battle id: ident
 
     setTimeout ->
+      battle.forfeit()
       alert ("(Placeholder) You've been attacked! This is where a battle would start, if battles were in the game! Just make some clanging and slashing noises for now...")
     , 1000
 
