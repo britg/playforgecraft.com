@@ -27,6 +27,21 @@ table {
 #content {
 }
 
+#splash-message {
+  position: absolute;
+  width: 100%;
+  overflow: visible;
+  top: 30%;
+  text-align: center;
+  font-weight: bold;
+  color: $highlight-color;
+  display: none;
+  margin: 0 auto;
+  @include transition-property("font-size");
+  @include transition-duration("0.2s");
+  z-index: 10000
+}
+
 #footer {
 }
 

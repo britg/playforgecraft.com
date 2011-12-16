@@ -28,6 +28,7 @@ $ ->
   window.armoryView   = new ForgeCraft.Views.ArmoryView
   window.mapView      = new ForgeCraft.Views.MapView
   window.tooltipView  = new ForgeCraft.Views.TooltipView
+  window.splashView   = new ForgeCraft.Views.SplashView el: $('#splash-message').get(0)
 
   window.appView      = new ForgeCraft.Views.AppView
 

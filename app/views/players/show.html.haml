@@ -75,9 +75,15 @@
       
       .section
 
-        %h1.heading Best Loot
+        - if @player.loot.any?
 
-        - @player.loot.order("rating desc").limit(10).each do |loot|
-          = render "items/loot", :loot => loot
+          %h1.heading Exceptional Craft
+
+          .exceptional-loot
+
+            - @player.loot.order("rating desc").limit(9).each do |loot|
+              = render "items/loot", :loot => loot
+
+          = link_to "View Full Armory &rarr;".html_safe, armory_index_path, :class => "btn primary"
 
   .clear

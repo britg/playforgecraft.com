@@ -26,7 +26,7 @@ class ForgeCraft.Models.Ore extends Backbone.Model
     @get("name") + " (" + @get("x") + ", " + @get("y") + ")" + " in forgeable " + @get("forgeable")
 
   useMovement: ->
-    console.log "Using movement"
+    # console.log "Using movement"
     @set moveable: false
     
   
@@ -267,3 +267,6 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
   addReplacements: (ores) ->
     @replacements ||= []
     @replacements = _.union @replacements, ores
+
+  unlockAllOres: ->
+    ore.set({moveable: true}) for ore in @models

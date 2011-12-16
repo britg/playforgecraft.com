@@ -255,19 +255,6 @@ html.game.no-touch {
       margin-top: 60px;
       display: none;
     }
-
-    .message {
-      text-align: center;
-      font-weight: bold;
-      color: $highlight-color;
-      display: block;
-      margin-top: -120px;
-      margin: 0 auto;
-      @include transition-property("font-size");
-      @include transition-duration("0.2s");
-      position: relative;
-      z-index: 10000
-    }
   }
 }
 

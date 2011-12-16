@@ -99,18 +99,11 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
         @trigger "ForgeCraft:activeForgeComplete", accuracy
     , 500
 
-    if accuracy > 95
-      @showPerfect()
+    if accuracy >= 92
+      splashView.queueMessage("Perfect!")
 
-    if accuracy > 90
-      @unlockBoard()
+    if accuracy >= 85
+      Ores.unlockAllOres()
+      splashView.queueMessage("Ores Unlocked!")
 
-  showPerfect: ->
-    msg = $(@el).find('.message')
     
-    msg.html("Perfect!").show()
-    setTimeout =>
-      msg.css fontSize: "800%"
-    , 100
-
-
