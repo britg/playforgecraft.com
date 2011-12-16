@@ -10,7 +10,7 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
     @reset()
 
   shouldTrigger: ->
-    Math.floor(Math.random()*7) == 1
+    Math.floor(Math.random()*6) == 1
 
   bar: ->
     $('#bar')
