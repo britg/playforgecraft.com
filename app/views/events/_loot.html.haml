@@ -7,7 +7,6 @@
     %br
 
     %span.stats
-      = "+"
     
       - if loot.attack and loot.attack > 0
         %span.attack
@@ -18,3 +17,5 @@
         %span.defense
           %span.val= loot.defense
           = image_tag "loot/defense.png", :class => "type-icon"
+
+    = link_to "Equip".html_safe, "#", :class => "equip launch-equipper", "data-external" => true, "data-id" => loot.to_param
