@@ -29,7 +29,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
 
     @initializeActiveForge()
     @renderForge()
-    @renderLoot()
+    @renderEvents()
 
     unless Modernizr.touch
       $(window).unbind('resize').resize =>
@@ -63,42 +63,13 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @htmlHeight     = $('html').height();
     $('#sidebar').css minHeight: @htmlHeight - @topBarHeight
 
-  renderLoot: ->
-    Loot.unbind "add"
-    Loot.unbind "reset"
+  # Events
 
-    Loot.bind "add", @displayLoot, @
-    Loot.bind "reset", @displayAllLoot, @
-    Loot.reset(ForgeCraft.Config.loot)
+  renderEvents: ->
+    window.eventsView = new ForgeCraft.Views.EventsView
 
-    $('.more-loot').click ->
-      Loot.fetchMore(10)
-      return false
+  # Ores
 
-    $(window).scroll ->
-      if isScrolledIntoView($('#loot-list-more'))
-        forgeView.fetchMoreLoot()
-  
-  fetchMoreLoot: ->
-    return if Loot.fetchLootLock is on
-    clearTimeout(@fetchMoreLootTimeout)
-    @fetchMoreLootTimeout = setTimeout ->
-      Loot.fetchMore(10)
-    , 500
-
-  displayAllLoot: ->
-    Loot.forEach (loot) =>
-      @displayLoot(loot)
-
-  displayLoot: (loot) ->
-    if $('#loot-list').length > 0
-      lootView = new ForgeCraft.Views.LootView id: loot.id, model: loot, el: $('#loot-template').find('.loot').clone().get(0)
-      lootView.render()
-      lootView.addToLootList()
-
-  reflectBottomOfLootList: ->
-    $('#loot-list-more').remove()
-    $(window).unbind('scroll')
 
   clearOres: ->
     $('#ores').html('')

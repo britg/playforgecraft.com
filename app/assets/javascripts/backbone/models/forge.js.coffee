@@ -97,6 +97,7 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
     Loot.add(loot)
     Ores.addReplacements(params.replacements)
     @consumeOres()
+    eventsView.addEventsHTML(params.new_events_html)
     Forgings.remove(@)
 
   unableToPurchase: (params) ->
@@ -118,7 +119,7 @@ class ForgeCraft.Collections.Forgings extends Backbone.Collection
   
   model: ForgeCraft.Models.Forgeable
   url: ->
-    "/forges/" + window.forge.get("id") + "/loot.json"
+    "/forges/" + window.forge.get("id") + "/loot"
 
   onRender: ->
     @reset()

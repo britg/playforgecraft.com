@@ -13,6 +13,7 @@ class Loot < ActiveRecord::Base
 
   before_create :purchase
   after_save :update_progress
+  after_create :create_event
 
   validates_presence_of :item
 
@@ -75,6 +76,10 @@ class Loot < ActiveRecord::Base
   def serializable_hash(opts = {})
     super((opts||{}).merge( :only => [:id, :attack, :defense, :battle_id],
                             :methods => [:item_attributes, :level, :equipped?, :battle_required?, :battle_won?]))
+  end
+
+  def to_s
+    item.to_s
   end
 
   def item_attributes
@@ -205,6 +210,20 @@ class Loot < ActiveRecord::Base
 
   def update_progress
     forge.update_progress(self)
+  end
+
+  def event= e
+    @event = e
+  end
+
+  def event
+    @event
+  end
+
+  def create_event
+    self.event = Event.for_loot self
+    forge.events << self.event
+    true
   end
 
 end

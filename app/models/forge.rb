@@ -29,7 +29,7 @@ class Forge
   end
 
   def serializable_hash(opts={})
-    super((opts||{}).merge(:methods => [:id, :progress_percent]))
+    super((opts||{}).merge(:methods => [:id, :progress_percent], :except => :events))
   end
 
   def to_s
@@ -113,6 +113,17 @@ class Forge
 
   def check_completion
     self.update_attributes(:complete => finished?)
+  end
+
+  # Events
+
+  def new_events
+    @new_events ||= []
+  end
+
+  def add_event event
+    events << event
+    new_events << event
   end
 
 end

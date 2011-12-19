@@ -8,8 +8,8 @@
     
     #event-list
 
-      - @forge.events.each do |event|
-        = render "events/#{event.type}"
+      - @forge.events.reverse.each do |event|
+        = render "events/#{event.type}", :event => event
 
   - if @forge.complete? and @forge.requires_funding?
     #complete
@@ -25,6 +25,3 @@
   ForgeCraft.Config.forge = #{@forge.to_json}
   ForgeCraft.Config.ores = #{Ore.tile_urls.to_json}
   ForgeCraft.Config.loot = #{@loot.to_json}
-
-#loot-template
-  = render "items/loot", :loot => Loot.new(:attack => 1, :defense => 1)
