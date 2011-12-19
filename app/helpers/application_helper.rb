@@ -29,12 +29,12 @@ module ApplicationHelper
     link_to(item, item_path(item), :class => item.rarity)
   end
 
-  def loot_icon(item)
-    image_tag(item.icon.url(:tiny), :title => item.type, :class => "item-icon")
+  def loot_icon(loot)
+    image_tag(loot.icon, :class => "item-icon")
   end
 
-  def loot_with_icon(item)
-    link_to "#{loot_icon(item)} #{item}".html_safe, item_path(item), :class => [item.rarity, "loot-with-icon"]
+  def loot_with_icon(loot)
+    link_to "#{loot_icon(loot)} #{loot}".html_safe, "#", :class => [loot.rarity, "loot-with-icon", "launch-equipper"], "data-id" => loot.to_param, "data-external" => true
   end
 
   def equipment_icon(loot)

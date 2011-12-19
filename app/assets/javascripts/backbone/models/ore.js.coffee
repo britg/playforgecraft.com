@@ -6,6 +6,7 @@ class ForgeCraft.Models.Ore extends Backbone.Model
     x: -1
     y: -1
     moveable: true
+    neighbors: []
 
   initialize: ->
     @bind "change", @cache, @

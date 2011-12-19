@@ -1,4 +1,4 @@
-.loot{ :class => "#{loot.to_css_classes} launch-equipper", "data-id" => loot.to_param }
+.loot.full{ :class => "#{loot.to_css_classes} launch-equipper", "data-id" => loot.to_param }
 
   
   = image_tag "loot/equipped.png", :class => "equipped-indicator #{'hidden' unless loot.equipped?}", :title => "Equipped"

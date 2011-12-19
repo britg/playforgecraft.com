@@ -28,10 +28,15 @@ class LootController < ApplicationController
     if @loot.save
       @loot.generate_battle if Loot.random_battle?(@forge)
       @replacements = Ore.random_set(params[:forging][:ore_count])
+
+      @new_events_html = render_to_string(:partial => "events/list",
+                                          :locals => {:events => [@loot.event]})
+
       render :json => { :purchased => true, 
-                        :loot => @loot, 
-                        :replacements => @replacements, 
-                        :player => current_player }
+                        :loot => @loot,
+                        :replacements => @replacements,
+                        :player => current_player,
+                        :new_events_html => @new_events_html}
     else
       render :json => { :purchased => false, :player => current_player }
     end

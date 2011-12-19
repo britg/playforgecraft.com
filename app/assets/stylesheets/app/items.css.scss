@@ -9,7 +9,7 @@
   margin-bottom: -55px !important;
 }
 
-.loot {
+.loot.full {
 
   border: solid 1px;
   @include border-radius(5px);
@@ -112,7 +112,7 @@
     width: 20px;
     height: 20px;
     margin-right: 2px;
-    vertical-align: -3px;
+    vertical-align: -6px;
   }
 }
 

@@ -6,10 +6,10 @@
     .progress-wrap
       = render "forges/progress", :forge => @forge
     
-    #loot-list
+    #event-list
 
-    - if @forge.loot.count > 20
-      = link_to "Loading ...", "javascript:void(0)", :id => "loot-list-more", :class => "more-loot", :"data-external" => false
+      - @forge.events.reverse.each do |event|
+        = render "events/#{event.type}", :event => event
 
   - if @forge.complete? and @forge.requires_funding?
     #complete
@@ -25,6 +25,3 @@
   ForgeCraft.Config.forge = #{@forge.to_json}
   ForgeCraft.Config.ores = #{Ore.tile_urls.to_json}
   ForgeCraft.Config.loot = #{@loot.to_json}
-
-#loot-template
-  = render "items/loot", :loot => Loot.new(:attack => 1, :defense => 1)

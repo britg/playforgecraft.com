@@ -1,0 +1,17 @@
+@import "base";
+
+.event {
+
+  margin-bottom: 10px;
+
+  .stats {
+    font-size: 110%;
+    color: $highlight-color;
+    margin-left: 25px;
+  }
+  
+  .type-icon {
+    height: 10px;
+    width: 10px;
+  }
+}

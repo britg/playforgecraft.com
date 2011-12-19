@@ -4,6 +4,7 @@
  * Board
  */ 
 $tile-dim: 64px;
+$side-dim: $tile-dim;
 $status-height: 12px;
 $status-width: 14px;
 $board-guide-color: #333;
@@ -52,7 +53,7 @@ html.game.no-touch {
   margin: 0;
   padding: 0;
 
-  #ores {
+  #ores, #effects-canvas {
     padding-top: 10px;
     position: fixed;
   }
@@ -77,26 +78,44 @@ html.game.no-touch {
 
     &.bone {
       background: image_url("tile-sprite.png") left -320px;
+      .side {
+        background-color: rgba(174,167,155,0.2);
+      }
     }
 
     &.iron {
       background: image_url("tile-sprite.png") left top;
+      .side {
+        background-color: rgba(42,92,125,0.2);
+      }
     }
 
     &.bronze {
       background: image_url("tile-sprite.png") left -64px;
+      .side {
+        background-color: rgba(150,88,23,0.2);
+      }
     }
 
     &.eldarite {
       background: image_url("tile-sprite.png") left -128px; 
+      .side {
+        background-color: rgba(139,108,29,0.2);
+      }
     }
 
     &.mithril {
       background: image_url("tile-sprite.png") left -192px;
+      .side {
+        background-color: rgba(71,134,94,0.2);
+      }
     }
 
     &.dragonsteel {
       background: image_url("tile-sprite.png") left -256px; 
+      .side {
+        background-color: rgba(168,27,98,0.2);
+      }
     }
 
     &.immoveable {
@@ -104,15 +123,98 @@ html.game.no-touch {
     }
 
     &.forgeable {
-      /* background-color: rgba(100,100,100,0.2); */
-      /* border: solid 1px #fff; */
+
+      &.bone {
+        background-color: rgba(174,167,155,0.1);
+      }
+
+      &.iron {
+        background-color: rgba(42,92,125,0.1);
+      }
+
+      &.bronze {
+        background-color: rgba(150,88,23,0.1);
+      }
+
+      &.eldarite {
+        background-color: rgba(139,108,29,0.1);
+      }
+
+      &.mithril {
+        background-color: rgba(71,134,94,0.1);
+      }
+
+      &.dragonsteel {
+        background-color: rgba(168,27,98,0.1);
+      }
 
       background-position-x: -64px;
+
+      .side {
+        display: block;
+      }
     }
 
     &.marked {
       @include opacity(0.3);
       background-color: rgba(100,100,100,0.3);
+    }
+
+    .side {
+      display: none;
+      width: 1px;
+      height: 1px;
+      margin-right: -1px;
+      margin-bottom: -1px;
+      background-color: rgba(100,100,100,0.3);
+      position: relative;
+      
+
+      &.top {  
+        width: $side-dim;
+        margin-right: -$side-dim;
+      }
+
+      &.right {
+        left: $tile-dim - 1;
+        height: $side-dim;
+        margin-bottom: -$side-dim;
+      }
+
+      &.bottom {
+        top: $tile-dim - 1;
+        width: $side-dim;
+        margin-right: -$side-dim;
+      }
+
+      &.left {
+        height: $side-dim;
+        margin-bottom: -$side-dim;
+      }
+    }
+
+    &.top {
+      .side.top {
+        display: none;
+      }
+    }
+
+    &.right {
+      .side.right {
+        display: none;
+      }
+    }
+
+    &.bottom {
+      .side.bottom {
+        display: none;
+      }
+    }
+
+    &.left {
+      .side.left {
+        display: none;
+      }
     }
 
     .status {
