@@ -26,6 +26,37 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
 
     $.each ores, (i, ore) ->
       ore.set forgeable: self
+      self.setNeighbors(ore)
+
+  setNeighbors: (ore) ->
+    x = ore.get("x")
+    y = ore.get("y")
+    n = []
+
+    # top
+    if @hasOreAt(x, y-1)
+      n.push "top"
+
+    # right
+    if @hasOreAt(x+1, y)
+      n.push "right"
+
+    # bottom
+    if @hasOreAt(x, y+1)
+      n.push "bottom"
+
+    # left
+    if @hasOreAt(x-1, y)
+      n.push "left"
+
+    ore.set neighbors: n
+
+  hasOreAt: (x, y) ->
+    hasOre = false
+    $.each @get("ores"), (i, ore) ->
+      hasOre = (ore.get("x") == x and ore.get("y") == y)
+      return false if hasOre
+    hasOre
 
   toJSON: ->
     forging:

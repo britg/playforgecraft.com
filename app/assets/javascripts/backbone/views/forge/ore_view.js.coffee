@@ -18,9 +18,14 @@ class ForgeCraft.Views.OreView extends Backbone.View
     @el = $('<div class="ore" />').get(0);
     $(@el).addClass(@model.get('to_class'))
     $(@el).data view: @
-    # $(@el).css("backgroundImage", "url(" + @oreUrl() + ")")
-    # $(@el).append('<div class="status" />')
+    @addSides()
     @
+
+  addSides: ->
+    $(@el).append('<div class="side top" />')
+      .append('<div class="side right" />')
+      .append('<div class="side bottom" />')
+      .append('<div class="side left" />')
 
   oreUrl: ->
     ForgeCraft.Config.ores[@model.get("rank")]
