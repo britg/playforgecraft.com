@@ -6,10 +6,10 @@
     .progress-wrap
       = render "forges/progress", :forge => @forge
     
-    #loot-list
+    #event-list
 
-    - if @forge.loot.count > 20
-      = link_to "Loading ...", "javascript:void(0)", :id => "loot-list-more", :class => "more-loot", :"data-external" => false
+      - @forge.events.each do |event|
+        = render "events/#{event.type}"
 
   - if @forge.complete? and @forge.requires_funding?
     #complete

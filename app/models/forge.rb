@@ -12,6 +12,7 @@ class Forge
   index [:player_id, :mine_id], :unique => true
 
   embeds_many :progresses
+  embeds_many :events
 
   after_create :create_progresses
 

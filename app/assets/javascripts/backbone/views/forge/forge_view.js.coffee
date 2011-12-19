@@ -114,6 +114,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @sidebarWidth   = $('#sidebar').width()
 
     $('#ores').css width: (@forgeWidth - @sidebarWidth - 20), height: @forgeHeight
+    $('#effects-canvas').css width: (@forgeWidth - @sidebarWidth - 20), height: @forgeHeight
     
     @topOffset      = parseInt($('#ores').css('paddingTop'))
 
@@ -229,9 +230,6 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     return unless @model.get("requires_funding")
     console.log "Updating funds to", @model.get("funds")
     $('.funds').find('.amount').html(number_with_delimiter(@model.get("funds")))
-
-  shakeFunds: ->
-    $('.funds').effect("shake", { times: 3, distance: 10 }, 50)
 
   updateProgressPercent: ->
     console.log "Updating progress percent to", @model.get("progress_percent")
