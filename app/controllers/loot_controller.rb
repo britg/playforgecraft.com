@@ -19,7 +19,7 @@ class LootController < ApplicationController
   end
 
   def create
-
+    @start_time     = Time.now
     @classification = Classification.find_by_name(params[:forging][:classification].capitalize)
     @ore            = Ore.find_by_name(params[:forging][:ore].capitalize)
     @accuracy       = params[:forging][:accuracy]
@@ -30,7 +30,7 @@ class LootController < ApplicationController
       @replacements = Ore.random_set(params[:forging][:ore_count])
 
       @new_events_html = render_to_string(:partial => "events/list",
-                                          :locals => {:events => [@loot.event]})
+                                          :locals => {:events => @forge.events_after(@start_time)})
 
       render :json => { :purchased => true, 
                         :loot => @loot,
