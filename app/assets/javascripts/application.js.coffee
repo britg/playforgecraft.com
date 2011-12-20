@@ -7,6 +7,10 @@
 #= require_tree ./lib
 #= require backbone/forge_craft
 
+Crafty.audio.add "swap", "/sounds/swap_stone.mp3"
+Crafty.audio.add "forge", "/sounds/forge.mp3"
+Crafty.audio.add "forge_bg", "/sounds/forge_bg.mp3"
+
 $ ->
 
   # Router
@@ -31,6 +35,3 @@ $ ->
   window.splashView   = new ForgeCraft.Views.SplashView el: $('#splash-message').get(0)
 
   window.appView      = new ForgeCraft.Views.AppView
-
-  Crafty.audio.add "swap", "/sounds/swap_stone.mp3"
-  Crafty.audio.add "forge", "/sounds/forge.mp3"

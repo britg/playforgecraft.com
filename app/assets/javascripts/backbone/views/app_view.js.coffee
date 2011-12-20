@@ -39,6 +39,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
   startForge: ->
     window.forge = new ForgeCraft.Models.Forge(ForgeCraft.Config.forge)
     window.forgeView = new ForgeCraft.Views.ForgeView el: $('#forge').get(0), model: window.forge
+    Crafty.audio.play 'forge_bg', -1
 
   startBattle: ->
     window.battle = new ForgeCraft.Models.Battle(ForgeCraft.Config.battle)

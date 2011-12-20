@@ -79,7 +79,7 @@ html.game.no-touch {
     &.bone {
       background: image_url("tile-sprite.png") left -320px;
       .side {
-        background-color: rgba(174,167,155,0.2);
+        background-color: rgba(174,167,155,0.1);
       }
     }
 
@@ -125,7 +125,7 @@ html.game.no-touch {
     &.forgeable {
 
       &.bone {
-        background-color: rgba(174,167,155,0.1);
+        background-color: rgba(113,107,96,0.1);
       }
 
       &.iron {

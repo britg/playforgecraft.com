@@ -126,4 +126,8 @@ class Forge
     new_events << event
   end
 
+  def events_after time
+    events.where(:created_at.gte => time).desc(:_id)
+  end
+
 end
