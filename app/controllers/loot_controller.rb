@@ -29,6 +29,7 @@ class LootController < ApplicationController
       @loot.generate_battle if Loot.random_battle?(@forge)
       @replacements = Ore.random_set(params[:forging][:ore_count])
 
+      @forge.reload
       @new_events_html = render_to_string(:partial => "events/list",
                                           :locals => {:events => @forge.events_after(@start_time)})
 

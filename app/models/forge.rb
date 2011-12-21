@@ -127,7 +127,7 @@ class Forge
   end
 
   def events_after time
-    events.where(:created_at.gte => time).desc(:_id)
+    events.where(:created_at.gte => time).reverse
   end
 
 end
