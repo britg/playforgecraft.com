@@ -1,5 +1,10 @@
 #menu {
 
+  .settings-menu {
+    margin: 0 auto;
+    width: 200px;
+  }
+
   ul {
     margin: 0;
     margin-top: 20px;
@@ -8,12 +13,14 @@
   li {
     list-style-type: none;
     margin-bottom: 10px;
-    text-align: center;
 
     .btn {
       width: 150px;
       text-align: center;
     }
   } 
+
+  .edit_player {
+  }
 
 }

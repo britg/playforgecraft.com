@@ -5,6 +5,7 @@ class Player < ActiveRecord::Base
   belongs_to :user
   belongs_to :zone
   belongs_to :mine
+  has_one :setting
 
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
@@ -25,6 +26,8 @@ class Player < ActiveRecord::Base
     :styles => { :full => ["200x200#", :jpg], :thumb => ["100x100#", :jpg], :tiny => ["50x50#", :jpg] }
 
   before_validation :generate_url_name
+
+  accepts_nested_attributes_for :setting
 
   class << self
 
@@ -51,7 +54,7 @@ class Player < ActiveRecord::Base
   end
 
   def serializable_hash(opts={})
-    super((opts||{}).merge(:only => [:id, :name, :level, :coins], :methods => [:zone, :forge]))
+    super((opts||{}).merge(:only => [:id, :name, :level, :coins], :methods => [:zone, :forge, :setting]))
   end
 
   def generate_url_name

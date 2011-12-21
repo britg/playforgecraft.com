@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111212002106) do
+ActiveRecord::Schema.define(:version => 20111220234012) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -340,6 +340,16 @@ ActiveRecord::Schema.define(:version => 20111212002106) do
 
   add_index "requirements", ["mine_id"], :name => "index_requirements_on_mine_id"
 
+  create_table "settings", :force => true do |t|
+    t.integer  "player_id"
+    t.boolean  "effects",    :default => true
+    t.boolean  "music",      :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["player_id"], :name => "index_settings_on_player_id", :unique => true
+
   create_table "tiles", :force => true do |t|
     t.integer   "game_id"
     t.integer   "x",          :default => 0
@@ -360,6 +370,14 @@ ActiveRecord::Schema.define(:version => 20111212002106) do
   add_index "tiles_turns", ["tile_id", "turn_id"], :name => "index_tiles_turns_on_tile_id_and_turn_id", :unique => true
   add_index "tiles_turns", ["tile_id"], :name => "index_tiles_turns_on_tile_id"
   add_index "tiles_turns", ["turn_id"], :name => "index_tiles_turns_on_turn_id"
+
+  create_table "tooltips", :force => true do |t|
+    t.string    "context"
+    t.string    "title"
+    t.text      "tip"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+  end
 
   create_table "turns", :force => true do |t|
     t.integer   "game_id"

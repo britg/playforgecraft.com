@@ -27,6 +27,8 @@ class ForgeCraft.Views.AppView extends Backbone.View
   startAppContext: (path) ->
     console.log "Starting app context with", path
 
+    ForgeCraft.Audio.stop('forge_bg')
+
     @startForge() if path.match '/forges/'
     @startBattle() if path.match '/battles/'
     @startMap() if path.match '/map'

@@ -1,0 +1,18 @@
+@import "base";
+
+.switch {
+  .checkbox{
+      display:none;
+  }
+
+  .toggle{
+      background: image_url('toggle.png') bottom left;
+      display:block;
+      width:70px;
+      height:22px;
+  }
+
+  .toggle.checked{
+      background-position:top left;
+  }  
+}

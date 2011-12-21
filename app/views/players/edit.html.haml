@@ -1,5 +1,17 @@
 #menu
+
   .settings-menu
+
+    = form_for current_player, :remote => true do |f|
+      = f.fields_for current_player.setting do |s|
+        
+        %h4 Music
+        .switch
+          = s.check_box :music, :class => "checkbox"
+
+        %h4 Sound Effects
+        .switch
+          = s.check_box :effects, :class => "checkbox"
 
     %ul
       
@@ -20,3 +32,31 @@
 :javascript
 
   tooltipView.bindTooltips()
+
+  $('.checkbox').after(function() {
+      if ($(this).is(":checked")) {
+          return "<a href='#' class='toggle checked' ref='" + $(this).attr("id") + "' data-external='true' ></a>";
+      } else {
+          return "<a href='#' class='toggle' ref='" + $(this).attr("id") + "' data-external='true'></a>";
+      }
+  });
+
+  $('.toggle').click(function(e) {
+      var checkboxID = $(this).attr("ref");
+      var checkbox = $('#' + checkboxID);
+
+      if (checkbox.is(":checked")) {
+          checkbox.removeAttr("checked");
+      } else {
+          checkbox.attr("checked", "true");
+      }
+      $(this).toggleClass("checked");
+
+      $('.edit_player').submit().bind("ajax:complete", function (e, resp) {
+        p = JSON.parse(resp.responseText)
+        player.set(p);
+      })
+
+      e.preventDefault();
+
+  });

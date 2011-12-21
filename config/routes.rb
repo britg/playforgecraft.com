@@ -70,5 +70,6 @@ ForgeCraft::Application.routes.draw do
   get "ladder", :to => "players#index"
   get 'menu', :to => "players#edit", :as => :menu
   get ':playername', :to => "players#show", :as => :player
+  put ':playername', :to => "players#update"
 
 end

@@ -50,3 +50,5 @@
 
 :javascript
   ForgeCraft.Config.player = #{current_player.to_json}
+  ForgeCraft.Config.sound.music = #{current_player.setting.try(:music).to_json}
+  ForgeCraft.Config.sound.effects = #{current_player.setting.try(:effects).to_json}

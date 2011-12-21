@@ -4,9 +4,11 @@ class ForgeCraft.Models.Player extends Backbone.Model
   defaults:
     level: 0
     coins: 0
+    setting: {}
 
   initialize: ->
     @bind "change:forge", @updateForge, @
+    @bind "change:setting", @updateSetting, @
 
   equip: (hero_id, slot, loot_id) ->
     console.log "Equipping loot", loot_id
@@ -25,6 +27,12 @@ class ForgeCraft.Models.Player extends Backbone.Model
 
   updateForge: ->
     forge.set(@get("forge"))
+
+  updateSetting: ->
+    ForgeCraft.Config.sound.music = @get("setting").music
+    ForgeCraft.Config.sound.effects = @get("setting").effects
+    ForgeCraft.Audio.update()
+      
   
 class ForgeCraft.Collections.PlayersCollection extends Backbone.Collection
   model: ForgeCraft.Models.Player

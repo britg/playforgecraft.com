@@ -12,7 +12,13 @@ class PlayersController < ApplicationController
   end
 
   def edit
-    
+    current_player.build_setting unless current_player.setting.present?
+  end
+
+  def update
+    current_player.create_setting unless current_player.setting.present?
+    current_player.setting.update_attributes(params[:player][:setting])
+    render :json => current_player
   end
 
 end
