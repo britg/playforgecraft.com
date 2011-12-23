@@ -19,7 +19,7 @@
     @include inset;
     padding: 20px;
     margin: 20px 0;
-    @include glow($thief-color);
+    // @include glow($thief-color);
   }
 
   .heading {
