@@ -24,12 +24,7 @@
 
   .heading {
     margin-top: 10px;
-    margin-bottom: 20px;
-
-    .sep {
-      height:2px;
-      @include inset;
-    }
+    margin-bottom: 0px;
   }
   
   .player {
@@ -76,10 +71,6 @@
 
   .section {
     margin-bottom: 20px;
-    
-    .heading {
-      margin-bottom: 20px;
-    }
   }
 
   .exceptional-loot {
@@ -88,9 +79,8 @@
 
   .practice {
     float: right;
-    font-size: 12px;
-    margin-top: 8px;
-    margin-right: 10px;
+    font-size: 11px;
+    margin-top: 10px;
     padding: 3px 5px;
   }
 

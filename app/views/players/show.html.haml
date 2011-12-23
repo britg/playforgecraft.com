@@ -54,6 +54,8 @@
         %h1.heading 
           Forges
 
+        .sep
+
         - if @player.forges.active.any?
           .active-forges
             - @player.forges.active.each_with_index do |forge, index|
@@ -79,6 +81,8 @@
 
         %h1.heading Elite Guard
 
+        .sep
+
         = render "heroes/heroes", :player => @player, :loot => nil
 
     .span-one-third
@@ -91,6 +95,8 @@
             = link_to "Armory &rarr;".html_safe, armory_index_path, :class => "btn danger practice"
 
           %h1.heading Best Loot
+
+          .sep
 
           .exceptional-loot
 

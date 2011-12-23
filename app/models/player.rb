@@ -195,6 +195,10 @@ class Player < ActiveRecord::Base
     start_forge(target_mine) unless has_forge?(target_mine)
   end
 
+  def completed_mine? mine
+    completed_mines.include? mine
+  end
+
   def completed_mines
     @completed_mines ||= forges.where(:complete => true).map(&:mine)
   end

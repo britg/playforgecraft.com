@@ -24,6 +24,12 @@ table {
   clear: both;
 }
 
+.sep {
+  height:2px;
+  margin-bottom: 20px;
+  @include inset;
+}
+
 #content {
 }
 

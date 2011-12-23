@@ -12,7 +12,11 @@
         .progress-wrap
           = render "forges/progress", :forge => forge
 
-        = link_to "Continue Forging", "#", :class => "travel btn primary", "data-mine-id" => mine.id
+        - if forge.complete?
+          %h3 Forge Complete &#x2713;
+          
+        - else
+          = link_to "Continue Forging", "#", :class => "travel btn primary", "data-mine-id" => mine.id
       
       - else
         .requirements
