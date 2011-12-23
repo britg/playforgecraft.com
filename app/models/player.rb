@@ -212,6 +212,10 @@ class Player < ActiveRecord::Base
 
   # Forges
 
+  def practice_forge
+    forges.first
+  end
+
   def forges
     Forge.where(:player_id => id)
   end

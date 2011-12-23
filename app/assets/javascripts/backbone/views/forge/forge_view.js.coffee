@@ -178,6 +178,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
       
     if @refOre and not @swapOre
       if @forgeable = @refOre.get("forgeable")
+        $('.ore').addClass("unmarked")
         if activeForgeView.shouldTrigger()
           activeForgeView.start()
         else

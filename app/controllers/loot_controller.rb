@@ -26,7 +26,7 @@ class LootController < ApplicationController
     @loot           = Loot.generate(@classification, @ore, @accuracy, current_player, @forge)
 
     if @loot.save
-      @loot.generate_battle if Loot.random_battle?(@forge)
+      @forge.generate_battle_event if Loot.random_battle?(@forge)
       @replacements = Ore.random_set(params[:forging][:ore_count])
 
       @forge.reload

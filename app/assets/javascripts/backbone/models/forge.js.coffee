@@ -99,6 +99,9 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
     @consumeOres()
     eventsView.addEventsHTML(params.new_events_html)
     Forgings.remove(@)
+    setTimeout ->
+      $('.ore').removeClass("unmarked")
+    , 500
 
   unableToPurchase: (params) ->
     @unmarkOres()

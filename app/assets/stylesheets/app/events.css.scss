@@ -23,4 +23,13 @@
     float: right;
     margin-right: 20px;
   }
+
+  &.battle {
+    text-align: center;
+  }
+
+  &.message {
+    color: $highlight-color;
+    text-align: center;
+  }
 }

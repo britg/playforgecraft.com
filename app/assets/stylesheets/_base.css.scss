@@ -140,6 +140,32 @@ $sidebar-width: 250px;
   }
 }
 
+@mixin ore-background {
+  &.bone {
+    background-color: rgba(113,107,96,0.1);
+  }
+
+  &.iron {
+    background-color: rgba(42,92,125,0.1);
+  }
+
+  &.bronze {
+    background-color: rgba(150,88,23,0.1);
+  }
+
+  &.eldarite {
+    background-color: rgba(139,108,29,0.1);
+  }
+
+  &.mithril {
+    background-color: rgba(71,134,94,0.1);
+  }
+
+  &.dragonsteel {
+    background-color: rgba(168,27,98,0.1);
+  }
+}
+
 @mixin gutter {
   @include clearfix;
   @include inset;

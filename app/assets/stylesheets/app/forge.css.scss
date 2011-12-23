@@ -67,6 +67,8 @@ html.game.no-touch {
     position: absolute;
     background-position: center center;
     background-repeat: no-repeat;
+    @include transition-property("margin-top");
+    @include transition-duration(".5s");
     /*border: solid 1px $board-guide-color; */
     
     img {
@@ -124,29 +126,7 @@ html.game.no-touch {
 
     &.forgeable {
 
-      &.bone {
-        background-color: rgba(113,107,96,0.1);
-      }
-
-      &.iron {
-        background-color: rgba(42,92,125,0.1);
-      }
-
-      &.bronze {
-        background-color: rgba(150,88,23,0.1);
-      }
-
-      &.eldarite {
-        background-color: rgba(139,108,29,0.1);
-      }
-
-      &.mithril {
-        background-color: rgba(71,134,94,0.1);
-      }
-
-      &.dragonsteel {
-        background-color: rgba(168,27,98,0.1);
-      }
+      @include ore-background;
 
       background-position-x: -64px;
 
@@ -155,9 +135,14 @@ html.game.no-touch {
       }
     }
 
-    &.marked {
+    &.unmarked {
       @include opacity(0.3);
-      background-color: rgba(100,100,100,0.3);
+    }
+
+    &.marked {
+      @include opacity(1);
+      @include ore-background;
+      margin-top: -10px;
     }
 
     .side {

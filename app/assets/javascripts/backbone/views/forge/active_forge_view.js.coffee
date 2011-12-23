@@ -99,10 +99,10 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
         @trigger "ForgeCraft:activeForgeComplete", accuracy
     , 500
 
-    if accuracy >= 92
+    if accuracy >= ForgeCraft.Config.perfect_accuracy
       splashView.queueMessage("Perfect!")
 
-    if accuracy >= 85
+    if accuracy >= ForgeCraft.Config.unlock_accuracy
       Ores.unlockAllOres()
       splashView.queueMessage("Ores Unlocked!")
 

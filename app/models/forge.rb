@@ -117,17 +117,20 @@ class Forge
 
   # Events
 
-  def new_events
-    @new_events ||= []
-  end
-
-  def add_event event
-    events << event
-    new_events << event
-  end
-
   def events_after time
     events.where(:created_at.gte => time).reverse
+  end
+
+  def generate_battle_event
+    events.create(:type => Event::BATTLE_TYPE)
+  end
+
+  def generate_loot_event loot
+    events.create(:type => Event::LOOT_TYPE, :loot_id => loot.id)
+  end
+
+  def generate_message_event msg
+    events.create(:type => Event::MESSAGE_TYPE, :message => msg)
   end
 
 end

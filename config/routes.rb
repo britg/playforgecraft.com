@@ -32,6 +32,7 @@ ForgeCraft::Application.routes.draw do
     resources :ores, :only => [:index] do
       post :swap, :on => :collection
     end
+    resources :events, :only => [:create, :index]
   end
   
   resources :loot, :only => [:index, :show, :destroy]

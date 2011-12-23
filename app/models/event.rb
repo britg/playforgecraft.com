@@ -2,14 +2,17 @@ class Event
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  MESSAGE_TYPE = "message"
   LOOT_TYPE = "loot"
+  BATTLE_TYPE = "battle"
 
-  TYPES = [LOOT_TYPE]
+  TYPES = [LOOT_TYPE, BATTLE_TYPE]
 
   embedded_in :forge
 
   field :type
   field :loot_id, :type => Integer
+  field :message
 
   class << self
 

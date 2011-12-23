@@ -6,6 +6,9 @@ class Loot < ActiveRecord::Base
   RARE_THRESHOLD = 94.9
   EPIC_THRESHOLD = 99.0
 
+  PERFECT_ACCURACY = 92
+  UNLOCK_ACCURACY = 80
+
   belongs_to :player
   belongs_to :game
   belongs_to :action
@@ -75,7 +78,7 @@ class Loot < ActiveRecord::Base
 
   def serializable_hash(opts = {})
     super((opts||{}).merge( :only => [:id, :attack, :defense, :battle_id],
-                            :methods => [:item_attributes, :level, :equipped?, :battle_required?, :battle_won?]))
+                            :methods => [:item_attributes, :level, :equipped?]))
   end
 
   def to_s
@@ -122,10 +125,12 @@ class Loot < ActiveRecord::Base
   end
 
   def set_stats accuracy
-    # STUB
     accuracy = Random.new.rand(50) unless accuracy
     self.attack = stat_by_accuracy(item.attack_min, item.attack_max, accuracy)
     self.defense = stat_by_accuracy(item.defense_min, item.defense_max, accuracy)
+
+    forge.generate_message_event("Ores Unlocked!") if accuracy >= UNLOCK_ACCURACY
+    forge.generate_message_event("Perfect!") if accuracy >= PERFECT_ACCURACY
   end
 
   def stat_by_accuracy(min, max, accuracy)
@@ -150,7 +155,8 @@ class Loot < ActiveRecord::Base
   end
 
   def buy_price
-    item.cost!
+    # item.cost!
+    0
   end
 
   def sell_price
@@ -184,45 +190,12 @@ class Loot < ActiveRecord::Base
     end
   end
 
-  # Battle
-
-  def battle
-    return nil unless battle_id.present?
-    Battle.find(battle_id)
-  end
-
-  def generate_battle
-    random_battle = Battle.create :mode => "singleplayer",
-                                  :first_player_id => player_id,
-                                  :forge_id => self.forge_id,
-                                  :loot_id => self.id
-    self.battle_id = random_battle.id.to_s
-    self.save
-  end
-
-  def battle_required?
-    battle.present? and !battle.finished?
-  end
-
-  def battle_won?
-    battle_required? and battle.finished? and battle.winner_id == player.id
-  end
-
   def update_progress
     forge.update_progress(self)
   end
 
-  def event= e
-    @event = e
-  end
-
-  def event
-    @event
-  end
-
   def create_event
-    self.event = Event.for_loot self
-    forge.events << self.event
+    forge.generate_loot_event(self)
     true
   end
 
