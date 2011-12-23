@@ -9,6 +9,7 @@
         %span.value= @player.score
 
       %h1.player= @player
+      .sep
 
     %table.completion
 
@@ -47,6 +48,9 @@
 
       .section.forges-wrap
 
+        - if @player == current_player and current_player.forges.any?
+          = link_to "Practice &rarr;".html_safe, forge_path(current_player.forges.first), :class => "btn danger practice"
+
         %h1.heading 
           Forges
 
@@ -69,6 +73,10 @@
     .span-one-third
 
       .section.hero-wrap
+
+        - if @player == current_player
+          = link_to "Spar &rarr;".html_safe, armory_index_path, :class => "btn danger practice"
+
         %h1.heading Elite Guard
 
         = render "heroes/heroes", :player => @player, :loot => nil
@@ -79,13 +87,14 @@
 
         - if @player.loot.any?
 
-          %h1.heading Exceptional Craft
+          - if @player == current_player
+            = link_to "Armory &rarr;".html_safe, armory_index_path, :class => "btn danger practice"
+
+          %h1.heading Best Loot
 
           .exceptional-loot
 
             - @player.loot.order("rating desc").limit(6).each do |loot|
               = render "items/loot", :loot => loot
-
-          = link_to "View Full Armory &rarr;".html_safe, armory_index_path, :class => "btn primary" if @player == current_player
 
   .clear

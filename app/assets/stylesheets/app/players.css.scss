@@ -19,19 +19,25 @@
     @include inset;
     padding: 20px;
     margin: 20px 0;
-    @include glow(#a1a1a1);
+    @include glow($thief-color);
   }
 
   .heading {
     margin-top: 10px;
     margin-bottom: 20px;
+
+    .sep {
+      height:2px;
+      @include inset;
+    }
   }
   
   .player {
     font-size: 400%;
-    border-bottom: solid 1px $highlight-color;
+    // border-bottom: solid 1px #a1a1a1;
     margin-bottom: 0;
     line-height: 1em;
+    color: $advanced-color;
   }
 
   .score {
@@ -78,6 +84,14 @@
 
   .exceptional-loot {
     margin-bottom: 10px;
+  }
+
+  .practice {
+    float: right;
+    font-size: 12px;
+    margin-top: 8px;
+    margin-right: 10px;
+    padding: 3px 5px;
   }
 
 }

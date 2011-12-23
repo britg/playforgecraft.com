@@ -236,7 +236,7 @@ class Player < ActiveRecord::Base
 
   def can_forge_at? forge
     return unless forge.player_id == self.id
-    !forge.complete? or !forge.mine.requires_funding?
+    !forge.complete?
   end
 
 end
