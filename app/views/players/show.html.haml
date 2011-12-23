@@ -1,43 +1,45 @@
 #player-page.container
 
-  .heading
+  .badge
+  
+    .heading
 
-    .score
-      %span.stat Score
-      %span.value= @player.score
+      .score
+        %span.stat Score
+        %span.value= @player.score
 
-    %h1.player= player_slug(@player)
+      %h1.player= @player
 
-  %table.completion
+    %table.completion
 
-    %tbody
+      %tbody
 
-      %tr
+        %tr
 
-        %td.mines
-          %span.count= @player.forge_count
-          Forge Complete
-          (#{@player.forge_percent}%)
+          %td.forge
+            %span.count= @player.forge_count
+            Forges Complete
+            (#{@player.forge_percent}%)
 
-        %td.mines
-          %span.count= @player.battle_win_count
-          Battles Won
-          (#{@player.battle_win_percent}%)
+          %td.battle
+            %span.count= @player.battle_win_count
+            Battles Won
+            (#{@player.battle_win_percent}%)
 
-        %td.total
-          %span.count= @player.item_count
-          Total Items
-          (#{@player.item_percent}%)
-        
-        %td.rare
-          %span.count= @player.rare_count
-          Rares
-          (#{@player.rare_percent}%)
+          %td.total
+            %span.count= @player.item_count
+            Total Items
+            (#{@player.item_percent}%)
+          
+          %td.rare
+            %span.count= @player.rare_count
+            Rares
+            (#{@player.rare_percent}%)
 
-        %td.epic
-          %span.count= @player.epic_count
-          Epics
-          (#{@player.epic_percent}%)
+          %td.epic
+            %span.count= @player.epic_count
+            Epics
+            (#{@player.epic_percent}%)
 
   .row
 
@@ -81,7 +83,7 @@
 
           .exceptional-loot
 
-            - @player.loot.order("rating desc").limit(9).each do |loot|
+            - @player.loot.order("rating desc").limit(6).each do |loot|
               = render "items/loot", :loot => loot
 
           = link_to "View Full Armory &rarr;".html_safe, armory_index_path, :class => "btn primary" if @player == current_player

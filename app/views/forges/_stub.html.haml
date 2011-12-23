@@ -5,7 +5,12 @@
       = link_to "Forge", forge_path(forge), :class => "btn primary"
     
   .details
-    %h3.name= forge
+    %h3.name
+      = forge
+      - if forge.complete?
+        %span.complete-checkmark
+          &#x2713;
 
-    .progress-wrap
-      = render "forges/progress", :forge => forge
+    - unless forge.complete?
+      .progress-wrap
+        = render "forges/progress", :forge => forge

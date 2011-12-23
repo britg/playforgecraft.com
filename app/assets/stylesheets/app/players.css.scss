@@ -15,13 +15,20 @@
 
 #player-page {
 
+  .badge {
+    @include inset;
+    padding: 20px;
+    margin: 20px 0;
+    @include glow(#a1a1a1);
+  }
+
   .heading {
     margin-top: 10px;
     margin-bottom: 20px;
   }
   
   .player {
-    font-size: 500%;
+    font-size: 400%;
     border-bottom: solid 1px $highlight-color;
     margin-bottom: 0;
     line-height: 1em;
@@ -29,7 +36,7 @@
 
   .score {
     float: right;
-    margin-top: 33px;
+    margin-top: 23px;
 
     .stat {
       font-size: 150%;
@@ -46,7 +53,7 @@
 
     text-align: center;
     @include clearfix;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     vertical-align: bottom;
 
     td {
@@ -56,7 +63,7 @@
     }
 
     .count {
-      font-size: 400%;
+      font-size: 350%;
     }
 
   }

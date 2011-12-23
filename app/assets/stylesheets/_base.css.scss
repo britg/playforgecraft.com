@@ -17,6 +17,11 @@ $set-color: #FF8000;
 $coin-color: #FEF092;
 $blood-color: #920516;
 $forge-color: #EFC9A0;
+$battle-color: #FF8000;
+
+$warrior-color: $blood-color;
+$thief-color: darken($rare-color, 20%);
+$ranger-color: darken($advanced-color, 20%);
 
 $bone-color: #aea79b;
 $bronze-color: #965817;
@@ -64,19 +69,28 @@ $sidebar-width: 250px;
 }
 
 @mixin warrior {
-  color: $blood-color !important;
+  color: $warrior-color !important;
 }
 
 @mixin thief {
-  color: darken($rare-color, 20%) !important;
+  color: $thief-color !important;
 }
 
 @mixin ranger {
-  color: darken($advanced-color, 20%) !important;
+  color: $ranger-color !important;
 }
 
 @mixin forge {
   color: $forge-color;
+}
+
+@mixin battle {
+  color: $battle-color;
+}
+
+@mixin glow($color) {
+  border: solid 1px $color;
+  @include box-shadow(rgba($color, 0.4) 0 0 15px, rgba($color, 0.2) 0 0 3px 1px inset);
 }
 
 @mixin rarity {
@@ -177,6 +191,10 @@ $sidebar-width: 250px;
 
   .forge {
     @include forge;
+  }
+
+  .battle {
+    @include battle;
   }
 
   label {

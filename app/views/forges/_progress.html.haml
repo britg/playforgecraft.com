@@ -1,19 +1,10 @@
 .progress
 
-  .funds
-    %span.stat Funds:
-    %span.amount
-      - if forge.requires_funding?
-        = number_with_delimiter(forge.funds)
-      - else
-        %span.infinite &#8734;
-    = image_tag "coin.png", :class => "icon"
-
   .completion
     .bar-wrap
-      .bar{ :style => "width: #{forge.progress_percent}%" }
+      .bar{ :style => "width: #{forge.progress_percent}%", :class => (forge.complete? ? "complete" : nil) }
 
-    .percent
+    .percent{ :class => (forge.complete? ? "complete" : nil) }
       %span.amount= forge.progress_percent
       = "% complete"
 

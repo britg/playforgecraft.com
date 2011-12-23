@@ -388,8 +388,7 @@ html.no-touch {
   margin-bottom: 10px;
 
   &.current {
-    border: solid 1px $advanced-color;
-    @include box-shadow(rgba($advanced-color, 0.4) 0 0 15px, rgba($advanced-color, 0.2) 0 0 3px 1px inset);
+    // @include glow($advanced-color);
   }
 
   &.last {
@@ -409,6 +408,12 @@ html.no-touch {
   .details {
     @include clearfix;
     padding: 10px;
+  }
+
+  .complete-checkmark {
+    float: right;
+    font-weight: bold;
+    color: $advanced-color;
   }
 }
 
@@ -456,6 +461,10 @@ html.no-touch {
     font-size: 90%;
     margin-left: 5px;
     color: $highlight-color;
+
+    &.complete {
+      color: $advanced-color;
+    }
   }
 
   .requirements {

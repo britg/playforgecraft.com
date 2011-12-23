@@ -3,11 +3,8 @@
   .hero.warrior.span-one-third
     .inner
       
+      = render "heroes/inline_stats", :hero => player.warrior
       %h3.name= player.warrior
-
-      .stats
-
-        = render "heroes/stats", :hero => player.warrior
 
       .equipment
 
@@ -17,11 +14,8 @@
   .hero.thief.span-one-third
     .inner
       
+      = render "heroes/inline_stats", :hero => player.thief
       %h3.name= player.thief
-
-      .stats
-
-        = render "heroes/stats", :hero => player.thief
 
       .equipment
       
@@ -30,11 +24,8 @@
   .hero.ranger.span-one-third
     .inner
       
+      = render "heroes/inline_stats", :hero => player.ranger
       %h3.name= player.ranger
-
-      .stats
-
-        = render "heroes/stats", :hero => player.ranger
 
       .equipment
       
