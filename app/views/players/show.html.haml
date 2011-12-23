@@ -84,6 +84,6 @@
             - @player.loot.order("rating desc").limit(9).each do |loot|
               = render "items/loot", :loot => loot
 
-          = link_to "View Full Armory &rarr;".html_safe, armory_index_path, :class => "btn primary"
+          = link_to "View Full Armory &rarr;".html_safe, armory_index_path, :class => "btn primary" if @player == current_player
 
   .clear
