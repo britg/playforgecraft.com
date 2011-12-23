@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   layout :detect_layout
 
-  before_filter :update_last_active
+  before_filter :require_player!, :unless => :open_routes
 
   helper_method :admin?, :current_user, :current_player,
                 :current_zone, :current_mine
@@ -57,6 +57,11 @@ class ApplicationController < ActionController::Base
   def update_last_active
     return unless current_player.present?
     current_player.touch(:last_active_at)
+  end
+
+  def open_routes
+    devise_controller? or \
+    params[:controller] == "users"
   end
 
 end

@@ -1,7 +1,5 @@
 class PlayersController < ApplicationController
 
-  before_filter :require_player!
-
   def index
     select_nav 'ladder'
   end
