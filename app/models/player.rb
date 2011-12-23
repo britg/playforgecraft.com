@@ -243,4 +243,38 @@ class Player < ActiveRecord::Base
     !forge.complete?
   end
 
+  # Loot
+
+  def best_set
+    [best_sword, best_axe, best_crossbow, best_shield, best_leggings, best_tunic].compact
+  end
+
+  def best_loot
+    loot.includes(:item).order("loots.rating desc").limit(1)
+  end
+
+  def best_sword
+    best_loot.where('items.classification_id' => Classification.sword).first
+  end
+
+  def best_axe
+    best_loot.where('items.classification_id' => Classification.axe).first
+  end
+
+  def best_crossbow
+    best_loot.where('items.classification_id' => Classification.crossbow).first
+  end
+
+  def best_shield
+    best_loot.where('items.classification_id' => Classification.shield).first
+  end
+
+  def best_leggings
+    best_loot.where('items.classification_id' => Classification.leggings).first
+  end
+
+  def best_tunic
+    best_loot.where('items.classification_id' => Classification.tunic).first
+  end
+
 end

@@ -100,7 +100,7 @@
 
           .exceptional-loot
 
-            - @player.loot.order("rating desc").limit(6).each do |loot|
+            - @player.best_set.each do |loot|
               = render "items/loot", :loot => loot
 
   .clear

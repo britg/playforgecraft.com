@@ -43,27 +43,27 @@ class Classification < ActiveRecord::Base
     end
 
     def sword
-      Classification.find_by_name("Sword")
+      @sword = Classification.find_by_name("Sword")
     end
 
     def axe
-      Classification.find_by_name("Axe")
+      @axe = Classification.find_by_name("Axe")
     end
 
     def crossbow
-      Classification.find_by_name("Crossbow")
+      @crossbow = Classification.find_by_name("Crossbow")
     end
 
     def shield
-      Classification.find_by_name("Shield")
+      @shield = Classification.find_by_name("Shield")
     end
 
     def leggings
-      Classification.find_by_name("Legging")
+      @leggings = Classification.find_by_name("Legging")
     end
     
     def tunic
-      Classification.find_by_name("Tunic")
+      @tunic = Classification.find_by_name("Tunic")
     end
 
   end
