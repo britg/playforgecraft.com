@@ -8,7 +8,7 @@
     
     #event-list
 
-      - @forge.events.reverse.each do |event|
+      - @forge.events.reverse.take(20).each do |event|
         = render "events/#{event.type}", :event => event
 
   - if @forge.complete? and @forge.requires_funding?
