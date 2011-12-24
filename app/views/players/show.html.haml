@@ -50,7 +50,7 @@
 
         - if @player == current_player and current_player.practice_forge.present?
 
-          = link_to "Practice &rarr;".html_safe, forge_path(current_player.practice_forge), :class => "btn danger practice"
+          = link_to "Practice &rarr;".html_safe, forge_path(current_player.practice_forge), :class => "btn primary practice"
 
         %h1.heading 
           Forges
@@ -81,7 +81,7 @@
           = form_for [current_player.practice_forge, Event.new] do |f|
             = f.hidden_field :type, :value => Event::BATTLE_TYPE
 
-            = f.submit "Spar &rarr;".html_safe, :class => "btn danger practice"
+            = f.submit "Spar &rarr;".html_safe, :class => "btn primary practice"
 
         %h1.heading Elite Guard
 
@@ -96,7 +96,7 @@
         - if @player.loot.any?
 
           - if @player == current_player
-            = link_to "Armory &rarr;".html_safe, armory_index_path, :class => "btn danger practice"
+            = link_to "Armory &rarr;".html_safe, armory_index_path, :class => "btn primary practice"
 
           %h1.heading Showcase
 
