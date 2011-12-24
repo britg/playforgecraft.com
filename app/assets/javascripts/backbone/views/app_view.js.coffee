@@ -26,6 +26,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
 
   startAppContext: (path) ->
     console.log "Starting app context with", path
+    $('body').scrollTop(0)
 
     ForgeCraft.Audio.stop('forge_bg')
 
