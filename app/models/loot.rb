@@ -6,9 +6,6 @@ class Loot < ActiveRecord::Base
   RARE_THRESHOLD = 94.9
   EPIC_THRESHOLD = 99.0
 
-  PERFECT_ACCURACY = 92
-  UNLOCK_ACCURACY = 80
-
   belongs_to :player
   belongs_to :game
   belongs_to :action
@@ -47,7 +44,7 @@ class Loot < ActiveRecord::Base
       rand        = Random.new
       chance      = rand.rand(1000).to_f/10.0
 
-      rarity = (accuracy.present? and accuracy > 95) ? Rarity.advanced : Rarity.common
+      rarity = (accuracy.present? and accuracy > Forge::PERFECT_ACCURACY) ? Rarity.advanced : Rarity.common
 
       if forge.has_rarity?(Rarity.epic) and chance >= EPIC_THRESHOLD
         return Rarity.epic
@@ -66,12 +63,6 @@ class Loot < ActiveRecord::Base
 
     def best item
       of_item(item).order("rating desc").first
-    end
-
-    def random_battle? forge
-      return false unless forge.battle_chance.present?
-      return false unless forge.battle_chance > 0
-      Random.new.rand(100) <= forge.battle_chance
     end
 
   end
@@ -125,12 +116,8 @@ class Loot < ActiveRecord::Base
   end
 
   def set_stats accuracy
-    accuracy = Random.new.rand(50) unless accuracy
     self.attack = stat_by_accuracy(item.attack_min, item.attack_max, accuracy)
     self.defense = stat_by_accuracy(item.defense_min, item.defense_max, accuracy)
-
-    forge.generate_message_event("Ores Unlocked!") if accuracy >= UNLOCK_ACCURACY
-    forge.generate_message_event("Perfect!") if accuracy >= PERFECT_ACCURACY
   end
 
   def stat_by_accuracy(min, max, accuracy)

@@ -1,6 +1,10 @@
 class Forge
   include Mongoid::Document
 
+  PERFECT_ACCURACY = 92
+  UNLOCK_ACCURACY = 80
+  DEFAULT_ACCURACY = 50
+
   field :mine_id, :type => Integer
   field :zone_id, :type => Integer
   field :player_id, :type => Integer
@@ -115,6 +119,18 @@ class Forge
     self.update_attributes(:complete => finished?)
   end
 
+  # Battle
+
+  def roll_battle!
+    generate_battle_event if random_battle?
+  end
+
+  def random_battle?
+    return false unless battle_chance.present?
+    return false unless battle_chance > 0
+    Random.new.rand(100) <= battle_chance
+  end
+
   # Events
 
   def events_after time
@@ -131,6 +147,11 @@ class Forge
 
   def generate_message_event msg
     events.create(:type => Event::MESSAGE_TYPE, :message => msg)
+  end
+
+  def generate_accuracy_events accuracy
+    generate_message_event("Perfect Forge!") if accuracy >= PERFECT_ACCURACY
+    generate_message_event("Ores Unlocked!") if accuracy >= UNLOCK_ACCURACY
   end
 
 end

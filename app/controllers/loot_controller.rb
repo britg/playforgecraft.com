@@ -22,21 +22,28 @@ class LootController < ApplicationController
     @start_time     = Time.now
     @classification = Classification.find_by_name(params[:forging][:classification].capitalize)
     @ore            = Ore.find_by_name(params[:forging][:ore].capitalize)
-    @accuracy       = params[:forging][:accuracy]
-    @loot           = Loot.generate(@classification, @ore, @accuracy, current_player, @forge)
+    
+    @accuracy = params[:forging][:accuracy]||Random.new.rand(Forge::DEFAULT_ACCURACY)
+    @forge.generate_accuracy_events @accuracy
+    
+    @loot = Loot.generate(@classification, @ore, @accuracy, current_player, @forge)
 
     if @loot.save
-      @forge.generate_battle_event if Loot.random_battle?(@forge)
+      
+      @forge.roll_battle!
+
       @replacements = Ore.random_set(params[:forging][:ore_count])
 
       @forge.reload
+      @new_events = @forge.events_after(@start_time)
       @new_events_html = render_to_string(:partial => "events/list",
-                                          :locals => {:events => @forge.events_after(@start_time)})
+                                          :locals => {:events => @new_events})
 
       render :json => { :purchased => true, 
                         :loot => @loot,
                         :replacements => @replacements,
                         :player => current_player,
+                        :new_events => @new_events,
                         :new_events_html => @new_events_html}
     else
       render :json => { :purchased => false, :player => current_player }
