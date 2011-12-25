@@ -99,17 +99,17 @@ ActiveRecord::Schema.define(:version => 20111225034928) do
   add_index "emails", ["address"], :name => "index_emails_on_address", :unique => true
 
   create_table "enemies", :force => true do |t|
-    t.string    "name"
-    t.integer   "level_min"
-    t.integer   "level_max"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "avatar_file_name"
-    t.string    "avatar_content_type"
-    t.integer   "avatar_file_size"
-    t.timestamp "avatar_updated_at"
-    t.integer   "attack"
-    t.integer   "defense"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.integer  "attack"
+    t.integer  "defense"
+    t.boolean  "random",              :default => true
+    t.string   "battle_message"
   end
 
   create_table "games", :force => true do |t|
