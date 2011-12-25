@@ -138,7 +138,7 @@ class Forge
   end
 
   def generate_battle_event
-    events.create(:type => Event::BATTLE_TYPE)
+    events.create(:type => Event::BATTLE_TYPE, :enemy_id => Enemy.random.try(:id))
   end
 
   def generate_loot_event loot

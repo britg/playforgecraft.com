@@ -11,8 +11,9 @@ class Event
   embedded_in :forge
 
   field :type
-  field :loot_id, :type => Integer
   field :message
+  field :loot_id, :type => Integer
+  field :enemy_id, :type => Integer
 
   class << self
 
@@ -29,6 +30,12 @@ class Event
 
   def loot
     @loot||=Loot.find_by_id(loot_id)
+  end
+
+  # Enemy
+
+  def enemy
+    Enemy.find_by_id(self.enemy_id)
   end
 
 end
