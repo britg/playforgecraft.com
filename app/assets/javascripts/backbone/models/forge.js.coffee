@@ -92,16 +92,23 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
       forgeable.unableToPurchase(params)
     
   convertToLoot: (params) ->
-    loot = new ForgeCraft.Models.Loot(params.loot)
-    player.set(params.player)
-    Loot.add(loot)
-    Ores.addReplacements(params.replacements)
-    @consumeOres()
-    eventsView.addEventsHTML(params.new_events_html)
+
     Forgings.remove(@)
+    player.set(params.player)
+    
+    # Ores
+    @consumeOres()
+    Ores.addReplacements(params.replacements)
     setTimeout ->
       $('.ore').removeClass("unmarked")
     , 500
+
+    # Loot
+    loot = new ForgeCraft.Models.Loot(params.loot)
+    Loot.add(loot)
+
+    # Events
+    eventsView.addEventsHTML(params.new_events_html)
 
   unableToPurchase: (params) ->
     @unmarkOres()
