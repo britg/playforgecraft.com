@@ -10,6 +10,14 @@ class Enemy < ActiveRecord::Base
     :path => "/:class/:id/:attachment/:style.:extension",
     :styles => { :full => ["200x200#", :jpg], :thumb => ["100x100#", :jpg], :tiny => ["50x50#", :jpg] }
 
+  class << self
+
+    def for_forge forge
+      where(:random => true).random
+    end
+
+  end
+  
   def to_s
     name
   end
