@@ -30,6 +30,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
 
     ForgeCraft.Audio.stop('forge_bg')
 
+    return if path.match '/logout'
     @startForge() if path.match '/forges/'
     @startBattle() if path.match '/battles/'
     @startMap() if path.match '/map'
@@ -67,27 +68,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
     $('.notice').alert()
 
   bindPopovers: ->
-    return if Modernizr.touch
-    $('.loot-icon').popover({
-      html: true
-      title: ->
-        classes = $(this).attr("data-type")
-        title = $(this).attr('data-original-title')
-        return '<span class="' + classes + '">' + title + '</span>'
-      content: ->
-        attack = $(this).attr('data-attack')
-        defense = $(this).attr('data-defense')
-
-        out = ""
-        if attack? and attack > 0
-          out += '<span class="attack">' + attack + '</span>'
-
-        if defense? and defense > 0
-          out += '<span class="defense">' + defense + '</span>'
-
-        out
-
-    })
+    
 
   hideAllPopovers: ->
     $('.popover').remove()

@@ -28,6 +28,8 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     "map" : "map"
     "map/:ident" : "mapShow"
 
+    "logout" : "logout"
+
     ":player": "player"
 
   # User
@@ -91,3 +93,10 @@ class ForgeCraft.Routers.Router extends Backbone.Router
   battle: (id) ->
     menuView.selectNav('battle')
     @load '/battles/' + id
+
+  # Logout
+
+  logout: ->
+    @load "/logout", ->
+      $(document).trigger("close.facebox")
+      Backbone.history.navigate("/")
