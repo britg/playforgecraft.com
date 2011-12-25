@@ -1,5 +1,8 @@
 class ForgeCraft.Models.Forge extends Backbone.Model
 
+  initialize: ->
+    @events = new ForgeCraft.Collections.Events ForgeCraft.Config.latest_event
+
   hasEnoughFunds: (amount) ->
     return yes unless @get("requires_funding")
     @get("funds") > amount
@@ -108,6 +111,7 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
     Loot.add(loot)
 
     # Events
+    forge.events.add params.new_events.reverse()
     eventsView.addEventsHTML(params.new_events_html)
 
   unableToPurchase: (params) ->

@@ -126,6 +126,7 @@ class Forge
   end
 
   def random_battle?
+    return true
     return false unless battle_chance.present?
     return false unless battle_chance > 0
     Random.new.rand(100) <= battle_chance

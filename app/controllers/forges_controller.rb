@@ -7,6 +7,8 @@ class ForgesController < ApplicationController
 
   def show
     @forge = Forge.where(:_id => params[:id]).first
+    @events = @forge.events.reverse.take(20)
+    @latest_event = @events.take(1)
     redirect_to(player_path(current_player)) and return unless @forge.present?
     @loot = @forge.loot.limit(20)
     current_player.update_attributes(:mine_id => @forge.mine_id)

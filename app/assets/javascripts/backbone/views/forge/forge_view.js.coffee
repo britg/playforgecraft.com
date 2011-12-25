@@ -21,7 +21,6 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @model.bind "change:complete", @complete, @
     @model.bind "ForgeCraft:NeedMoreCoins", @shakeFunds, @
 
-
     window.Ores = new ForgeCraft.Collections.OresCollection
     Ores.bind "add", @displayOre, @
     Ores.bind "reveal", @displayAllOres, @

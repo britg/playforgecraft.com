@@ -7,9 +7,7 @@
       = render "forges/progress", :forge => @forge
     
     #event-list
-
-      - @forge.events.reverse.take(20).each do |event|
-        = render "events/#{event.type}", :event => event
+      = render "events/list", :events => @events
 
   - if @forge.complete? and @forge.requires_funding?
     #complete
@@ -23,6 +21,7 @@
 
 :javascript
   ForgeCraft.Config.forge = #{@forge.to_json}
+  ForgeCraft.Config.latest_event = #{@latest_event.to_json}
   ForgeCraft.Config.ores = #{Ore.tile_urls.to_json}
   ForgeCraft.Config.loot = #{@loot.to_json}
   ForgeCraft.Config.perfect_accuracy = #{Forge::PERFECT_ACCURACY}

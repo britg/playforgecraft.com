@@ -23,6 +23,14 @@ class Event
 
   end
 
+  def serializable_hash(opts={})
+    super((opts||{}).merge(:methods => [:enemy]))
+  end
+
+  def to_css_class
+    "#{type}"
+  end
+
   def loot= loot
     self.loot_id = @loot.try(:id)
     @loot = Loot.find_by_id(loot_id)
