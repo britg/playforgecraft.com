@@ -1,0 +1,16 @@
+@import "base";
+
+#enemy {
+
+  position: fixed;
+  height: 0;
+  width: 0;
+  
+  .enemy {
+    padding: 20px;
+  }
+
+  .flee {
+    float: right;
+  }
+}

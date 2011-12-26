@@ -7,6 +7,19 @@ class ForgeCraft.Models.Forge extends Backbone.Model
     return yes unless @get("requires_funding")
     @get("funds") > amount
   
+  processEventResponse: (params) ->
+
+    if params.player?
+      player.set(params.player)
+
+    # Loot
+    if params.loot?
+      loot = new ForgeCraft.Models.Loot(params.loot)
+      Loot.add(loot)
+
+    # Events
+    forge.events.add params.new_events.reverse()
+    eventsView.addEventsHTML(params.new_events_html)
 
 class ForgeCraft.Models.Forgeable extends Backbone.Model
   
@@ -90,11 +103,11 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
     console.log "Response from server is:", params
 
     if params.purchased
-      forgeable.convertToLoot(params)
+      forgeable.processEventResponse(params)
     else
       forgeable.unableToPurchase(params)
     
-  convertToLoot: (params) ->
+  processEventResponse: (params) ->
 
     Forgings.remove(@)
     player.set(params.player)

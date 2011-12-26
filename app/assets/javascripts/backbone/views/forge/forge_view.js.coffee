@@ -84,7 +84,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @sidebarWidth   = $('#sidebar').width()
 
     $('#ores').css width: (@forgeWidth - @sidebarWidth - 20), height: @forgeHeight
-    $('#battle').css width: (@forgeWidth - @sidebarWidth - 20), height: @forgeHeight
+    $('#enemy').css width: (@forgeWidth - @sidebarWidth - 20), height: @forgeHeight
     
     @topOffset      = parseInt($('#ores').css('paddingTop'))
 
@@ -228,3 +228,19 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
       $('#ores')
         .html("(Placeholder) Congrats, you completed this forge.")
         .fadeIn()
+
+  # Enemies
+
+  startFight: ->
+    $('#ores').fadeOut()
+    splashView.queueMessage "Enemies Attack!"
+    $('#enemy').fadeIn ->
+      loadingView.show()
+      $('#enemy').load "/forges/" + forge.get("id") + "/enemies/" + forge.enemy.get("id"), ->
+        loadingView.hide()
+        forge.enemy.view = new ForgeCraft.Views.EnemyView model: forge.enemy
+
+  endFight: ->
+    $('#enemy').fadeOut ->
+      $('#ores').fadeIn()
+      $('#enemy').html('')

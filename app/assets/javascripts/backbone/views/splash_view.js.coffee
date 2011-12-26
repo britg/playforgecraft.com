@@ -22,7 +22,7 @@ class ForgeCraft.Views.SplashView extends Backbone.View
     @showMessage(nextMsg)
     setTimeout =>
       @showMessages()
-    , 1000
+    , 1400
 
 
   showMessage: (message) ->
@@ -35,4 +35,4 @@ class ForgeCraft.Views.SplashView extends Backbone.View
     setTimeout =>
       $(@el).fadeOut "fast", =>
         $(@el).css fontSize: "10px"
-    , 600
+    , 1000

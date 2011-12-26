@@ -34,10 +34,7 @@ class LootController < ApplicationController
 
       @replacements = Ore.random_set(params[:forging][:ore_count])
 
-      @forge.reload
-      @new_events = @forge.events_after(@start_time)
-      @new_events_html = render_to_string(:partial => "events/list",
-                                          :locals => {:events => @new_events})
+      set_new_forge_events(@start_time)
 
       render :json => { :purchased => true, 
                         :loot => @loot,

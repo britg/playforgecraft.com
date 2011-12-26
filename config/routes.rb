@@ -33,6 +33,7 @@ ForgeCraft::Application.routes.draw do
       post :swap, :on => :collection
     end
     resources :events, :only => [:create, :index]
+    resources :enemies, :only => [:show, :update]
   end
   
   resources :loot, :only => [:index, :show, :destroy]

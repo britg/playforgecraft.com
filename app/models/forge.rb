@@ -126,7 +126,6 @@ class Forge
   end
 
   def random_battle?
-    return true
     return false unless battle_chance.present?
     return false unless battle_chance > 0
     Random.new.rand(100) <= battle_chance
@@ -154,6 +153,14 @@ class Forge
   def generate_accuracy_events accuracy
     generate_message_event("Perfect Forge!") if accuracy >= PERFECT_ACCURACY
     generate_message_event("Ores Unlocked!") if accuracy >= UNLOCK_ACCURACY
+  end
+
+  def generate_battle_win_event
+    generate_message_event("Battle won!")
+  end
+
+  def generate_battle_loss_event
+    generate_message_event("Battle lost!")
   end
 
 end

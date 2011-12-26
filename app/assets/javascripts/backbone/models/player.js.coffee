@@ -32,6 +32,10 @@ class ForgeCraft.Models.Player extends Backbone.Model
     ForgeCraft.Config.sound.music = @get("setting").music
     ForgeCraft.Config.sound.effects = @get("setting").effects
     ForgeCraft.Audio.update()
+
+  fleeBattle: ->
+    forge.enemy.win()
+    false
       
   
 class ForgeCraft.Collections.PlayersCollection extends Backbone.Collection

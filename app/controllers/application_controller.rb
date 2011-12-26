@@ -64,4 +64,11 @@ class ApplicationController < ActionController::Base
     params[:controller] == "users"
   end
 
+  def set_new_forge_events time
+    @forge.reload
+    @new_events = @forge.events_after(time)
+    @new_events_html = render_to_string(:partial => "events/list",
+                                        :locals => {:events => @new_events})
+  end
+
 end

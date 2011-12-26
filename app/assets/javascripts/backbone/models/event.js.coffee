@@ -7,10 +7,11 @@ class ForgeCraft.Models.Event extends Backbone.Model
     @bind "add", @process, @
 
   process: ->
-    @processBattle() if @get("battle")?
+    @processBattle() if @get("enemy")?
 
   processBattle: ->
-    console.log "Processing battle!", @get("enemy")
+    forge.enemy = new ForgeCraft.Models.Enemy(@get("enemy"))
+    forge.enemy.start()
 
 
 class ForgeCraft.Collections.Events extends Backbone.Collection
@@ -21,3 +22,8 @@ class ForgeCraft.Collections.Events extends Backbone.Collection
 
   lastEvent: ->
     @at @length-1
+
+  processLastEvent: ->
+    ev = @lastEvent()
+    console.log "Processing event", ev
+    ev.process()

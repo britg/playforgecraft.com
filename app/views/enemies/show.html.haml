@@ -1,0 +1,3 @@
+.enemy{ :id => dom_id(@enemy) }
+  = link_to "Flee From Battle", "javascript:player.fleeBattle()", "data-external" => true, :class => 'flee btn danger'
+  %h1= @enemy.name
