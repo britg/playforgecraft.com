@@ -68,8 +68,6 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     window.eventsView = new ForgeCraft.Views.EventsView
 
   # Ores
-
-
   clearOres: ->
     $('#ores').html('')
 
@@ -103,7 +101,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     # console.log "Ores width:", @oresWidth, "height:", @oresHeight, "cols:", @cols, "rows:", @rows
 
   initializeOres: ->
-
+    return unless $('#ores').is(":visible")
     # Ask the server for ores
     console.log "Initializing Ores for", @numOres, "ores"
     Ores.initialFill(@numOres)
@@ -234,13 +232,10 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
   startFight: ->
     $('#ores').fadeOut()
     splashView.queueMessage "Enemies Attack!"
-    $('#enemy').fadeIn ->
-      loadingView.show()
-      $('#enemy').load "/forges/" + forge.get("id") + "/enemies/" + forge.enemy.get("id"), ->
-        loadingView.hide()
-        forge.enemy.view = new ForgeCraft.Views.EnemyView model: forge.enemy
+    window.enemyView = new ForgeCraft.Views.EnemyView
 
   endFight: ->
-    $('#enemy').fadeOut ->
-      $('#ores').fadeIn()
-      $('#enemy').html('')
+    window.enemyView.end()
+
+    if $('.ore').length < 1
+      @renderForge()
