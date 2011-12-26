@@ -11,21 +11,30 @@
 
 .lanes
 
-  .lane
+  .lane.thief
     .hero.thief
       = image_tag Classification.sword.default_icon.url(:thumb), :class => "icon"
       %span.name Thief
       = render "heroes/inline_stats", :hero => current_player.thief
 
+    .zone.thief
+      .crit
 
-  .lane
+  .lane.warrior
     .hero.warrior
       = image_tag Classification.shield.default_icon.url(:thumb), :class => "icon"
       %span.name Warrior
       = render "heroes/inline_stats", :hero => current_player.warrior
 
-  .lane
+    .zone.warrior
+      .crit
+      
+      
+  .lane.ranger
     .hero.ranger
       = image_tag Classification.crossbow.default_icon.url(:thumb), :class => "icon"
       %span.name Ranger
       = render "heroes/inline_stats", :hero => current_player.ranger
+
+    .zone.ranger
+      .crit

@@ -65,13 +65,16 @@
     }
 
     .hero {
+      cursor: pointer;
       width: 50px;
       height: 50px;
-      cursor: pointer;
       border: solid 2px #ccc;
+      margin-bottom: -52px;
+      margin-right: -52px;
       @include border-radius(5px);
       position: relative;
       top: -27px;
+      z-index: 2;
 
       text-align: center;
 
@@ -103,6 +106,50 @@
       &.ranger {
         border-color: $ranger-color;
         left: 600px;
+      }
+    }
+
+    .zone {
+      background: rgba(120, 120, 120, 0.2);
+      height: 40px;
+      width: 100px;
+      margin-bottom: -40px;
+      position: relative;
+      top: -20px;
+      z-index: 1;
+
+      .crit {
+        background: $highlight-color;
+        height: 50px;
+        width: 10px;
+        position: relative;
+        top: -5px;
+      }
+
+      &.warrior {
+        left: 350px;
+        .crit {
+          background: $warrior-color;
+          left: 40px;
+        }
+      }
+
+      &.thief {
+        left: 520px;
+        width: 170px;
+        .crit {
+          background: $thief-color;
+          left: 75px;
+        }
+      }
+
+      &.ranger {
+        left: 200px;
+        width: 200px;
+        .crit {
+          background: $ranger-color;
+          left: 30px;
+        }
       }
     }
   }
