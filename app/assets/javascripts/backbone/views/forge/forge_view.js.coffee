@@ -6,7 +6,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
   events:
 
     mousedown:  "beginWatchingMovement"
-    # touchstart: "beginWatchingMovement"
+    touchstart: "beginWatchingMovement"
     mousemove:  "watchMovement"
     touchmove:  "watchMovement"
     mouseup:    "attemptForge"
