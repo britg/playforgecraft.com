@@ -2,7 +2,7 @@ class ForgeCraft.Views.GuardView extends Backbone.View
 
   events:
     mousedown: "attack"
-    touchstart: "attack"
+    # touchstart: "attack"
 
   targetLane: ->
     enemyView[@guard + "Target"]
