@@ -50,3 +50,6 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
     $(@el).fadeOut ->
       $('#ores').fadeIn()
       $(@el).html('')
+
+  takeDamage: (damage) ->
+    $(@el).find('.bar').effect("shake", { times: 3, distance: 4 }, 50)

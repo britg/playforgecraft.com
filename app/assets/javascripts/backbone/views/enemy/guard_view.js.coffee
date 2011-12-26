@@ -16,11 +16,11 @@ class ForgeCraft.Views.GuardView extends Backbone.View
     console.log "Zone bounds l:", l, "r:", r
 
     $('.target.' + @guard + ':visible').each (i, t) ->
-      tl = $(t).position().left
+      tl = $('#' + t.id).position().left
       console.log "target position left", tl
       if tl > l and tl < r
-        $(t).remove()
-        enemyView[self.guard + "Target"].takeDamage(1)
+        $('#' + t.id).remove()
+        enemyView.takeDamage(1)
 
     @shakeZone()
 
@@ -28,4 +28,4 @@ class ForgeCraft.Views.GuardView extends Backbone.View
     @zone().effect("shake", { times: 3, distance: 4 }, 50)
 
   takeDamage: (damage) ->
-    @(el).effect("shake", { times: 3, distance: 4 }, 50)
+    $(@el).effect("shake", { times: 3, distance: 4 }, 50)
