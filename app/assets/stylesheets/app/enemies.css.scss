@@ -8,9 +8,103 @@
   
   .enemy {
     padding: 20px;
+    margin-bottom: 20px;
+
+    .name {
+      font-size: 300%;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .inline-stats {
+      .stat {
+        font-size: 200%;
+        color: $highlight-color;
+      }
+
+      .type-icon {
+        width: 15px;
+        vertical-align: -1px;
+        margin-right: 20px
+      }
+    }
   }
 
   .flee {
     float: right;
+    margin-right: 20px;
+    margin-top: 20px;
   }
+
+  
+  #lifebar.bar-wrap {
+    @include inset;
+    height: 10px;
+    width: 300px;
+    overflow: hidden;
+    margin-bottom: 10px;
+
+    .bar {
+      background: lighten($blood-color, 20%);
+      width: 100%;
+      height: 10px;
+      @include border-radius(5px);
+    }
+  }
+
+  .lanes {
+    width: 714px;
+    padding: 20px;
+
+    .lane {
+      width: 100%;
+      height: 5px;
+      margin-bottom: 100px;
+      background: #272727;
+      @include inset;
+    }
+
+    .hero {
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      border: solid 2px #ccc;
+      @include border-radius(5px);
+      position: relative;
+      top: -27px;
+
+      text-align: center;
+
+      .icon {
+        width: 100%;
+        height: 100%;
+      }
+
+      .val {
+        color: $highlight-color;
+      }
+
+      .type-icon {
+        width: 10px;
+        height: 10px;
+        vertical-align: -1px;
+      }
+
+      &.warrior {
+        border-color: $warrior-color;
+        left: 430px
+      }
+
+      &.thief {
+        border-color: $thief-color;
+        left: 520px;
+      }
+
+      &.ranger {
+        border-color: $ranger-color;
+        left: 600px;
+      }
+    }
+  }
+
 }

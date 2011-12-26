@@ -1,3 +1,31 @@
+= link_to "Flee", "javascript:player.fleeBattle()", "data-external" => true, :class => 'flee btn danger'
+
 .enemy{ :id => dom_id(@enemy) }
-  = link_to "Flee From Battle", "javascript:player.fleeBattle()", "data-external" => true, :class => 'flee btn danger'
-  %h1= @enemy.name
+  
+  %h1.name= @enemy.name
+
+  #lifebar.bar-wrap
+    .bar
+
+  = render "heroes/inline_stats", :hero => @enemy
+
+.lanes
+
+  .lane
+    .hero.thief
+      = image_tag Classification.sword.default_icon.url(:thumb), :class => "icon"
+      %span.name Thief
+      = render "heroes/inline_stats", :hero => current_player.thief
+
+
+  .lane
+    .hero.warrior
+      = image_tag Classification.shield.default_icon.url(:thumb), :class => "icon"
+      %span.name Warrior
+      = render "heroes/inline_stats", :hero => current_player.warrior
+
+  .lane
+    .hero.ranger
+      = image_tag Classification.crossbow.default_icon.url(:thumb), :class => "icon"
+      %span.name Ranger
+      = render "heroes/inline_stats", :hero => current_player.ranger
