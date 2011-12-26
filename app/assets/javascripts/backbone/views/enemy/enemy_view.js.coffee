@@ -31,9 +31,14 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
 
   start: ->
     console.log "Starting battle!"
-    @attackInterval = setInterval =>
+    @loop()
+
+  loop: ->
+    wait = 500 + Math.random() * 5000
+    @loopTimeout = setTimeout =>
       @attack()
-    , 3000
+      @loop()
+    , wait
 
   attack: ->
     target = @chooseTarget()
@@ -46,7 +51,7 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
     @[t + "Target"]
 
   end: ->
-    clearInterval(@attackInterval)
+    clearTimeout(@loopTimeout)
     $(@el).fadeOut ->
       $('#ores').fadeIn()
       $(@el).html('')

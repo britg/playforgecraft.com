@@ -4,6 +4,9 @@ class ForgeCraft.Views.GuardView extends Backbone.View
     mousedown: "attack"
     touchstart: "attack"
 
+  targetLane: ->
+    enemyView[@guard + "Target"]
+
   zone: ->
     $('.zone.' + @guard)
 
@@ -19,13 +22,16 @@ class ForgeCraft.Views.GuardView extends Backbone.View
       tl = $('#' + t.id).position().left
       console.log "target position left", tl
       if tl > l and tl < r
-        $('#' + t.id).remove()
-        enemyView.takeDamage(1)
+        self.targetLane().destroyTarget(t.id)
 
-    @shakeZone()
+        setTimeout ->
+          enemyView.takeDamage(1)
+        , 200
 
-  shakeZone: ->
-    @zone().effect("shake", { times: 3, distance: 4 }, 50)
+    @activateZone()
+
+  activateZone: ->
+    @zone().effect("pulsate", { times: 3, }, 50)
 
   takeDamage: (damage) ->
     $(@el).effect("shake", { times: 3, distance: 4 }, 50)

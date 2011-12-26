@@ -21,5 +21,7 @@ class ForgeCraft.Views.TargetView extends Backbone.View
         $actual.remove()
       , 4500
 
-  takeDamage: (damage) ->
-    $('.lane.' + @lane).find('.target:visible').remove()
+  destroyTarget: (id) ->
+    t = $('#' + id)
+    t.css left: t.css("left")
+    t.fadeOut()
