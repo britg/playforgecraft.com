@@ -18,5 +18,9 @@ window.ForgeCraft =
     sound:
       music: true
       effects: true
+    splash:
+      embiggenDelay: 100
+      stickDelay: 1000
+      queueDelay: 1400
 
   Audio: {}
