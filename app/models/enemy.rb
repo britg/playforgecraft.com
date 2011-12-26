@@ -17,6 +17,10 @@ class Enemy < ActiveRecord::Base
     end
 
   end
+
+  def serializable_hash(opts={})
+    super((opts||{}).merge(:only => [:id, :name, :attack, :defense]))
+  end
   
   def to_s
     name

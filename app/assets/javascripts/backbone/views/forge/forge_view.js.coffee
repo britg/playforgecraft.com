@@ -84,7 +84,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @sidebarWidth   = $('#sidebar').width()
 
     $('#ores').css width: (@forgeWidth - @sidebarWidth - 20), height: @forgeHeight
-    $('#effects-canvas').css width: (@forgeWidth - @sidebarWidth - 20), height: @forgeHeight
+    $('#battle').css width: (@forgeWidth - @sidebarWidth - 20), height: @forgeHeight
     
     @topOffset      = parseInt($('#ores').css('paddingTop'))
 
