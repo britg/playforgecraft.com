@@ -5,6 +5,7 @@
   position: fixed;
   height: 0;
   width: 0;
+  background: $background-color asset_url("background.png", image);
   
   .enemy {
     padding: 20px;
