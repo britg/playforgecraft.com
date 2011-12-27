@@ -281,4 +281,12 @@ class Player < ActiveRecord::Base
     best_loot.where('items.classification_id' => Classification.tunic).first
   end
 
+  def defeat_offering
+    offering = loot.includes(:item).where("items.rarity_id" => Rarity.advanced).random
+    unless offering.present?
+      offering = loot.random
+    end
+    offering
+  end
+
 end

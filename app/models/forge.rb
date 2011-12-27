@@ -162,7 +162,7 @@ class Forge
   end
 
   def generate_battle_loss_event
-    loot = player.loot.random
+    loot = player.defeat_offering
     loot.update_attributes(:available => false)
     events.create(:type => Event::BATTLE_LOSS_TYPE, :loot_id => loot.id)
   end
