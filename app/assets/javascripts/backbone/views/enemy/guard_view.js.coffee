@@ -2,7 +2,9 @@ class ForgeCraft.Views.GuardView extends Backbone.View
 
   events:
     mousedown: "attack"
-    # touchstart: "attack"
+    touchstart: "attack"
+    mousemove: "cancelScroll"
+    touchmove: "cancelScroll"
 
   targetLane: ->
     enemyView[@guard + "Target"]
@@ -29,9 +31,13 @@ class ForgeCraft.Views.GuardView extends Backbone.View
         , 200
 
     @activateZone()
+    false
 
   activateZone: ->
     @zone().effect("pulsate", { times: 3, }, 50)
 
   takeDamage: (damage) ->
     $(@el).effect("shake", { times: 3, distance: 4 }, 50)
+
+  cancelScroll: ->
+    false

@@ -1,7 +1,11 @@
 class ForgeCraft.Views.EnemyView extends Backbone.View
 
+  mousedown: "cancelScroll"
+  touchdown: "cancelScroll"
+  mousemove: "cancelScroll"
+  touchmove: "cancelScroll"
+
   initialize: ->
-    @el = $('#enemy').get(0)
     @model = forge.enemy
     @targets = ['warrior', 'thief', 'ranger']
     @reveal()
@@ -58,3 +62,6 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
 
   takeDamage: (damage) ->
     $(@el).find('.bar').effect("shake", { times: 3, distance: 4 }, 50)
+
+  cancelScroll: ->
+    false
