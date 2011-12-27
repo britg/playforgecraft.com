@@ -165,14 +165,17 @@
       display: none;
       @include transition-property("left");
       @include transition-duration("6s");
-      @include transition-timing-function("linear");
 
-      .fast {
-        @include transition-duration("5s");        
+      &.fast {
+        @include transition-duration("5s");
       }
 
-      .slow {
+      &.slow {
         @include transition-duration("7s");
+      }
+
+      &.activated {
+        left: 714px;
       }
     }
   }

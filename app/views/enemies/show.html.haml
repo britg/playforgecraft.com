@@ -1,4 +1,3 @@
-= link_to "Flee", "javascript:player.fleeBattle()", "data-external" => true, :class => 'flee btn danger'
 
 .enemy{ :id => dom_id(@enemy) }
   
@@ -27,3 +26,5 @@
     Keep your guards well equipped by visiting the
     = link_to "Armory", armory_index_path
     or equipping forged loot directly from the sidebar.
+  
+  = link_to "Visit the Armory", armory_index_path, :class => "btn primary"

@@ -17,7 +17,7 @@ class ForgeCraft.Views.LaneView extends Backbone.View
     $actual = $('#' + t.attr("id"))
     $actual.addClass(@chooseSpeed())
     $actual.fadeIn =>
-      $actual.css left: "100%"
+      $actual.addClass("activated")
       $actual.bind 'webkitTransitionEnd', =>
         @targetAttacked($actual.attr("id"))
       $actual.bind 'transitionend', =>
