@@ -19,3 +19,11 @@
       = render "ranger_lane", :guard => current_player.ranger
     - else
       = render "thief_lane", :guard => current_player.thief
+
+.tip
+  
+  %p 
+    %strong Tip:
+    Keep your guards well equipped by visiting the
+    = link_to "Armory", armory_index_path
+    or equipping forged loot directly from the sidebar.

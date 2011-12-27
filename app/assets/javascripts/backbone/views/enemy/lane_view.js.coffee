@@ -20,6 +20,8 @@ class ForgeCraft.Views.LaneView extends Backbone.View
       $actual.css left: "100%"
       $actual.bind 'webkitTransitionEnd', =>
         @targetAttacked($actual.attr("id"))
+      $actual.bind 'transitionend', =>
+        @targetAttacked($actual.attr("id"))
 
   chooseSpeed: ->
     @speeds[Math.floor(Math.random()*2)]
