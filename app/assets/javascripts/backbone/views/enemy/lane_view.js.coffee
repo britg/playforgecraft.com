@@ -3,6 +3,7 @@ class ForgeCraft.Views.LaneView extends Backbone.View
   initialize: (lane) ->
     @speeds = ["fast", "slow"]
     @lane = lane
+    @el = $('.lane.' + @lane).get(0)
 
   createNewTarget: ->
     id = Math.round(Math.random()*10000)
@@ -10,13 +11,13 @@ class ForgeCraft.Views.LaneView extends Backbone.View
 
   attack: ->
     t = @createNewTarget()
-    $('.lane.' + @lane).append(t)
+    $(@el).append(t)
     # console.log("New target with id", t.attr("id"))
 
     $actual = $('#' + t.attr("id"))
     $actual.addClass(@chooseSpeed())
     $actual.fadeIn =>
-      $actual.css left: "97%"
+      $actual.css left: "100%"
       $actual.bind 'webkitTransitionEnd', =>
         @targetAttacked($actual.attr("id"))
 
@@ -37,3 +38,6 @@ class ForgeCraft.Views.LaneView extends Backbone.View
     t.css left: t.css("left")
     t.fadeOut ->
       t.remove()
+
+  removeFromPlay: ->
+    $(@el).effect("pulsate", { times: 3, }, 50).fadeOut()

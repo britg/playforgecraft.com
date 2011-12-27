@@ -7,6 +7,7 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
 
   initialize: ->
     console.log "Initializing enemy!", @
+    @originalDefense = @get("defense")
 
   start: ->
     forgeView.startFight()
@@ -24,6 +25,27 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
 
   takeDamage: (amount) ->
     console.log "Enemy took damage:", amount
+    curr_defense = @get("defense")
+    new_defense = curr_defense - amount
+    if new_defense <= 0
+      new_defense = 0
+      @die()
+    
+    @set defense: new_defense
+
+  defensePercent: ->
+    Math.round((@get("defense")/@originalDefense) * 100)
+
+  die: ->
+    params =
+      _method: "put"
+      winner: "player"
+
+    $.post "/forges/" + forge.get("id") + "/enemies/" + @get("id"), params, (response) ->
+      forge.processEventResponse(response)
+      forgeView.endFight('win')
+
+    return false
 
   win: ->
     params =
@@ -32,7 +54,7 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
 
     $.post "/forges/" + forge.get("id") + "/enemies/" + @get("id"), params, (response) ->
       forge.processEventResponse(response)
-      forgeView.endFight()
+      forgeView.endFight('loss')
 
     return false
 

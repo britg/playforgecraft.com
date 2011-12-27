@@ -155,17 +155,16 @@
     }
 
     .target {
-      width: 1px;
-      height: 1px;
-      margin-bottom: -1px;
-      margin-right: -1px;
-      font-size: 1000%;
-      color: $enemy-color;
+      width: 5px;
+      height: 30px;
+      margin-bottom: -30px;
+      margin-right: -10px;
+      background: $highlight-color;
       position: relative;
-      top: -14px;
+      top: -15px;
       display: none;
       @include transition-property("left");
-      @include transition-duration("10s");
+      @include transition-duration("8s");
       @include transition-timing-function("linear");
 
       .fast {

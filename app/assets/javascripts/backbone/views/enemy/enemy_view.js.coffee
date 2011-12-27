@@ -10,6 +10,8 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
     @targets = ['warrior', 'thief', 'ranger']
     @reveal()
 
+    @model.bind "change:defense", @takeDamage, @
+
   reveal: ->
     self = @
     
@@ -59,7 +61,7 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
     , 1000
 
   loop: ->
-    wait = 1500 + Math.random() * 5000
+    wait = 500 + Math.random() * 3000
     @loopTimeout = setTimeout =>
       @attack()
       @loop()
@@ -81,7 +83,20 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
       $(@el).html('')
 
   takeDamage: (damage) ->
-    $(@el).find('.bar').effect("shake", { times: 3, distance: 4 }, 50)
+    per = @model.defensePercent() + "%"
+    $(@el).find('.bar-wrap').effect("shake", { times: 3, distance: 4 }, 50)
+    $(@el).find('.bar').css width: per
+    $(@el).find('.enemy').find('.val.defense').html(@model.get("defense"))
+
+  removeTarget: (guard) ->
+    i = @targets.indexOf(guard)
+    if i >= 0
+      @targets.splice(i, 1)
+
+    if @targets.length < 1
+      setTimeout =>
+        @model.win()
+      , 1000
 
   cancelScroll: ->
     false

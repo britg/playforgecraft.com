@@ -3,6 +3,7 @@ class ForgeCraft.Models.Guard extends Backbone.Model
   defaults:
     attack: 10
     defense: 20
+    alive: true
 
   calculateDamage: ->
     attack = parseInt(@get('attack'))
@@ -17,5 +18,14 @@ class ForgeCraft.Models.Guard extends Backbone.Model
 
   takeDamage: (amount) ->
     console.log "Guard took damage:", amount
+    curr_defense = @get("defense")
+    new_defense = curr_defense - amount
+    if new_defense <= 0
+      new_defense = 0
+      @die()
+    
+    @set defense: new_defense
 
+  die: ->
+    @set alive: false
   

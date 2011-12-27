@@ -1,9 +1,9 @@
 .inline-stats
 
   %span.stat
-    %span.val= number_with_delimiter(hero.attack)
+    %span.val.attack= number_with_delimiter(hero.attack)
     = image_tag "loot/attack.png", :class => "type-icon"
 
   %span.stat
-    %span.val= number_with_delimiter(hero.defense)
+    %span.val.defense= number_with_delimiter(hero.defense)
     = image_tag "loot/defense.png", :class => "type-icon"

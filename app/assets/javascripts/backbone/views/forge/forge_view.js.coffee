@@ -233,6 +233,9 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     $('#ores').fadeOut()
     window.enemyView = new ForgeCraft.Views.EnemyView el: $('#enemy').get(0)
 
-  endFight: ->
+  endFight: (result) ->
     window.enemyView.end()
     @renderForge() if $('.ore').length < 1
+
+    splashView.queueMessage("Battle won!") if result == "win"
+    splashView.queueMessage("Battle lost!") if result == "loss"

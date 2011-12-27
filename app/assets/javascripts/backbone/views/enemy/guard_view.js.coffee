@@ -8,6 +8,7 @@ class ForgeCraft.Views.GuardView extends Backbone.View
 
   initialize: ->
     @model.bind "change:defense", @takeDamage, @
+    @model.bind "change:alive", @die, @
 
   lane: ->
     enemyView[@guard + "Lane"]
@@ -44,7 +45,14 @@ class ForgeCraft.Views.GuardView extends Backbone.View
     @zone().effect("pulsate", { times: 3, }, 50)
 
   takeDamage: (damage) ->
+    $(@el).find('.val.defense').html(@model.get("defense"))
     $(@el).effect("shake", { times: 3, distance: 4 }, 50)
+
+  die: ->
+    enemyView.removeTarget(@guard)
+    setTimeout =>
+      @lane().removeFromPlay()
+    , 1000
 
   cancelScroll: ->
     false
