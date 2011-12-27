@@ -1,0 +1,102 @@
+#complete
+  
+  %h1.page-title #{forge.to_s} Complete!
+
+  %h3 #{forge.loot.count} Total Items Forged
+
+  %table.stats
+
+    %tr
+      %td.val.epic= forge.loot.epic.count
+      %td.stat Epic
+
+      %td.val.dragonsteel= forge.loot.dragonsteel.count
+      %td.stat 
+        = image_tag Ore.dragonsteel.tile, :class => "icon"
+        Dragonsteel
+
+      %td.val.tunic= forge.loot.tunic.count
+      %td.stat 
+        = image_tag Classification.tunic.default_icon, :class => "icon"
+        Tunics
+
+    %tr
+      %td.val.rare= forge.loot.rare.count
+      %td.stat Rare
+
+      %td.val.mithril= forge.loot.mithril.count
+      %td.stat 
+        = image_tag Ore.mithril.tile, :class => "icon"
+        Mithril
+
+      %td.val.leggings= forge.loot.leggings.count
+      %td.stat 
+        = image_tag Classification.leggings.default_icon, :class => "icon"
+        Leggings
+
+    %tr
+      %td.val.advanced= forge.loot.advanced.count
+      %td.stat Advanced
+
+      %td.val.eldarite= forge.loot.eldarite.count
+      %td.stat 
+        = image_tag Ore.eldarite.tile, :class => "icon"
+        Eldarite
+
+      %td.val.shield= forge.loot.shield.count
+      %td.stat 
+        = image_tag Classification.shield.default_icon, :class => "icon"
+        Shields
+
+    %tr
+      %td.val.common= forge.loot.common.count
+      %td.stat Common
+
+      %td.val.iron= forge.loot.iron.count
+      %td.stat 
+        = image_tag Ore.iron.tile, :class => "icon"
+        Iron
+
+      %td.val.crossbow= forge.loot.crossbow.count
+      %td.stat 
+        = image_tag Classification.crossbow.default_icon, :class => "icon"
+        Crossbows
+
+    %tr
+      %td.val
+      %td.stat
+
+      %td.val.bronze= forge.loot.bronze.count
+      %td.stat
+        = image_tag Ore.bronze.tile, :class => "icon"
+        Bronze
+
+      %td.val.axe= forge.loot.axe.count
+      %td.stat 
+        = image_tag Classification.axe.default_icon, :class => "icon"
+        Axes
+
+    %tr
+      %td.val
+      %td.stat
+
+      %td.val.bone= forge.loot.bone.count
+      %td.stat 
+        = image_tag Ore.bone.tile, :class => "icon"
+        Bone
+
+      %td.val.sword= forge.loot.sword.count
+      %td.stat 
+        = image_tag Classification.sword.default_icon, :class => "icon"
+        Swords
+
+
+  .controls
+    
+    = link_to "Visit the Map &rarr;".html_safe, map_path, :class => "btn primary"
+    %br
+    %br
+
+    = form_for forge do |f|
+      %input{ :type => :hidden, :name => "restart", :value => 1 }
+      = f.submit "Restart this Forge", :class => "btn danger", :confirm => "Are you sure you want to restart this forge?"

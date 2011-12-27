@@ -71,4 +71,8 @@ class Progress
     forge.check_completion
   end
 
+  def reset
+    update_attributes(:quantity => 0, :complete => false)
+  end
+
 end

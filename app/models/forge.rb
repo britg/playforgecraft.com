@@ -167,4 +167,11 @@ class Forge
     events.create(:type => Event::BATTLE_LOSS_TYPE, :loot_id => loot.id)
   end
 
+  def restart!
+    progresses.each do |p|
+      p.reset
+    end
+    update_attributes(:complete => false)
+  end
+
 end

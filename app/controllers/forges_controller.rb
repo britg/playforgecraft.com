@@ -14,6 +14,19 @@ class ForgesController < ApplicationController
     current_player.update_attributes(:mine_id => @forge.mine_id)
   end
 
+  def complete
+    @forge = Forge.where(:_id => params[:id]).first
+    render :partial => "complete", :locals => { :forge => @forge }
+  end
+
+  def update
+    @forge = Forge.where(:_id => params[:id]).first
+    if params[:restart] 
+      @forge.restart!
+    end
+    redirect_to forge_path(@forge)
+  end
+
   def set_nav
     select_nav "forge"
   end

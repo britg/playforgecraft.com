@@ -72,6 +72,70 @@ class Loot < ActiveRecord::Base
       of_item(item).order("rating desc").first
     end
 
+    def epic
+      includes(:item).where("items.rarity_id" => Rarity.epic.id)
+    end
+
+    def rare
+      includes(:item).where("items.rarity_id" => Rarity.rare.id)
+    end
+
+    def advanced
+      includes(:item).where("items.rarity_id" => Rarity.advanced.id)
+    end
+
+    def common
+      includes(:item).where("items.rarity_id" => Rarity.common.id)
+    end
+
+    def dragonsteel
+      includes(:item).where("items.ore_id" => Ore.dragonsteel.id)
+    end
+
+    def mithril
+      includes(:item).where("items.ore_id" => Ore.mithril.id)
+    end
+
+    def eldarite
+      includes(:item).where("items.ore_id" => Ore.eldarite.id)
+    end
+
+    def iron
+      includes(:item).where("items.ore_id" => Ore.iron.id)
+    end
+
+    def bronze
+      includes(:item).where("items.ore_id" => Ore.bronze.id)
+    end
+
+    def bone
+      includes(:item).where("items.ore_id" => Ore.bone.id)
+    end
+
+    def sword
+      includes(:item).where("items.classification_id" => Classification.sword.id)
+    end
+
+    def axe
+      includes(:item).where("items.classification_id" => Classification.axe.id)
+    end
+
+    def crossbow
+      includes(:item).where("items.classification_id" => Classification.crossbow.id)
+    end
+
+    def shield
+      includes(:item).where("items.classification_id" => Classification.shield.id)
+    end
+
+    def leggings
+      includes(:item).where("items.classification_id" => Classification.leggings.id)
+    end
+
+    def tunic
+      includes(:item).where("items.classification_id" => Classification.tunic.id)
+    end
+
   end
 
   def serializable_hash(opts = {})

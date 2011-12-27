@@ -10,8 +10,8 @@
       = render "events/list", :events => @events
 
   - if @forge.complete? and @forge.requires_funding?
-    #complete
-      (Placeholder) This forge is complete
+    = render "complete", :forge => @forge
+    
   - else
 
     #enemy

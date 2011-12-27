@@ -80,7 +80,27 @@ class Ore < ActiveRecord::Base
     end
 
     def dragonsteel
-      Ore.find_by_name("Dragonsteel")
+      @dragonsteel ||= Ore.find_by_name("Dragonsteel")
+    end
+
+    def mithril
+      @mithril ||= Ore.find_by_name("Mithril")
+    end
+
+    def eldarite
+      @eldarite ||= Ore.find_by_name("Eldarite")
+    end
+
+    def iron
+      @iron ||= Ore.find_by_name("Iron")
+    end
+
+    def bronze
+      @bronze ||= Ore.find_by_name("Bronze")
+    end
+
+    def bone
+      @bone ||= Ore.find_by_name("Bone")
     end
 
     def defaults

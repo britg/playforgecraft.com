@@ -223,9 +223,9 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
 
   complete: ->
     $('#ores').fadeOut ->
-      $('#ores')
-        .html("(Placeholder) Congrats, you completed this forge.")
-        .fadeIn()
+      splashView.queueMessage "Forge Complete!"
+      $.get "/forges/" + forge.get("id") + "/complete", (response) ->
+        $('#ores').html(response).fadeIn()
 
   # Enemies
 

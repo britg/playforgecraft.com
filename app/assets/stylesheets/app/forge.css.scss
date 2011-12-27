@@ -384,6 +384,12 @@ html.no-touch {
     float: right;
     margin-top: 20px;
     margin-right: 10px;
+
+    .review {
+      padding: 4px 6px;
+      font-size: 90%;
+      margin-top: -5px;
+    }
   }
 
   .name {
@@ -464,5 +470,43 @@ html.no-touch {
         }
       }
     }
+  }
+}
+
+#complete {
+  padding: 20px;
+  float: left;
+
+  .page-title {
+    font-size: 300%;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  .stats {
+    margin-bottom: 20px;
+    
+    td {
+      vertical-align: bottom;
+    }
+    
+    .val {
+      text-align: right;
+      font-size: 250%;
+      width: 60px;
+    }
+    .stat {
+      font-size: 125%;
+
+      .icon {
+        width: 25px;
+        height: 25px;
+        vertical-align: -4px;
+      }
+    }
+  }
+
+  .controls {
+    text-align: center;
   }
 }

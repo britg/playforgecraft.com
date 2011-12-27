@@ -141,6 +141,34 @@ $sidebar-width: 250px;
   }
 }
 
+@mixin ore {
+  
+  &.bone {
+    color: $bone-color;
+  }
+
+  &.iron {
+    color: $iron-color
+  }
+
+  &.bronze {
+    color: $bronze-color
+  }
+
+  &.eldarite {
+    color: $eldarite-color
+  }
+
+  &.mithril {
+    color: $mithril-color
+  }
+
+  &.dragonsteel {
+    color: $dragonsteel-color
+  }
+
+}
+
 @mixin ore-background {
   &.bone {
     background-color: rgba(113,107,96,0.1);
@@ -187,6 +215,7 @@ $sidebar-width: 250px;
   margin: 0;
 
   @include rarity;
+  @include ore;
 
   #{headings()} {
     font-weight: normal;
