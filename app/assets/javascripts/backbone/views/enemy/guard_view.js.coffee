@@ -27,6 +27,7 @@ class ForgeCraft.Views.GuardView extends Backbone.View
   determineHit: (target) ->
     if @inZone(target)
       @lane().destroyTarget(target.id)
+      ForgeCraft.Audio.play 'slash'
       @model.hit()
 
   inZone: (target) ->
