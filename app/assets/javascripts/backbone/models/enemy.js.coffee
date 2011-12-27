@@ -22,6 +22,9 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
   hit: (guard) ->
     guard.takeDamage(@calculateDamage())
 
+  takeDamage: (amount) ->
+    console.log "Enemy took damage:", amount
+
   win: ->
     params =
       _method: "put"

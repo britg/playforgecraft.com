@@ -11,33 +11,11 @@
 
 .lanes
 
-  .lane.thief
-    .target.thief &middot;
-    #thief.hero.thief{ "data-attack" => current_player.thief.attack, "data-defense" => current_player.thief.defense }
-      = image_tag Classification.sword.default_icon.url(:thumb), :class => "icon"
-      %span.name Thief
-      = render "heroes/inline_stats", :hero => current_player.thief
-
-    .zone.thief
-      .crit
-
-  .lane.warrior
-    .target.warrior &middot;
-    #warrior.hero.warrior{ "data-attack" => current_player.warrior.attack, "data-defense" => current_player.warrior.defense }
-      = image_tag Classification.shield.default_icon.url(:thumb), :class => "icon"
-      %span.name Warrior
-      = render "heroes/inline_stats", :hero => current_player.warrior
-
-    .zone.warrior
-      .crit
-      
-      
-  .lane.ranger
-    .target.ranger &middot;
-    #ranger.hero.ranger{ "data-attack" => current_player.ranger.attack, "data-defense" => current_player.ranger.defense }
-      = image_tag Classification.crossbow.default_icon.url(:thumb), :class => "icon"
-      %span.name Ranger
-      = render "heroes/inline_stats", :hero => current_player.ranger
-
-    .zone.ranger
-      .crit
+  - @seed.each do |name|
+    
+    - if name == "warrior"
+      = render "warrior_lane", :guard => current_player.warrior
+    - elsif name == "ranger"
+      = render "ranger_lane", :guard => current_player.ranger
+    - else
+      = render "thief_lane", :guard => current_player.thief

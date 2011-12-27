@@ -1,0 +1,9 @@
+.lane.ranger
+  .target.ranger &middot;
+  #ranger.hero.ranger{ "data-attack" => guard.attack, "data-defense" => guard.defense }
+    = image_tag Classification.crossbow.default_icon.url(:thumb), :class => "icon"
+    %span.name Ranger
+    = render "heroes/inline_stats", :hero => guard
+
+  .zone.ranger
+    .crit

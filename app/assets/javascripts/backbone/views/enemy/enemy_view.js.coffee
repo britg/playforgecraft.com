@@ -59,7 +59,7 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
     , 1000
 
   loop: ->
-    wait = 500 + Math.random() * 5000
+    wait = 1500 + Math.random() * 5000
     @loopTimeout = setTimeout =>
       @attack()
       @loop()
