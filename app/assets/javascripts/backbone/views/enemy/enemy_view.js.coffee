@@ -12,30 +12,51 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
 
   reveal: ->
     self = @
-    $(@el).fadeIn ->
+    
     loadingView.show()
-    $(@el).load "/forges/" + forge.get("id") + "/enemies/" + @model.get("id"), ->
+    $(self.el).load "/forges/" + forge.get("id") + "/enemies/" + self.model.get("id"), ->
       loadingView.hide()
       self.createGuards()
       self.createTargets()
-      self.start()
+
+      $(self.el).fadeIn ->
+        self.start()
+
 
   createGuards: ->
-    @warrior = new ForgeCraft.Views.GuardView el: $('#warrior').get(0)
-    @warrior.guard = "warrior"
-    @thief = new ForgeCraft.Views.GuardView el: $('#thief').get(0)
-    @thief.guard = "thief"
-    @ranger = new ForgeCraft.Views.GuardView el: $('#ranger').get(0)
-    @ranger.guard = "ranger"
+    warrior_attack = parseInt($('#warrior').attr("data-attack"))
+    warrior_defense = parseInt($('#warrior').attr("data-defense"))
+    @warrior = new ForgeCraft.Models.Guard attack: warrior_attack, defense: warrior_defense
+    @warriorView = new ForgeCraft.Views.GuardView el: $('#warrior').get(0), model: @warrior
+    @warriorView.guard = "warrior"
+
+    thief_attack = parseInt($('#thief').attr("data-attack"))
+    thief_defense = parseInt($('#thief').attr("data-defense"))
+    @thief = new ForgeCraft.Models.Guard attack: thief_attack, defense: thief_defense
+    @thiefView = new ForgeCraft.Views.GuardView el: $('#thief').get(0), model: @thief
+    @thiefView.guard = "thief"
+
+    ranger_attack = parseInt($('#ranger').attr("data-attack"))
+    ranger_defense = parseInt($('#ranger').attr("data-defense"))
+    @ranger = new ForgeCraft.Models.Guard attack: ranger_attack, defense: ranger_defense
+    @rangerView = new ForgeCraft.Views.GuardView el: $('#ranger').get(0), model: @ranger
+    @rangerView.guard = "ranger"
 
   createTargets: ->
-    @warriorTarget = new ForgeCraft.Views.TargetView('warrior')
-    @thiefTarget = new ForgeCraft.Views.TargetView('thief')
-    @rangerTarget = new ForgeCraft.Views.TargetView('ranger')
+    @warriorLane = new ForgeCraft.Views.LaneView('warrior')
+    @warriorLane.model = @warrior
+    @thiefLane = new ForgeCraft.Views.LaneView('thief')
+    @thiefLane.model = @thief
+    @rangerLane = new ForgeCraft.Views.LaneView('ranger')
+    @rangerLane.model = @ranger
 
   start: ->
     console.log "Starting battle!"
-    @loop()
+
+    setTimeout =>
+      splashView.queueMessage "Battle!"
+      @loop()
+    , 1000
 
   loop: ->
     wait = 500 + Math.random() * 5000
@@ -45,14 +66,13 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
     , wait
 
   attack: ->
-    target = @chooseTarget()
-    # console.log "Attacking", target
-    target.attack()
+    lane = @chooseLane()
+    lane.attack()
 
-  chooseTarget: ->
+  chooseLane: ->
     t = @targets[Math.floor(Math.random()*@targets.length)]
     # console.log "Chose", t
-    @[t + "Target"]
+    @[t + "Lane"]
 
   end: ->
     clearTimeout(@loopTimeout)

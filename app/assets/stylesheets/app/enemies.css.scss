@@ -3,8 +3,8 @@
 #enemy {
 
   position: fixed;
-  height: 0;
-  width: 0;
+  min-height: 700px;
+  min-width: 714px;
   background: $background-color asset_url("background.png", image);
   
   .enemy {
@@ -165,14 +165,15 @@
       top: -14px;
       display: none;
       @include transition-property("left");
-      @include transition-duration("4s");
+      @include transition-duration("10s");
+      @include transition-timing-function("linear");
 
       .fast {
-        @include transition-duration("3s");        
+        @include transition-duration("10s");        
       }
 
       .slow {
-        @include transition-duration("5s");
+        @include transition-duration("10s");
       }
     }
   }

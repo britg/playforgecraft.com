@@ -6,32 +6,39 @@ class ForgeCraft.Views.GuardView extends Backbone.View
     mousemove: "cancelScroll"
     touchmove: "cancelScroll"
 
-  targetLane: ->
-    enemyView[@guard + "Target"]
+  initialize: ->
+    @model.bind "change:defense", @takeDamage, @
+
+  lane: ->
+    enemyView[@guard + "Lane"]
 
   zone: ->
     $('.zone.' + @guard)
 
+  targets: ->
+    $('.target.' + @guard + ':visible')
+
   attack: ->
-    self = @
-
-    l = @zone().position().left
-    r = l + @zone().width()
-
-    console.log "Zone bounds l:", l, "r:", r
-
-    $('.target.' + @guard + ':visible').each (i, t) ->
-      tl = $('#' + t.id).position().left
-      console.log "target position left", tl
-      if tl > l and tl < r
-        self.targetLane().destroyTarget(t.id)
-
-        setTimeout ->
-          enemyView.takeDamage(1)
-        , 200
-
+    @determineHit target for target in @targets()
     @activateZone()
     false
+
+  determineHit: (target) ->
+    if @inZone(target)
+      @lane().destroyTarget(target.id)
+      @model.hit()
+
+  inZone: (target) ->
+    $actual     = $('#' + target.id)
+    targetLeft  = $actual.position().left
+    targetRight = targetLeft + $actual.width()
+    zoneLeft    = @zone().position().left
+    zoneRight   = zoneLeft + @zone().width()
+
+    leftIn  = (targetLeft >= zoneLeft) and (targetLeft <= zoneRight)
+    rightIn = (targetRight >= zoneLeft) and (targetRight <= zoneRight)
+
+    leftIn or rightIn
 
   activateZone: ->
     @zone().effect("pulsate", { times: 3, }, 50)

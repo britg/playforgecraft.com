@@ -231,12 +231,8 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
 
   startFight: ->
     $('#ores').fadeOut()
-    # $('html').css height: "100%", overflow: "hidden"
-    splashView.queueMessage "Enemies Attack!"
     window.enemyView = new ForgeCraft.Views.EnemyView el: $('#enemy').get(0)
 
   endFight: ->
     window.enemyView.end()
-    # $('html').css height: "auto", overflow: "auto"
-    if $('.ore').length < 1
-      @renderForge()
+    @renderForge() if $('.ore').length < 1

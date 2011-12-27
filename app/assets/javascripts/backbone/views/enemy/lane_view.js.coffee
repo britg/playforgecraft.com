@@ -1,4 +1,4 @@
-class ForgeCraft.Views.TargetView extends Backbone.View
+class ForgeCraft.Views.LaneView extends Backbone.View
 
   initialize: (lane) ->
     @speeds = ["fast", "slow"]
@@ -17,14 +17,19 @@ class ForgeCraft.Views.TargetView extends Backbone.View
     $actual.addClass(@chooseSpeed())
     $actual.fadeIn =>
       $actual.css left: "97%"
-
-      setTimeout =>
-        # $actual.remove()
-        @destroyTarget($actual.attr("id"))
-      , 4500
+      $actual.bind 'webkitTransitionEnd', =>
+        @targetAttacked($actual.attr("id"))
 
   chooseSpeed: ->
     @speeds[Math.floor(Math.random()*2)]
+
+  targetAttacked: (id) ->
+    console.log "Target made it through! Do damage"
+    forge.enemy.hit(@model)
+    @destroyTarget(id)
+
+  targetKilled: (id) ->
+    @destroyTarget(id)
 
   destroyTarget: (id) ->
     t = $('#' + id)

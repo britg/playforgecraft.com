@@ -1,10 +1,26 @@
 class ForgeCraft.Models.Enemy extends Backbone.Model
 
+  defaults:
+    name: "Enemy"
+    attack: 10
+    defense: 20
+
   initialize: ->
     console.log "Initializing enemy!", @
 
   start: ->
     forgeView.startFight()
+
+  calculateDamage: ->
+    attack = parseInt(@get('attack'))
+    min = attack * 0.7
+    max = attack * 1.3
+    diff = max - min
+    dmg = Math.round(Math.random()*diff + min)
+    return dmg
+
+  hit: (guard) ->
+    guard.takeDamage(@calculateDamage())
 
   win: ->
     params =
