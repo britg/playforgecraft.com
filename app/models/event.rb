@@ -5,6 +5,8 @@ class Event
   MESSAGE_TYPE = "message"
   LOOT_TYPE = "loot"
   BATTLE_TYPE = "battle"
+  BATTLE_WIN_TYPE = "battle_win"
+  BATTLE_LOSS_TYPE = "battle_loss"
 
   TYPES = [LOOT_TYPE, BATTLE_TYPE]
 
@@ -37,7 +39,7 @@ class Event
   end
 
   def loot
-    @loot||=Loot.find_by_id(loot_id)
+    @loot||=Loot.unscoped.find_by_id(loot_id)
   end
 
   # Enemy

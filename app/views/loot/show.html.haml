@@ -6,17 +6,23 @@
 
   .explanation
 
-    - if @loot.player == current_player
-    
-      - if @loot.equipped?
-        This item is equipped
+    - if @loot.available?
 
-      - else
-        Select an enabled slot below to equip this item
+      - if @loot.player == current_player
+      
+        - if @loot.equipped?
+          This item is equipped
 
-    - else 
-      This item belongs to 
-      = link_to @loot.player, @loot.player
+        - else
+          Select an enabled slot below to equip this item
+
+      - else 
+        This item belongs to 
+        = link_to @loot.player, @loot.player
+
+    - else
+      
+      This item is unavailable. It's either been stolen or destroyed!
 
   .heroes-wrap
     = render "heroes/heroes", :player => current_player, :loot => @loot

@@ -1,12 +1,14 @@
+%p.highlight
+  Defeat! You offer the following item in exchange for your life:
+
 - event.loot.tap do |loot|
-  
-  = loot_with_icon loot
-  forged
-  
+
+  %span.lost= loot_with_icon loot
+
   %br
 
   %span.stats
-  
+
     - if loot.attack and loot.attack > 0
       %span.attack
         %span.val= loot.attack
@@ -16,5 +18,3 @@
       %span.defense
         %span.val= loot.defense
         = image_tag "loot/defense.png", :class => "type-icon"
-
-  = link_to "Equip".html_safe, "#", :class => "equip launch-equipper", "data-external" => true, "data-id" => loot.to_param

@@ -13,7 +13,6 @@ class Loot < ActiveRecord::Base
 
   before_create :purchase
   after_save :update_progress
-  after_create :create_event
 
   validates_presence_of :item
 
@@ -30,6 +29,14 @@ class Loot < ActiveRecord::Base
                        :mine_id => player.mine_id )
       loot.set_stats accuracy
       loot
+    end
+
+    def generate_battle_prize forge
+      classification = Classification.random
+      ore = Ore.random
+      accuracy = 100
+      player = forge.player
+      return generate classification, ore, accuracy, player, forge
     end
 
     def roll classification, ore, accuracy, player, forge
@@ -179,11 +186,6 @@ class Loot < ActiveRecord::Base
 
   def update_progress
     forge.update_progress(self)
-  end
-
-  def create_event
-    forge.generate_loot_event(self)
-    true
   end
 
 end

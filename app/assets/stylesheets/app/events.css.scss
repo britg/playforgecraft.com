@@ -30,4 +30,13 @@
   &.message {
     color: $highlight-color;
   }
+
+  .highlight {
+    color: $highlight-color;
+    font-weight: bold;
+  }
+
+  .lost {
+    text-decoration: line-through;
+  }
 }

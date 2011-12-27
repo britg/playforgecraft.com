@@ -164,15 +164,15 @@
       top: -15px;
       display: none;
       @include transition-property("left");
-      @include transition-duration("8s");
+      @include transition-duration("6s");
       @include transition-timing-function("linear");
 
       .fast {
-        @include transition-duration("10s");        
+        @include transition-duration("5s");        
       }
 
       .slow {
-        @include transition-duration("10s");
+        @include transition-duration("7s");
       }
     }
   }

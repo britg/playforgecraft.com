@@ -29,7 +29,7 @@ class LootController < ApplicationController
     @loot = Loot.generate(@classification, @ore, @accuracy, current_player, @forge)
 
     if @loot.save
-      
+      @forge.generate_loot_event(@loot)
       @forge.roll_battle!
 
       @replacements = Ore.random_set(params[:forging][:ore_count])
@@ -49,7 +49,7 @@ class LootController < ApplicationController
   end
 
   def show
-    @loot = Loot.find(params[:id])
+    @loot = Loot.unscoped.find(params[:id])
   end
 
   def update

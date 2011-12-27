@@ -156,11 +156,15 @@ class Forge
   end
 
   def generate_battle_win_event
-    generate_message_event("Battle won!")
+    loot = Loot.generate_battle_prize(self)
+    loot.save
+    events.create(:type => Event::BATTLE_WIN_TYPE, :loot_id => loot.id)
   end
 
   def generate_battle_loss_event
-    generate_message_event("Battle lost!")
+    loot = player.loot.random
+    loot.update_attributes(:available => false)
+    events.create(:type => Event::BATTLE_LOSS_TYPE, :loot_id => loot.id)
   end
 
 end

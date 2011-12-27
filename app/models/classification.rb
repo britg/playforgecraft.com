@@ -66,6 +66,11 @@ class Classification < ActiveRecord::Base
       @tunic = Classification.find_by_name("Tunic")
     end
 
+    def random
+      c = count
+      offset(rand(c)).first
+    end
+
   end
 
   def to_s
