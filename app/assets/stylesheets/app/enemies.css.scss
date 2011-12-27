@@ -165,7 +165,15 @@
       top: -14px;
       display: none;
       @include transition-property("left");
-      @include transition-duration("5s");
+      @include transition-duration("4s");
+
+      .fast {
+        @include transition-duration("3s");        
+      }
+
+      .slow {
+        @include transition-duration("5s");
+      }
     }
   }
 
