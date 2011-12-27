@@ -97,6 +97,10 @@
     %br
     %br
 
+    = link_to "Visit the Armory &rarr;".html_safe, armory_index_path, :class => "btn primary"
+    %br
+    %br
+
     = form_for forge do |f|
       %input{ :type => :hidden, :name => "restart", :value => 1 }
-      = f.submit "Restart this Forge", :class => "btn danger", :confirm => "Are you sure you want to restart this forge?"
+      = f.submit "Restart this Forge", :class => "btn danger", :confirm => "Are you sure you want to restart this forge? You will keep all your loot, but lose your progress and score."

@@ -18,11 +18,14 @@ class Requirement < ActiveRecord::Base
   end
 
   def description
-    if description_fields.any?
-      return description_fields.join(' ')
-    else
-      return "Any Item"
+    out = ""
+    out = description_fields.join(' ')
+
+    unless classification or genre
+      out += " Items"
     end
+
+    return out.titleize
   end
 
 end

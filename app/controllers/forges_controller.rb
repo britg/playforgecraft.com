@@ -16,7 +16,6 @@ class ForgesController < ApplicationController
 
   def complete
     @forge = Forge.where(:_id => params[:id]).first
-    render :partial => "complete", :locals => { :forge => @forge }
   end
 
   def update

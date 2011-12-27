@@ -34,7 +34,7 @@ ForgeCraft::Application.routes.draw do
     end
     resources :events, :only => [:create, :index]
     resources :enemies, :only => [:show, :update]
-    get :complete, :member
+    get :complete, :on => :member
   end
   
   resources :loot, :only => [:index, :show, :destroy]

@@ -168,9 +168,8 @@ class Forge
   end
 
   def restart!
-    progresses.each do |p|
-      p.reset
-    end
+    progresses.destroy_all
+    create_progresses
     update_attributes(:complete => false)
   end
 
