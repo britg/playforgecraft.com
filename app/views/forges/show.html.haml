@@ -9,7 +9,7 @@
     #event-list
       = render "events/list", :events => @events
 
-  - if @forge.complete? and @forge.requires_funding?
+  - if @forge.complete?
     = render "complete", :forge => @forge
     
   - else
