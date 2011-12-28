@@ -24,7 +24,10 @@
       - if admin?
         %li
           = link_to "Admin", admin_dashboard_path, "data-external" => true, :class => "btn primary"
-      
+
+      %li
+        = mail_to "britg@foolishaggro.com", "Contact / Support", "data-external" => true, :subject => "Forgecraft!", :class => "btn primary"
+
       %li
         = link_to "Logout", logout_path, :class => "btn danger"
 

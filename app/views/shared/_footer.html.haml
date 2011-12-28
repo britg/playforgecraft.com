@@ -3,4 +3,4 @@
   %p.copyright 
     &copy; #{Time.now.year} 
     
-    = link_to "Foolish Aggro", login_path
+    = mail_to "britg@foolishaggro.com", "Foolish Aggro", "data-external" => true, :subject => "Forgecraft!"
