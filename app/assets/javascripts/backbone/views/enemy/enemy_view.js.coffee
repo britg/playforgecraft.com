@@ -12,6 +12,27 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
 
     @model.bind "change:defense", @takeDamage, @
 
+    @bindKeys()
+
+  bindKeys: ->
+    $(window).bind 'keydown', @activateGuard
+
+  unbindKeys: ->
+    $(window).unbind 'keydown', @activateGuard
+
+  activateGuard: (e) ->
+    console.log e.which, e.keyCode
+
+    if e.which == 49 or e.keyCode == 49
+      enemyView.guards[0].attack()
+    if e.which == 50 or e.keyCode == 50
+      enemyView.guards[1].attack()
+    if e.which == 51 or e.keyCode == 51
+      enemyView.guards[2].attack()
+
+    return
+      
+
   reveal: ->
     self = @
     
@@ -49,6 +70,16 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
     @rangerView = new ForgeCraft.Views.GuardView el: $('#ranger').get(0), model: @ranger
     @rangerView.guard = "ranger"
 
+    @guards = []
+    $('.lane').each (i, lane) =>
+      which = $(lane).find('.hero').attr("id")
+      if which == "warrior"
+        @guards.push @warriorView
+      else if which == "thief"
+        @guards.push @thiefView
+      else if which == "ranger"
+        @guards.push @rangerView
+
   createTargets: ->
     @warriorLane = new ForgeCraft.Views.LaneView('warrior')
     @warriorLane.model = @warrior
@@ -66,7 +97,7 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
     , 1000
 
   loop: ->
-    wait = 500 + Math.random() * 3000
+    wait = 500 + Math.random() * 2000
     @loopTimeout = setTimeout =>
       @attack()
       @loop()

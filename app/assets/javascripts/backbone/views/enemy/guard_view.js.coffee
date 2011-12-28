@@ -22,6 +22,7 @@ class ForgeCraft.Views.GuardView extends Backbone.View
   attack: ->
     @determineHit target for target in @targets()
     @activateZone()
+    @activateIcon()
     false
 
   determineHit: (target) ->
@@ -42,12 +43,15 @@ class ForgeCraft.Views.GuardView extends Backbone.View
 
     leftIn or rightIn
 
+  activateIcon: ->
+    $(@el).effect("pulsate", { times: 3, }, 50)
+
   activateZone: ->
     @zone().effect("pulsate", { times: 3, }, 50)
 
   takeDamage: (damage) ->
     $(@el).find('.val.defense').html(@model.get("defense"))
-    $(@el).effect("shake", { times: 3, distance: 4 }, 50)
+    $(@el).effect("shake", { times: 3, distance: 2 }, 50)
 
   die: ->
     enemyView.removeTarget(@guard)

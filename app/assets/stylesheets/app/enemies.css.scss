@@ -60,7 +60,7 @@
     .lane {
       width: 100%;
       height: 5px;
-      margin-bottom: 100px;
+      margin-bottom: 110px;
       background: #272727;
       @include inset;
     }
@@ -75,6 +75,7 @@
       @include border-radius(5px);
       position: relative;
       top: -27px;
+      left: 715px;
       z-index: 2;
 
       text-align: center;
@@ -96,17 +97,17 @@
 
       &.warrior {
         border-color: $warrior-color;
-        left: 430px
+        /* left: 430px */
       }
 
       &.thief {
         border-color: $thief-color;
-        left: 520px;
+        /* left: 520px; */
       }
 
       &.ranger {
         border-color: $ranger-color;
-        left: 600px;
+        /* left: 600px; */
       }
     }
 
@@ -186,4 +187,18 @@
     text-align: center;
   }
 
+  .shortcut {
+    display: none;
+    margin-top: -20px;
+    font-weight: bold;
+  }
+
+}
+
+html.no-touch {
+  #enemy {
+    .shortcut {
+      display: block;
+    }  
+  }
 }

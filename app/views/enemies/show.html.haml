@@ -11,14 +11,14 @@
 
 .lanes
 
-  - @seed.each do |name|
+  - @seed.each_with_index do |name, index|
     
     - if name == "warrior"
-      = render "warrior_lane", :guard => current_player.warrior
+      = render "warrior_lane", :guard => current_player.warrior, :key => index+1
     - elsif name == "ranger"
-      = render "ranger_lane", :guard => current_player.ranger
+      = render "ranger_lane", :guard => current_player.ranger, :key => index+1
     - else
-      = render "thief_lane", :guard => current_player.thief
+      = render "thief_lane", :guard => current_player.thief, :key => index+1
 
 .tip
   

@@ -33,6 +33,7 @@ class ForgeCraft.Views.LaneView extends Backbone.View
 
   targetKilled: (id) ->
     @destroyTarget(id)
+    enemyView.attack()
 
   destroyTarget: (id) ->
     t = $('#' + id)

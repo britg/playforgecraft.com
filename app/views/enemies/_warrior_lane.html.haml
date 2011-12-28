@@ -2,6 +2,7 @@
   .target.warrior
   #warrior.hero.warrior{ "data-attack" => guard.attack, "data-defense" => guard.defense }
     = image_tag Classification.shield.default_icon.url(:thumb), :class => "icon"
+    %span.shortcut (#{key})
     %span.name Warrior
     = render "heroes/inline_stats", :hero => guard
 

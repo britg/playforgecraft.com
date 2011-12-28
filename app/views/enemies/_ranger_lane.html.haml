@@ -2,6 +2,7 @@
   .target.ranger
   #ranger.hero.ranger{ "data-attack" => guard.attack, "data-defense" => guard.defense }
     = image_tag Classification.crossbow.default_icon.url(:thumb), :class => "icon"
+    %span.shortcut (#{key})
     %span.name Ranger
     = render "heroes/inline_stats", :hero => guard
 
