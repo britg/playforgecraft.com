@@ -20,10 +20,15 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
       loadingView.hide()
       self.createGuards()
       self.createTargets()
+      self.bindFleeButton()
 
       $(self.el).fadeIn ->
         self.start()
 
+  bindFleeButton: ->
+    $('.flee').click ->
+      forge.enemy.win()
+      return false
 
   createGuards: ->
     warrior_attack = parseInt($('#warrior').attr("data-attack"))

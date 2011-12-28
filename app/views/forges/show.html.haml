@@ -9,13 +9,11 @@
     #event-list
       = render "events/list", :events => @events
 
-  - if @forge.complete?
+  - if @forge.complete? and @latest_event.first.type != "battle"
     = render "complete", :forge => @forge
-    
-  - else
-
-    #enemy
   
+  - else
+    #enemy
     #ores
 
 

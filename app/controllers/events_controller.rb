@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @forge.generate_battle_event
+    @forge.generate_training_event
     
     respond_to do |format|
       format.html{ redirect_to forge_path(@forge) and return }

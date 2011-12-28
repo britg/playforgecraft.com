@@ -3,6 +3,8 @@ class Enemy < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  belongs_to :item
+
   has_attached_file :avatar,
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
@@ -14,6 +16,10 @@ class Enemy < ActiveRecord::Base
 
     def for_forge forge
       where(:random => true).random
+    end
+
+    def training
+      where(:training => true).first
     end
 
   end

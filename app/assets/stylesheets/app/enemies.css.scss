@@ -162,6 +162,7 @@
       background: $highlight-color;
       position: relative;
       top: -15px;
+      left: 0;
       display: none;
       @include transition-property("left");
       @include transition-duration("6s");

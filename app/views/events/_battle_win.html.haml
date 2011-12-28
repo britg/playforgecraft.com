@@ -1,22 +1,25 @@
 %p.highlight
-  Victory! You loot the following item from your enemy's corpse:
+  Victory! 
+  - if event.loot.present? 
+    You loot the following item from your enemy's corpse:
 
-- event.loot.tap do |loot|
+- if event.loot.present?
+  - event.loot.tap do |loot|
 
-  = loot_with_icon loot
+    = loot_with_icon loot
 
-  %br
+    %br
 
-  %span.stats
+    %span.stats
 
-    - if loot.attack and loot.attack > 0
-      %span.attack
-        %span.val= loot.attack
-        = image_tag "loot/attack.png", :class => "type-icon"
-    
-    - if loot.defense and loot.defense > 0
-      %span.defense
-        %span.val= loot.defense
-        = image_tag "loot/defense.png", :class => "type-icon"
+      - if loot.attack and loot.attack > 0
+        %span.attack
+          %span.val= loot.attack
+          = image_tag "loot/attack.png", :class => "type-icon"
+      
+      - if loot.defense and loot.defense > 0
+        %span.defense
+          %span.val= loot.defense
+          = image_tag "loot/defense.png", :class => "type-icon"
 
-  = link_to "Equip".html_safe, "#", :class => "equip launch-equipper", "data-external" => true, "data-id" => loot.to_param
+    = link_to "Equip".html_safe, "#", :class => "equip launch-equipper", "data-external" => true, "data-id" => loot.to_param

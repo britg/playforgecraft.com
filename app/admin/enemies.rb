@@ -8,6 +8,8 @@ ActiveAdmin.register Enemy do
     column :attack
     column :defense
     column :random
+    column :training
+    column :yields_loot
 
     default_actions
   end
@@ -20,6 +22,9 @@ ActiveAdmin.register Enemy do
       f.input :battle_message
       f.input :attack
       f.input :defense
+      f.input :training
+      f.input :yields_loot
+      f.input :item
     end
 
     f.buttons

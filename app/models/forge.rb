@@ -137,6 +137,11 @@ class Forge
     events.where(:created_at.gte => time).reverse
   end
 
+  def generate_training_event
+    enemy = Enemy.training
+    events.create(:type => Event::BATTLE_TYPE, :enemy_id => enemy.try(:id))
+  end
+
   def generate_battle_event
     enemy = Enemy.for_forge(self)
     events.create(:type => Event::BATTLE_TYPE, :enemy_id => enemy.try(:id))
@@ -155,16 +160,24 @@ class Forge
     generate_message_event("Ores Unlocked!") if accuracy >= UNLOCK_ACCURACY
   end
 
-  def generate_battle_win_event
-    loot = Loot.generate_battle_prize(self)
-    loot.save
-    events.create(:type => Event::BATTLE_WIN_TYPE, :loot_id => loot.id)
+  def generate_battle_win_event enemy = nil
+    e = events.build(:type => Event::BATTLE_WIN_TYPE)
+    if enemy.try(:yields_loot?)
+      loot = Loot.generate_battle_prize(self)
+      loot.save
+      e.loot_id = loot.id
+    end
+    e.save
   end
 
-  def generate_battle_loss_event
-    loot = player.defeat_offering
-    loot.update_attributes(:available => false)
-    events.create(:type => Event::BATTLE_LOSS_TYPE, :loot_id => loot.id)
+  def generate_battle_loss_event enemy = nil
+    e = events.build(:type => Event::BATTLE_LOSS_TYPE)
+    if enemy.try(:yields_loot?)
+      loot = player.defeat_offering
+      loot.update_attributes(:available => false)
+      e.loot_id = loot.id
+    end
+    e.save
   end
 
   def restart!

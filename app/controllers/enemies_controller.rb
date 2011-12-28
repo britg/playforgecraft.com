@@ -12,9 +12,9 @@ class EnemiesController < ApplicationController
     @enemy = Enemy.find(params[:id])
 
     if params[:winner] == "enemy"
-      @forge.generate_battle_loss_event
+      @forge.generate_battle_loss_event(@enemy)
     else
-      @forge.generate_battle_win_event
+      @forge.generate_battle_win_event(@enemy)
     end
 
     set_new_forge_events(@start_time)

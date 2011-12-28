@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111225034928) do
+ActiveRecord::Schema.define(:version => 20111228164047) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -110,6 +110,9 @@ ActiveRecord::Schema.define(:version => 20111225034928) do
     t.integer  "defense"
     t.boolean  "random",              :default => true
     t.string   "battle_message"
+    t.boolean  "yields_loot",         :default => true
+    t.boolean  "training",            :default => false
+    t.integer  "item_id"
   end
 
   create_table "games", :force => true do |t|

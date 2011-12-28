@@ -1,20 +1,23 @@
 %p.highlight
-  Defeat! You offer the following item in exchange for your life:
+  Defeat! 
+  - if event.loot.present?
+    You offer the following item in exchange for your life:
 
-- event.loot.tap do |loot|
+- if event.loot.present?
+  - event.loot.tap do |loot|
 
-  %span.lost= loot_with_icon loot
+    %span.lost= loot_with_icon loot
 
-  %br
+    %br
 
-  %span.stats
+    %span.stats
 
-    - if loot.attack and loot.attack > 0
-      %span.attack
-        %span.val= loot.attack
-        = image_tag "loot/attack.png", :class => "type-icon"
-    
-    - if loot.defense and loot.defense > 0
-      %span.defense
-        %span.val= loot.defense
-        = image_tag "loot/defense.png", :class => "type-icon"
+      - if loot.attack and loot.attack > 0
+        %span.attack
+          %span.val= loot.attack
+          = image_tag "loot/attack.png", :class => "type-icon"
+      
+      - if loot.defense and loot.defense > 0
+        %span.defense
+          %span.val= loot.defense
+          = image_tag "loot/defense.png", :class => "type-icon"
