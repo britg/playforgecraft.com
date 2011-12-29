@@ -20,6 +20,7 @@ class ForgeCraft.Views.GuardView extends Backbone.View
     $('.target.' + @guard + ':visible')
 
   attack: ->
+    return if enemyView.ended?
     @determineHit target for target in @targets()
     @activateZone()
     @activateIcon()
