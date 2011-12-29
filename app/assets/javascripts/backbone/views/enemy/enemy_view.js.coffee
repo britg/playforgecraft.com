@@ -113,7 +113,7 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
     @[t + "Lane"]
 
   end: ->
-    @ended = true
+    @model.dead = true
     clearTimeout(@loopTimeout)
     $(@el).fadeOut ->
       $('#ores').fadeIn()

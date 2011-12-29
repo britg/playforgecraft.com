@@ -24,6 +24,7 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
     guard.takeDamage(@calculateDamage())
 
   takeDamage: (amount) ->
+    return if @dead?
     console.log "Enemy took damage:", amount
     curr_defense = @get("defense")
     new_defense = curr_defense - amount
@@ -37,6 +38,7 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
     Math.round((@get("defense")/@originalDefense) * 100)
 
   die: ->
+    @dead = true
     params =
       _method: "put"
       winner: "player"
@@ -48,6 +50,7 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
     return false
 
   win: ->
+    return if @dead?
     params =
       _method: "put"
       winner: "enemy"
