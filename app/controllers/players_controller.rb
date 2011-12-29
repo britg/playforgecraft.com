@@ -2,6 +2,7 @@ class PlayersController < ApplicationController
 
   def index
     select_nav 'ladder'
+    @scores = Score.desc(:score).limit(100)
   end
 
   def show

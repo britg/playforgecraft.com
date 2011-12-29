@@ -23,6 +23,14 @@ class Event
       new :type => LOOT_TYPE, :loot_id => loot.id
     end
 
+    def battles_won
+      where(:type => BATTLE_WIN_TYPE)
+    end
+
+    def battles_lost
+      where(:type => BATTLE_LOSS_TYPE)
+    end
+
   end
 
   def serializable_hash(opts={})

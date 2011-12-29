@@ -6,7 +6,7 @@
 
       .score
         %span.stat Score
-        %span.value= @player.score
+        %span.value= @player.score.score
 
       %h1.player= @player
       .sep
@@ -18,29 +18,29 @@
         %tr
 
           %td.forge
-            %span.count= @player.forge_count
+            %span.count= @player.forges_complete
             Forges Complete
-            (#{@player.forge_percent}%)
+            (#{@player.forges_complete_percent}%)
 
           %td.battle
-            %span.count= @player.battle_win_count
+            %span.count= @player.battles_won_count
             Battles Won
-            (#{@player.battle_win_percent}%)
+            (#{@player.battles_won_percent}%)
 
           %td.total
-            %span.count= @player.item_count
+            %span.count= @player.total_items
             Total Items
-            (#{@player.item_percent}%)
+            (#{@player.total_items_percent}%)
           
           %td.rare
-            %span.count= @player.rare_count
+            %span.count= @player.rare_items
             Rares
-            (#{@player.rare_percent}%)
+            (#{@player.rare_items_percent}%)
 
           %td.epic
-            %span.count= @player.epic_count
+            %span.count= @player.epic_items
             Epics
-            (#{@player.epic_percent}%)
+            (#{@player.epic_items_percent}%)
 
   .row
 

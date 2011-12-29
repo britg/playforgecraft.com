@@ -1,8 +1,9 @@
 #ladder-page.container
 
   .heading.padded
-
-    %h1 Player Ladder
+    %h1 
+      Top 100 Players
+      %span.disclaimer (Updated daily)
 
     %table#ladder
 
@@ -17,29 +18,29 @@
         %th Rares
         %th Epics
       
-      - Player.ladder.each_with_index do |player, i|
+      - @scores.each_with_index do |score, i|
 
         %tr
           %td.rank= i+1
-          %td.score= number_with_delimiter player.score
-          %td.name= link_to player.name, player_path(player)
+          %td.score= number_with_delimiter score.score
+          %td.name= link_to score.player.name, player_path(score.player)
 
           %td.count
-            = player.forge_count
-            (#{player.forge_percent}%)
+            = score.forges_complete
+            (#{score.forges_complete_percent}%)
 
           %td.count
-            = player.battle_win_count
-            (#{player.battle_win_percent}%)
+            = score.battles_won
+            (#{score.battles_won_percent}%)
 
           %td.count
-            = player.item_count
-            (#{player.item_percent}%)
+            = score.total_items
+            (#{score.total_items_percent}%)
 
           %td.count.rare
-            = player.rare_count
-            (#{player.rare_percent}%)
+            = score.rare_items
+            (#{score.rare_items_percent}%)
 
           %td.count.epic
-            = player.epic_count
-            (#{player.epic_percent}%)
+            = score.epic_items
+            (#{score.epic_items_percent}%)

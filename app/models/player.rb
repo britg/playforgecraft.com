@@ -26,18 +26,18 @@ class Player < ActiveRecord::Base
     :styles => { :full => ["200x200#", :jpg], :thumb => ["100x100#", :jpg], :tiny => ["50x50#", :jpg] }
 
   before_validation :generate_url_name
-  after_create :create_setting
+  after_create :create_setting, :create_score
 
   accepts_nested_attributes_for :setting
 
   class << self
 
-    def ladder
-      Player.all.sort_by{ |p| -p.score }
-    end
-
     def range(range_id)
       "#{(range_id.to_i*10+1)}-#{(range_id.to_i+1)*10}"
+    end
+
+    def update_scores!
+      Player.all.map(&:update_score!)
     end
 
   end
@@ -73,66 +73,6 @@ class Player < ActiveRecord::Base
 
   def title
     "Novice Crafstman"
-  end
-
-  def rare_count
-    @rare_count ||= items.rare.uniq.count
-  end
-
-  def rare_percent
-    (rare_count.to_f / Item.rare.count.to_f * 100).round rescue 0
-  end
-
-  def epic_count
-    @epic_count ||= items.epic.uniq.count
-  end
-
-  def epic_percent
-    @epic_percent ||= (epic_count.to_f / Item.epic.count.to_f * 100).round rescue 0
-  end
-
-  def set_count
-    0
-  end
-
-  def set_percent
-    0
-  end
-
-  def item_count
-    @item_count ||= items.uniq.count
-  end
-
-  def item_percent
-    @item_percent ||= (item_count.to_f / Item.all.count.to_f * 100).round rescue 0
-  end
-
-  def work_order_count
-    0
-  end
-
-  def work_order_percent
-    0
-  end
-
-  def forge_count
-    @forge_count ||= forges.completed.count
-  end
-
-  def forge_percent
-    @forge_percent ||= (forge_count.to_f / Mine.count.to_f * 100).round rescue 0
-  end
-
-  def battle_win_count
-    @battle_win_count ||= battles.won_by(self.id).count
-  end
-
-  def battle_win_percent
-    @battle_win_percent ||= (battle_win_count.to_f / battles.count * 100).round rescue 0
-  end
-
-  def score
-    item_count + (rare_count * 16) + (epic_count * 57) + (forge_count * 76) + (battle_win_count*50)
   end
 
   def purchase!(cost)
@@ -287,6 +227,83 @@ class Player < ActiveRecord::Base
       offering = loot.random
     end
     offering
+  end
+
+  # Score
+
+  def rare_items
+    @rare_items ||= items.rare.uniq.count
+  end
+
+  def rare_items_percent
+    @rare_items_percent ||= (rare_items.to_f / Item.rare.count.to_f * 100).round rescue 0
+  end
+
+  def epic_items
+    @epic_items ||= items.epic.uniq.count
+  end
+
+  def epic_items_percent
+    @epic_items_percent ||= (epic_items.to_f / Item.epic.count.to_f * 100).round rescue 0
+  end
+
+  def total_items
+    @total_items ||= items.uniq.count
+  end
+
+  def total_items_percent
+    @total_items_percent ||= (total_items.to_f / Item.all.count.to_f * 100).round rescue 0
+  end
+
+  def forges_complete
+    @forges_complete ||= forges.completed.count
+  end
+
+  def forges_complete_percent
+    @forges_complete_percent ||= (forges_complete.to_f / Mine.count.to_f * 100).round rescue 0
+  end
+
+  def battles_won_count
+    count = 0
+    forges.each do |f|
+      count += f.events.battles_won.count
+    end
+    count
+  end
+
+  def battles_lost_count
+    count = 0
+    forges.each do |f|
+      count += f.events.battles_lost.count
+    end
+    count
+  end
+
+  def battles_won_percent
+    @battles_won_percent ||= (battles_won_count.to_f / (battles_won_count + battles_lost_count) * 100).round rescue 0
+  end
+
+  def score
+    @score ||= (Score.where(:player_id => self.id).first || Score.create(:player_id => self.id))
+  end
+
+  def calculate_score
+    total_items + (rare_items * 16) + (epic_items * 26) + (forges_complete * 76) + (battles_won_count*20)
+  end
+
+  def update_score!
+    score.update_attributes :score => calculate_score,
+                            :battles_won => battles_won_count,
+                            :battles_lost => battles_lost_count,
+                            :battles_won_percent => battles_won_percent,
+                            :forges_complete => forges_complete,
+                            :forges_complete_percent => forges_complete_percent,
+                            :total_items => total_items,
+                            :total_items_percent => total_items_percent,
+                            :rare_items => rare_items,
+                            :rare_items_percent => rare_items_percent,
+                            :epic_items => epic_items,
+                            :epic_items_percent => epic_items_percent
   end
 
 end
