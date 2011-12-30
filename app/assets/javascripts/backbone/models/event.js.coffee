@@ -25,5 +25,6 @@ class ForgeCraft.Collections.Events extends Backbone.Collection
 
   processLastEvent: ->
     ev = @lastEvent()
+    return unless ev?
     console.log "Processing event", ev
     ev.process()
