@@ -67,7 +67,7 @@ tile-sprite.png: tile-sprite-5b3098e088dd4d740b0d8d01bb261f2f.png
 toggle.png: toggle-ea5ac72ff6a909bfbe1cf27fafcf46a8.png
 tooltip.png: tooltip-e0b3f8d25f7be9e676c448a3e46bd5ff.png
 topbar-bg.jpg: topbar-bg-18b3cd13a051399c5e20a18aca92892c.jpg
-backbone/assets/forgecraft.audio.js: backbone/assets/forgecraft-5a9b2be01b0cda7a990f21069c1a954a.audio.js
+backbone/assets/forgecraft.audio.js: backbone/assets/forgecraft-2d927212d35b4e5ba074582f93d8c50a.audio.js
 lib/jquery.defaulttext.js: lib/jquery-5db5c200232cc14ca44b517f7badfb21.defaulttext.js
 lib/jquery.effects.core.js: lib/jquery-da8d668f5bf04970e66e573ff06b3c47.effects.core.js
 lib/jquery.effects.pulsate.js: lib/jquery-f66e4a04285223c71098ef5a42b920de.effects.pulsate.js
@@ -89,5 +89,5 @@ active_admin/nested_menu_arrow_dark.gif: active_admin/nested_menu_arrow_dark-876
 active_admin/orderable.png: active_admin/orderable-003d291622c6610ce91358a266ff0f9a.png
 jquery-ui.min.js: jquery-ui-7e33882a28fc84ad0e0e47e46cbf901c.min.js
 jquery.min.js: jquery-8a50feed8d29566738ad005e19fe1c2d.min.js
-application.js: application-67332fe1225889897e0a885249674da0.js
+application.js: application-eba477ba47bf50727324783c5323cbbe.js
 application.css: application-82231e96d08cfb634bcdf45f78d90769.css
