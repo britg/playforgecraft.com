@@ -25,8 +25,9 @@ ForgeCraft.Audio.play = (id, repeat) ->
     return unless ForgeCraft.Config.sound.music
   else
     return unless ForgeCraft.Config.sound.effects
-    
-  ForgeCraft.Audio.sounds[id].play()
+  
+  sound = ForgeCraft.Audio.sounds[id]
+  sound.play() if sound.play?
 
 ForgeCraft.Audio.playMusic = () ->
   ForgeCraft.Audio.sounds['forge_bg'].play()
@@ -39,4 +40,4 @@ ForgeCraft.Audio.update = ->
 
 ForgeCraft.Audio.stop = (id) ->
   $.each ForgeCraft.Audio.sounds, (i, sound) ->
-    sound.stop()
+    sound.stop() if sound.stop?
