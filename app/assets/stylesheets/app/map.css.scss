@@ -38,22 +38,20 @@
       padding-left: 46px;
       padding-right: 10px;
       color: $highlight-color;
-      background: rgba(0, 0, 0, 0.6) image_url("mine.png") left -40px no-repeat;
-      @include border-radius(5px);
+      background: transparent image_url("mine.png") left -40px no-repeat;
       position: absolute;
       font-size: 125%;
       line-height: 2.3em;
       font-weight: bold;
+      text-indent: -2000em;
 
       &:hover {
         text-decoration: none;
-        border: solid 1px $advanced-color;
-        @include box-shadow(rgba($advanced-color, 0.4) 0 0 15px, rgba($advanced-color, 0.2) 0 0 3px 1px inset);
+        // @include box-shadow(rgba($advanced-color, 0.4) 0 0 15px, rgba($advanced-color, 0.2) 0 0 3px 1px inset);
       }
 
       &.selected {
-        border: solid 1px $rare-color;
-        @include box-shadow(rgba($rare-color, 0.4) 0 0 15px, rgba($rare-color, 0.2) 0 0 3px 1px inset);
+        // @include box-shadow(rgba($rare-color, 0.4) 0 0 15px, rgba($rare-color, 0.2) 0 0 3px 1px inset);
       }
 
       &.unavailable {
@@ -62,8 +60,8 @@
 
         &:hover {
           text-decoration: none;
-          border: solid 1px #ccc;
-          @include box-shadow(rgba(#ccc, 0.4) 0 0 15px, rgba(#ccc, 0.2) 0 0 3px 1px inset);
+          //border: solid 1px #ccc;
+          //@include box-shadow(rgba(#ccc, 0.4) 0 0 15px, rgba(#ccc, 0.2) 0 0 3px 1px inset);
         }
       }
     }
