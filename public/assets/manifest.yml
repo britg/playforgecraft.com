@@ -39,6 +39,7 @@ loot/equipped.png: loot/equipped-261e022633624eca4b54121129f8a670.png
 loot/forged.png: loot/forged-5cde81cf34a76595a6f07839fcd14687.png
 loot/sell.png: loot/sell-5b6a6cad628ed294d69e44a5d218c549.png
 map.jpg: map-4484f0e270e885a0048fced1af2994d1.jpg
+map.png: map-81844cc93667eff57bb6204b5f2f230b.png
 menu/attack.png: menu/attack-d36e112b58730a114cbcaaf915db7c92.png
 menu/chat.png: menu/chat-a91563ee6c48c7b5f45adbabc418cbe9.png
 menu/defense.png: menu/defense-65b72964255f7158d09b2890b75b1612.png
@@ -90,4 +91,4 @@ active_admin/orderable.png: active_admin/orderable-003d291622c6610ce91358a266ff0
 jquery-ui.min.js: jquery-ui-7e33882a28fc84ad0e0e47e46cbf901c.min.js
 jquery.min.js: jquery-8a50feed8d29566738ad005e19fe1c2d.min.js
 application.js: application-eba477ba47bf50727324783c5323cbbe.js
-application.css: application-82231e96d08cfb634bcdf45f78d90769.css
+application.css: application-fd832e5839c4f9e7dd7d67bc41cb143c.css
