@@ -1,12 +1,22 @@
-Crafty.audio.MAX_CHANNELS = 1
-Crafty.audio.add "swap", "/sounds/swap_stone.mp3"
-Crafty.audio.add("forge", ["/sounds/forge.mp3",
-                            "/sounds/forge.wav",
-                            "/sounds/forge.ogg"])
-Crafty.audio.add("slash", ["/sounds/slash.mp3",
-                            "/sounds/slash.wav",
-                            "/sounds/slash.ogg"])
-Crafty.audio.add "forge_bg", "/sounds/forge_bg.mp3"
+# Crafty.audio.MAX_CHANNELS = 1
+# Crafty.audio.add "swap", "/sounds/swap_stone.mp3"
+# Crafty.audio.add("forge", ["/sounds/forge.mp3",
+#                             "/sounds/forge.wav",
+#                             "/sounds/forge.ogg"])
+# Crafty.audio.add("slash", ["/sounds/slash.mp3",
+#                             "/sounds/slash.wav",
+#                             "/sounds/slash.ogg"])
+# Crafty.audio.add "forge_bg", "/sounds/forge_bg.mp3"
+
+ForgeCraft.Audio.sounds = {
+  swap: new Audia("/sounds/swap_stone.mp3"),
+  forge: new Audia("/sounds/forge.mp3"),
+  slash: new Audia("/sounds/slash.mp3"),
+  forge_bg: new Audia({
+    src: "/sounds/forge_bg.mp3",
+    loop: true
+  })
+}
 
 ForgeCraft.Audio.play = (id, repeat) ->
   console.log "Sound settings are", ForgeCraft.Config.sound
@@ -16,21 +26,17 @@ ForgeCraft.Audio.play = (id, repeat) ->
   else
     return unless ForgeCraft.Config.sound.effects
     
-  Crafty.audio.play id, repeat
+  ForgeCraft.Audio.sounds[id].play()
 
 ForgeCraft.Audio.playMusic = () ->
-  ForgeCraft.Audio.play 'forge_bg', -1
+  ForgeCraft.Audio.sounds['forge_bg'].play()
 
 ForgeCraft.Audio.update = ->
   unless ForgeCraft.Config.sound.music
-    ForgeCraft.Audio.stop('forge_bg')
+    ForgeCraft.Audio.sounds['forge_bg'].stop()
   else
     ForgeCraft.Audio.playMusic()
 
 ForgeCraft.Audio.stop = (id) ->
-  elem = Crafty.audio._elems[id]
-  l = elem.length
-
-  # loop over every channel for a sound
-  for el in elem
-    el.pause()
+  $.each ForgeCraft.Audio.sounds, (i, sound) ->
+    sound.stop()
