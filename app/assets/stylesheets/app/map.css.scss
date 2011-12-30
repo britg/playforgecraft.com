@@ -32,6 +32,20 @@
     height: 100%;
     background: #272727 image_url("map.png") left top no-repeat;
 
+    ul {
+      list-style-type: none;
+      li {
+        list-style-type: none;
+      }
+    }
+
+    h4.zone {
+      font-size: 250%;
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+
     .marker {
       height: 40px;
       display: block;
