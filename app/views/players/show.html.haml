@@ -75,11 +75,8 @@
 
         = render "heroes/heroes", :player => @player, :loot => nil
 
-        - if @player == current_player and current_player.practice_forge.present?
-          = form_for [current_player.practice_forge, Event.new] do |f|
-            = f.hidden_field :type, :value => Event::BATTLE_TYPE
-
-            = f.submit "Fight the Training Dummy &rarr;".html_safe, :class => "btn primary"
+        - if @player == current_player
+          = link_to "Fight the Training Dummy &rarr;".html_safe, enemy_path(Enemy.training), :class => "btn primary"
 
     .span-one-third
       

@@ -16,6 +16,9 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     "armory": "armory"
     "armory/:class": "class"
 
+    "colosseum": "colosseum"
+    "enemies/:id": "enemy"
+
     "battles": "battles"
     "battles/:id": "battle"
 
@@ -85,6 +88,14 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     @load("/ladder")
 
   # Battle
+
+  colosseum: ->
+    menuView.selectNav('colosseum')
+    @load("/colosseum")
+
+  enemy: (id) ->
+    menuView.selectNav('colosseum')
+    @load("/enemies/" + id)
 
   battles: ->
     menuView.selectNav('battle')

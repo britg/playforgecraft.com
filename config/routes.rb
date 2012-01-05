@@ -33,9 +33,11 @@ ForgeCraft::Application.routes.draw do
       post :swap, :on => :collection
     end
     resources :events, :only => [:create, :index]
-    resources :enemies, :only => [:show, :update]
     get :complete, :on => :member
   end
+
+  resources :enemies, :only => [:index, :show, :update]
+  get "colosseum", :to => "enemies#index"
   
   resources :loot, :only => [:index, :show, :destroy]
 
