@@ -41,7 +41,7 @@ group :production do
   gem 'pg'
 end
 
-gem 'devise'
+gem 'devise', '~> 1.5.3'
 gem 'paperclip', '2.4'
 gem 'aws-s3'
 gem 'will_paginate'
