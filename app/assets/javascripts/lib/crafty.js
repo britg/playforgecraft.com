@@ -5419,8 +5419,6 @@ Crafty.extend({
 					ext = source.substr(source.lastIndexOf('.')+1, 3);
 					canplay = audio.canPlayType(this.type[ext]);
 
-					console.log("can play", ext, canplay)
-					
 					//if browser can play this type, use it
 					if(canplay !== "" && canplay !== "no") {
 						url = source;

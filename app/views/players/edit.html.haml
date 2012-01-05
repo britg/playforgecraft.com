@@ -2,21 +2,11 @@
 
   .settings-menu
 
-    = form_for current_player, :remote => true do |f|
-      = f.fields_for current_player.setting do |s|
-        
-        %h4 Music
-        .switch
-          = s.check_box :music, :class => "checkbox"
-
-        %h4 Sound Effects
-        .switch
-          = s.check_box :effects, :class => "checkbox"
 
     %ul
       
       %li 
-        = link_to "Codex", tooltips_path, :rel => "tooltip", "data-external" => true, :class => "btn primary"
+        = link_to "How to Play", tooltips_path, :rel => "tooltip", "data-external" => true, :class => "btn primary"
 
       %li
         = link_to "Refresh", "javascript:window.location.reload();", "data-external" => true, :class => "btn primary"
@@ -24,6 +14,24 @@
       - if admin?
         %li
           = link_to "Admin", admin_dashboard_path, "data-external" => true, :class => "btn primary"
+
+      %li
+
+        = form_for current_player, :remote => true do |f|
+          = f.fields_for current_player.setting do |s|
+
+            %table
+
+              %tr
+                %td 
+                  %h4 Music
+                  .switch
+                    = s.check_box :music, :class => "checkbox"
+
+                %td 
+                  %h4 Effects 
+                  .switch
+                    = s.check_box :effects, :class => "checkbox"
 
       %li
         = mail_to "britg@foolishaggro.com", "Contact / Support", "data-external" => true, :subject => "Forgecraft!", :class => "btn primary"

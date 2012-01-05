@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120105173436) do
+ActiveRecord::Schema.define(:version => 20120105210522) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -411,6 +411,11 @@ ActiveRecord::Schema.define(:version => 20120105173436) do
     t.text      "tip"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.string    "image_file_name"
+    t.integer   "image_file_size"
+    t.string    "image_content_type"
+    t.datetime  "image_updated_at"
+    t.integer   "page"
   end
 
   create_table "turns", :force => true do |t|

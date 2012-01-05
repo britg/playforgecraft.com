@@ -4,7 +4,6 @@ class ForgeCraft.Models.Sound extends Backbone.Model
     @bind "add", @register, @
 
   register: ->
-    console.log "Registering sound", @
     Crafty.audio.add @get('id'), [@get('mp3_url'), 
                                   @get('ogg_url'), 
                                   @get('wav_url')]

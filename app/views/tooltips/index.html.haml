@@ -1,37 +1,43 @@
-#codex
+#codex.container
 
-  %h1 Codex
+  .row
 
-  .ores
+    .classifications.span-one-third
 
-    %h2 Ores
+      %h2 Item Classes
 
-    %table
+      - Classification.all.each do |c|
+        .classification
 
-      %tr
+          %h4= c
+          = image_tag(c.default_icon.url(:tiny))
+          = image_tag("codex/#{c.to_param.downcase}-pattern.png")
 
-        - Ore.defaults.each do |ore|
-          %td
-            %h4= ore
-            = image_tag(ore.tile.url(:normal))
-            
+      .clear
 
-  .classifications
+      %p.explain 
+        %strong Note:
+        Item patterns can be crafted in any orientation
 
-    %h2 Item Classes
+    .ores.span-one-third
 
-    %p 
-      %strong Note:
-      Item patterns can be crafted in any orientation
+      %h2 Ores
 
-    %table
+      - Ore.defaults.each do |ore|
+        .ore
+          %h4= ore
+          = image_tag(ore.tile.url(:normal))
+              
+    .tooltips.span-one-third
 
-      %tr
+      %h2 Tutorials
 
-        - Classification.all.each do |c|
-          %td
+      %ul.tooltip-list
+        %li= link_to "Watch the Video", "javascript:void(0);", "data-external" => true, :class => "btn primary"
+        - @tooltips.each do |t|
+          %li= link_to t, tooltip_path(t), "data-external" => true, :class => "btn primary", :rel => "tooltip"
 
-            %h4= c
-            = image_tag(c.default_icon.url(:tiny))
 
-            = image_tag("codex/#{c.to_param.downcase}-pattern.png")
+:javascript
+  
+  tooltipView.bindTooltips()
