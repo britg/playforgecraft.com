@@ -122,6 +122,7 @@ class Forge
   # Battle
 
   def roll_battle!
+    return
     generate_battle_event if random_battle?
   end
 
