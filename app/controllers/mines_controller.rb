@@ -22,7 +22,7 @@ class MinesController < ApplicationController
   end
 
   def set_zones
-    @zones = Zone.all
+    @zones = Zone.enabled
   end
 
 end

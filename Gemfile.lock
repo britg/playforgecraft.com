@@ -1,13 +1,3 @@
-GIT
-  remote: https://github.com/chriseppstein/compass.git
-  revision: 22e2458b77519e8eb8463170c1a1fe4bab105f3e
-  branch: rails31
-  specs:
-    compass (0.12.0.alpha.0.22e2458)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -71,6 +61,10 @@ GEM
       execjs
     coffee-script-source (1.1.2)
     columnize (0.3.2)
+    compass (0.12.alpha.0)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
     daemons (1.1.4)
     devise (1.4.4)
       bcrypt-ruby (~> 3.0)
@@ -233,7 +227,7 @@ DEPENDENCIES
   aws-s3
   bson_ext (>= 1.4)
   coffee-rails (~> 3.1.0)
-  compass!
+  compass (~> 0.12.alpha)
   devise
   fabrication
   fancy-buttons

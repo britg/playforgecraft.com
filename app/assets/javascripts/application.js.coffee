@@ -7,13 +7,14 @@
 #= require_tree ./lib
 #= require backbone/forge_craft
 
-$ ->
+ForgeCraft.start = ->
 
   # Router
   window.router       = new ForgeCraft.Routers.Router
 
   # Collections
   window.Loot         = new ForgeCraft.Collections.Loot
+  window.Sounds       = new ForgeCraft.Collections.Sounds(ForgeCraft.Config.sounds)
 
   # Models
   window.player       = new ForgeCraft.Models.Player ForgeCraft.Config.player

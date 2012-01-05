@@ -112,7 +112,7 @@ class ForgeCraft.Collections.OresCollection extends Backbone.Collection
     oreOne.set x: oreTwoX, y: oreTwoY
     oreTwo.set x: oreOneX, y: oreOneY
 
-    ForgeCraft.Audio.play "swap"
+    Sounds.play "ore_swap"
 
   swapOresAndValidate: (oreOne, oreTwo) ->
 

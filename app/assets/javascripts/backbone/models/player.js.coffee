@@ -31,7 +31,7 @@ class ForgeCraft.Models.Player extends Backbone.Model
   updateSetting: ->
     ForgeCraft.Config.sound.music = @get("setting").music
     ForgeCraft.Config.sound.effects = @get("setting").effects
-    ForgeCraft.Audio.update()
+    Sounds.update()
 
   fleeBattle: ->
     forge.enemy.win()

@@ -29,7 +29,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
     enemyView.unbindKeys() if enemyView?
     $('body').scrollTop(0)
 
-    ForgeCraft.Audio.stop('forge_bg')
+    Sounds.stop('forge_bg')
 
     return if path.match '/logout'
     @startForge() if path.match '/forges/'
@@ -45,7 +45,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
     window.forge = new ForgeCraft.Models.Forge(ForgeCraft.Config.forge)
     window.forgeView = new ForgeCraft.Views.ForgeView el: $('#forge').get(0), model: window.forge
     window.forge.events.processLastEvent()
-    ForgeCraft.Audio.play 'forge_bg', -1
+    Sounds.playMusic()
 
   startBattle: ->
     window.battle = new ForgeCraft.Models.Battle(ForgeCraft.Config.battle)

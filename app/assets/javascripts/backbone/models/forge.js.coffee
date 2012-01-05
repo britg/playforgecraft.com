@@ -89,7 +89,7 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
     @markOres()
     console.log "Forging with accuracy", @get("accuracy")
     @save @toJSON, success: @convertToLootIfPurchased
-    ForgeCraft.Audio.play "forge"
+    Sounds.play "forge_item"
 
   markOres: ->
     $.each @get("ores"), (i, ore) ->

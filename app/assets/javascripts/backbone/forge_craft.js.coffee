@@ -1,5 +1,4 @@
 #= require_self
-#= require_tree ./assets
 #= require_tree ./templates
 #= require_tree ./models
 #= require_tree ./views
@@ -22,5 +21,3 @@ window.ForgeCraft =
       embiggenDelay: 100
       stickDelay: 1000
       queueDelay: 1400
-
-  Audio: {}
