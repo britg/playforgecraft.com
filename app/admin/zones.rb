@@ -1,6 +1,6 @@
 ActiveAdmin.register Zone do
 
-  menu :label => "Map"
+  menu false
 
   scope :all
 
