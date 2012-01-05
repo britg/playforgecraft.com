@@ -62,6 +62,9 @@ class ForgeCraft.Collections.Sounds extends Backbone.Collection
     id = @idByTag(@FORGE_MUSIC)
     Crafty.audio.play id, -1 if id?
 
+  stopMusic: ->
+    @stop @FORGE_MUSIC
+
   stop: (tag) ->
     id = @idByTag(tag)
     return unless id?

@@ -29,7 +29,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
     enemyView.unbindKeys() if enemyView?
     $('body').scrollTop(0)
 
-    Sounds.stop('forge_bg')
+    Sounds.stopMusic()
 
     return if path.match '/logout'
     @startForge() if path.match '/forges/'

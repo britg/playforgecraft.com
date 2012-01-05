@@ -4,19 +4,19 @@ class Sound < ActiveRecord::Base
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :s3_headers => {'Expires' => 1.year.from_now.httpdate},
-    :path => "/:class/:id/:attachment.:extension"
+    :path => "/:class/:sound_ident/:attachment.:extension"
 
   has_attached_file :ogg,
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :s3_headers => {'Expires' => 1.year.from_now.httpdate},
-    :path => "/:class/:id/:attachment.:extension"
+    :path => "/:class/:sound_ident/:attachment.:extension"
 
   has_attached_file :wav,
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :s3_headers => {'Expires' => 1.year.from_now.httpdate},
-    :path => "/:class/:id/:attachment.:extension"
+    :path => "/:class/:sound_ident/:attachment.:extension"
 
   class << self
     
@@ -42,4 +42,12 @@ class Sound < ActiveRecord::Base
     mp3.present? and ogg.present? and wav.present?
   end
 
+  def ident
+    name.downcase.strip.gsub /\s+/, '_'
+  end
+
+end
+
+Paperclip.interpolates :sound_ident do |attachment, style|
+  attachment.instance.ident
 end
