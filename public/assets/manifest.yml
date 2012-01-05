@@ -72,6 +72,7 @@ lib/jquery.defaulttext.js: lib/jquery-5db5c200232cc14ca44b517f7badfb21.defaultte
 lib/jquery.effects.core.js: lib/jquery-da8d668f5bf04970e66e573ff06b3c47.effects.core.js
 lib/jquery.effects.pulsate.js: lib/jquery-f66e4a04285223c71098ef5a42b920de.effects.pulsate.js
 lib/jquery.effects.shake.js: lib/jquery-d990af8256c584d94c93c4eff4f7c4a8.effects.shake.js
+lib/jquery.fittext.js: lib/jquery-7cafe7a6a9012b0ca2d0cc6ef9c17f8f.fittext.js
 lib/jquery.jeditable.js: lib/jquery-5b24f7e6b5d44207ab798f691bf25520.jeditable.js
 lib/jquery.timeago.js: lib/jquery-c6df212f9f69208ac688719edb061234.timeago.js
 lib/jquery.touch.js: lib/jquery-f2ea2eb32429b7bd669bfcfa7cfb705d.touch.js
@@ -89,5 +90,5 @@ active_admin/nested_menu_arrow_dark.gif: active_admin/nested_menu_arrow_dark-876
 active_admin/orderable.png: active_admin/orderable-003d291622c6610ce91358a266ff0f9a.png
 jquery-ui.min.js: jquery-ui-7e33882a28fc84ad0e0e47e46cbf901c.min.js
 jquery.min.js: jquery-8a50feed8d29566738ad005e19fe1c2d.min.js
-application.js: application-03f370e3bf3fc90873a1ddba477aa6c3.js
-application.css: application-921d8d73742d9b368dae1690b4eff17f.css
+application.js: application-f540978b616c53206f16bc8e8a30785d.js
+application.css: application-bc160bd45ffdadf186a025b950f8baf7.css
