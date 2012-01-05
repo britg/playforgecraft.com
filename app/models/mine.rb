@@ -13,6 +13,8 @@ class Mine < ActiveRecord::Base
 
   before_create :default_max_rarity, :default_battle_chance
 
+  default_scope order("level asc")
+
   def to_param
     "#{id}-#{name.gsub(/[^a-zA-Z0-9]+/, '-')}"
   end

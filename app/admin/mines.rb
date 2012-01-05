@@ -6,10 +6,7 @@ ActiveAdmin.register Mine do
     column :id
     column :name
     column :zone
-    
-    column :starting_funds do |mine|
-      mine.requires_funding? ? mine.starting_funds.to_s : "No funds required"
-    end
+    column :level
 
     column "Requirements" do |mine|
       reqs = []
@@ -20,7 +17,6 @@ ActiveAdmin.register Mine do
     end
 
     column :max_rarity
-    column :battle_chance
 
     default_actions
   end
@@ -30,10 +26,8 @@ ActiveAdmin.register Mine do
     f.inputs "Details" do
       f.input :name
       f.input :zone
-      f.input :requires_funding
-      f.input :starting_funds
+      f.input :level
       f.input :max_rarity
-      f.input :battle_chance
       f.input :x
       f.input :y
     end

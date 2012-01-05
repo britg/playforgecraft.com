@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120105013347) do
+ActiveRecord::Schema.define(:version => 20120105172513) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -276,8 +276,10 @@ ActiveRecord::Schema.define(:version => 20120105013347) do
     t.integer   "battle_chance"
     t.integer   "x"
     t.integer   "y"
+    t.integer   "level"
   end
 
+  add_index "mines", ["level"], :name => "index_mines_on_level"
   add_index "mines", ["zone_id"], :name => "index_mines_on_zone_id"
 
   create_table "ores", :force => true do |t|
