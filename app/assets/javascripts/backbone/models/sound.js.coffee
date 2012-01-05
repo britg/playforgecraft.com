@@ -13,9 +13,20 @@ class ForgeCraft.Collections.Sounds extends Backbone.Collection
 
   model: ForgeCraft.Models.Sound
   
-  ORE_SWAP:     "ore_swap"
-  FORGE_ITEM:   "forge_item"
-  FORGE_MUSIC:  "forge_music"
+  ORE_SWAP:       "ore_swap"
+  FORGE_ITEM:     "forge_item"
+  FORGE_MUSIC:    "forge_music"
+
+  EQUIP_ITEM:     "equip_item"
+
+  BATTLE_START:   "battle_start"
+  BATTLE_WON:     "battle_won"
+  BATTLE_LOST:    "battle_lost"
+  ENEMY_ATTACK:   "enemy_attack"
+  WARRIOR_ATTACK: "warrior_attack"
+  THIEF_ATTACK:   "thief_attack"
+  RANGER_ATTACK:  "ranger_attack"
+  CRITICAL_HIT:   "critical_hit"
 
   initialize: ->
     Crafty.audio.MAX_CHANNELS = 1
@@ -45,6 +56,7 @@ class ForgeCraft.Collections.Sounds extends Backbone.Collection
     id = @idByTag(tag)
     Crafty.audio.play id, repeat if id?
 
+
   playMusic: ->
     return unless ForgeCraft.Config.sound.music
     id = @idByTag(@FORGE_MUSIC)
@@ -61,6 +73,10 @@ class ForgeCraft.Collections.Sounds extends Backbone.Collection
       @stop(@FORGE_MUSIC)
     else
       @playMusic()
+
+  attackWith: (guard) ->
+    tag = @[guard.toUpperCase() + "_ATTACK"]
+    @play tag
 
 
 

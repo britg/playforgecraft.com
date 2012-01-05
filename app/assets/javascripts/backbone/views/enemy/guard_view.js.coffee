@@ -29,7 +29,7 @@ class ForgeCraft.Views.GuardView extends Backbone.View
   determineHit: (target) ->
     if @inZone(target)
       @lane().destroyTarget(target.id)
-      Sounds.play 'slash'
+      Sounds.attackWith @guard
       @model.hit()
 
   inZone: (target) ->
