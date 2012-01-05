@@ -7,7 +7,7 @@ ActiveAdmin.register Zone do
   index do
     column :id
     column :name
-    column :range
+    column :enabled
 
     default_actions
   end

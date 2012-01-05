@@ -12,6 +12,10 @@ class Zone < ActiveRecord::Base
       all.map(&:for_select)  
     end
 
+    def enabled
+      where(:enabled => true)
+    end
+
   end
 
   def serializable_hash(opts={})

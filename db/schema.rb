@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120105000001) do
+ActiveRecord::Schema.define(:version => 20120105013347) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -459,6 +459,7 @@ ActiveRecord::Schema.define(:version => 20120105000001) do
     t.integer   "upper_level"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.boolean   "enabled",     :default => false
   end
 
 end
