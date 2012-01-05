@@ -5,6 +5,8 @@ class Enemy < ActiveRecord::Base
 
   belongs_to :item
 
+  default_scope order("level asc")
+
   has_attached_file :avatar,
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",

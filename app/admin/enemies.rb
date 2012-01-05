@@ -5,11 +5,9 @@ ActiveAdmin.register Enemy do
   index do
     column :id
     column :name
+    column :level
     column :attack
     column :defense
-    column :random
-    column :training
-    column :yields_loot
 
     default_actions
   end
@@ -18,13 +16,10 @@ ActiveAdmin.register Enemy do
     
     f.inputs "Details" do
       f.input :name
-      f.input :random
+      f.input :level
       f.input :battle_message
       f.input :attack
       f.input :defense
-      f.input :training
-      f.input :yields_loot
-      f.input :item
     end
 
     f.buttons

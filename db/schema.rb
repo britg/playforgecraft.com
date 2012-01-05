@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120105172513) do
+ActiveRecord::Schema.define(:version => 20120105173436) do
 
   create_table "actions", :force => true do |t|
     t.integer   "game_id"
@@ -113,7 +113,10 @@ ActiveRecord::Schema.define(:version => 20120105172513) do
     t.boolean  "yields_loot",         :default => true
     t.boolean  "training",            :default => false
     t.integer  "item_id"
+    t.integer  "level"
   end
+
+  add_index "enemies", ["level"], :name => "index_enemies_on_level"
 
   create_table "games", :force => true do |t|
     t.string    "game_type"
