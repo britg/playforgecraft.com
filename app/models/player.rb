@@ -221,66 +221,25 @@ class Player < ActiveRecord::Base
     best_loot.where('items.classification_id' => Classification.tunic).first
   end
 
-  def defeat_offering
-    offering = loot.includes(:item).where("items.rarity_id" => Rarity.advanced).random
-    unless offering.present?
-      offering = loot.random
-    end
-    offering
-  end
-
   # Score
+  def advanced_items
+    @advanced ||= items.advanced.uniq.count
+  end
 
   def rare_items
     @rare_items ||= items.rare.uniq.count
-  end
-
-  def rare_items_percent
-    @rare_items_percent ||= (rare_items.to_f / Item.rare.count.to_f * 100).round rescue 0
   end
 
   def epic_items
     @epic_items ||= items.epic.uniq.count
   end
 
-  def epic_items_percent
-    @epic_items_percent ||= (epic_items.to_f / Item.epic.count.to_f * 100).round rescue 0
-  end
-
   def total_items
     @total_items ||= items.uniq.count
   end
 
-  def total_items_percent
-    @total_items_percent ||= (total_items.to_f / Item.all.count.to_f * 100).round rescue 0
-  end
-
   def forges_complete
     @forges_complete ||= forges.completed.count
-  end
-
-  def forges_complete_percent
-    @forges_complete_percent ||= (forges_complete.to_f / Mine.count.to_f * 100).round rescue 0
-  end
-
-  def battles_won_count
-    count = 0
-    forges.each do |f|
-      count += f.events.battles_won.count
-    end
-    count
-  end
-
-  def battles_lost_count
-    count = 0
-    forges.each do |f|
-      count += f.events.battles_lost.count
-    end
-    count
-  end
-
-  def battles_won_percent
-    @battles_won_percent ||= (battles_won_count.to_f / (battles_won_count + battles_lost_count) * 100).round rescue 0
   end
 
   def score
@@ -288,22 +247,21 @@ class Player < ActiveRecord::Base
   end
 
   def calculate_score
-    total_items + (rare_items * 16) + (epic_items * 26) + (forges_complete * 76) + (battles_won_count*20)
+    total_items + \
+    (rare_items * 8) + \
+    (rare_items * 16) + \
+    (epic_items * 26) + \
+    (forges_complete * 76) + \
+    (bosses_complete*20)
   end
 
   def update_score!
     score.update_attributes :score => calculate_score,
-                            :battles_won => battles_won_count,
-                            :battles_lost => battles_lost_count,
-                            :battles_won_percent => battles_won_percent,
                             :forges_complete => forges_complete,
-                            :forges_complete_percent => forges_complete_percent,
                             :total_items => total_items,
-                            :total_items_percent => total_items_percent,
+                            :advanced_items => advanced_items,
                             :rare_items => rare_items,
-                            :rare_items_percent => rare_items_percent,
-                            :epic_items => epic_items,
-                            :epic_items_percent => epic_items_percent
+                            :epic_items => epic_items
   end
 
 end

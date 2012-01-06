@@ -15,58 +15,43 @@
 
 #player-page {
 
-  .badge {
+  padding-top: 20px;
+
+  .player {
+
+    .name {
+      font-weight: bold;
+      color: $player-color;
+      overflow: hidden;
+    }
+
+    .level {
+      float: right;
+      line-height: 1;
+      .value {
+        font-size: 250%;
+        color: $highlight-color;
+      }
+    }
+
+    table.stats {
+      td {
+        padding: 4px 10px 3px;
+      }
+      .value {
+        text-align: right;
+      }
+    }
+
+  }
+
+  .accessories {
     @include inset;
-    padding: 20px;
-    margin: 20px 0;
-    // @include glow($thief-color);
   }
 
   .heading {
     margin-top: 10px;
     margin-bottom: 0px;
-  }
-  
-  .player {
-    font-size: 400%;
-    // border-bottom: solid 1px #a1a1a1;
-    margin-bottom: 0;
-    line-height: 1em;
-    color: $advanced-color;
-  }
-
-  .score {
-    float: right;
-    margin-top: 23px;
-
-    .stat {
-      font-size: 150%;
-    }
-
-    .value {
-      font-size: 300%;
-      color: $highlight-color;
-      font-weight: bold;
-    }
-  }
-
-  table.completion {
-
-    text-align: center;
-    @include clearfix;
-    margin-bottom: 0px;
-    vertical-align: bottom;
-
-    td {
-      vertical-align: bottom;
-      border: 0;
-      padding: 20px 0;
-    }
-
-    .count {
-      font-size: 350%;
-    }
-
   }
 
   .section {

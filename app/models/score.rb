@@ -16,6 +16,10 @@ class Score
 
   index :player_id
 
+  def to_s
+    score.to_s
+  end
+
   def player
     Player.find_by_id(player_id)
   end
