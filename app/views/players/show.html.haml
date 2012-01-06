@@ -38,8 +38,33 @@
 
     .span-two-thirds
 
-      .section.accessories
-        %h2 Completion
+      .section.personalization
+
+        %table
+          
+          %tr.skills
+            %td.skill.accuracy
+              %span.value= @player.skills.accuracy
+              %span.name Accuracy
+            %td.skill.craftsmanship
+              %span.value= @player.skills.craftsmanship
+              %span.name Craftsmanship
+            %td.skill.perception
+              %span.value= @player.skills.perception
+              %span.name Perception
+
+            %td{ :rowspan => 2 }
+              .slot.final
+
+          %tr.accessories
+            %td.accessory
+              .slot.gloves{ :class => ("empty" unless @player.skills.gloves?) }
+            %td.accessory
+              .slot.apron{ :class => ("empty" unless @player.skills.apron?) }
+            %td.accessory
+              .slot.goggles{ :class => ("empty" unless @player.skills.goggles?) }
+
+          
 
   .row
 

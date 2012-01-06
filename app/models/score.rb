@@ -14,7 +14,7 @@ class Score
   field :epic_items, :type => Integer
   field :epic_items_percent, :type => Integer
 
-  index :player_id
+  index :player_id, :unique => true
 
   def to_s
     score.to_s

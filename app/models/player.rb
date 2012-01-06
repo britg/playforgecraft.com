@@ -264,4 +264,10 @@ class Player < ActiveRecord::Base
                             :epic_items => epic_items
   end
 
+  # Skills
+
+  def skills
+    @skills ||= (Skill.where(:player_id => self.id).first || Skill.create(:player_id => self.id))
+  end
+
 end
