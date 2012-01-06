@@ -3,8 +3,7 @@
   %h2.title= @tooltip
   = link_to "&larr; All Tooltips".html_safe, tooltips_path, :rel => "tooltip", "data-external" => true, :class => "btn primary back"
   
-  = image_tag @tooltip.image.url
-
+  = image_tag @tooltip.image.url, :style => "width: 750px; height: 580px;"
 
 :javascript
 
