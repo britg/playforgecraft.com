@@ -99,8 +99,8 @@
 
         = render "heroes/heroes", :player => @player, :loot => nil
 
-        - if @player == current_player
-          = link_to "Fight the Training Dummy &rarr;".html_safe, enemy_path(Enemy.training), :class => "btn primary"
+        / - if @player == current_player
+        /   = link_to "Fight the Training Dummy &rarr;".html_safe, enemy_path(Enemy.training), :class => "btn primary"
 
     .span-one-third
       
