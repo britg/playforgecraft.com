@@ -22,4 +22,8 @@ class Enemy < ActiveRecord::Base
     name
   end
 
+  def to_param
+    "#{id}-#{name.gsub(/[^a-zA-Z0-9]+/, '-')}"
+  end
+
 end

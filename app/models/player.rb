@@ -126,7 +126,7 @@ class Player < ActiveRecord::Base
   end
 
   def can_forge_at? forge
-    return unless forge.player_id == self.id
+    return false unless forge.player_id == self.id
     !forge.complete?
   end
 

@@ -9,6 +9,7 @@ class Forge
   field :zone_id, :type => Integer
   field :player_id, :type => Integer
   field :level, :type => Integer
+  field :boss_defeated, :type => Boolean, :default => false
   field :complete, :type => Boolean, :default => false
 
   index [:player_id, :mine_id], :unique => true
@@ -102,10 +103,7 @@ class Forge
   end
 
   def finished?
-    progresses.each do |p|
-      return false unless p.complete?
-    end
-    true
+    should_fight_boss? and boss_defeated
   end
 
   def complete?
@@ -169,6 +167,19 @@ class Forge
     progresses.destroy_all
     create_progresses
     update_attributes(:complete => false)
+  end
+
+  # Boss
+
+  def should_fight_boss?
+    progresses.each do |p|
+      return false unless p.complete?
+    end
+    true
+  end
+
+  def boss
+    Enemy.where(:level => level).first
   end
 
 end

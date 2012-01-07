@@ -17,3 +17,5 @@
           = "/ #{prog.requirement.to_s}"
 
           = link_to image_tag("tooltip.png"), tooltips_path, :rel => "tooltip"
+      - if forge.boss.present?
+        %li Defeat the #{forge.boss}!

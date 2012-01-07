@@ -1,7 +1,6 @@
 class Mine < ActiveRecord::Base
 
   has_many :requirements
-  has_many :prerequisites
   has_many :required_mines, :through => :prerequisites
 
   belongs_to :zone

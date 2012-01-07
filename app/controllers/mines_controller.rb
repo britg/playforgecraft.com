@@ -13,8 +13,8 @@ class MinesController < ApplicationController
 
   def update
     @mine = Mine.find(params[:player][:mine_id])
-    current_player.travel_to(@mine) if current_player.can_mine_at?(@mine)
-    render :json => current_player
+    forge = current_player.start_forge(@mine) if current_player.can_mine_at?(@mine)
+    render :json => forge
   end
 
   def set_nav

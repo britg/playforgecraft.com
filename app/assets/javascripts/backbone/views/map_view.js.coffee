@@ -32,7 +32,7 @@ class ForgeCraft.Views.MapView extends Backbone.View
   onMineChange: (response) ->
     console.log "Travelling!", response
     loadingView.hide()
-    forge_id = response.forge.id
+    forge_id = response.id
     mapView.travelTo forge_id
 
   travelTo: (forge_id) ->

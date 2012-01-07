@@ -218,24 +218,8 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
       else
         $('#progress_' + id).removeClass("complete")
 
-  startBattle: (ident) ->
-    Backbone.history.navigate "battles/" + ident, true
-
   complete: ->
     $('#ores').fadeOut ->
       splashView.queueMessage "Forge Complete!"
       $.get "/forges/" + forge.get("id") + "/complete", (response) ->
         $('#ores').html(response).fadeIn()
-
-  # Enemies
-
-  startFight: ->
-    $('#ores').fadeOut()
-    window.enemyView = new ForgeCraft.Views.EnemyView el: $('#enemy').get(0)
-
-  endFight: (result) ->
-    window.enemyView.end()
-    @renderForge() if $('.ore').length < 1
-
-    splashView.queueMessage("Battle won!") if result == "win"
-    splashView.queueMessage("Battle lost!") if result == "loss"

@@ -1,5 +1,4 @@
 #enemy
-  = link_to "Forfeit", "#", "data-external" => true, :class => 'flee btn danger'
 
   .enemy{ :id => dom_id(@enemy) }
     
@@ -9,24 +8,3 @@
       .bar
 
     = render "heroes/inline_stats", :hero => @enemy
-
-  .lanes
-
-    - @seed.each_with_index do |name, index|
-      
-      - if name == "warrior"
-        = render "warrior_lane", :guard => current_player.warrior, :key => index+1
-      - elsif name == "ranger"
-        = render "ranger_lane", :guard => current_player.ranger, :key => index+1
-      - else
-        = render "thief_lane", :guard => current_player.thief, :key => index+1
-
-  .tip
-    
-    %p 
-      %strong Tip:
-      Keep your guards well equipped by visiting the
-      = link_to "Armory", armory_index_path
-      or equipping forged loot directly from the sidebar.
-    
-    = link_to "Visit the Armory", armory_index_path, :class => "btn primary"

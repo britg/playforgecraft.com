@@ -14,9 +14,8 @@
 
         - if forge.complete?
           %h3 Forge Complete &#x2713;
-          
-        - else
-          = link_to "Continue Forging", "#", :class => "travel btn primary", "data-mine-id" => mine.id
+        
+        = action_button(forge)
       
       - else
         .requirements
