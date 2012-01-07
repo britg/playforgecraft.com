@@ -147,6 +147,15 @@ class Loot < ActiveRecord::Base
     item.to_s
   end
 
+  def tip
+    "#{item.name} +#{(attack||defense)} #{primary_stat}"
+  end
+
+  def primary_stat
+    return "attack" if attack.present?
+    return "defense" if defense.present?
+  end
+
   def item_attributes
     return {} unless item
     {

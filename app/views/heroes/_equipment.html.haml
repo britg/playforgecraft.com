@@ -5,7 +5,7 @@
 - leggings_equippable = (loot.present? and loot.equippable?(hero, hero.leggings_slot))
 
 .slots 
-  .slot.weapon1{ :class => "#{'enabled' if weapon1_equippable} #{hero.weapon1.to_css_classes if hero.weapon1.present?}", :rel => "weapon1", :"data-hero-id" => hero.id }
+  .slot.weapon1{ :class => "#{'enabled' if weapon1_equippable} #{hero.weapon1.to_css_classes if hero.weapon1.present?}", :rel => "weapon1", :"data-hero-id" => hero.id, :"data-tip" => (t('tips.empty') unless hero.weapon1.present?) }
 
     - if weapon1_equippable
       .diff
@@ -22,7 +22,7 @@
       &nbsp;
 
   - else
-    .slot.weapon2{ :class => "#{'enabled' if weapon2_equippable} #{hero.weapon2.to_css_classes if hero.weapon2.present?}", :rel => "weapon2", :"data-hero-id" => hero.id }
+    .slot.weapon2{ :class => "#{'enabled' if weapon2_equippable} #{hero.weapon2.to_css_classes if hero.weapon2.present?}", :rel => "weapon2", :"data-hero-id" => hero.id, :"data-tip" => (t('tips.empty') unless hero.weapon2.present?) }
 
       - if weapon2_equippable
         .diff
@@ -34,7 +34,7 @@
       .equipped-item
         = equipment_icon(hero.weapon2) if hero.weapon2.present?
 
-  .slot.armor{ :class => "#{'enabled' if armor_equippable} #{hero.armor.to_css_classes if hero.armor.present?}", :rel => "armor", :"data-hero-id" => hero.id }
+  .slot.armor{ :class => "#{'enabled' if armor_equippable} #{hero.armor.to_css_classes if hero.armor.present?}", :rel => "armor", :"data-hero-id" => hero.id, :"data-tip" => (t('tips.empty') unless hero.armor.present?) }
 
     - if armor_equippable
       .diff
@@ -46,7 +46,7 @@
     .equipped-item
       = equipment_icon(hero.armor) if hero.armor.present?
 
-  .slot.leggings{ :class => "#{'enabled' if leggings_equippable} #{hero.leggings.to_css_classes if hero.leggings.present?}", :rel => "leggings", :"data-hero-id" => hero.id }
+  .slot.leggings{ :class => "#{'enabled' if leggings_equippable} #{hero.leggings.to_css_classes if hero.leggings.present?}", :rel => "leggings", :"data-hero-id" => hero.id, :"data-tip" => (t('tips.empty') unless hero.leggings.present?) }
 
     - if leggings_equippable
       .diff
