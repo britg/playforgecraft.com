@@ -173,14 +173,14 @@
         left: 18px;
         font-weight: bold;
         text-align: right;
-        font-size: 141%;
+        font-size: 114%;
 
         .positive {
           color: $advanced-color;
         }
 
         .negative {
-          color: $blood-color;
+          color: red;
         }
       }
     }
