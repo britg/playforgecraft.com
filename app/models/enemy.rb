@@ -14,18 +14,6 @@ class Enemy < ActiveRecord::Base
     :path => "/:class/:id/:attachment/:style.:extension",
     :styles => { :full => ["200x200#", :jpg], :thumb => ["100x100#", :jpg], :tiny => ["50x50#", :jpg] }
 
-  class << self
-
-    def for_forge forge
-      where(:random => true).random
-    end
-
-    def training
-      where(:training => true).first
-    end
-
-  end
-
   def serializable_hash(opts={})
     super((opts||{}).merge(:only => [:id, :name, :attack, :defense]))
   end

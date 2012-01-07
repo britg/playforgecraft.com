@@ -16,5 +16,4 @@
           %span{ :id => dom_id(prog, "quantity") }= prog.quantity
           = "/ #{prog.requirement.to_s}"
 
-          - unless forge.requires_funding?
-            = link_to image_tag("tooltip.png"), tooltips_path, :rel => "tooltip"
+          = link_to image_tag("tooltip.png"), tooltips_path, :rel => "tooltip"

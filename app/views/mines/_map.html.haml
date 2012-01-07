@@ -9,4 +9,4 @@
 
           - zone.mines.each do |mine|
             %li
-              = link_to "#{mine} #{'&#x2713;' if current_player.completed_mine?(mine)}".html_safe, map_path(mine), "data-mine-id" => mine.id, :class => "marker #{'selected' if @mine == mine} #{'unavailable' unless current_player.can_travel_to?(mine)}", :style => "left: #{mine.x}px; top: #{mine.y}px;"
+              = link_to "#{mine} #{'&#x2713;' if current_player.completed_mine?(mine)}".html_safe, map_path(mine), "data-mine-id" => mine.id, :class => "marker #{'selected' if @mine == mine} #{'unavailable' unless current_player.can_mine_at?(mine)}", :style => "left: #{mine.x}px; top: #{mine.y}px;"

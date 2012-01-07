@@ -13,7 +13,7 @@ class MinesController < ApplicationController
 
   def update
     @mine = Mine.find(params[:player][:mine_id])
-    current_player.travel_to(@mine) if current_player.can_travel_to?(@mine)
+    current_player.travel_to(@mine) if current_player.can_mine_at?(@mine)
     render :json => current_player
   end
 

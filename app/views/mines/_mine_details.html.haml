@@ -6,7 +6,7 @@
     %p.description= mine.description
 
 
-    - if current_player.can_travel_to? mine
+    - if current_player.can_mine_at? mine
 
       - if forge.present?
         .progress-wrap

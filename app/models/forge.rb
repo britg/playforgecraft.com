@@ -8,15 +8,16 @@ class Forge
   field :mine_id, :type => Integer
   field :zone_id, :type => Integer
   field :player_id, :type => Integer
-  field :funds, :type => Integer
+  field :level, :type => Integer
   field :complete, :type => Boolean, :default => false
-  field :requires_funding, :type => Boolean, :default => true
-  field :battle_chance, :type => Integer
 
   index [:player_id, :mine_id], :unique => true
 
   embeds_many :progresses
   embeds_many :events
+
+
+  default_scope desc("level")
 
   after_create :create_progresses
 
@@ -82,7 +83,7 @@ class Forge
 
   def update_progress loot
     progresses.each do |p|
-      if loot.available? and !loot.equipped?
+      if loot.available?
         p.increment_with_loot loot  
       else
         p.decrement_with_loot loot
@@ -111,25 +112,8 @@ class Forge
     complete
   end
 
-  def requires_funding?
-    requires_funding
-  end
-
   def check_completion
     self.update_attributes(:complete => finished?)
-  end
-
-  # Battle
-
-  def roll_battle!
-    return
-    generate_battle_event if random_battle?
-  end
-
-  def random_battle?
-    return false unless battle_chance.present?
-    return false unless battle_chance > 0
-    Random.new.rand(100) <= battle_chance
   end
 
   # Events
