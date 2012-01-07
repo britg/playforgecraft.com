@@ -84,6 +84,7 @@ class ItemsController < ApplicationController
 
   def parse_zone
     # params[:zone_id] = (current_player.zone.try(:id)||Zone.first.try(:id)) unless params[:zone_id].present?
+    params[:zone_id] = 1
     zone = Zone.find_by_id(1)
     @context_arr << zone.name
   end
