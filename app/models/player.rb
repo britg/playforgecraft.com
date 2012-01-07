@@ -242,6 +242,10 @@ class Player < ActiveRecord::Base
     @forges_complete ||= forges.completed.count
   end
 
+  def bosses_complete
+    @bosses_complete ||= 0
+  end
+
   def score
     @score ||= (Score.where(:player_id => self.id).first || Score.create(:player_id => self.id))
   end
