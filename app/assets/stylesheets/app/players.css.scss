@@ -68,6 +68,12 @@
       }
     }
 
+    .accessory {
+      .slot {
+        @include glow($rare-color);
+      }
+    }
+
     .slot {
       @include inset;
       width: 60px;
@@ -80,6 +86,10 @@
         font-size: 200%;
         color: #ccc;
         text-align: center;
+      }
+
+      &.final {
+        @include glow($set-color);
       }
     }
 

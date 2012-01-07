@@ -12,6 +12,7 @@
         %th Rank
         %th Score
         %th Player
+        %th Level
         %th Forges Complete
         %th Items
         %th Advanced 
@@ -24,6 +25,9 @@
           %td.rank= i+1
           %td.score= number_with_delimiter score.score
           %td.name= link_to score.player.name, player_path(score.player)
+
+          %td.count
+            = score.player.level
 
           %td.count
             = score.forges_complete
