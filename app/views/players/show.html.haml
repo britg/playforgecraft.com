@@ -1,46 +1,70 @@
 #player-page.container
 
-  .badge
-  
-    .heading
+  .row
 
-      .score
-        %span.stat Score
-        %span.value= @player.score.score
+    .span-one-third
 
-      %h1.player= @player
-      .sep
+      .section.player
+        %span.level 
+          LVL
+          %span.value= @player.level
 
-    %table.completion
+        %h1.name= @player
 
-      %tbody
-
-        %tr
-
-          %td.forge
-            %span.count= @player.forges_complete
-            Forges Complete
-            (#{@player.forges_complete_percent}%)
-
-          %td.battle
-            %span.count= @player.battles_won_count
-            Battles Won
-            (#{@player.battles_won_percent}%)
-
-          %td.total
-            %span.count= @player.total_items
-            Total Items
-            (#{@player.total_items_percent}%)
+        %table.stats
+          %tr
+            %td.stat Score
+            %td.value= @player.score
           
-          %td.rare
-            %span.count= @player.rare_items
-            Rares
-            (#{@player.rare_items_percent}%)
+          %tr.forge
+            %td.stat Forges Complete
+            %td.value= @player.forges_complete
 
-          %td.epic
-            %span.count= @player.epic_items
-            Epics
-            (#{@player.epic_items_percent}%)
+          %tr
+            %td.stat Total Items
+            %td.value= @player.total_items
+
+          %tr.advanced
+            %td.stat Advanced
+            %td.value= @player.advanced_items
+
+          %tr.rare
+            %td.stat Rares
+            %td.value= @player.rare_items
+
+          %tr.epic
+            %td.stat Epics
+            %td.value= @player.rare_items
+
+    .span-two-thirds
+
+      .section.personalization
+
+        %table
+          
+          %tr.skills
+            %td.skill.accuracy{ "data-tip" => t('tips.accuracy') }
+              %span.value= "+#{@player.skills.accuracy}"
+              %span.name Accuracy
+            %td.skill.craftsmanship{ "data-tip" => t('tips.craftsmanship') }
+              %span.value= "+#{@player.skills.craftsmanship}"
+              %span.name Craftsmanship
+            %td.skill.perception{ "data-tip" => t('tips.perception') }
+              %span.value= "+#{@player.skills.perception}"
+              %span.name Perception
+
+            %td{ :rowspan => 2, "data-tip" => t('tips.missing') }
+              .slot.final
+
+          %tr.accessories
+            %td.accessory
+              .slot.gloves{ :class => ("empty" unless @player.skills.gloves?), "data-tip" => t('tips.missing') }
+            %td.accessory
+              .slot.apron{ :class => ("empty" unless @player.skills.apron?), "data-tip" => t('tips.missing') }
+            %td.accessory
+              .slot.goggles{ :class => ("empty" unless @player.skills.goggles?), "data-tip" => t('tips.missing') }
+
+          
 
   .row
 
@@ -48,7 +72,7 @@
 
       .section.forges-wrap
 
-        %h1.heading 
+        %h2.heading 
           Forges
 
         .sep
@@ -69,7 +93,7 @@
 
       .section.hero-wrap
 
-        %h1.heading Guards
+        %h2.heading Guards
 
         .sep
 
@@ -84,7 +108,7 @@
 
         - if @player.loot.any?
 
-          %h1.heading Showcase
+          %h2.heading Showcase
 
           .sep
 

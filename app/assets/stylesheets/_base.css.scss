@@ -20,6 +20,7 @@ $forge-color: #EFC9A0;
 $battle-color: #FF8000;
 $enemy-color: lighten($blood-color, 20%);
 
+$player-color: $advanced-color;
 $warrior-color: $blood-color;
 $thief-color: darken($rare-color, 20%);
 $ranger-color: darken($advanced-color, 20%);

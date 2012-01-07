@@ -1,45 +1,51 @@
 class ForgeCraft.Views.AppView extends Backbone.View
 
   initialize: ->
-
     @startHistory()
     @bindInternalLinks()
     @bindAlerts()
-
-    @bind "ForgeCraft::ViewLoaded", @startAppContext, @
     @startAppContext(window.location.pathname)
+    @resetLoadTriggers()
+
+  resetLoadTriggers: ->
+    @faded = false
+    @loaded = false
 
   load: (path, callback) ->
     self = @
     flashView.hide()
     loadingView.show()
-    @hideAllPopovers()
     $(window).unbind('resize')
+    @resetLoadTriggers()
+
+    $('#content').fadeOut 'fast', ->
+      $('body').scrollTop(0)
+      self.faded = true
+      self.reveal()
     
     $('#content').load path, ->
-      loadingView.hide()
-      self.trigger "ForgeCraft::ViewLoaded", path
+      self.loaded = true
+      self.startAppContext(path)
       callback.apply() if callback?
+
+  reveal: ->
+    return unless @faded and @loaded
+    $('#content').fadeIn('fast')
 
   startHistory: ->
     Backbone.history.start(pushState: true, silent: true)
 
   startAppContext: (path) ->
     console.log "Starting app context with", path
-    enemyView.unbindKeys() if enemyView?
-    $('body').scrollTop(0)
+    @reveal()
 
+    loadingView.hide()
+    tooltipView.bindElements('#content')
     Sounds.stopMusic()
 
     return if path.match '/logout'
     @startForge() if path.match '/forges/'
-    @startBattle() if path.match '/battles/'
     @startMap() if path.match '/map'
-
-    @bindPopovers()
-    tooltipView.bindTooltips()
-
-    $('abbr.timeago').timeago()
   
   startForge: ->
     window.forge = new ForgeCraft.Models.Forge(ForgeCraft.Config.forge)
@@ -47,17 +53,11 @@ class ForgeCraft.Views.AppView extends Backbone.View
     window.forge.events.processLastEvent()
     Sounds.playMusic()
 
-  startBattle: ->
-    window.battle = new ForgeCraft.Models.Battle(ForgeCraft.Config.battle)
-    window.battleView = new ForgeCraft.Views.BattleView el: $('#battle').get(0), model: window.battle
-    window.battle.continue()
-
   startMap: ->
     mapView.bindTravelActions()
     mapView.refresh()
 
   bindInternalLinks: ->
-
     $('a').live 'click', ->
       unless $(@).attr('data-external')
         r = $(@).attr('href').slice(1)
@@ -66,11 +66,4 @@ class ForgeCraft.Views.AppView extends Backbone.View
         return false
 
   bindAlerts: ->
-
     $('.notice').alert()
-
-  bindPopovers: ->
-    
-
-  hideAllPopovers: ->
-    $('.popover').remove()

@@ -13,8 +13,8 @@
         %th Score
         %th Player
         %th Forges Complete
-        %th Battles Won
         %th Items
+        %th Advanced 
         %th Rares
         %th Epics
       
@@ -27,20 +27,15 @@
 
           %td.count
             = score.forges_complete
-            (#{score.forges_complete_percent}%)
-
-          %td.count
-            = score.battles_won
-            (#{score.battles_won_percent}%)
 
           %td.count
             = score.total_items
-            (#{score.total_items_percent}%)
+
+          %td.count.advanced
+            = score.advanced_items
 
           %td.count.rare
             = score.rare_items
-            (#{score.rare_items_percent}%)
 
           %td.count.epic
             = score.epic_items
-            (#{score.epic_items_percent}%)
