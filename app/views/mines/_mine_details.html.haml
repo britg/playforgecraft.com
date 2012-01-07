@@ -3,6 +3,7 @@
   - if mine.present?
 
     %h3.name= mine.name
+    %h4.level Level #{mine.level}
     %p.description= mine.description
 
 
@@ -35,12 +36,6 @@
         %ul
           - mine.requirements.each do |req|
             %li= req
-      
-      %p You must complete forging at the following mines to access this mine:
-      %ul
-        - mine.required_mines.each do |req_mine|
-
-          %li= link_to req_mine, map_path(req_mine)
 
   - else
     

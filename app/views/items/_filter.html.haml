@@ -16,22 +16,6 @@
                   %span
                     = image_tag(c.default_icon.url(:tiny), :class => "icon")
                     = c
-
-    .span2.second
-
-      %fieldset
-        
-        %legend Map Region
-        .input
-
-          %ul.inputs-list
-            - Zone.all.each do |zone|
-              
-              %li
-                %label{ :for => "zone-#{zone.id}" }
-                  %input{ :id => "zone-#{zone.id}", :rel => :filter, :type => :radio, :name => "zone_id", :value => zone.id, :checked => (params[:zone_id].to_i == zone.id.to_i), :disabled => !current_player.can_access_zone?(zone) }
-                  %span= zone.name
-
   .row
 
     .span2.first
