@@ -7,7 +7,6 @@ class ForgeCraft.Models.Player extends Backbone.Model
     setting: {}
 
   initialize: ->
-    @bind "change:forge", @updateForge, @
     @bind "change:setting", @updateSetting, @
 
   equip: (hero_id, slot, loot_id) ->
@@ -25,18 +24,10 @@ class ForgeCraft.Models.Player extends Backbone.Model
       if $('#facebox').length > 0
         $('#facebox').find('.content').html(response)
 
-  updateForge: ->
-    forge.set(@get("forge"))
-
   updateSetting: ->
     ForgeCraft.Config.sound.music = @get("setting").music
     ForgeCraft.Config.sound.effects = @get("setting").effects
     Sounds.update()
-
-  fleeBattle: ->
-    forge.enemy.win()
-    false
-      
   
 class ForgeCraft.Collections.PlayersCollection extends Backbone.Collection
   model: ForgeCraft.Models.Player

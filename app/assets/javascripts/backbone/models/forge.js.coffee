@@ -111,6 +111,7 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
 
     Forgings.remove(@)
     player.set(params.player)
+    forge.set(params.forge)
     
     # Ores
     @consumeOres()
