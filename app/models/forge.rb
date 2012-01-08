@@ -8,15 +8,17 @@ class Forge
   field :mine_id, :type => Integer
   field :zone_id, :type => Integer
   field :player_id, :type => Integer
-  field :funds, :type => Integer
+  field :level, :type => Integer
+  field :boss_defeated, :type => Boolean, :default => false
   field :complete, :type => Boolean, :default => false
-  field :requires_funding, :type => Boolean, :default => true
-  field :battle_chance, :type => Integer
 
   index [:player_id, :mine_id], :unique => true
 
   embeds_many :progresses
   embeds_many :events
+
+
+  default_scope desc("level")
 
   after_create :create_progresses
 
@@ -82,12 +84,14 @@ class Forge
 
   def update_progress loot
     progresses.each do |p|
-      if loot.available? and !loot.equipped?
+      if loot.available?
         p.increment_with_loot loot  
       else
         p.decrement_with_loot loot
       end
     end
+
+    generate_boss_event if should_fight_boss?
   end
 
   def create_progresses
@@ -101,35 +105,15 @@ class Forge
   end
 
   def finished?
-    progresses.each do |p|
-      return false unless p.complete?
-    end
-    true
+    should_fight_boss? and boss_defeated
   end
 
   def complete?
     complete
   end
 
-  def requires_funding?
-    requires_funding
-  end
-
   def check_completion
     self.update_attributes(:complete => finished?)
-  end
-
-  # Battle
-
-  def roll_battle!
-    return
-    generate_battle_event if random_battle?
-  end
-
-  def random_battle?
-    return false unless battle_chance.present?
-    return false unless battle_chance > 0
-    Random.new.rand(100) <= battle_chance
   end
 
   # Events
@@ -138,14 +122,8 @@ class Forge
     events.where(:created_at.gte => time).reverse
   end
 
-  def generate_training_event
-    enemy = Enemy.training
-    events.create(:type => Event::BATTLE_TYPE, :enemy_id => enemy.try(:id))
-  end
-
-  def generate_battle_event
-    enemy = Enemy.for_forge(self)
-    events.create(:type => Event::BATTLE_TYPE, :enemy_id => enemy.try(:id))
+  def generate_boss_event
+    events.create(:type => Event::BOSS_TYPE, :enemy_id => boss.try(:id))
   end
 
   def generate_loot_event loot
@@ -161,30 +139,23 @@ class Forge
     generate_message_event("Ores Unlocked!") if accuracy >= UNLOCK_ACCURACY
   end
 
-  def generate_battle_win_event enemy = nil
-    e = events.build(:type => Event::BATTLE_WIN_TYPE)
-    if enemy.try(:yields_loot?)
-      loot = Loot.generate_battle_prize(self)
-      loot.save
-      e.loot_id = loot.id
-    end
-    e.save
-  end
-
-  def generate_battle_loss_event enemy = nil
-    e = events.build(:type => Event::BATTLE_LOSS_TYPE)
-    if enemy.try(:yields_loot?)
-      loot = player.defeat_offering
-      loot.update_attributes(:available => false)
-      e.loot_id = loot.id
-    end
-    e.save
-  end
-
   def restart!
     progresses.destroy_all
     create_progresses
     update_attributes(:complete => false)
+  end
+
+  # Boss
+
+  def should_fight_boss?
+    progresses.each do |p|
+      return false unless p.complete?
+    end
+    true
+  end
+
+  def boss
+    Enemy.where(:level => level).first
   end
 
 end

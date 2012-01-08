@@ -46,6 +46,7 @@ class ForgeCraft.Views.AppView extends Backbone.View
     return if path.match '/logout'
     @startForge() if path.match '/forges/'
     @startMap() if path.match '/map'
+    @startBattle() if path.match '/enemies'
   
   startForge: ->
     window.forge = new ForgeCraft.Models.Forge(ForgeCraft.Config.forge)
@@ -54,8 +55,18 @@ class ForgeCraft.Views.AppView extends Backbone.View
     Sounds.playMusic()
 
   startMap: ->
-    mapView.bindTravelActions()
-    mapView.refresh()
+    mapView.start()
+
+  startBattle: ->
+    window.battle = new ForgeCraft.Models.Battle enemy: ForgeCraft.Config.enemy
+    window.battleView = new ForgeCraft.Views.BattleView model: window.battle
+
+  sendToBoss: (boss) ->
+    splashView.queueMessage("Forging Complete!")
+    splashView.queueMessage("Boss Fight!")
+    setTimeout =>
+      Backbone.history.navigate("enemies/" + boss.to_param, true)
+    , 2500
 
   bindInternalLinks: ->
     $('a').live 'click', ->

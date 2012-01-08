@@ -1,32 +1,42 @@
 #enemy
-  = link_to "Forfeit", "#", "data-external" => true, :class => 'flee btn danger'
 
-  .enemy{ :id => dom_id(@enemy) }
-    
-    %h1.name= @enemy.name
+  #sidebar
+    %h3 Next Enemy Attack In
 
-    #lifebar.bar-wrap
-      .bar
+  #battle.pre
 
-    = render "heroes/inline_stats", :hero => @enemy
-
-  .lanes
-
-    - @seed.each_with_index do |name, index|
+    .enemy{ :id => dom_id(@enemy) }
       
-      - if name == "warrior"
-        = render "warrior_lane", :guard => current_player.warrior, :key => index+1
-      - elsif name == "ranger"
-        = render "ranger_lane", :guard => current_player.ranger, :key => index+1
-      - else
-        = render "thief_lane", :guard => current_player.thief, :key => index+1
+      %h1.name= @enemy.name
 
-  .tip
-    
-    %p 
-      %strong Tip:
-      Keep your guards well equipped by visiting the
-      = link_to "Armory", armory_index_path
-      or equipping forged loot directly from the sidebar.
-    
-    = link_to "Visit the Armory", armory_index_path, :class => "btn primary"
+      #enemy-lifebar
+        .bar
+
+      = render "heroes/inline_stats", :hero => @enemy
+
+    #attacks
+
+    #pre-battle
+
+      %table
+
+        %tr
+
+          %td.hero-col
+            = render "heroes/heroes", :player => current_player, :loot => @loot
+
+          %td
+
+            #warning
+
+              - if current_player.empty_slots?
+                %h3.warning You must fully equip your guards to begin battle! Visit the armory and equip your best loot, then return to this forge.
+                = link_to "Visit the Armory &rarr;".html_safe, armory_index_path, :class => "btn primary"
+
+              - else
+                %h3.warning Before beginning the battle, be sure to equip your best loot from the armory... you'll need it!
+                = link_to "Visit the Armory &rarr;".html_safe, armory_index_path, :class => "btn primary"
+                = link_to "Start the Battle &rarr;".html_safe, armory_index_path, :class => "btn danger start"
+
+:javascript
+  ForgeCraft.Config.enemy = #{@enemy.to_json}

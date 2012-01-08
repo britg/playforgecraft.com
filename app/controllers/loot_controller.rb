@@ -30,7 +30,6 @@ class LootController < ApplicationController
 
     if @loot.save
       @forge.generate_loot_event(@loot)
-      @forge.roll_battle!
 
       @replacements = Ore.random_set(params[:forging][:ore_count])
 
@@ -40,6 +39,7 @@ class LootController < ApplicationController
                         :loot => @loot,
                         :replacements => @replacements,
                         :player => current_player,
+                        :forge => @forge,
                         :new_events => @new_events,
                         :new_events_html => @new_events_html}
     else

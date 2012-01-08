@@ -1,11 +1,8 @@
 .forge-stub{ :id => forge.to_param, :class => "#{'last' if last} #{'current' if current}", "data-mine-id" => forge.mine_id }
 
   .controls
-    - if current_player.try(:can_forge_at?, forge)
-      = link_to "Forge", forge_path(forge), :class => "btn primary"
-    - else
-      = link_to "Review", forge_path(forge), :class => "btn primary review"
-    
+    = action_button(forge)
+
   .details
     %h3.name
       = forge

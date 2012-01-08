@@ -2,17 +2,14 @@ class Player < ActiveRecord::Base
 
   RESERVED_NAMES = ["ladder", "player", "players", "battles", "forges", "map", "armory", "items", "item", "loot", "loots", "admin", "users", "user", "session", "sessions", "ore", "ores", "classifications", "classification", "rarity", "rarities", "hero", "heroes", "topic", "topics", "menu", "settings", "admin_logout", "login", "logout", "register", "forum", "home", "contact", "about"]
 
-  belongs_to :user
-  belongs_to :zone
-  belongs_to :mine
-  has_one :setting
-
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
   validates_presence_of :url_name
   validates_uniqueness_of :url_name, :case_sensitive => false
   validates :url_name, :exclusion => { :in => Player::RESERVED_NAMES, :message => "Sorry, your player name is a reserved word" }
 
+  belongs_to :user
+  has_one :setting
   has_many :loot, :class_name => "Loot"
   has_many :items, :through => :loot, :uniq => true
   has_many :heroes
@@ -55,7 +52,7 @@ class Player < ActiveRecord::Base
   end
 
   def serializable_hash(opts={})
-    super((opts||{}).merge(:only => [:id, :name, :level, :coins], :methods => [:zone, :forge, :setting]))
+    super((opts||{}).merge(:only => [:id, :name, :level], :methods => [:setting]))
   end
 
   def generate_url_name
@@ -65,25 +62,6 @@ class Player < ActiveRecord::Base
   def generate_url_name!
     generate_url_name
     save
-  end
-
-  def to_css_class
-    'advanced'
-  end
-
-  def title
-    "Novice Crafstman"
-  end
-
-  def purchase!(cost)
-    return false if cost > forge.funds
-    forge.inc(:funds, -cost)
-    true
-  end
-
-  def sell!(cost)
-    forge.inc(:funds, cost)
-    true
   end
 
   # Heroes
@@ -104,36 +82,14 @@ class Player < ActiveRecord::Base
     heroes.where(:hero_class_id => HeroClass.ranger).first
   end
 
-  def level_range
-    ((level-1) / 10)
-  end
-
-  # Battles
-
-  def battles
-    Battle.where(:first_player_id => self.id)
-  end
-
-  def active_battle
-    battles.singleplayer.active.first
-  end
-
-  def won? battle
-    battle.winner == self
-  end
-
-  # Zones
-
-  def can_access_zone? target_zone
+  def empty_slots?
+    slots.each do |s|
+      return true if s.empty?
+    end
     false
   end
 
   # Mines
-
-  def travel_to target_mine
-    self.update_attributes(:mine => target_mine, :zone => target_mine.zone)
-    start_forge(target_mine) unless has_forge?(target_mine)
-  end
 
   def completed_mine? mine
     completed_mines.include? mine
@@ -143,47 +99,37 @@ class Player < ActiveRecord::Base
     @completed_mines ||= forges.where(:complete => true).map(&:mine)
   end
 
-  def can_travel_to? target_mine
-    target_mine.required_mines.each do |req_mine|
-      return false unless self.completed_mines.include?(req_mine)
-    end
-    true
+  def can_mine_at? mine
+    mine.level <= level
   end
 
   # Forges
-
-  def practice_forge
-    forges.first
-  end
 
   def forges
     Forge.where(:player_id => id)
   end
 
   def forge
-    return nil unless mine_id.present?
-    Forge.where(:player_id => id, :mine_id => mine_id).first
+    forges.where(:level => level).first
   end
 
-  def forge_for target_mine
-    forges.where(:mine_id => target_mine.try(:id)).first
+  def forge_for mine
+    forges.where(:mine_id => mine.try(:id)).first
   end
 
-  def start_forge target_mine
-    return false unless target_mine.try(:id)
-    forges.create :mine_id => target_mine.try(:id),
-                  :zone_id => target_mine.zone.try(:id),
-                  :requires_funding => target_mine.requires_funding?,
-                  :funds => target_mine.starting_funds,
-                  :battle_chance => target_mine.battle_chance
+  def start_forge mine
+    return false unless mine.try(:id)
+    forges.create :mine_id => mine.id,
+                  :level => mine.level,
+                  :zone_id => mine.zone.id
   end
 
-  def has_forge? target_mine
-    forge_for(target_mine).present?
+  def has_forge? mine
+    forge_for(mine).present?
   end
 
   def can_forge_at? forge
-    return unless forge.player_id == self.id
+    return false unless forge.player_id == self.id
     !forge.complete?
   end
 
@@ -240,6 +186,10 @@ class Player < ActiveRecord::Base
 
   def forges_complete
     @forges_complete ||= forges.completed.count
+  end
+
+  def bosses_complete
+    @bosses_complete ||= 0
   end
 
   def score

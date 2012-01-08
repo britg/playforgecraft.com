@@ -19,7 +19,7 @@ en:
     destroy_item: "Deleting this item will remove it from all players. Are you sure you want to delete it?"
 
   tips:
-    accuracy: "Accuracy slows down the Bonus Strike event during forging, making it easier to get a perfect strike"
+    accuracy: "Dexterity slows down the Bonus Strike event during forging, making it easier to get a perfect strike"
     craftsmanship: "Craftsmanship increases your chances of rarer items while forging"
     perception: "Perception increases the chance that rarer ores will appear while forging"
     missing: "This item is waiting to be discovered in the mines of The Spire Coast"

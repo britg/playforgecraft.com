@@ -1,11 +1,9 @@
 class Mine < ActiveRecord::Base
 
-  belongs_to :zone
-  has_many :players
   has_many :requirements
-  has_many :prerequisites
   has_many :required_mines, :through => :prerequisites
 
+  belongs_to :zone
   belongs_to :prize, :class_name => "Item"
   belongs_to :max_rarity, :class_name => "Rarity", :foreign_key => "max_rarity_id"
 

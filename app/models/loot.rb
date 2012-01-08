@@ -11,7 +11,6 @@ class Loot < ActiveRecord::Base
   belongs_to :action
   belongs_to :item
 
-  before_create :purchase
   after_save :update_progress
 
   validates_presence_of :item
@@ -205,29 +204,6 @@ class Loot < ActiveRecord::Base
     diff = max - min
     pc = (accuracy.to_f/100.0) * diff
     return (min + pc).round
-  end
-
-  def purchase
-    return unless player
-    return unless item
-    return true unless forge.requires_funding?
-    player.purchase!(buy_price)
-  end
-
-  def sell
-    return unless player
-    return unless item
-    player.sell!(sell_price)
-    destroy
-  end
-
-  def buy_price
-    # item.cost!
-    0
-  end
-
-  def sell_price
-    item.cost!
   end
 
   def destroy
