@@ -7,12 +7,12 @@ class ForgeCraft.Models.Event extends Backbone.Model
     @bind "add", @process, @
 
   process: ->
-    @processBattle() if @get("enemy")?
+    @processBoss() if @get("boss")?
 
-  processBattle: ->
-    forge.enemy = new ForgeCraft.Models.Enemy(@get("enemy"))
-    forge.enemy.start()
-
+  processBoss: ->
+    setTimeout =>
+      window.appView.startBoss(@get("boss"))
+    , 1000
 
 class ForgeCraft.Collections.Events extends Backbone.Collection
 

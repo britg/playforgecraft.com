@@ -9,11 +9,10 @@
     #event-list
       = render "events/list", :events => @events
 
-  - if @forge.complete? and @latest_event.first.type != "battle"
+  - if @forge.complete?
     = render "complete", :forge => @forge
   
   - else
-    #enemy
     #ores
 
 
@@ -23,6 +22,5 @@
   ForgeCraft.Config.forge = #{@forge.to_json}
   ForgeCraft.Config.latest_event = #{@latest_event.to_json}
   ForgeCraft.Config.ores = #{Ore.tile_urls.to_json}
-  ForgeCraft.Config.loot = #{@loot.to_json}
   ForgeCraft.Config.perfect_accuracy = #{Forge::PERFECT_ACCURACY}
   ForgeCraft.Config.unlock_accuracy = #{Forge::UNLOCK_ACCURACY}

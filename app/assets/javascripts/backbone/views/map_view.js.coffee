@@ -5,6 +5,10 @@ class ForgeCraft.Views.MapView extends Backbone.View
   
   initialize: ->
 
+  start: ->
+    @bindTravelActions()
+    @refresh()
+
   refresh: ->
     @topBarHeight   = $('.topbar').height();
     @htmlHeight     = $('html').height();
@@ -12,7 +16,7 @@ class ForgeCraft.Views.MapView extends Backbone.View
     $('#map').find('.map').css minHeight: @htmlHeight - @topBarHeight
 
   showMine: ->
-    $('#map.details').load
+    # $('#map.details').load
 
   bindTravelActions: ->
     self = @

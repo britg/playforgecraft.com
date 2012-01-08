@@ -1,10 +1,42 @@
 #enemy
 
-  .enemy{ :id => dom_id(@enemy) }
-    
-    %h1.name= @enemy.name
+  #sidebar
+    %h3 Next Enemy Attack In
 
-    #lifebar.bar-wrap
-      .bar
+  #battle.pre
 
-    = render "heroes/inline_stats", :hero => @enemy
+    .enemy{ :id => dom_id(@enemy) }
+      
+      %h1.name= @enemy.name
+
+      #enemy-lifebar
+        .bar
+
+      = render "heroes/inline_stats", :hero => @enemy
+
+    #attacks
+
+    #pre-battle
+
+      %table
+
+        %tr
+
+          %td.hero-col
+            = render "heroes/heroes", :player => current_player, :loot => @loot
+
+          %td
+
+            #warning
+
+              - if current_player.empty_slots?
+                %h3.warning You must fully equip your guards to begin battle! Visit the armory and equip your best loot, then return to this forge.
+                = link_to "Visit the Armory &rarr;".html_safe, armory_index_path, :class => "btn primary"
+
+              - else
+                %h3.warning Before beginning the battle, be sure to equip your best loot from the armory... you'll need it!
+                = link_to "Visit the Armory &rarr;".html_safe, armory_index_path, :class => "btn primary"
+                = link_to "Start the Battle &rarr;".html_safe, armory_index_path, :class => "btn danger start"
+
+:javascript
+  ForgeCraft.Config.enemy = #{@enemy.to_json}

@@ -82,8 +82,11 @@ class Player < ActiveRecord::Base
     heroes.where(:hero_class_id => HeroClass.ranger).first
   end
 
-  def level_range
-    ((level-1) / 10)
+  def empty_slots?
+    slots.each do |s|
+      return true if s.empty?
+    end
+    false
   end
 
   # Mines

@@ -1,11 +1,75 @@
 @import "base";
 
+$attack-width: 64px;
+$attack-height: 64px;
+$rows: 8;
+$cols: 8;
+
+@mixin lifebar ($color) {
+  
+  @include inset;
+  height: 10px;
+  width: 90%;
+  overflow: hidden;
+  margin-bottom: 10px;
+
+  .bar {
+    background: $color;
+    width: 100%;
+    height: 10px;
+    @include border-radius(5px);
+  }
+  
+}
+
 #enemy {
 
-  position: fixed;
-  min-height: 700px;
-  min-width: 714px;
-  background: $background-color asset_url("background.png", image);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  #sidebar {
+    float: right;
+    width: $sidebar-width;
+    @include inset;
+    @include border-radius(0);
+    padding-left: 10px;
+    padding-bottom: 20px;
+
+    .progress-wrap {
+      margin-bottom: 20px;
+    }
+
+  }
+
+  #battle {
+    position: fixed;
+    #pre-battle {
+      display: none;
+    }
+
+    &.pre {
+      #pre-battle {
+        display: block;
+      }
+      #attacks, #player {
+        display: none;
+      }
+    }
+  }
+
+  #pre-battle {
+    .hero-col {
+      width: 150px;
+    }
+  }
+
+  .warning {
+    line-height: 1.2em;
+    margin-bottom: 20px;
+  }
+
   
   .enemy {
     padding: 20px;
@@ -17,7 +81,13 @@
       line-height: 1;
     }
 
+    #enemy-lifebar {
+      @include lifebar($enemy-color);
+    }
+
     .inline-stats {
+      text-align: center;
+
       .stat {
         font-size: 200%;
         color: $highlight-color;
@@ -31,174 +101,29 @@
     }
   }
 
-  .flee {
-    float: right;
-    margin-right: 20px;
-    margin-top: 20px;
-  }
+  #attacks {
 
+    display: block;
+    margin: 0 auto;
+    width: $attack-width * $cols;
+    height: $attack-height * $rows;
+
+    .attack {
+      width: $attack-width;
+      height: $attack-height;
+      position: absolute;
+      background: red;
+    }
+
+  }
   
-  #lifebar.bar-wrap {
-    @include inset;
-    height: 10px;
-    width: 300px;
-    overflow: hidden;
-    margin-bottom: 10px;
+  #player {
+    padding: 10px 20px;
 
-    .bar {
-      background: $enemy-color;
-      width: 100%;
-      height: 10px;
-      @include border-radius(5px);
-    }
-  }
-
-  .lanes {
-    width: 714px;
-    padding: 20px;
-
-    .lane {
-      width: 100%;
-      height: 5px;
-      margin-bottom: 110px;
-      background: #272727;
-      @include inset;
+    #player-lifebar {
+      @include lifebar($player-color);
     }
 
-    .hero {
-      cursor: pointer;
-      width: 50px;
-      height: 50px;
-      border: solid 2px #ccc;
-      margin-bottom: -52px;
-      margin-right: -52px;
-      @include border-radius(5px);
-      position: relative;
-      top: -27px;
-      left: 680px;
-      z-index: 2;
-
-      text-align: center;
-
-      .icon {
-        width: 100%;
-        height: 100%;
-      }
-
-      .val {
-        color: $highlight-color;
-      }
-
-      .type-icon {
-        width: 10px;
-        height: 10px;
-        vertical-align: -1px;
-      }
-
-      &.warrior {
-        border-color: $warrior-color;
-        /* left: 430px */
-      }
-
-      &.thief {
-        border-color: $thief-color;
-        /* left: 520px; */
-      }
-
-      &.ranger {
-        border-color: $ranger-color;
-        /* left: 600px; */
-      }
-    }
-
-    .zone {
-      background: rgba(120, 120, 120, 0.2);
-      height: 40px;
-      width: 100px;
-      margin-bottom: -40px;
-      position: relative;
-      top: -20px;
-      z-index: 1;
-
-      .crit {
-        background: $highlight-color;
-        height: 50px;
-        width: 10px;
-        position: relative;
-        top: -5px;
-      }
-
-      &.warrior {
-        left: 350px;
-        .crit {
-          background: $warrior-color;
-          left: 40px;
-        }
-      }
-
-      &.thief {
-        left: 520px;
-        width: 170px;
-        .crit {
-          background: $thief-color;
-          left: 75px;
-        }
-      }
-
-      &.ranger {
-        left: 200px;
-        width: 200px;
-        .crit {
-          background: $ranger-color;
-          left: 30px;
-        }
-      }
-    }
-
-    .target {
-      width: 5px;
-      height: 30px;
-      margin-bottom: -30px;
-      margin-right: -10px;
-      background: $highlight-color;
-      position: relative;
-      top: -15px;
-      left: 0;
-      display: none;
-      @include transition-property("left");
-      @include transition-duration("6s");
-
-      &.fast {
-        @include transition-duration("5s");
-      }
-
-      &.slow {
-        @include transition-duration("7s");
-      }
-
-      &.activated {
-        left: 680px;
-      }
-    }
   }
-
-  .tip {
-    padding: 20px 50px;
-    text-align: center;
-  }
-
-  .shortcut {
-    display: none;
-    margin-top: -20px;
-    font-weight: bold;
-  }
-
-}
-
-html.no-touch {
-  #enemy {
-    .shortcut {
-      display: block;
-    }  
-  }
+  
 }

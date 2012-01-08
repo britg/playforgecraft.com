@@ -4,11 +4,9 @@ class Event
 
   MESSAGE_TYPE = "message"
   LOOT_TYPE = "loot"
-  BATTLE_TYPE = "battle"
-  BATTLE_WIN_TYPE = "battle_win"
-  BATTLE_LOSS_TYPE = "battle_loss"
+  BOSS_TYPE = "boss"
 
-  TYPES = [LOOT_TYPE, BATTLE_TYPE]
+  TYPES = [LOOT_TYPE, BOSS_TYPE]
 
   embedded_in :forge
 
@@ -23,18 +21,10 @@ class Event
       new :type => LOOT_TYPE, :loot_id => loot.id
     end
 
-    def battles_won
-      where(:type => BATTLE_WIN_TYPE)
-    end
-
-    def battles_lost
-      where(:type => BATTLE_LOSS_TYPE)
-    end
-
   end
 
   def serializable_hash(opts={})
-    super((opts||{}).merge(:methods => [:enemy]))
+    super((opts||{}).merge(:methods => [:boss]))
   end
 
   def to_css_class
@@ -52,7 +42,7 @@ class Event
 
   # Enemy
 
-  def enemy
+  def boss
     Enemy.find_by_id(self.enemy_id)
   end
 

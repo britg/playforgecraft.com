@@ -15,7 +15,7 @@ class Enemy < ActiveRecord::Base
     :styles => { :full => ["200x200#", :jpg], :thumb => ["100x100#", :jpg], :tiny => ["50x50#", :jpg] }
 
   def serializable_hash(opts={})
-    super((opts||{}).merge(:only => [:id, :name, :attack, :defense]))
+    super((opts||{}).merge(:only => [:id, :name, :attack, :defense], :methods => [:to_param]))
   end
   
   def to_s
