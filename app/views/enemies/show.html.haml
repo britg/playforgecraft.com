@@ -1,7 +1,44 @@
 #enemy
 
   #sidebar
-    %h3 Next Enemy Attack In
+
+    #timer.section
+      %h3.title Next enemy attack in:
+      .counter= @enemy.attack_interval
+
+    .clear
+
+    #defense.section
+      %h3.title Your defense total:
+
+      .stat
+        %span.val.defense= number_with_delimiter(current_player.defense)
+        = image_tag "loot/defense.png", :class => "type-icon"
+
+    #legend.section
+      %h3.title Match 3 or more to:
+
+      %ul.attack-list
+        %li
+          .att.warrior1
+            .icon
+            Deal up to #{current_player.warrior.weapon1.attack} damage with your Warrior's weapon
+        %li
+          .att.warrior2
+            .icon
+            Shield bash your opponent, delaying the time to their next attack
+        %li
+          .att.thief1
+            .icon
+            Deal up to #{current_player.thief.weapon1.attack} damage with your Thief's mainhand weapon
+        %li
+          .att.thief2
+            .icon
+            Backstab your opponent for up to 2X #{current_player.thief.weapon2.attack} damage with your Thief's offhand weapon
+        %li
+          .att.ranger
+            .icon
+            Deal up to #{current_player.ranger.weapon1.attack} damage with your Ranger's weapon
 
   #battle.pre
 
@@ -22,12 +59,11 @@
 
         %tr
 
-          %td.hero-col
-            = render "heroes/heroes", :player => current_player, :loot => @loot
-
           %td
 
             #warning
+
+              %h2.message= @enemy.battle_message
 
               - if current_player.empty_slots?
                 %h3.warning You must fully equip your guards to begin battle! Visit the armory and equip your best loot, then return to this forge.
@@ -36,7 +72,10 @@
               - else
                 %h3.warning Before beginning the battle, be sure to equip your best loot from the armory... you'll need it!
                 = link_to "Visit the Armory &rarr;".html_safe, armory_index_path, :class => "btn primary"
-                = link_to "Start the Battle &rarr;".html_safe, armory_index_path, :class => "btn danger start"
+                = link_to "Start the Battle".html_safe, armory_index_path, :class => "btn danger start"
+
+          %td.hero-col
+            = render "heroes/heroes", :player => current_player, :loot => @loot
 
 :javascript
   ForgeCraft.Config.enemy = #{@enemy.to_json}

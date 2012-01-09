@@ -5,6 +5,12 @@ $attack-height: 64px;
 $rows: 8;
 $cols: 8;
 
+$warrior-attack1: lighten($warrior-color, 50%);
+$warrior-attack2: $warrior-color;
+$thief-attack1: lighten($thief-color, 50%);
+$thief-attack2: $thief-color;
+$ranger-attack: $ranger-color;
+
 @mixin lifebar ($color) {
   
   @include inset;
@@ -41,6 +47,99 @@ $cols: 8;
       margin-bottom: 20px;
     }
 
+    .section {
+      @include clearfix;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      text-transform: uppercase;
+      font-size: 90%;
+    }
+
+    #timer {
+
+      .counter {
+        float: right;
+        font-size: 400%;
+        color: $highlight-color;
+        margin-right: 20px;
+        line-height: 1;
+      }
+    }
+
+    #defense {
+      .stat {
+        float: right;
+        margin-right: 20px;
+      }
+      .val {
+        font-size: 300%;
+        line-height: 1;
+        color: $highlight-color;
+      }
+    }
+
+    #legend {
+      .attack-list {
+        margin: 0;
+        padding: 0;
+
+        li {
+          @include clearfix;
+          list-style-type: none;
+          margin-bottom: 10px;
+        }
+      }
+
+      .att {
+        .icon {
+          @include inset;
+          margin-right: 10px;
+          float: left;
+          width: $attack-width;
+          height: $attack-height;
+          border: solid 2px #ccc;
+        }
+
+        &.warrior1 {
+          .icon {
+            border-color: $warrior-attack1;
+            background: $warrior-attack1;
+          }
+        }
+
+        &.warrior2 {
+          .icon {
+            border-color: $warrior-attack2;
+            background: $warrior-attack2;
+          }
+        }
+
+        &.thief1 {
+          .icon {
+            border-color: $thief-attack1;
+            background: $thief-attack1;
+          }
+        }
+
+        &.thief2 {
+          .icon {
+            border-color: $thief-attack2;
+            background: $thief-attack2;
+          }
+        }
+
+        &.ranger {
+          .icon {
+            border-color: $ranger-attack;
+            background: $ranger-attack;
+          }
+        }
+
+      }
+    }
+
   }
 
   #battle {
@@ -63,6 +162,11 @@ $cols: 8;
     .hero-col {
       width: 150px;
     }
+  }
+
+  .message {
+    line-height: 1.2em;
+    margin-bottom: 20px;
   }
 
   .warning {

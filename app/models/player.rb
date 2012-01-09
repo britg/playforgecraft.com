@@ -89,6 +89,14 @@ class Player < ActiveRecord::Base
     false
   end
 
+  def defense
+    total = 0
+    heroes.each do |h|
+      total += h.defense
+    end
+    total
+  end
+
   # Mines
 
   def completed_mine? mine

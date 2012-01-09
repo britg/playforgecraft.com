@@ -8,6 +8,7 @@ ActiveAdmin.register Enemy do
     column :level
     column :attack
     column :defense
+    column :attack_interval
 
     default_actions
   end
@@ -20,6 +21,7 @@ ActiveAdmin.register Enemy do
       f.input :battle_message
       f.input :attack
       f.input :defense
+      f.input :attack_interval
     end
 
     f.buttons
