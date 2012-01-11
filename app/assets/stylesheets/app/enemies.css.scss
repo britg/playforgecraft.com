@@ -90,6 +90,11 @@ $ranger-attack: $ranger-color;
           list-style-type: none;
           margin-bottom: 10px;
         }
+
+        .damage {
+          font-weight: bold;
+          color: $highlight-color;
+        }
       }
 
       .att {
@@ -167,6 +172,11 @@ $ranger-attack: $ranger-color;
   .message {
     line-height: 1.2em;
     margin-bottom: 20px;
+  }
+
+  #warning {
+    padding: 40px;
+    text-align: center;
   }
 
   .warning {

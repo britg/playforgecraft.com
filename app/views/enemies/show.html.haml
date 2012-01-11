@@ -22,7 +22,12 @@
         %li
           .att.warrior1
             .icon
-            Deal up to #{current_player.warrior.weapon1.attack} damage with your Warrior's weapon
+            Deal up to 
+            %span.damage= current_player.battle_attack(:warrior1)
+            damage with your Warrior's weapon:
+            - if warrior1 = current_player.battle_slot(:warrior1)
+              %br
+              = loot_with_icon warrior1
         %li
           .att.warrior2
             .icon
@@ -30,15 +35,30 @@
         %li
           .att.thief1
             .icon
-            Deal up to #{current_player.thief.weapon1.attack} damage with your Thief's mainhand weapon
+            Deal up to 
+            %span.damage= current_player.battle_attack(:thief1)
+            damage with your Thief's mainhand weapon:
+            - if thief1 = current_player.battle_slot(:thief1)
+              %br
+              = loot_with_icon thief1
         %li
           .att.thief2
             .icon
-            Backstab your opponent for up to 2X #{current_player.thief.weapon2.attack} damage with your Thief's offhand weapon
+            Backstab your opponent for up to 2X 
+            %span.damage= current_player.battle_attack(:thief2)
+            damage with your Thief's offhand weapon:
+            - if thief2 = current_player.battle_slot(:thief2)
+              %br
+              = loot_with_icon thief2
         %li
           .att.ranger
             .icon
-            Deal up to #{current_player.ranger.weapon1.attack} damage with your Ranger's weapon
+            Deal up to 
+            %span.damage= current_player.battle_attack(:ranger)
+            damage with your Ranger's weapon:
+            - if ranger = current_player.battle_slot(:ranger)
+              %br
+              = loot_with_icon ranger
 
   #battle.pre
 
@@ -61,9 +81,9 @@
 
           %td
 
-            #warning
+            %h2.message= @enemy.battle_message
 
-              %h2.message= @enemy.battle_message
+            #warning
 
               - if current_player.empty_slots?
                 %h3.warning You must fully equip your guards to begin battle! Visit the armory and equip your best loot, then return to this forge.
@@ -72,6 +92,8 @@
               - else
                 %h3.warning Before beginning the battle, be sure to equip your best loot from the armory... you'll need it!
                 = link_to "Visit the Armory &rarr;".html_safe, armory_index_path, :class => "btn primary"
+                %br
+                %br
                 = link_to "Start the Battle".html_safe, armory_index_path, :class => "btn danger start"
 
           %td.hero-col

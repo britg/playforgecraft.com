@@ -97,6 +97,32 @@ class Player < ActiveRecord::Base
     total
   end
 
+  def battle_slot(slot)
+    case slot
+    when :warrior1
+      warrior.weapon1
+    when :thief1
+      thief.weapon1
+    when :thief2
+      thief.weapon2
+    when :ranger
+      ranger.weapon1
+    end
+  end
+
+  def battle_attack(slot)
+    case slot
+    when :warrior1
+      warrior.weapon1.try(:attack)||0
+    when :thief1
+      thief.weapon1.try(:attack)||0
+    when :thief2
+      thief.weapon2.try(:attack)||0
+    when :ranger
+      ranger.weapon1.try(:attack)||0
+    end
+  end
+
   # Mines
 
   def completed_mine? mine
