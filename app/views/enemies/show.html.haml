@@ -94,7 +94,7 @@
                 = link_to "Visit the Armory &rarr;".html_safe, armory_index_path, :class => "btn primary"
                 %br
                 %br
-                = link_to "Start the Battle".html_safe, armory_index_path, :class => "btn danger start"
+                = link_to "Start the Battle".html_safe, '#', :class => "btn danger start"
 
           %td.hero-col
             = render "heroes/heroes", :player => current_player, :loot => @loot

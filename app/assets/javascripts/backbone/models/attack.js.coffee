@@ -33,13 +33,26 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
     @attackTypes = [@WARRIOR1, @SHIELDBASH, @THIEF1, @THIEF2, @RANGER]
 
   seed: ->
+    @prev = @chooseRandomAttackType()
+
     for row in [0..@ROWS-1]
       for col in [0..@COLS-1]
-        type = @chooseAttackType()
+        type = @chooseAttackType(row, col)
         attack = new ForgeCraft.Models.Attack x: col, y: row, type: type
         @add(attack)
 
-  chooseAttackType: ->
+  chooseAttackType: (row, col) ->
+    chosen = @prev
+    @prevAttack = @attackAt(col, row-1)
+    @prevRow = @prevAttack.get("type") if @prevAttack?
+    console.log "Previous row:", @prevRow
+
+    while chosen == @prev or chosen == @prevRow
+      chosen = @chooseRandomAttackType()
+
+    return @prev = chosen
+
+  chooseRandomAttackType: ->
     i = Math.floor(Math.random()*@attackTypes.length)
     @attackTypes[i]
 
@@ -75,3 +88,53 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
 
     attack.set x: swapX, y: swapY
     swap.set x: attackX, y: attackY
+
+    unless @detectMatches()
+      swap.set x: swapX, y: swapY
+      attack.set x: attackX, y: attackY
+
+  detectMatches: ->
+    @atLeastOneMatch = false
+    @matches = []
+    @detectRowMatches()
+    @detectColMatches()
+    return @atLeastOneMatch
+
+  detectRowMatches: ->
+    for row in [0..@ROWS-1]
+      for col in [0..@COLS-1]
+        @test(row, col, 'right')
+
+  detectColMatches: ->
+    for col in [0..@COLS-1]
+      for row in [0..@ROWS-1]
+        @test(row, col, 'down')
+
+  test: (row, col, direction) ->
+    me = @attackAt(col, row)
+    return unless me?
+
+    if direction == 'right'
+      them = @attackAt(col+1, row)
+
+    if direction == 'down'
+      them = @attackAt(col, row+1)
+
+    return unless them?
+
+    if me.get("type") == them.get("type")
+      @addMatch(me, them) 
+    else
+      @testMatches() 
+
+
+  addMatch: (attack1, attack2) ->
+    @matches.push(attack1) unless _.include(@matches, attack1)
+    @matches.push(attack2) unless _.include(@matches, attack2)
+
+  testMatches: ->
+    if @matches.length > 2
+      @atLeastOneMatch = true
+      attack.set({matched: true}) for attack in @matches
+
+    @matches = []

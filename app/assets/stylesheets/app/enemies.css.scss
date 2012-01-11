@@ -243,6 +243,13 @@ $ranger-attack: $ranger-color;
       }
 
       @include attack_icons;
+
+      &.matched {
+        .icon {
+          border: solid 1px #fff;
+          margin: 1px;
+        }
+      }
     }
 
   }

@@ -16,6 +16,7 @@ class ForgeCraft.Views.AttackView extends Backbone.View
   initialize: ->
     @model.bind "change:x", @updateCoordinates, @
     @model.bind "change:y", @updateCoordinates, @
+    @model.bind "change:matched", @matched, @
 
   render: ->
     $(@el).addClass(@model.get("type"))
@@ -98,6 +99,12 @@ class ForgeCraft.Views.AttackView extends Backbone.View
     @ref = undefined
     @refAttack = undefined 
     @direction = undefined
+
+  matched: ->
+    if @model.get("matched")
+      $(@el).addClass('matched') 
+    else
+      $(@el).removeClass('matched')
 
 class ForgeCraft.Views.GridView extends Backbone.View
 
