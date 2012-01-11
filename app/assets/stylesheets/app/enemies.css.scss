@@ -28,6 +28,45 @@ $ranger-attack: $ranger-color;
   
 }
 
+@mixin attack_icons {
+
+  &.warrior1 {
+    .icon {
+      border-color: $warrior-attack1;
+      background: $warrior-attack1;
+    }
+  }
+
+  &.shieldbash {
+    .icon {
+      border-color: $warrior-attack2;
+      background: $warrior-attack2;
+    }
+  }
+
+  &.thief1 {
+    .icon {
+      border-color: $thief-attack1;
+      background: $thief-attack1;
+    }
+  }
+
+  &.thief2 {
+    .icon {
+      border-color: $thief-attack2;
+      background: $thief-attack2;
+    }
+  }
+
+  &.ranger {
+    .icon {
+      border-color: $ranger-attack;
+      background: $ranger-attack;
+    }
+  }
+  
+}
+
 #enemy {
 
   width: 100%;
@@ -107,40 +146,7 @@ $ranger-attack: $ranger-color;
           border: solid 2px #ccc;
         }
 
-        &.warrior1 {
-          .icon {
-            border-color: $warrior-attack1;
-            background: $warrior-attack1;
-          }
-        }
-
-        &.warrior2 {
-          .icon {
-            border-color: $warrior-attack2;
-            background: $warrior-attack2;
-          }
-        }
-
-        &.thief1 {
-          .icon {
-            border-color: $thief-attack1;
-            background: $thief-attack1;
-          }
-        }
-
-        &.thief2 {
-          .icon {
-            border-color: $thief-attack2;
-            background: $thief-attack2;
-          }
-        }
-
-        &.ranger {
-          .icon {
-            border-color: $ranger-attack;
-            background: $ranger-attack;
-          }
-        }
+        @include attack_icons;
 
       }
     }
@@ -215,9 +221,9 @@ $ranger-attack: $ranger-color;
     }
   }
 
-  #attacks {
+  #grid {
 
-    display: block;
+    display: none;
     margin: 0 auto;
     width: $attack-width * $cols;
     height: $attack-height * $rows;
@@ -226,7 +232,16 @@ $ranger-attack: $ranger-color;
       width: $attack-width;
       height: $attack-height;
       position: absolute;
-      background: red;
+
+      .icon {
+        @include inset;
+        display: block;
+        width: $attack-width - 4;
+        height: $attack-height - 4;
+        margin: 2px;
+      }
+
+      @include attack_icons;
     }
 
   }
