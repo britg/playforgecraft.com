@@ -15,11 +15,15 @@ class Enemy < ActiveRecord::Base
     :styles => { :full => ["200x200#", :jpg], :thumb => ["100x100#", :jpg], :tiny => ["50x50#", :jpg] }
 
   def serializable_hash(opts={})
-    super((opts||{}).merge(:only => [:id, :name, :attack, :defense], :methods => [:to_param]))
+    super((opts||{}).merge(:only => [:id, :name, :attack, :defense], :methods => [:to_param, :original_defense]))
   end
   
   def to_s
     name
+  end
+
+  def original_defense
+    defense
   end
 
   def to_param

@@ -64,3 +64,6 @@ class ForgeCraft.Models.Battle extends Backbone.Model
 
     attack.remove() for attack in set
 
+  win: ->
+    @set winner: "player"
+

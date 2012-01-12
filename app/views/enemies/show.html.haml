@@ -104,3 +104,9 @@
 
 :javascript
   ForgeCraft.Config.enemy = #{@enemy.to_json}
+  ForgeCraft.Config.attacks = {
+    warrior1: #{current_player.battle_attack(:warrior1).to_json},
+    thief1: #{current_player.battle_attack(:thief1).to_json},
+    thief2: #{current_player.battle_attack(:thief2).to_json},
+    ranger: #{current_player.battle_attack(:ranger).to_json},
+  }
