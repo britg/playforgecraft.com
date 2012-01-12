@@ -52,7 +52,6 @@ class ForgeCraft.Views.AppView extends Backbone.View
     window.forge = new ForgeCraft.Models.Forge(ForgeCraft.Config.forge)
     window.forgeView = new ForgeCraft.Views.ForgeView el: $('#forge').get(0), model: window.forge
     window.forge.events.processLastEvent()
-    Sounds.playMusic()
 
   startMap: ->
     mapView.start()

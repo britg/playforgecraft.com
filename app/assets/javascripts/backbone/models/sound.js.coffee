@@ -21,6 +21,7 @@ class ForgeCraft.Collections.Sounds extends Backbone.Collection
   BATTLE_START:   "battle_start"
   BATTLE_WON:     "battle_won"
   BATTLE_LOST:    "battle_lost"
+  BATTLE_MUSIC:   "battle_music"
   ENEMY_ATTACK:   "enemy_attack"
   WARRIOR_ATTACK: "warrior_attack"
   THIEF_ATTACK:   "thief_attack"
@@ -61,8 +62,14 @@ class ForgeCraft.Collections.Sounds extends Backbone.Collection
     id = @idByTag(@FORGE_MUSIC)
     Crafty.audio.play id, -1 if id?
 
+  playBattleMusic: ->
+    return unless ForgeCraft.Config.sound.music
+    id = @idByTag(@BATTLE_MUSIC)
+    Crafty.audio.play id, -1 if id?
+
   stopMusic: ->
     @stop @FORGE_MUSIC
+    @stop @BATTLE_MUSIC
 
   stop: (tag) ->
     id = @idByTag(tag)
@@ -72,49 +79,11 @@ class ForgeCraft.Collections.Sounds extends Backbone.Collection
 
   update: ->
     unless ForgeCraft.Config.sound.music
-      @stop(@FORGE_MUSIC)
+      @stopMusic()
     else
-      @playMusic()
+      @playMusic() if window.location.pathname.match '/forges/'
+      @playBattleMusic() if window.location.pathname.match '/enemies/'
 
   attackWith: (guard) ->
     tag = @[guard.toUpperCase() + "_ATTACK"]
     @play tag
-
-
-
-# Crafty.audio.MAX_CHANNELS = 1
-# Crafty.audio.add "swap", "/sounds/swap_stone.mp3"
-# Crafty.audio.add("forge", ["/sounds/forge.mp3",
-#                             "/sounds/forge.wav",
-#                             "/sounds/forge.ogg"])
-# Crafty.audio.add("slash", ["/sounds/slash.mp3",
-#                             "/sounds/slash.wav",
-#                             "/sounds/slash.ogg"])
-# Crafty.audio.add "forge_bg", "/sounds/forge_bg.mp3"
-
-# Sounds.play = (id, repeat) ->
-#   console.log "Sound settings are", ForgeCraft.Config.sound
-
-#   if repeat == -1
-#     return unless ForgeCraft.Config.sound.music
-#   else
-#     return unless ForgeCraft.Config.sound.effects
-    
-#   Crafty.audio.play id, repeat
-
-# Sounds.playMusic = () ->
-#   Sounds.play 'forge_bg', -1
-
-# Sounds.update = ->
-#   unless ForgeCraft.Config.sound.music
-#     Sounds.stop('forge_bg')
-#   else
-#     Sounds.playMusic()
-
-# Sounds.stop = (id) ->
-#   elem = Crafty.audio._elems[id]
-#   l = elem.length
-
-#   # loop over every channel for a sound
-#   for el in elem
-#     el.pause()

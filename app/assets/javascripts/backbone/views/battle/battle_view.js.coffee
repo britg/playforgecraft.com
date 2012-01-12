@@ -19,6 +19,8 @@ class ForgeCraft.Views.BattleView extends Backbone.View
 
     @enemyView = new ForgeCraft.Views.EnemyView model: @model.enemy
 
+    Sounds.playBattleMusic()
+
   renderBattle: ->
     @resizeBattle()
     @bindStart()
