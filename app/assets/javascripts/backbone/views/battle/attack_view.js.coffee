@@ -17,11 +17,16 @@ class ForgeCraft.Views.AttackView extends Backbone.View
     @model.bind "change:x", @updateCoordinates, @
     @model.bind "change:y", @updateCoordinates, @
     @model.bind "change:matched", @matched, @
+    @model.bind "remove", @remove, @
 
-  render: ->
+  render: (drop) ->
     $(@el).addClass(@model.get("type"))
     $(@el).data "view", @
-    $(@el).css left: @leftPos(), top: @topPos() 
+
+    if drop
+      # @animateToPosition()
+    else
+      $(@el).css left: @leftPos(), top: @topPos() 
 
   updateCoordinates: () ->
     @animateToPosition(no)
@@ -31,15 +36,8 @@ class ForgeCraft.Views.AttackView extends Backbone.View
     timeout = parseInt(Math.random() * ForgeCraft.Config.dropInTimeout)
 
     $(@el).animate left: @leftPos(), "fast"
-
-    dropDown = ->
-      $(self.el).animate top: self.topPos(), "fast"
+    $(self.el).animate top: self.topPos(), "fast"
     
-    if dropDelay
-      # console.log("timeout on move")
-      setTimeout dropDown, timeout
-    else
-      dropDown()
 
   leftPos: () ->
     boardLeft = $('#grid').position().left
@@ -48,7 +46,7 @@ class ForgeCraft.Views.AttackView extends Backbone.View
   topPos: () ->
     y = @model.get("y")
     if y == -1
-      topPost = -2*ForgeCraft.Config.attackDim
+      topPos = -2*ForgeCraft.Config.attackDim
     else
       boardTop = $('#grid').position().top
       topPos = boardTop + ForgeCraft.Config.attackDim * @model.get("y")
@@ -106,6 +104,11 @@ class ForgeCraft.Views.AttackView extends Backbone.View
     else
       $(@el).removeClass('matched')
 
+  remove: ->
+    $(@el).fadeOut =>
+      $(@el).remove()
+
+
 class ForgeCraft.Views.GridView extends Backbone.View
 
   tagName: 'div'
@@ -115,11 +118,15 @@ class ForgeCraft.Views.GridView extends Backbone.View
     $(@el).show()
     @createAttackViews()
 
+    @model.bind "add", @createAttackView, @
+
   createAttackViews: ->
-    for attack in battle.grid.models
-      attackView = new ForgeCraft.Views.AttackView model: attack, el: @generateAttackElement()
-      attackView.gridView = @
-      attackView.render()
+    @createAttackView(attack, no) for attack in battle.grid.models
+
+  createAttackView: (attack, drop = yes) ->
+    attackView = new ForgeCraft.Views.AttackView model: attack, el: @generateAttackElement()
+    attackView.gridView = @
+    attackView.render(drop)
 
   generateAttackElement: ->
     $att = $('<div class="attack"><div class="icon" /></div>')

@@ -3,8 +3,8 @@ class ForgeCraft.Models.Attack extends Backbone.Model
   defaults:
     matched: false
     type: 'warrior1'
-    x: 0
-    y: 0
+    x: -1
+    y: -1
 
   initialize: ->
     @bind "add", @cache, @
@@ -12,6 +12,14 @@ class ForgeCraft.Models.Attack extends Backbone.Model
 
   cache: ->
     battle.grid.cache @
+
+  remove: ->
+    battle.grid.consume @
+    battle.grid.remove @
+
+  dropTo: (y) -> 
+    battle.grid.consume(@)
+    @set y: y
 
 class ForgeCraft.Collections.Grid extends Backbone.Collection
 
@@ -30,6 +38,7 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
   RANGER: 'ranger'
 
   initialize: ->
+    @holes = []
     @attackTypes = [@WARRIOR1, @SHIELDBASH, @THIEF1, @THIEF2, @RANGER]
 
   seed: ->
@@ -45,7 +54,6 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
     chosen = @prev
     @prevAttack = @attackAt(col, row-1)
     @prevRow = @prevAttack.get("type") if @prevAttack?
-    console.log "Previous row:", @prevRow
 
     while chosen == @prev or chosen == @prevRow
       chosen = @chooseRandomAttackType()
@@ -61,6 +69,51 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
     y = attack.get('y')
     @attackCache[x] = [] unless @attackCache[x]?
     @attackCache[x][y] = attack
+  
+  uncache: (attack) ->
+    x = attack.get('x')
+    y = attack.get('y')
+    @attackCache[x] = [] unless @attackCache[x]?
+    @attackCache[x][y] = undefined    
+
+  consume: (attack) ->
+    @uncache attack
+    col = attack.get('x')
+    @holes.push(col) unless _.include(@holes, col)
+
+  fillHoles: ->
+    return unless @holes.length > 0
+
+    for x in @holes
+      @applyGravityAt(x, y) for y in [@ROWS-2 .. 0]
+      @backFillAt(x, y) for y in [@ROWS-2 .. 0]
+      _.reject @holes, (col) -> col == x
+
+    setTimeout =>
+      @detectMatches()
+    , 500
+
+  applyGravityAt: (x, y) ->
+    # console.log "Checking ore at", x, ",", y
+    return unless attack = @attackAt(x, y)
+
+    # check ore below this one
+    blocked = false
+    dy = y
+    blocked = @blockage(x, ++dy) while !blocked
+
+    attack.dropTo(dy-1) if blocked and (dy-1)!=y
+
+  backFillAt: (x, y) ->
+    return if @attackAt(x, y)
+
+    type = @chooseAttackType(y, x)
+    filler = new ForgeCraft.Models.Attack type: type
+    @add(filler)
+    filler.set x: x, y: y,
+
+  blockage: (x, y) ->
+    @attackAt(x, y)? or y >= @ROWS
 
   attackAt: (x, y) ->
     return undefined unless @attackCache[x]?
@@ -95,9 +148,11 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
 
   detectMatches: ->
     @atLeastOneMatch = false
+    @matchSets = []
     @matches = []
     @detectRowMatches()
     @detectColMatches()
+    battle.queueAttacks(@matchSets)
     return @atLeastOneMatch
 
   detectRowMatches: ->
@@ -136,5 +191,6 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
     if @matches.length > 2
       @atLeastOneMatch = true
       attack.set({matched: true}) for attack in @matches
+      @matchSets.push @matches
 
     @matches = []

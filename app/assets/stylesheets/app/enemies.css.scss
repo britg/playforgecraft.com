@@ -228,11 +228,13 @@ $ranger-attack: $ranger-color;
     margin: 0 auto;
     width: $attack-width * $cols;
     height: $attack-height * $rows;
+    overflow: hidden;
 
     .attack {
       width: $attack-width;
       height: $attack-height;
       position: absolute;
+      top: -$attack-height;
 
       .icon {
         @include inset;

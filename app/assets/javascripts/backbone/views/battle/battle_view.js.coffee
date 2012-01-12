@@ -44,8 +44,8 @@ class ForgeCraft.Views.BattleView extends Backbone.View
 
   onBattleStart: ->
     self = @
-    $('#pre-battle').fadeOut ->
-      self.gridView = new ForgeCraft.Views.GridView el: $('#grid').get(0)
+    $('#pre-battle').fadeOut =>
+      self.gridView = new ForgeCraft.Views.GridView el: $('#grid').get(0), model: @model.grid
 
   continue: ->
 

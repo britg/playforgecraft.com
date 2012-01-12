@@ -31,7 +31,10 @@
         %li
           .att.shieldbash
             .icon
-            Shield bash your opponent, delaying the time to their next attack
+            Shield bash your opponent, delaying the time to their next attack with:
+            - if warrior2 = current_player.battle_slot(:shieldbash)
+              %br
+              = loot_with_icon warrior2
         %li
           .att.thief1
             .icon
