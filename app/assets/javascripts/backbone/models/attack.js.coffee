@@ -167,7 +167,6 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
 
   test: (row, col, direction) ->
     me = @attackAt(col, row)
-    return unless me?
 
     if direction == 'right'
       them = @attackAt(col+1, row)
@@ -175,9 +174,7 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
     if direction == 'down'
       them = @attackAt(col, row+1)
 
-    return unless them?
-
-    if me.get("type") == them.get("type")
+    if me? and them? and (me.get("type") == them.get("type"))
       @addMatch(me, them) 
     else
       @testMatches() 
