@@ -6,7 +6,9 @@ class EnemiesController < ApplicationController
   end
 
   def update
-    # Win/Loss events
+    @forge = current_player.forge
+    @forge.defeatBoss() if params[:winner] == 'player'
+    render :json => @forge
   end
 
 end

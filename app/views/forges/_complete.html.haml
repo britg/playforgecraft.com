@@ -91,7 +91,13 @@
         Swords
 
 
+  %h3 #{forge.boss} Defeated!
+
   .controls
+
+    = link_to "Fight again &rarr;".html_safe, forge.boss, :class => "btn danger"
+    %br
+    %br
     
     = link_to "Visit the Map &rarr;".html_safe, map_index_path, :class => "btn primary"
     %br

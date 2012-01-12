@@ -20,9 +20,7 @@ class ForgesController < ApplicationController
 
   def update
     @forge = Forge.where(:_id => params[:id]).first
-    if params[:restart] 
-      @forge.restart!
-    end
+    @forge.restart! if params[:restart] 
     redirect_to forge_path(@forge)
   end
 

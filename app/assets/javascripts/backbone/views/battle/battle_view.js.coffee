@@ -6,6 +6,7 @@ class ForgeCraft.Views.BattleView extends Backbone.View
   initialize: ->
     @model.bind "battle:start", @onBattleStart, @
     @model.bind "change:state", @onStateChange, @
+    @model.bind "change:winner", @endBattle, @
 
     @renderBattle()
 
@@ -15,6 +16,8 @@ class ForgeCraft.Views.BattleView extends Backbone.View
 
     $(document).unbind('orientationchange').bind 'orientationchange', =>
       @renderBattle()
+
+    @enemyView = new ForgeCraft.Views.EnemyView model: @model.enemy
 
   renderBattle: ->
     @resizeBattle()
@@ -44,11 +47,19 @@ class ForgeCraft.Views.BattleView extends Backbone.View
 
   onBattleStart: ->
     self = @
-    $('#pre-battle').fadeOut ->
-      $('#attacks').fadeIn()
-      $('#player').fadeIn()
-      self.gridView = new ForgeCraft.Views.GridView el: $('#attacks').get(0)
+    $('#pre-battle').fadeOut =>
+      self.gridView = new ForgeCraft.Views.GridView el: $('#grid').get(0), model: @model.grid
 
   continue: ->
 
   pause: ->
+
+  endBattle: ->
+    if @model.get("winner") == "player"
+      splashView.queueMessage("Victory!")
+      uri = "/enemies/" + @model.enemy.get("to_param") + ".json"
+      $.post uri, {
+        "_method": "PUT",
+        "winner": "player"
+      }, (forge) ->
+        Backbone.history.navigate("forges/" + forge.id, true)

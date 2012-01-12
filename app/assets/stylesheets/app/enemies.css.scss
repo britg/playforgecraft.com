@@ -5,6 +5,12 @@ $attack-height: 64px;
 $rows: 8;
 $cols: 8;
 
+$warrior-attack1: lighten($warrior-color, 50%);
+$warrior-attack2: $warrior-color;
+$thief-attack1: lighten($thief-color, 50%);
+$thief-attack2: $thief-color;
+$ranger-attack: $ranger-color;
+
 @mixin lifebar ($color) {
   
   @include inset;
@@ -18,6 +24,45 @@ $cols: 8;
     width: 100%;
     height: 10px;
     @include border-radius(5px);
+  }
+  
+}
+
+@mixin attack_icons {
+
+  &.warrior1 {
+    .icon {
+      border-color: $warrior-attack1;
+      background: $warrior-attack1;
+    }
+  }
+
+  &.shieldbash {
+    .icon {
+      border-color: $warrior-attack2;
+      background: $warrior-attack2;
+    }
+  }
+
+  &.thief1 {
+    .icon {
+      border-color: $thief-attack1;
+      background: $thief-attack1;
+    }
+  }
+
+  &.thief2 {
+    .icon {
+      border-color: $thief-attack2;
+      background: $thief-attack2;
+    }
+  }
+
+  &.ranger {
+    .icon {
+      border-color: $ranger-attack;
+      background: $ranger-attack;
+    }
   }
   
 }
@@ -39,6 +84,71 @@ $cols: 8;
 
     .progress-wrap {
       margin-bottom: 20px;
+    }
+
+    .section {
+      @include clearfix;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      text-transform: uppercase;
+      font-size: 90%;
+    }
+
+    #timer {
+
+      .counter {
+        float: right;
+        font-size: 400%;
+        color: $highlight-color;
+        margin-right: 20px;
+        line-height: 1;
+      }
+    }
+
+    #defense {
+      .stat {
+        float: right;
+        margin-right: 20px;
+      }
+      .val {
+        font-size: 300%;
+        line-height: 1;
+        color: $highlight-color;
+      }
+    }
+
+    #legend {
+      .attack-list {
+        margin: 0;
+        padding: 0;
+
+        li {
+          @include clearfix;
+          list-style-type: none;
+          margin-bottom: 10px;
+        }
+
+        .damage {
+          font-weight: bold;
+          color: $highlight-color;
+        }
+      }
+
+      .att {
+        .icon {
+          @include inset;
+          margin-right: 10px;
+          float: left;
+          width: $attack-width;
+          height: $attack-height;
+          border: solid 2px #ccc;
+        }
+
+        @include attack_icons;
+
+      }
     }
 
   }
@@ -63,6 +173,17 @@ $cols: 8;
     .hero-col {
       width: 150px;
     }
+  }
+
+  .message {
+    line-height: 1.2em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  #warning {
+    padding: 40px;
+    text-align: center;
   }
 
   .warning {
@@ -101,18 +222,36 @@ $cols: 8;
     }
   }
 
-  #attacks {
+  #grid {
 
-    display: block;
+    display: none;
     margin: 0 auto;
     width: $attack-width * $cols;
     height: $attack-height * $rows;
+    overflow: hidden;
 
     .attack {
       width: $attack-width;
       height: $attack-height;
       position: absolute;
-      background: red;
+      top: -$attack-height;
+
+      .icon {
+        @include inset;
+        display: block;
+        width: $attack-width - 4;
+        height: $attack-height - 4;
+        margin: 2px;
+      }
+
+      @include attack_icons;
+
+      &.matched {
+        .icon {
+          border: solid 1px #fff;
+          margin: 1px;
+        }
+      }
     }
 
   }

@@ -105,7 +105,7 @@ class Forge
   end
 
   def finished?
-    should_fight_boss? and boss_defeated
+    progresses_complete? and boss_defeated?
   end
 
   def complete?
@@ -147,15 +147,27 @@ class Forge
 
   # Boss
 
-  def should_fight_boss?
+  def progresses_complete?
     progresses.each do |p|
       return false unless p.complete?
     end
     true
   end
 
+  def should_fight_boss?
+    return false if boss_defeated?
+    progresses_complete?
+  end
+
   def boss
     Enemy.where(:level => level).first
+  end
+
+  def defeatBoss
+    update_attributes(:boss_defeated => true)
+    generate_message_event "#{boss} defeated!"
+    player.update_attributes(:level => level+1)
+    check_completion
   end
 
 end
