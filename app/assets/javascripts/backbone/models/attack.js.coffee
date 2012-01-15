@@ -39,7 +39,7 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
 
   initialize: ->
     @holes = []
-    @attackTypes = [@WARRIOR1, @SHIELDBASH, @THIEF1, @THIEF2, @RANGER]
+    @attackTypes = [@WARRIOR1, @WARRIOR1, @WARRIOR1, @SHIELDBASH, @THIEF1, @THIEF1, @THIEF2, @RANGER]
 
   seed: ->
     @prev = @chooseRandomAttackType()
