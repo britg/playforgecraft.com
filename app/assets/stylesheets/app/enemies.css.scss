@@ -144,6 +144,7 @@ $ranger-attack: $ranger-color;
           width: $attack-width;
           height: $attack-height;
           border: solid 2px #ccc;
+          margin-bottom: 10px;
         }
 
         @include attack_icons;
