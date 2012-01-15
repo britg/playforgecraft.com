@@ -5,9 +5,9 @@ $attack-height: 64px;
 $rows: 8;
 $cols: 8;
 
-$warrior-attack1: lighten($warrior-color, 50%);
+$warrior-attack1: yellow;
 $warrior-attack2: $warrior-color;
-$thief-attack1: lighten($thief-color, 50%);
+$thief-attack1: $set-color;
 $thief-attack2: $thief-color;
 $ranger-attack: $ranger-color;
 
@@ -33,35 +33,35 @@ $ranger-attack: $ranger-color;
   &.warrior1 {
     .icon {
       border-color: $warrior-attack1;
-      background: $warrior-attack1;
+      background: image_url('battle/Warrior1.png') center no-repeat;
     }
   }
 
   &.shieldbash {
     .icon {
       border-color: $warrior-attack2;
-      background: $warrior-attack2;
+      background: image_url('battle/ShieldBash.png') center no-repeat;
     }
   }
 
   &.thief1 {
     .icon {
       border-color: $thief-attack1;
-      background: $thief-attack1;
+      background: image_url('battle/Thief1.png') center no-repeat;
     }
   }
 
   &.thief2 {
     .icon {
       border-color: $thief-attack2;
-      background: $thief-attack2;
+      background: image_url('battle/Thief2.png') center no-repeat;
     }
   }
 
   &.ranger {
     .icon {
       border-color: $ranger-attack;
-      background: $ranger-attack;
+      background: image_url('battle/Ranger1.png') center no-repeat;
     }
   }
   
