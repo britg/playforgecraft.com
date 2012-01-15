@@ -13,7 +13,7 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
     newLife = 0 if newLife < 0
 
     @set defense: newLife
-
+    @trigger "damage_taken", type, dmg
     console.log "Taking damage", dmg
 
   lifePercent: ->
@@ -21,6 +21,7 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
 
   takeShieldBash: ->
     console.log "Taking shield bash!"
+    @trigger "shieldbash_taken"
 
   detectDeath: ->
     @die() if @get("defense") < 1

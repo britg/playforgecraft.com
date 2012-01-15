@@ -221,6 +221,26 @@ $ranger-attack: $ranger-color;
         margin-right: 10px
       }
     }
+
+    .combat-text {
+      text-align: center;
+      height: 10px;
+      margin-top: -10px;
+      margin-bottom: -10px;
+
+      .damage {
+        position: relative;
+        font-size: 250%;
+        color: lighten($blood-color, 20%);
+        @include transition-property("all");
+        @include transition-duration(".5s");
+
+        &.displayed {
+          top: -100px;
+          font-size: 400%;
+        }
+      }
+    }
   }
 
   #grid {

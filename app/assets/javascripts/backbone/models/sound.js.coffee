@@ -23,9 +23,11 @@ class ForgeCraft.Collections.Sounds extends Backbone.Collection
   BATTLE_LOST:    "battle_lost"
   BATTLE_MUSIC:   "battle_music"
   ENEMY_ATTACK:   "enemy_attack"
-  WARRIOR_ATTACK: "warrior_attack"
-  THIEF_ATTACK:   "thief_attack"
-  RANGER_ATTACK:  "ranger_attack"
+  WARRIOR1:       "warrior1_attack"
+  SHIELDBASH:     "shieldbash_attack"
+  THIEF1:         "thief1_attack"
+  THIEF2:         "thief2_attack"
+  RANGER:         "ranger_attack"
   CRITICAL_HIT:   "critical_hit"
 
   initialize: ->
@@ -83,7 +85,3 @@ class ForgeCraft.Collections.Sounds extends Backbone.Collection
     else
       @playMusic() if window.location.pathname.match '/forges/'
       @playBattleMusic() if window.location.pathname.match '/enemies/'
-
-  attackWith: (guard) ->
-    tag = @[guard.toUpperCase() + "_ATTACK"]
-    @play tag
