@@ -230,6 +230,7 @@ $ranger-attack: $ranger-color;
 
       .damage {
         position: relative;
+        top: 0;
         font-size: 250%;
         color: lighten($blood-color, 20%);
         @include transition-property("all");
