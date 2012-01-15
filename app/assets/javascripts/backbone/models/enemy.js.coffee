@@ -14,7 +14,7 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
       dmg = Math.round(Math.random() * 2 * base) + base
       critical = true
     else
-      dmg = Math.round(Math.random() * base)
+      dmg = Math.round(Math.random() * base/2 + base/2)
       critical = false
     
     newLife = @get("defense") - dmg
@@ -44,7 +44,6 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
     @set next_attack: next
 
   queueAttack: ->
-    battle.grid.lock()
     battle.queueEnemyAttack()
 
   attack: ->
@@ -53,4 +52,3 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
     @set 'next_attack': @get('attack_interval')
     @trigger 'attack'
     battle.grid.compress()
-    battle.grid.unlock()

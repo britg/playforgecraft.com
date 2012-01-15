@@ -65,7 +65,7 @@
 
   #battle.pre
 
-    = link_to "Restart Battle", "javascript:window.location.reload();", "data-remote" => true, :class => "btn danger restart"
+    = link_to "Restart", enemy_path(@enemy), "data-remote" => true, :class => "btn danger restart"
 
     .enemy{ :id => dom_id(@enemy) }
       

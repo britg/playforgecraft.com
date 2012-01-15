@@ -90,7 +90,11 @@ class ForgeCraft.Models.Battle extends Backbone.Model
     @enemy.attack()
 
   win: ->
+    @stop()
+    @attackQueue = []
     @set winner: "player"
 
   lose: ->
+    @stop()
+    @attackQueue = []
     @set winner: "enemy"

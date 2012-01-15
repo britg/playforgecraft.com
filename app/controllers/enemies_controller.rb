@@ -6,8 +6,9 @@ class EnemiesController < ApplicationController
   end
 
   def update
-    @forge = current_player.forge
-    @forge.defeatBoss() if params[:winner] == 'player'
+    @enemy = Enemy.find(params[:id])
+    @forge = current_player.forges.where(:level => @enemy.level).first
+    @forge.defeat_boss() if params[:winner] == 'player'
     render :json => @forge
   end
 

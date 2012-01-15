@@ -163,7 +163,7 @@ class Forge
     Enemy.where(:level => level).first
   end
 
-  def defeatBoss
+  def defeat_boss
     update_attributes(:boss_defeated => true)
     generate_message_event "#{boss} defeated!"
     player.update_attributes(:level => level+1)
