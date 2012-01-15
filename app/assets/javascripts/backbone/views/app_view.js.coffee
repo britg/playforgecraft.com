@@ -46,7 +46,10 @@ class ForgeCraft.Views.AppView extends Backbone.View
     return if path.match '/logout'
     @startForge() if path.match '/forges/'
     @startMap() if path.match '/map'
-    @startBattle() if path.match '/enemies'
+    if path.match '/enemies'
+      @startBattle() 
+    else
+      @stopBattle()
   
   startForge: ->
     window.forge = new ForgeCraft.Models.Forge(ForgeCraft.Config.forge)
@@ -59,6 +62,10 @@ class ForgeCraft.Views.AppView extends Backbone.View
   startBattle: ->
     window.battle = new ForgeCraft.Models.Battle enemy: ForgeCraft.Config.enemy
     window.battleView = new ForgeCraft.Views.BattleView model: window.battle
+
+  stopBattle: ->
+    return unless window.battle?
+    window.battle.stop()
 
   sendToBoss: (boss) ->
     splashView.queueMessage("Forging Complete!")

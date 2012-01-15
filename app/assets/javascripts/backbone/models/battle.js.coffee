@@ -23,6 +23,9 @@ class ForgeCraft.Models.Battle extends Backbone.Model
 
     @startCountDown()
 
+  stop: ->
+    @stopCountDown()
+
   startCountDown: ->
     @countDownInterval = setInterval =>
       @tick()
