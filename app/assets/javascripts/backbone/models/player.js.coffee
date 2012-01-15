@@ -28,6 +28,17 @@ class ForgeCraft.Models.Player extends Backbone.Model
     ForgeCraft.Config.sound.music = @get("setting").music
     ForgeCraft.Config.sound.effects = @get("setting").effects
     Sounds.update()
+
+  takeDamage: (dmg) ->
+    def = @get('defense') - dmg
+    if def <= 0
+      def = 0
+      @die()
+    @set defense: def
+
+  die: () ->
+    battle.lose()
+
   
 class ForgeCraft.Collections.PlayersCollection extends Backbone.Collection
   model: ForgeCraft.Models.Player

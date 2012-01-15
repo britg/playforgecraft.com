@@ -62,6 +62,9 @@ class ForgeCraft.Views.BattleView extends Backbone.View
       uri = "/enemies/" + @model.enemy.get("to_param") + ".json"
       $.post uri, {
         "_method": "PUT",
-        "winner": "player"
+        "winner": @model.get("winner")
       }, (forge) ->
         Backbone.history.navigate("forges/" + forge.id, true)
+    else
+      splashView.queueMessage("Defeat!")
+      window.location.reload()

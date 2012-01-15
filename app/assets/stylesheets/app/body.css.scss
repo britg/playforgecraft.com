@@ -45,7 +45,8 @@ table {
   margin: 0 auto;
   @include transition-property("font-size");
   @include transition-duration("0.2s");
-  z-index: 10000
+  z-index: 10000;
+  line-height: 1;
 }
 
 #footer {

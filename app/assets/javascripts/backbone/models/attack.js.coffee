@@ -21,6 +21,12 @@ class ForgeCraft.Models.Attack extends Backbone.Model
     battle.grid.consume(@)
     @set y: y
 
+  lock: ->
+    @set type: battle.grid.LOCKED
+
+  canMove: ->
+    @get("type") != battle.grid.LOCKED
+
 class ForgeCraft.Collections.Grid extends Backbone.Collection
 
   model: ForgeCraft.Models.Attack
@@ -36,8 +42,10 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
   THIEF1: 'thief1'
   THIEF2: 'thief2'
   RANGER: 'ranger'
+  LOCKED: 'locked'
 
   initialize: ->
+    @locked = false
     @holes = []
     @attackTypes = [@WARRIOR1, @WARRIOR1, @WARRIOR1, @SHIELDBASH, @THIEF1, @THIEF1, @THIEF2, @RANGER]
 
@@ -49,6 +57,14 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
         type = @chooseAttackType(row, col)
         attack = new ForgeCraft.Models.Attack x: col, y: row, type: type
         @add(attack)
+
+  lock: ->
+    @locked = true
+    @trigger "lock"
+
+  unlock: ->
+    @locked = false
+    @trigger "unlock"
 
   chooseAttackType: (row, col) ->
     chosen = @prev
@@ -130,6 +146,7 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
       when "down" then y += 1
 
     swapAttack = @attackAt(x, y)
+    # return unless swapAttack.canMove()
     console.log("Swapping attack", attack, direction, swapAttack)
     @swapAttacks(attack, swapAttack)
 
@@ -174,7 +191,7 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
     if direction == 'down'
       them = @attackAt(col, row+1)
 
-    if me? and them? and (me.get("type") == them.get("type"))
+    if me? and me.canMove() and them? and them.canMove() and (me.get("type") == them.get("type"))
       @addMatch(me, them) 
     else
       @testMatches() 
@@ -191,3 +208,27 @@ class ForgeCraft.Collections.Grid extends Backbone.Collection
       @matchSets.push @matches
 
     @matches = []
+
+  compress: ->
+    @lockRandomAttack() for i in [0..3]
+
+  lockRandomAttack: ->
+    return if @allLocked()
+    att = @randomAttack()
+
+    while !att.canMove()
+      att = @randomAttack()
+
+    att.lock()
+
+  allLocked: ->
+    for att in @models
+      return false if att.canMove()
+
+    true
+
+  randomAttack: ->
+    col = Math.floor(Math.random() * @COLS)
+    row = Math.floor(Math.random() * @ROWS)
+
+    return @attackAt(col, row)

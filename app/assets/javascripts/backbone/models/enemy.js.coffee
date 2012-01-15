@@ -2,10 +2,11 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
 
   initialize: ->
     @bind "change:defense", @detectDeath, @
+    @bind "tick", @tick
 
   takeAttack: (type, count) ->
     console.log @get("name"), "taking", count, "x", type
-    return @takeShieldBash() if type == 'shieldbash'
+    return @takeShieldBash(count) if type == 'shieldbash'
 
     base = ForgeCraft.Config.attacks[type]
 
@@ -26,8 +27,9 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
   lifePercent: ->
     Math.round(@get("defense")/@get("original_defense")*100)
 
-  takeShieldBash: ->
-    console.log "Taking shield bash!"
+  takeShieldBash: (count) ->
+    next = @get("next_attack") + count
+    @set next_attack: next
     @trigger "shieldbash_taken"
 
   detectDeath: ->
@@ -35,3 +37,20 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
 
   die: ->
     battle.win()
+
+  tick: ->
+    next = @get('next_attack') - 1
+    return @queueAttack() if next == 0
+    @set next_attack: next
+
+  queueAttack: ->
+    battle.grid.lock()
+    battle.queueEnemyAttack()
+
+  attack: ->
+    dmg = Math.round(@get("attack") * Math.random() + @get("attack")/2)
+    player.takeDamage(dmg)
+    @set 'next_attack': @get('attack_interval')
+    @trigger 'attack'
+    battle.grid.compress()
+    battle.grid.unlock()

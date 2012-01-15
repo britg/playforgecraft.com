@@ -12,6 +12,7 @@ class ForgeCraft.Models.Battle extends Backbone.Model
     @processingAttackQueue = false
     @enemy = new ForgeCraft.Models.Enemy(params.enemy)
     @set state: @PRE_STATE
+    player.set defense: ForgeCraft.Config.player_defense
 
   start: ->
     @grid = new ForgeCraft.Collections.Grid
@@ -19,6 +20,19 @@ class ForgeCraft.Models.Battle extends Backbone.Model
 
     @trigger 'battle:start'
     @set state: @PLAY_STATE
+
+    @startCountDown()
+
+  startCountDown: ->
+    @countDownInterval = setInterval =>
+      @tick()
+    , 1000
+
+  stopCountDown: ->
+    clearInterval @countDownInterval
+
+  tick: ->
+    @enemy.trigger "tick"
 
   play: ->
     @set state: @PLAY_STATE
@@ -31,6 +45,10 @@ class ForgeCraft.Models.Battle extends Backbone.Model
 
   isPaused: ->
     @get("state") == @PAUSE_STATE
+
+  queueEnemyAttack: ->
+    @attackQueue.push 'enemy'
+    @startAttackQueue()
 
   queueAttacks: (sets) ->
     @attackQueue.push(set) for set in sets
@@ -58,12 +76,18 @@ class ForgeCraft.Models.Battle extends Backbone.Model
     , @QUEUE_SPEED
 
   processAttack: (set) ->
+    return @processEnemyAttack() if set == 'enemy'
     type = set[0].get("type")
     console.log "Processing attack of type", type
     @enemy.takeAttack(type, set.length)
 
     attack.remove() for attack in set
 
+  processEnemyAttack: ->
+    @enemy.attack()
+
   win: ->
     @set winner: "player"
 
+  lose: ->
+    @set winner: "enemy"

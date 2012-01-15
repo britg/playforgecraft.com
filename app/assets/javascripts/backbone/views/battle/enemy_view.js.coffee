@@ -4,6 +4,8 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
     @model.bind "change:defense", @reflectCurrentDefense, @
     @model.bind "damage_taken", @takeDamage, @
     @model.bind "shieldbash_taken", @takeShieldBash, @
+    @model.bind "change:next_attack", @reflectNextAttack, @
+    @model.bind "attack", @announceAttack, @
 
   takeDamage: (type, dmg, critical=no) ->
     @lifebarReflectDamage(dmg, critical)
@@ -36,8 +38,13 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
                   $(this).fadeOut ->
                     $(this).remove()
                 )
-    
 
   reflectCurrentDefense: ->
     $('.enemy').find('.defense').html(@model.get("defense"))
     $('#enemy-lifebar').find('.bar').css width: @model.lifePercent() + "%"
+
+  reflectNextAttack: ->
+    $('.counter').html(@model.get("next_attack"))
+
+  announceAttack: ->
+    splashView.queueMessage(@model.get('name') + " Attacks!")

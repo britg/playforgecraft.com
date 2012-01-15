@@ -9,7 +9,7 @@
     .clear
 
     #defense.section
-      %h3.title Your defense total:
+      %h3.title Defense remaining:
 
       .stat
         %span.val.defense= number_with_delimiter(current_player.defense)
@@ -65,6 +65,8 @@
 
   #battle.pre
 
+    = link_to "Restart Battle", "javascript:window.location.reload();", "data-remote" => true, :class => "btn danger restart"
+
     .enemy{ :id => dom_id(@enemy) }
       
       %h1.name= @enemy.name
@@ -112,3 +114,4 @@
     thief2: #{current_player.battle_attack(:thief2).to_json},
     ranger: #{current_player.battle_attack(:ranger).to_json},
   }
+  ForgeCraft.Config.player_defense = #{current_player.defense.to_json}

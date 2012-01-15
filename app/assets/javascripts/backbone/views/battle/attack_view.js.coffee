@@ -18,6 +18,7 @@ class ForgeCraft.Views.AttackView extends Backbone.View
     @model.bind "change:y", @updateCoordinates, @
     @model.bind "change:matched", @matched, @
     @model.bind "remove", @remove, @
+    @model.bind "change:type", @lock, @
 
   render: (drop) ->
     $(@el).addClass(@model.get("type"))
@@ -51,7 +52,11 @@ class ForgeCraft.Views.AttackView extends Backbone.View
       boardTop = $('#grid').position().top
       topPos = boardTop + ForgeCraft.Config.attackDim * @model.get("y")
 
+  canMove: ->
+    @model.canMove() and !battle.grid.locked
+
   onDown: (e) ->
+    return false unless @canMove()
     # console.log "Mouse down on me"
     @watching = yes
     @ref = x: e.pageX, y: e.pageY 
@@ -61,7 +66,8 @@ class ForgeCraft.Views.AttackView extends Backbone.View
     false
 
   onMove: (e) ->
-    return unless @watching
+    return false unless @canMove()
+    return false unless @watching
     # console.log "Mouse move"
 
     @delta = x: e.pageX - @ref.x, y: e.pageY - @ref.y
@@ -92,7 +98,8 @@ class ForgeCraft.Views.AttackView extends Backbone.View
     false
 
   onUp: ->
-    return unless @watching
+    return false unless @canMove()
+    return false unless @watching
     @watching = no
     @ref = undefined
     @refAttack = undefined 
@@ -107,6 +114,9 @@ class ForgeCraft.Views.AttackView extends Backbone.View
   remove: ->
     $(@el).fadeOut =>
       $(@el).remove()
+
+  lock: ->
+    $(@el).addClass('locked')
 
 
 class ForgeCraft.Views.GridView extends Backbone.View

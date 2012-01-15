@@ -156,6 +156,13 @@ $ranger-attack: $ranger-color;
 
   #battle {
     position: fixed;
+
+    .restart {
+      float: right;
+      margin-top: 10px;
+      margin-bottom: -20px;
+    }
+
     #pre-battle {
       display: none;
     }
@@ -275,9 +282,16 @@ $ranger-attack: $ranger-color;
 
       @include attack_icons;
 
+      &.locked {
+        .icon {
+          background: black;
+        }
+      }
+
       &.matched {
         .icon {
           border: solid 1px #fff;
+          @include glow(#fff);
           margin: 1px;
         }
       }

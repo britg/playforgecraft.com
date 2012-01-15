@@ -7,6 +7,8 @@ class ForgeCraft.Views.PlayerView extends Backbone.View
     @model.bind "change:coins", @onCoinChange, @
     @model.bind "ForgeCraft:NeedMoreCoins", @shakeMoney, @
 
+    @model.bind "change:defense", @reflectDefense, @
+
   onCoinChange: ->
     coins = @model.get("coins")
     console.log "Updating coins to", coins
@@ -23,3 +25,7 @@ class ForgeCraft.Views.PlayerView extends Backbone.View
 
   cashInLoot: (loot_id) ->
     
+
+  reflectDefense: ->
+    $('#defense').find('.val').html(@model.get("defense"))
+    $('#defense').find('.stat').effect('shake', { times: 3, distance: 10 }, 50)
