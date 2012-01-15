@@ -57,9 +57,8 @@ class ForgeCraft.Views.ActiveForgeView extends Backbone.View
 
   activateBar: ->
     @bar().removeClass("new").addClass("activated")
-    @finishTimeout = setTimeout => 
+    @bar().bind CSS3_TRANSITION_END, =>
       @finish() if @active
-    , 1500
 
   calculateCheckpoints: ->
     @checkpoints = []

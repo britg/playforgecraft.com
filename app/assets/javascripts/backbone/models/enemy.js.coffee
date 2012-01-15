@@ -7,13 +7,20 @@ class ForgeCraft.Models.Enemy extends Backbone.Model
     console.log @get("name"), "taking", count, "x", type
     return @takeShieldBash() if type == 'shieldbash'
 
-    dmg = ForgeCraft.Config.attacks[type]
+    base = ForgeCraft.Config.attacks[type]
+
+    if count > 3
+      dmg = Math.round(Math.random() * 2 * base) + base
+      critical = true
+    else
+      dmg = Math.round(Math.random() * base)
+      critical = false
     
     newLife = @get("defense") - dmg
     newLife = 0 if newLife < 0
 
     @set defense: newLife
-    @trigger "damage_taken", type, dmg
+    @trigger "damage_taken", type, dmg, critical
     console.log "Taking damage", dmg
 
   lifePercent: ->

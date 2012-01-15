@@ -235,6 +235,13 @@ $ranger-attack: $ranger-color;
         color: lighten($blood-color, 20%);
         @include transition-property("all");
         @include transition-duration(".5s");
+        width: 100px;
+        margin-right: -100px;
+        overflow: visible;
+
+        &.big {
+          font-weight: bold;
+        }
 
         &.displayed {
           top: -100px;

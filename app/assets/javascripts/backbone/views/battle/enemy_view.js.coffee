@@ -5,21 +5,26 @@ class ForgeCraft.Views.EnemyView extends Backbone.View
     @model.bind "damage_taken", @takeDamage, @
     @model.bind "shieldbash_taken", @takeShieldBash, @
 
-  takeDamage: (type, dmg) ->
-    @lifebarReflectDamage(dmg)
+  takeDamage: (type, dmg, critical=no) ->
+    @lifebarReflectDamage(dmg, critical)
     Sounds.play type
 
-  lifebarReflectDamage: (dmg) ->
+  lifebarReflectDamage: (dmg, critical=no) ->
     $('#enemy-lifebar').effect("pulsate", { times: 3 } , 50)
-    @showCombatText("-" + dmg)
+    if critical
+      @showCombatText("Critical Hit! -" + dmg, big=true)
+    else
+      @showCombatText("-" + dmg)
 
   takeShieldBash: () ->
     @showCombatText("Shield Bash!")
 
-  showCombatText: (msg) ->
+  showCombatText: (msg, big=no) ->
     id = Math.round(Math.random()*10000)
     $('.enemy').find('.combat-text')
                 .append('<span class="damage" id="' + id + '">' + msg + '</span>' )
+
+    $('#' + id).addClass('big') if big
     
     setTimeout =>
       @floatCombatText(id)
