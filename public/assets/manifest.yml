@@ -5,6 +5,11 @@ apple-touch-icon-57.png: apple-touch-icon-57-8ee009f9793cc505dd5551ad54d0b6d5.pn
 apple-touch-icon-72.png: apple-touch-icon-72-8ee009f9793cc505dd5551ad54d0b6d5.png
 apple-touch-icon.png: apple-touch-icon-8ee009f9793cc505dd5551ad54d0b6d5.png
 background.png: background-88a5567561b81d8218fc2c26d06ba252.png
+battle/Ranger1.png: battle/Ranger1-a751c3731131f7b4d97aa8eed5696483.png
+battle/ShieldBash.png: battle/ShieldBash-115c724a9e0717664c3ec7f021016405.png
+battle/Thief1.png: battle/Thief1-a7ecbf636c75bf623711e5d1e09265f8.png
+battle/Thief2.png: battle/Thief2-1ede0ca42e4078d9ea0264c7d811bc9d.png
+battle/Warrior1.png: battle/Warrior1-741483f0ce4810ac7f6c3e9bae977504.png
 classes/axe.png: classes/axe-02eeb60cf3196a4c5b86b245ae70662f.png
 classes/crossbow.png: classes/crossbow-e43b5908e250b4d324e73fc91dc53626.png
 classes/legging.png: classes/legging-a7effa65c89a7a112e793bcc9649fb19.png
@@ -92,4 +97,4 @@ active_admin/orderable.png: active_admin/orderable-003d291622c6610ce91358a266ff0
 jquery-ui.min.js: jquery-ui-7e33882a28fc84ad0e0e47e46cbf901c.min.js
 jquery.min.js: jquery-8a50feed8d29566738ad005e19fe1c2d.min.js
 application.js: application-7ba828bbaa1d1734a282ef992b4203b4.js
-application.css: application-3546aa9ede49e94129453c4a4d40c7c1.css
+application.css: application-99cfc53798fc51a957fb02fd4138c997.css
