@@ -87,8 +87,10 @@ class Player < ActiveRecord::Base
   end
 
   def empty_slots?
-    slots.each do |s|
-      return true if s.empty?
+    heroes.each do |h|
+      h.slots.each do |s|
+        return true if s.empty?
+      end
     end
     false
   end
