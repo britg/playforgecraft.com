@@ -1,0 +1,25 @@
+.section.personalization
+
+  %table
+    
+    %tr.skills
+      %td.skill.accuracy{ "data-tip" => t('tips.accuracy') }
+        %span.value= "+#{player.skills.accuracy}"
+        %span.name Dexterity
+      %td.skill.craftsmanship{ "data-tip" => t('tips.craftsmanship') }
+        %span.value= "+#{player.skills.craftsmanship}"
+        %span.name Craftsmanship
+      %td.skill.perception{ "data-tip" => t('tips.perception') }
+        %span.value= "+#{player.skills.perception}"
+        %span.name Perception
+
+      %td{ :rowspan => 2, "data-tip" => t('tips.missing') }
+        .slot.final
+
+    %tr.accessories
+      %td.accessory
+        .slot.gloves{ :class => ("empty" unless player.skills.gloves?), "data-tip" => t('tips.missing') }
+      %td.accessory
+        .slot.apron{ :class => ("empty" unless player.skills.apron?), "data-tip" => t('tips.missing') }
+      %td.accessory
+        .slot.goggles{ :class => ("empty" unless player.skills.goggles?), "data-tip" => t('tips.missing') }
