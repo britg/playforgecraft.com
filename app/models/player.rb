@@ -23,7 +23,6 @@ class Player < ActiveRecord::Base
     :styles => { :full => ["200x200#", :jpg], :thumb => ["100x100#", :jpg], :tiny => ["50x50#", :jpg] }
 
   before_validation :generate_url_name
-  after_create :create_setting, :update_score!
 
   accepts_nested_attributes_for :setting
 
@@ -159,6 +158,7 @@ class Player < ActiveRecord::Base
 
   def start_forge mine
     return false unless mine.try(:id)
+    return if has_forge? mine
     forges.create :mine_id => mine.id,
                   :level => mine.level,
                   :zone_id => mine.zone.id
