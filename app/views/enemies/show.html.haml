@@ -68,8 +68,9 @@
     = link_to "Restart", enemy_path(@enemy), "data-remote" => true, :class => "btn danger restart"
 
     .enemy{ :id => dom_id(@enemy) }
-      
-      %h1.name= @enemy.name
+      .ident
+        .icon
+        %h1.name= @enemy.name
 
       #enemy-lifebar
         .bar

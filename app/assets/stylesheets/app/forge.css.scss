@@ -483,6 +483,10 @@ html.no-touch {
     line-height: 1;
   }
 
+  .next {
+    padding: 10px;
+  }
+
   .stats {
     margin-bottom: 20px;
     
@@ -508,5 +512,23 @@ html.no-touch {
 
   .controls {
     text-align: center;
+  }
+
+  .boss {
+
+    @include clearfix;
+    margin-bottom: 10px;
+
+    .icon {
+      height: 60px;
+      width: 60px;
+      @include inset;
+      float: left;
+      margin-right: 10px;
+    }
+
+    .fight-again {
+      color: $blood-color;
+    }
   }
 }

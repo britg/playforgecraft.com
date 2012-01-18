@@ -205,6 +205,19 @@ $ranger-attack: $ranger-color;
     padding: 20px;
     margin-bottom: 20px;
 
+    .ident {
+      margin-bottom: 10px;
+      @include clearfix;
+    }
+
+    .icon {
+      height: 60px;
+      width: 60px;
+      @include inset;
+      float: left;
+      margin-right: 10px;
+    }
+
     .name {
       font-size: 300%;
       font-weight: bold;
