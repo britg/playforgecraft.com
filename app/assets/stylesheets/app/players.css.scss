@@ -57,6 +57,10 @@
     padding: 10px;
     margin-top: 10px;
 
+    &.unspent {
+      @include glow($rare-color);
+    }
+
     table {
       td {
         text-align: center;
@@ -71,6 +75,12 @@
         color: $highlight-color;
         font-size: 250%;
         line-height: 1;
+      }
+
+      .name {
+        .tooltip {
+          vertical-align: -2px;
+        }
       }
     }
 

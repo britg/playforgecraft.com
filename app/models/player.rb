@@ -29,6 +29,10 @@ class Player < ActiveRecord::Base
 
   class << self
 
+    def find ident
+      find_by_id(ident) || find_by_url_name(ident)
+    end 
+
     def range(range_id)
       "#{(range_id.to_i*10+1)}-#{(range_id.to_i+1)*10}"
     end
@@ -52,7 +56,7 @@ class Player < ActiveRecord::Base
   end
 
   def serializable_hash(opts={})
-    super((opts||{}).merge(:only => [:id, :name, :level], :methods => [:setting]))
+    super((opts||{}).merge(:only => [:id, :name, :level, :url_name], :methods => [:setting, :skills]))
   end
 
   def generate_url_name
@@ -252,6 +256,21 @@ class Player < ActiveRecord::Base
 
   def skills
     @skills ||= (Skill.where(:player_id => self.id).first || Skill.create(:player_id => self.id))
+  end
+
+  # Leveling
+
+  def level_from_forge forge
+    forge_level = forge.level
+    return if forge_level < level
+    level_up
+  end
+
+  def level_up
+    new_level = level+1
+    update_attributes(:level => new_level)
+    skills.inc :available_points, 1
+    skills.reward_accessories
   end
 
 end

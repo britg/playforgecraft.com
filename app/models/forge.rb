@@ -104,6 +104,32 @@ class Forge
     progresses.map(&:requirement)
   end
 
+  def progresses_complete?
+    progresses.each do |p|
+      return false unless p.complete?
+    end
+    true
+  end
+
+  # Boss
+
+  def should_fight_boss?
+    return false if boss_defeated?
+    progresses_complete?
+  end
+
+  def boss
+    Enemy.where(:level => level).first
+  end
+
+  def defeat_boss
+    update_attributes(:boss_defeated => true)
+    generate_message_event "#{boss} defeated!"
+    check_completion
+  end
+
+  # Completion
+
   def finished?
     progresses_complete? and boss_defeated?
   end
@@ -112,8 +138,13 @@ class Forge
     complete
   end
 
+  def complete!
+    player.level_from_forge(self)
+    self.update_attributes(:complete => true)
+  end
+
   def check_completion
-    self.update_attributes(:complete => finished?)
+    complete! if finished?
   end
 
   # Events
@@ -143,31 +174,6 @@ class Forge
     progresses.destroy_all
     create_progresses
     update_attributes(:complete => false)
-  end
-
-  # Boss
-
-  def progresses_complete?
-    progresses.each do |p|
-      return false unless p.complete?
-    end
-    true
-  end
-
-  def should_fight_boss?
-    return false if boss_defeated?
-    progresses_complete?
-  end
-
-  def boss
-    Enemy.where(:level => level).first
-  end
-
-  def defeat_boss
-    update_attributes(:boss_defeated => true)
-    generate_message_event "#{boss} defeated!"
-    player.update_attributes(:level => level+1)
-    check_completion
   end
 
 end
