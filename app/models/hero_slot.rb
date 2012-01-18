@@ -41,7 +41,7 @@ class HeroSlot < ActiveRecord::Base
   end
 
   def empty?
-    !loot.present?
+    !loot.present? unless (hero.job.name == :ranger and slot == :weapon2)
   end
 
   def accepts? loot

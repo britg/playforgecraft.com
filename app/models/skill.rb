@@ -16,7 +16,7 @@ class Skill
   index :player_id, :unique => true
 
   def player
-    Player.find_by_id(player_id)
+    @player ||= Player.find_by_id(player_id)
   end
 
   def increase skill
@@ -46,10 +46,10 @@ class Skill
   end
 
   def reward_accessories
-    reward_gloves if level >= 4
-    reward_apron if level >= 7
-    reward_goggles if level >= 9
-    reward_hammer if level >= 10
+    reward_gloves if player.level >= 4
+    reward_apron if player.level >= 7
+    reward_goggles if player.level >= 9
+    reward_hammer if player.level >= 10
   end
 
   def reward_gloves
