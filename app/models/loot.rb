@@ -68,7 +68,10 @@ class Loot < ActiveRecord::Base
     end
 
     def best item
-      of_item(item).order("rating desc").first
+      of_item(item).order("rating desc").each do |l|
+        return l unless l.equipped?
+      end
+      nil
     end
 
     def epic
