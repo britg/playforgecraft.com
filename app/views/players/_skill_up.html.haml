@@ -1,24 +1,26 @@
 .section.personalization.unspent
   
-  %h3 You have #{pluralize(player.skills.available_points, 'available skill point')}:  
+  %h3
+    Points to spend:
+    %span.remaining= player.skills.available_points
 
   %table
     
     %tr.skills
       %td.skill.accuracy{ "data-tip" => t('tips.accuracy') }
-        %span.value= "+#{player.skills.accuracy}"
+        %span.value= "#{player.skills.accuracy}"
         %span.name 
           Dexterity
           = link_to image_tag("tooltip.png"), "#", :class => "tooltip", "data-tip" => t('tips.accuracy') 
 
       %td.skill.craftsmanship{ "data-tip" => t('tips.craftsmanship') }
-        %span.value= "+#{player.skills.craftsmanship}"
+        %span.value= "#{player.skills.craftsmanship}"
         %span.name 
           Craftsmanship
           = link_to image_tag("tooltip.png"), "#", :class => "tooltip", "data-tip" => t('tips.craftsmanship') 
 
       %td.skill.perception{ "data-tip" => t('tips.perception') }
-        %span.value= "+#{player.skills.perception}"
+        %span.value= "#{player.skills.perception}"
         %span.name 
           Perception
           = link_to image_tag("tooltip.png"), "#", :class => "tooltip", "data-tip" => t('tips.perception')

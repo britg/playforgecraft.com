@@ -68,7 +68,7 @@ ForgeCraft::Application.routes.draw do
     resource :mine, :only => [:update]
   end
 
-  resource :skills, :only => [:update]
+  resource :skills, :only => [:show, :update]
 
   # Tooltips
 

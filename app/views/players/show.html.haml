@@ -36,7 +36,7 @@
             %td.stat Epics
             %td.value= @player.rare_items
 
-    .span-two-thirds
+    #skills.span-two-thirds
       
       - if @player == current_player and current_player.skills.available_points > 0
         = render "skill_up", :player => @player

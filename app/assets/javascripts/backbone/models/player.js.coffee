@@ -43,9 +43,8 @@ class ForgeCraft.Models.Player extends Backbone.Model
     $.post '/skills.json', {
       "_method": "PUT",
       skill: skill
-    }, (player) ->
-      console.log player
-
+    }, (player) =>
+      @set player
   
 class ForgeCraft.Collections.PlayersCollection extends Backbone.Collection
   model: ForgeCraft.Models.Player
