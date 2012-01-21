@@ -31,7 +31,7 @@ class ForgeCraft.Collections.Sounds extends Backbone.Collection
   CRITICAL_HIT:   "critical_hit"
 
   initialize: ->
-    Crafty.audio.MAX_CHANNELS = 2
+    Crafty.audio.MAX_CHANNELS = 1
     @bind "reset", @registerAll, @
     @registerAll()
 
