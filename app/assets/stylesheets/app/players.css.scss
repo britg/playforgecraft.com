@@ -121,6 +121,11 @@
     }
   }
 
+  #dashboard {
+    background: image_url('dashboard-header.png') top center no-repeat;
+    padding-top: 176px;
+  }
+
   .heading {
     margin-top: 10px;
     margin-bottom: 0px;
