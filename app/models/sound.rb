@@ -39,7 +39,7 @@ class Sound < ActiveRecord::Base
   end
 
   def complete?
-    mp3.present? and ogg.present? and wav.present?
+    mp3.present?
   end
 
   def ident
