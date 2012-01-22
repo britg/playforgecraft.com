@@ -27,6 +27,7 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     Ores.bind "reset", @clearOres, @
 
     @initializeActiveForge()
+    @initializeLootSplash()
     @renderForge()
     @renderEvents()
 
@@ -63,6 +64,15 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
     @topBarHeight   = $('.topbar').height();
     @htmlHeight     = $('html').height();
     $('#sidebar').css minHeight: @htmlHeight - @topBarHeight
+
+  # Loot Splash
+
+  initializeLootSplash: ->
+    Loot.bind "add", @renderLootSplash, @
+
+  renderLootSplash: (loot) ->
+    lootSplashView = new ForgeCraft.Views.LootSplashView model: loot
+    lootSplashView.showSplash()
 
   # Events
 

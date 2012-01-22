@@ -138,3 +138,47 @@
     display: block;
   }
 }
+
+.loot-splash {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  z-index: 10000;
+  display: block;
+  padding: 5px;
+  background: $background-color;
+  font-size: 125%;
+
+  white-space: nowrap;
+  
+  @include border-radius(5px);
+  @include glow($common-color);
+
+  @include transition-property("all");
+  @include transition-duration("0.5s");
+
+  .icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    vertical-align: -6px;
+    @include transition-property("all");
+    @include transition-duration("0.5s");
+  }
+
+  &.common {
+    @include glow($common-color);
+  }
+
+  &.advanced {
+    @include glow($advanced-color);
+  }
+
+  &.rare {
+    @include glow($rare-color);
+  }
+
+  &.epic {
+    @include glow($epic-color);
+  }
+}

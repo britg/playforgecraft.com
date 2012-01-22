@@ -108,6 +108,7 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
       forgeable.unableToPurchase(params)
     
   processEventResponse: (params) ->
+    console.log params
 
     Forgings.remove(@)
     player.set(params.player)
@@ -122,6 +123,7 @@ class ForgeCraft.Models.Forgeable extends Backbone.Model
 
     # Loot
     loot = new ForgeCraft.Models.Loot(params.loot)
+    console.log "Adding loot to Loot", loot
     Loot.add(loot)
 
     # Events
