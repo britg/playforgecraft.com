@@ -158,7 +158,7 @@ class Player < ActiveRecord::Base
 
   def start_forge mine
     return false unless mine.try(:id)
-    return if has_forge? mine
+    return forge_for(mine) if has_forge? mine
     forges.create :mine_id => mine.id,
                   :level => mine.level,
                   :zone_id => mine.zone.id
