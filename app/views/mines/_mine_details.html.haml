@@ -1,35 +1,21 @@
-.details
+.details{ :id => dom_id(mine, 'details') }
 
-  - if mine.present?
-
-    %h3.name= mine.name
-    %h4.level Level #{mine.level}
-    %p.description= mine.description
+  %h4.level Level #{mine.level}
+  %p.description= mine.description
 
 
-    - if current_player.can_mine_at? mine
+  - if current_player.can_mine_at? mine
 
-      - if forge.present?
-        .progress-wrap
-          = render "forges/progress", :forge => forge
+    - if forge.present?
+      .progress-wrap
+        = render "forges/progress", :forge => forge
 
-        - if forge.complete?
-          %h3 Forge Complete &#x2713;
-        
-        = action_button(forge)
+      - if forge.complete?
+        %h3 Forge Complete &#x2713;
       
-      - else
-        .requirements
-          %p Clear this mine by forging:
-
-          %ul
-            - mine.requirements.each do |req|
-              %li= req
-
-        = link_to "Start a Forge Here", "#", :class => "travel btn primary", "data-mine-id" => mine.id
-
+      = action_button(forge)
+    
     - else
-
       .requirements
         %p Clear this mine by forging:
 
@@ -37,6 +23,13 @@
           - mine.requirements.each do |req|
             %li= req
 
+      = link_to "Start a Forge Here", "#", :class => "travel btn primary", "data-mine-id" => mine.id
+
   - else
-    
-    %h3 Select a mine on the map
+
+    .requirements
+      %p Clear this mine by forging:
+
+      %ul
+        - mine.requirements.each do |req|
+          %li= req

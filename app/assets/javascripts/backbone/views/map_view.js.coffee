@@ -6,7 +6,7 @@ class ForgeCraft.Views.MapView extends Backbone.View
   initialize: ->
 
   start: ->
-    @bindTravelActions()
+    @bindNavAction()
     @refresh()
 
   refresh: ->
@@ -15,29 +15,22 @@ class ForgeCraft.Views.MapView extends Backbone.View
     $('.sidebar').css minHeight: @htmlHeight - @topBarHeight
     $('#map').find('.map').css minHeight: @htmlHeight - @topBarHeight
 
-  showMine: ->
-    # $('#map.details').load
-
-  bindTravelActions: ->
+  bindNavAction: ->
     self = @
-    $('.travel').click ->
-      mine_id = $(@).attr("data-mine-id")
-      self.changeMine(mine_id)
+    $('.mine').click ->
+      id = $(this).attr('data-id')
+      self.selectMine(id)
+      Backbone.history.navigate("map/" + id)
+
       return false
 
-  changeMine: (mine_id)->
-    console.log "Starting travel with mine id", mine_id
-    loadingView.show()
-    $.post '/players/' + player.get("name") + '/mine', {
-      _method: "PUT",
-      player: {mine_id: mine_id}
-    }, @onMineChange
+  selectMine: (id) ->
+    id = id.toString().split('-')[0]
 
-  onMineChange: (response) ->
-    console.log "Travelling!", response
-    loadingView.hide()
-    forge_id = response.id
-    mapView.travelTo forge_id
+    $mine = $('#mine_' + id)
+    if $mine.hasClass('selected')
+      $mine.removeClass('selected')
+    else
+      $('.mine').removeClass('selected')
+      $mine.addClass('selected')
 
-  travelTo: (forge_id) ->
-    Backbone.history.navigate("forges/" + forge_id, true)

@@ -3,11 +3,12 @@ class MinesController < ApplicationController
   before_filter :set_nav, :set_zones
 
   def index
-    @mine = current_player.try(:mine)
+    @mines = Mine.all
     render "show"
   end
 
   def show
+    @mines = Mine.all
     @mine = Mine.find(params[:id])
   end
 

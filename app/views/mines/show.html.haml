@@ -1,7 +1,25 @@
 #map
 
   .sidebar
-    = render "mine_details", :mine => @mine, :forge => current_player.forge_for(@mine)
+
+    %ul.mine-list
+
+      - @mines.each do |mine|
+
+        - forge = current_player.forge_for(mine)
+
+        %li
+
+          .mine{ :id => dom_id(mine), :"data-id" => mine.to_param, :class => ("selected" if @mine == mine) }
+            
+            %h3.name
+              = mine
+              - if forge.present? and forge.complete?
+                %span.complete-checkmark
+                  &#x2713;
+
+            = render "mine_details", :mine => mine, :forge => forge
+
 
   .map-wrap
 

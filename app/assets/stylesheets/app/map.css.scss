@@ -10,10 +10,51 @@
     @include inset;
 
     .details {
-      padding: 10px;
-
+      display: none;
       .progress-wrap {
         margin-bottom: 20px;
+      }
+
+      margin-bottom: 20px;
+    }
+
+    .mine-list {
+
+      padding: 0;
+      margin: 0;
+
+      li {
+        list-style-type: none;
+      }
+
+      .mine {
+        border-bottom: solid 1px #272727;
+        padding: 5px 10px;
+        cursor: pointer;
+
+        .name {
+          color: $forge-color;
+        }
+
+        .complete-checkmark {
+          float: right;
+          font-weight: bold;
+          color: $advanced-color;
+        }
+
+        &.selected {
+
+          background: #272727;
+          
+          .name {
+            font-weight: bold;
+            color: $highlight-color;
+          }
+
+          .details {
+            display: block;
+          }
+        }
       }
     }
 
