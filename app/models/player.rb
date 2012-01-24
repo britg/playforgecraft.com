@@ -266,6 +266,10 @@ class Player < ActiveRecord::Base
 
   # Leveling
 
+  def just_started?
+    level == 1 and forges.count == 1 and forges.first.events.count == 0
+  end
+
   def level_from_forge forge
     forge_level = forge.level
     return if forge_level < level

@@ -58,6 +58,9 @@
 
       .section.forges-wrap
 
+        - if @player == current_player and current_player.just_started?
+          = link_to "Start your first Forge &rarr;".html_safe, forge_path(@player.forge_for(Mine.find_by_level(1))), :class => "btn primary next"
+
         - if @player.forges.active.any?
           .active-forges
             - @player.forges.active.each_with_index do |forge, index|
@@ -65,7 +68,7 @@
           
           .clear
 
-        - else
+        - elsif @player == current_player
           = link_to "Discover the next Forge &rarr;".html_safe, map_path(Mine.find_by_level(current_player.level)), :class => "btn primary next"
 
         - @player.forges.completed.each_with_index do |forge, index|
