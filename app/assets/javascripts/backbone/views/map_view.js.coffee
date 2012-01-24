@@ -18,8 +18,8 @@ class ForgeCraft.Views.MapView extends Backbone.View
 
   bindNavAction: ->
     self = @
-    $('.mine').click ->
-      id = $(this).attr('data-id')
+    $('.mine').find('.name').click ->
+      id = $(this).parent().attr('data-id')
       self.selectMine(id)
       Backbone.history.navigate("map/" + id)
 
