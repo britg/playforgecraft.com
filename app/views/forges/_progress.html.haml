@@ -17,5 +17,17 @@
           = "/ #{prog.requirement.to_s}"
 
           = link_to image_tag("tooltip.png"), tooltips_path, :rel => "tooltip"
-      - if forge.boss.present?
-        %li Defeat the #{forge.boss}!
+      
+      %li.boss{ :class => ("complete" if forge.boss_defeated?) }
+        
+        - if forge.boss_defeated?
+
+          #{forge.boss} defeated!
+          
+        - else
+
+          Defeat the #{forge.boss}!
+
+          .fight-action
+            - if forge.progresses_complete?
+              = link_to "Fight!", enemy_path(forge.boss), :class => "btn danger" 
