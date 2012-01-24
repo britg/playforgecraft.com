@@ -98,7 +98,5 @@
 
   .next
 
-    = link_to "Visit the Map &rarr;".html_safe, map_index_path, :class => "btn primary"
-
-    = link_to "Visit the Armory &rarr;".html_safe, armory_index_path, :class => "btn primary"
+    = link_to "Level Up &rarr;".html_safe, player_path(current_player), :class => "btn primary finish"
 

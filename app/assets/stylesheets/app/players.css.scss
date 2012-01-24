@@ -154,6 +154,14 @@
     margin-bottom: 0;
   }
 
+  .next {
+    width: 90%;
+    text-align: center;
+    @include glow($highlight-color);
+    margin: 10px 0;
+    font-size: 125%;
+  }
+
 }
 
 #ladder-page {

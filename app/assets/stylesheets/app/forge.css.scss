@@ -230,6 +230,16 @@ html.game.no-touch {
       margin-bottom: 20px;
     }
 
+    .boss {
+      .fight {
+        font-size: 250%;
+        @include glow(#fff);
+        margin-top: 10px;
+        width: 65%;
+        text-align: center;
+      }
+    }
+
   }
 
   #player-bar {
@@ -406,6 +416,13 @@ html.no-touch {
     font-weight: bold;
     color: $advanced-color;
   }
+
+  .boss {
+    .fight {
+      @include glow(#fff);
+      margin-top: 10px;
+    }
+  } 
 }
 
 .progress {
@@ -508,6 +525,13 @@ html.no-touch {
         vertical-align: -4px;
       }
     }
+  }
+
+  .finish {
+    font-size: 250%;
+    @include glow(#fff);
+    text-align: center;
+    width: 200px;
   }
 
   .controls {

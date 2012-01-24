@@ -29,10 +29,10 @@ class ForgeCraft.Views.SplashView extends Backbone.View
     $(@el).html(message).show()
 
     setTimeout =>
-      $(@el).css fontSize: "800%"
+      $(@el).css fontSize: "600%"
     , ForgeCraft.Config.splash.embiggenDelay
 
     setTimeout =>
       $(@el).fadeOut "fast", =>
-        $(@el).css fontSize: "10px"
+        $(@el).css fontSize: "20px"
     , ForgeCraft.Config.splash.stickDelay

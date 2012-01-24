@@ -55,6 +55,14 @@
             display: block;
           }
         }
+
+        .requirements {
+          margin-bottom: 10px;
+        }
+
+        .travel {
+          @include glow(#fff);
+        }
       }
     }
 

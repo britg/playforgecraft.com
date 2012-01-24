@@ -173,6 +173,10 @@ class Player < ActiveRecord::Base
     !forge.complete?
   end
 
+  def has_forge_in_progress?
+    forges.where(:complete => false).any?
+  end
+
   # Loot
 
   def best_set

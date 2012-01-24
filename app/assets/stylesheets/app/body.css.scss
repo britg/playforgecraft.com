@@ -39,6 +39,7 @@ table {
   overflow: visible;
   top: 30%;
   text-align: center;
+  font-size: 20px;
   font-weight: bold;
   color: $highlight-color;
   display: none;
@@ -46,7 +47,10 @@ table {
   @include transition-property("font-size");
   @include transition-duration("0.2s");
   z-index: 10000;
-  line-height: 1;
+  line-height: 1.3;
+  background: rgba(39, 39, 39, 0.6);
+  @include glow(#fff);
+  padding: 5px 10px;
 }
 
 #footer {

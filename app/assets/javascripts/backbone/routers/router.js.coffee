@@ -75,7 +75,10 @@ class ForgeCraft.Routers.Router extends Backbone.Router
     @load('/map')
 
   mapShow: (ident) ->
-    mapView.selectMine(ident)
+    if $('#map').length > 0
+      mapView.selectMine(ident)
+    else
+      @load('/map/' + ident)
 
   # Ladder
 

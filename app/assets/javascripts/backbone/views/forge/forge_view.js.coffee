@@ -235,3 +235,10 @@ class ForgeCraft.Views.ForgeView extends Backbone.View
       splashView.queueMessage "Forge Complete!"
       $.get "/forges/" + forge.get("id") + "/complete", (response) ->
         $('#ores').html(response).fadeIn()
+
+  enableBossFight: (boss) ->
+    splashView.queueMessage("Forging Complete!")
+    splashView.queueMessage("Boss Fight Enabled!")
+
+    $btn = $('<a href="/enemies/' + boss.to_param + '" class="btn danger fight">Fight!</a>')
+    $('li.boss').append $btn

@@ -7,7 +7,6 @@ class ForgesController < ApplicationController
 
   def show
     @forge = Forge.where(:_id => params[:id]).first
-    redirect_to enemy_path(@forge.boss) and return if @forge.should_fight_boss?
     redirect_to(player_path(current_player)) and return unless @forge.present?
 
     @events = @forge.events.reverse.take(20)

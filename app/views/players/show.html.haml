@@ -65,6 +65,9 @@
           
           .clear
 
+        - else
+          = link_to "Discover the next Forge &rarr;".html_safe, map_path(Mine.find_by_level(current_player.level)), :class => "btn primary next"
+
         - @player.forges.completed.each_with_index do |forge, index|
           = render "forges/stub", :forge => forge, :last => ((index+1)%3==0), :current => false
         

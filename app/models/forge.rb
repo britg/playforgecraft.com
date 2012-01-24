@@ -91,7 +91,7 @@ class Forge
       end
     end
 
-    generate_boss_event if should_fight_boss?
+    generate_boss_event if should_fight_boss? and !boss_event_exists?
   end
 
   def create_progresses
@@ -126,6 +126,10 @@ class Forge
     update_attributes(:boss_defeated => true)
     generate_message_event "#{boss} defeated!"
     check_completion
+  end
+
+  def boss_event_exists?
+    events.where(:type => Event::BOSS_TYPE).any?
   end
 
   # Completion

@@ -82,9 +82,7 @@ module ApplicationHelper
   end
 
   def action_button forge
-    if current_player.try(:can_forge_at?, forge) and forge.should_fight_boss?
-      return link_to "Fight!", enemy_path(forge.boss), :class => "btn danger"
-    elsif current_player.try(:can_forge_at?, forge)
+    if current_player.try(:can_forge_at?, forge)
       return link_to "Forge", forge_path(forge), :class => "btn primary"
     elsif current_player == forge.player
       return link_to "Review", forge_path(forge), :class => "btn primary review"

@@ -11,7 +11,8 @@ class ForgeCraft.Models.Event extends Backbone.Model
 
   processBoss: ->
     setTimeout =>
-      window.appView.sendToBoss(@get("boss"))
+      #window.appView.sendToBoss(@get("boss"))
+      forgeView.enableBossFight(@get("boss"))
     , 1000
 
 class ForgeCraft.Collections.Events extends Backbone.Collection
