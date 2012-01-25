@@ -11,6 +11,8 @@ class ForgeCraft.Views.ArmoryView extends Backbone.View
 
     @bindItemSold()
 
+    @bindEquipperClose()
+
   bindItemDelete: ->
     $('.delete-item').live "ajax:complete", (e) ->
       item_id = $(e.target).attr("data-item-id")
@@ -24,7 +26,9 @@ class ForgeCraft.Views.ArmoryView extends Backbone.View
     uri = 'armory?'
 
     # Classification
+    $('.class-label').removeClass('selected')
     classification = $('input[name=classification]:checked').val()
+    $('#label_classification_' + classification).addClass('selected')
     uri += '&classification=' + classification
 
     # Ore
@@ -87,3 +91,7 @@ class ForgeCraft.Views.ArmoryView extends Backbone.View
   removeItem: (model) ->
     $('.loot[data-id=' + model.get("id") + ']').fadeOut ->
       $(this).remove()
+
+  bindEquipperClose: () ->
+    $(document).bind 'close.facebox', =>
+      @applyFilter()

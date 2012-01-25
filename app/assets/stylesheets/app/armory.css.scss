@@ -18,31 +18,41 @@
     }
 
     .inputs-list {
+
+      margin-top: 25px;
+
       li {
-        @include inset;
         padding: 3px 5px;
         padding-right: 0;
-        margin-bottom: 3px;
-        width: 110px;
+        margin-bottom: 10px;
+      }
+
+      label {
+        padding-left: 0;
+        font-size: 150%;
       }
     }
 
     label {
       text-align: left;
+
+      &.selected {
+        color: $highlight-color;
+        font-weight: bold;
+      }
+    }
+
+    .selector {
+      display: none;
     }
 
     .icon {
-      width: 20px;
+      width: 25px;
       vertical-align: -5px;
     }
 
     .span2.first {
       margin-left: 0;
-      width: 120px;
-
-      li {
-        width: 120px;
-      }
     }
 
     .span2.second {
