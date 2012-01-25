@@ -49,7 +49,9 @@ class LootController < ApplicationController
   end
 
   def show
-    @loot = Loot.unscoped.find(params[:id])
+    @general = Loot.unscoped.find(params[:id])
+    @item = @general.item
+    @loot = current_player.loot.best(@item)
   end
 
   def update

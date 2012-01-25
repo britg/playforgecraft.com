@@ -1,5 +1,5 @@
 - if items.count < 1
-  %h3 There are no items matching the criteria.
+  %h3 No items have been forged of this class
 - else
   %table#item-table.item-table.zebra-striped
     
@@ -28,7 +28,11 @@
 
           %td.name
             = image_tag(item.icon.url(:tiny), :class => "icon")
-            %span{ :class => item.rarity }= item
+            %span{ :class => item.rarity }
+              - if found = current_player.loot.best(item)
+                = link_to item, loot_path(found), :class => "launch-equipper #{item.rarity}", "data-external" => true, "data-id" => found.to_param
+              - else
+                = item
 
           %td
             - if found = current_player.loot.best(item)

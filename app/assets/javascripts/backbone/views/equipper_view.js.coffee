@@ -7,6 +7,8 @@ class ForgeCraft.Views.EquipperView extends Backbone.View
 
   bindLootClicks: ->
     self = @
+    $(document).bind 'reveal.facebox', ->
+      tooltipView.bindTips($('#facebox'))
     $('.launch-equipper').live 'click', ->
       id = $(@).attr("data-id")
       self.activateEquipper(id)

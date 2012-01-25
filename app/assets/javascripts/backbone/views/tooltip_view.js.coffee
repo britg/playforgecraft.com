@@ -17,10 +17,14 @@ class ForgeCraft.Views.TooltipView extends Backbone.View
         attr: 'data-tip'
 
       position:
-        target: 'mouse'
+        my: 'top center',
+        at: 'bottom center'
 
       style:
         classes: 'ui-tooltip-dark ui-tooltip-shadow ui-tooltip-tipsy'
+
+      hide:
+        event: 'click mouseleave'
 
     })
 

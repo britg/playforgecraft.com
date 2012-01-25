@@ -93,5 +93,7 @@ class ForgeCraft.Views.ArmoryView extends Backbone.View
       $(this).remove()
 
   bindEquipperClose: () ->
-    $(document).bind 'close.facebox', =>
-      @applyFilter()
+    $(document).bind 'close.facebox', @applyFilter
+      
+  unbindEquipperClose: () ->
+    $(document).unbind 'close.facebox', @applyFilter

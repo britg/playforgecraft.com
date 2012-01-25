@@ -50,6 +50,10 @@ class ForgeCraft.Views.AppView extends Backbone.View
       @startBattle() 
     else
       @stopBattle()
+
+    if armoryView?
+      armoryView.unbindEquipperClose() unless path.match '/armory'
+
   
   startForge: ->
     window.forge = new ForgeCraft.Models.Forge(ForgeCraft.Config.forge)
